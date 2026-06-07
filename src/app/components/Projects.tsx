@@ -5,41 +5,65 @@ import { Button } from './ui/button';
 
 const projects = [
   {
-    title: "T-Jobs",
+    title: "ATS Job Portal",
     description: "A comprehensive job platform connecting talented developers with opportunities. Built with modern tech stack and real-time features.",
-    tech: ["React", "Node.js", "MongoDB", "WebSocket"],
+    tech: ["React", "PHP", "PostgreSQL", "WebSocket"],
     gradient: "from-cyan-500 to-blue-600",
+    githubUrl: "https://github.com/superiorshipet/ATS-website",
   },
   {
-    title: "Superior.lu",
-    description: "Premium e-commerce solution with advanced inventory management and seamless checkout experience.",
-    tech: ["Laravel", "MySQL", "Vue.js", "Stripe"],
+    title: "SUPVEND",
+    description: "Premium e-commerce solution with advanced inventory management and seamless checkout experience and wallet system designing .",
+    tech: ["node.js", "postgreSQL", "React", "Stripe", "redis"],
     gradient: "from-indigo-500 to-purple-600",
+    githubUrl: "https://github.com/superiorshipet/SUPVEND",
   },
   {
-    title: "Techome",
-    description: "Smart home automation platform for controlling IoT devices with intuitive dashboard and voice integration.",
-    tech: ["React", "Express.js", "IoT", "MQTT"],
+    title: " discover-madina ",
+    description: "A tourism website for elmadina which had a chatbot and alot of other features which makes him more like google maps but whith my style .",
+    tech: ["React", "Node.js", "PostgreSQL", "WebSocket"],
     gradient: "from-purple-500 to-pink-600",
+    githubUrl: "https://github.com/superiorshipet/discover-madina",
+    demoUrl: "https://discover-madina.vercel.app/"
   },
   {
-    title: "Photo Editor",
-    description: "Feature-rich web-based photo editor with filters, effects, and layer support for professional image editing.",
-    tech: ["React", "Canvas API", "WebGL", "TypeScript"],
-    gradient: "from-pink-500 to-red-600",
+    title:"pharmacy management system",
+    description:"A comprehensive pharmacy management system built with C# and ASP.NET Core, featuring inventory management, sales tracking, and customer management.",
+    tech:["C#", "ASP.NET Core", "SQL Server", "Entity Framework"],
+    gradient:"from-pink-500 to-cyan-500",
+    githubUrl:"https://github.com/superiorshipet/pharmacy",
   },
-  {
-    title: "Restaurant AI Prediction System",
-    description: "ML-powered system predicting customer demand and optimizing inventory for restaurant operations.",
-    tech: ["Python", "TensorFlow", "FastAPI", "React"],
-    gradient: "from-orange-500 to-yellow-600",
+  {title:"Discover",
+    description:"A tourism website for saudi arabia all which had a integration with tickets website atrraction commiting and plans for your vacation.",
+    tech:["React", "asp.net", "PostgreSQL", "WebSocket","redis"],
+    gradient:"from-pink-500 to-cyan-500",
+    githubUrl:"https://github.com/superiorshipet/----------------------",
+    demoUrl:"https://discover-saudi.vercel.app/"
   },
-  {
-    title: "E-Commerce Platform",
-    description: "Scalable full-stack e-commerce solution with payment integration, admin dashboard, and analytics.",
-    tech: ["ASP.NET Core", "React", "SQL Server", "Azure"],
-    gradient: "from-green-500 to-cyan-600",
+  {title:"Nour-dental",
+    description:"A comprehensive dental clinic ecommerce for selling dental equipments .",
+    tech:["C#", "ASP.NET Core", "postgreSQL", "Entity Framework","redis","hostinger"],
+    gradient:"from-pink-500 to-cyan-500",
+    demoUrl:"www.elnordental.shop"
   },
+  {title:"podcasty",
+    description:"A podcast website with a lot of features like creating your own podcast and sharing it with your friends and also you can listen to other podcasts.",
+    tech:["React", "asp.net", "sqlsever", "WebSocket"],
+    gradient:"from-pink-500 to-cyan-500",
+    githubUrl:"https://github.com/superiorshipet/podcasty"
+  },
+  {title:"E-commerce for e-products",
+    description:"A comprehensive e-commerce platform for digital products, featuring secure payment processing, user-friendly interface, and robust inventory management.",
+    tech:["React", "asp.net", "PostgreSQL"],
+    gradient:"from-pink-500 to-cyan-500",
+    githubUrl:"https://github.com/superiorshipet/E-commerce-for-E-products"
+  },
+  {title:"Study-mate",
+    description:"A comprehensive study platform for students, featuring interactive lessons, quizzes, and progress tracking to enhance learning outcomes.",
+    tech:["React", "asp.net", "PostgreSQL", "WebSocket"],
+    gradient:"from-pink-500 to-cyan-500",
+    githubUrl:"github.com/superiorshipet/study-mate"
+  }
 ];
 
 export function Projects() {
@@ -111,20 +135,28 @@ export function Projects() {
                   {/* Action Buttons */}
                   <div className="flex gap-3">
                     <Button
+                      asChild
                       variant="outline"
                       size="sm"
                       className="flex-1 border-cyan-500/30 text-cyan-400 hover:bg-cyan-500/10 hover:border-cyan-500"
                     >
-                      <Github className="w-4 h-4 mr-2" />
-                      GitHub
+                      <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
+                        <Github className="w-4 h-4 mr-2" />
+                        GitHub
+                      </a>
                     </Button>
-                    <Button
-                      size="sm"
-                      className="flex-1 bg-gradient-to-r from-cyan-500 to-indigo-600 hover:from-cyan-600 hover:to-indigo-700 text-white"
-                    >
-                      <ExternalLink className="w-4 h-4 mr-2" />
-                      Demo
-                    </Button>
+                    {project.demoUrl && (
+                      <Button
+                        asChild
+                        size="sm"
+                        className="flex-1 bg-gradient-to-r from-cyan-500 to-indigo-600 hover:from-cyan-600 hover:to-indigo-700 text-white"
+                      >
+                        <a href={project.demoUrl} target="_blank" rel="noopener noreferrer">
+                          <ExternalLink className="w-4 h-4 mr-2" />
+                          Demo
+                        </a>
+                      </Button>
+                    )}
                   </div>
                 </div>
 
