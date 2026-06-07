@@ -52,7 +52,7 @@ export function Navigation() {
               whileHover={{ scale: 1.05 }}
               className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-indigo-400 bg-clip-text text-transparent"
             >
-              Mohamed.dev
+              shipet.dev
             </motion.a>
 
             {/* Desktop Navigation */}

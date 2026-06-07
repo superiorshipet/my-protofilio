@@ -11,14 +11,47 @@ export function Contact() {
     email: '',
     message: '',
   });
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
     if (!formData.name || !formData.email || !formData.message) {
-      e.preventDefault();
+      return;
+    }
+
+    setSubmitStatus('sending');
+
+    try {
+      const response = await fetch('https://formsubmit.co/ajax/mohmedshipet4@gmail.com', {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ...formData,
+          _subject: 'New portfolio idea',
+          _template: 'table',
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to submit contact form');
+      }
+
+      setFormData({ name: '', email: '', message: '' });
+      setSubmitStatus('success');
+    } catch {
+      setSubmitStatus('error');
     }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    if (submitStatus !== 'idle') {
+      setSubmitStatus('idle');
+    }
+
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
@@ -132,13 +165,9 @@ export function Contact() {
             transition={{ duration: 0.6 }}
           >
             <form
-              action="https://formsubmit.co/mohmedshipet4@gmail.com"
-              method="POST"
               onSubmit={handleSubmit}
               className="space-y-6"
             >
-              <input type="hidden" name="_subject" value="New portfolio idea" />
-              <input type="hidden" name="_template" value="table" />
               <div className="bg-gradient-to-br from-[#1E293B] to-[#312E81] border border-cyan-500/20 rounded-2xl p-8 shadow-xl">
                 <div className="space-y-4">
                   <div>
@@ -190,11 +219,24 @@ export function Contact() {
 
                   <Button
                     type="submit"
+                    disabled={submitStatus === 'sending'}
                     className="w-full bg-gradient-to-r from-cyan-500 to-indigo-600 hover:from-cyan-600 hover:to-indigo-700 text-white py-6 text-lg shadow-lg shadow-cyan-500/30"
                   >
                     <Send className="w-5 h-5 mr-2" />
-                    Send Message
+                    {submitStatus === 'sending' ? 'Sending...' : 'Send Message'}
                   </Button>
+
+                  {submitStatus === 'success' && (
+                    <p className="text-sm text-cyan-300">
+                      Your idea was sent successfully. I will get back to you soon.
+                    </p>
+                  )}
+
+                  {submitStatus === 'error' && (
+                    <p className="text-sm text-red-300">
+                      Something went wrong. Please try again or email me directly.
+                    </p>
+                  )}
                 </div>
               </div>
             </form>
