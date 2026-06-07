@@ -192,7 +192,7 @@ export function Hero() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="relative flex justify-center lg:justify-end"
           >
-            <div className="relative w-[min(32rem,86vw)] h-[min(32rem,86vw)] md:w-[min(40rem,48vw)] md:h-[min(40rem,48vw)]">
+            <div className="relative w-[min(24rem,86vw)] h-[min(24rem,86vw)] md:w-[min(30rem,48vw)] md:h-[min(30rem,48vw)]">
               {/* Portrait */}
               <motion.div
                 initial={{ scale: 0.8, opacity: 0 }}
@@ -204,7 +204,7 @@ export function Hero() {
                   <img
                     src={portraitImg}
                     alt="Mohamed"
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover object-[center_35%]"
                   />
                   <div className="absolute inset-0 bg-cyan-500/40 mix-blend-color group-hover:opacity-0 transition-opacity duration-500" />
                   <div className="absolute inset-0 bg-indigo-900/30 mix-blend-multiply group-hover:opacity-0 transition-opacity duration-500" />
