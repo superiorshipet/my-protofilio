@@ -13,9 +13,9 @@ export function Contact() {
   });
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Handle form submission
-    console.log('Form submitted:', formData);
+    if (!formData.name || !formData.email || !formData.message) {
+      e.preventDefault();
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -70,7 +70,7 @@ export function Contact() {
                 </div>
                 <div>
                   <p className="text-sm text-gray-400">Email</p>
-                  <p className="font-mono">mohamed@example.com</p>
+                  <p className="font-mono">mohmedshipet4@gmail.com</p>
                 </div>
               </motion.div>
 
@@ -83,7 +83,8 @@ export function Contact() {
                 </div>
                 <div>
                   <p className="text-sm text-gray-400">Location</p>
-                  <p>Available Worldwide</p>
+                  <p>Egypt,Giza</p>
+                  <p>Available world wide </p>
                 </div>
               </motion.div>
             </div>
@@ -93,7 +94,7 @@ export function Contact() {
               <h4 className="text-lg font-bold text-white mb-4">Follow Me</h4>
               <div className="flex gap-4">
                 <motion.a
-                  href="https://github.com"
+                href="https://github.com/superiorshipet"
                   target="_blank"
                   rel="noopener noreferrer"
                   whileHover={{ scale: 1.1, y: -4 }}
@@ -102,7 +103,7 @@ export function Contact() {
                   <Github className="w-6 h-6" />
                 </motion.a>
                 <motion.a
-                  href="https://linkedin.com"
+                href="https://www.linkedin.com/in/mohamed-shipet-700864266/"
                   target="_blank"
                   rel="noopener noreferrer"
                   whileHover={{ scale: 1.1, y: -4 }}
@@ -111,7 +112,7 @@ export function Contact() {
                   <Linkedin className="w-6 h-6" />
                 </motion.a>
                 <motion.a
-                  href="https://twitter.com"
+                  href="https://x.com/M_shipet004"
                   target="_blank"
                   rel="noopener noreferrer"
                   whileHover={{ scale: 1.1, y: -4 }}
@@ -130,7 +131,14 @@ export function Contact() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form
+              action="https://formsubmit.co/mohmedshipet4@gmail.com"
+              method="POST"
+              onSubmit={handleSubmit}
+              className="space-y-6"
+            >
+              <input type="hidden" name="_subject" value="New portfolio idea" />
+              <input type="hidden" name="_template" value="table" />
               <div className="bg-gradient-to-br from-[#1E293B] to-[#312E81] border border-cyan-500/20 rounded-2xl p-8 shadow-xl">
                 <div className="space-y-4">
                   <div>
