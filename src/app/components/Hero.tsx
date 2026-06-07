@@ -135,7 +135,7 @@ export function Hero() {
                 />
               </h1>
               <p className="text-gray-300 text-lg md:text-xl max-w-xl">
-                Backend engineer passionate about building scalable systems, distributed architectures, 
+               Hi Iam mohamed shipet (Superior) Backend engineer passionate about building scalable systems, distributed architectures, 
                 and solving complex problems with elegant solutions.
               </p>
             </div>
@@ -158,7 +158,7 @@ export function Hero() {
 
             <div className="flex gap-4">
               <motion.a
-                href="https://github.com"
+                href="https://github.com/superiorshipet"
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.1, y: -2 }}
@@ -167,7 +167,7 @@ export function Hero() {
                 <Github className="w-6 h-6" />
               </motion.a>
               <motion.a
-                href="https://linkedin.com"
+                href="https://www.linkedin.com/in/mohamed-shipet-700864266/"
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.1, y: -2 }}
@@ -176,7 +176,7 @@ export function Hero() {
                 <Linkedin className="w-6 h-6" />
               </motion.a>
               <motion.a
-                href="mailto:mohamed@example.com"
+                href="mailto:mohmedshipet4@gmail.com"
                 whileHover={{ scale: 1.1, y: -2 }}
                 className="text-gray-400 hover:text-cyan-400 transition-colors"
               >

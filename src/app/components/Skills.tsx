@@ -6,19 +6,19 @@ const skillCategories = [
     title: "Frontend",
     icon: Code2,
     color: "from-cyan-500 to-blue-500",
-    skills: ["HTML", "CSS", "JavaScript", "React"],
+    skills: ["HTML", "CSS", "JavaScript", "React", "Angular"],
   },
   {
     title: "Backend",
     icon: Server,
     color: "from-indigo-500 to-purple-500",
-    skills: ["Node.js", "Express.js", "PHP", "Laravel", "ASP.NET Core", "C#"],
+    skills: ["Node.js", "Express.js", "PHP", "Laravel", "ASP.NET Core", "C#","GO"],
   },
   {
     title: "Database",
     icon: Database,
     color: "from-purple-500 to-pink-500",
-    skills: ["SQL Server", "MySQL"],
+    skills: ["SQL Server", "MySQL", "MongoDB", "PostgreSQL", "Redis", "Firebase","Dgraph"],
   },
   {
     title: "Engineering",
