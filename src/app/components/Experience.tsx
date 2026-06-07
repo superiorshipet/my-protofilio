@@ -12,7 +12,7 @@ const experiences = [
   },
   {
     period: "2023 - 2024",
-    role: "intern fluter developer",
+    role: "intern flutter developer",
     company: "DEPI",
     description: "Developed cross-platform mobile applications and collaborated with design teams on user experiences.",
     technologies: ["Flutter", "Dart", "Firebase"],

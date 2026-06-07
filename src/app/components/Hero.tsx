@@ -145,7 +145,7 @@ export function Hero() {
                 onClick={() => scrollToSection('projects')}
                 className="bg-cyan-500 hover:bg-cyan-600 text-white px-8 py-6 text-lg"
               >
-                Explore My Work
+                Explore My Projects
               </Button>
               <Button
                 onClick={() => scrollToSection('contact')}
