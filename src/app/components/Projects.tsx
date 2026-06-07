@@ -24,7 +24,7 @@ const projects = [
     tech: ["React", "Node.js", "PostgreSQL", "WebSocket"],
     gradient: "from-purple-500 to-pink-600",
     githubUrl: "https://github.com/superiorshipet/discover-madina",
-    demoUrl: "https://discover-madina.vercel.app/"
+    demoUrl: "https://discover-madina-production.up.railway.app/"
   },
   {
     title:"pharmacy management system",
@@ -38,13 +38,13 @@ const projects = [
     tech:["React", "asp.net", "PostgreSQL", "WebSocket","redis"],
     gradient:"from-pink-500 to-cyan-500",
     githubUrl:"https://github.com/superiorshipet/----------------------",
-    demoUrl:"https://discover-saudi.vercel.app/"
+    demoUrl:"https://madinaguide.vercel.app"
   },
   {title:"Nour-dental",
     description:"A comprehensive dental clinic ecommerce for selling dental equipments .",
     tech:["C#", "ASP.NET Core", "postgreSQL", "Entity Framework","redis","hostinger"],
     gradient:"from-pink-500 to-cyan-500",
-    demoUrl:"www.elnordental.shop"
+    demoUrl:"https://www.elnordental.shop"
   },
   {title:"podcasty",
     description:"A podcast website with a lot of features like creating your own podcast and sharing it with your friends and also you can listen to other podcasts.",
@@ -62,7 +62,7 @@ const projects = [
     description:"A comprehensive study platform for students, featuring interactive lessons, quizzes, and progress tracking to enhance learning outcomes.",
     tech:["React", "asp.net", "PostgreSQL", "WebSocket"],
     gradient:"from-pink-500 to-cyan-500",
-    githubUrl:"github.com/superiorshipet/study-mate"
+    githubUrl:"https://github.com/superiorshipet/study-mate"
   }
 ];
 
