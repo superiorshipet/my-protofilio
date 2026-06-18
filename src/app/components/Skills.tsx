@@ -30,7 +30,7 @@ const skillCategories = [
 
 export function Skills() {
   return (
-    <section id="skills" className="py-20 bg-[#0F172A]">
+    <section id="skills" className="relative overflow-hidden py-20">
       <div className="max-w-7xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -39,10 +39,10 @@ export function Skills() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+          <h2 className="font-display text-4xl md:text-5xl font-bold text-[var(--space-starlight)] mb-4">
             Technical Skills
           </h2>
-          <p className="text-gray-400 text-lg">
+          <p className="text-[var(--space-moon)] text-lg">
             Tools and technologies I work with daily
           </p>
         </motion.div>
@@ -58,7 +58,7 @@ export function Skills() {
               whileHover={{ y: -8, transition: { duration: 0.2 } }}
               className="group"
             >
-              <div className="h-full bg-gradient-to-br from-[#1E293B] to-[#0F172A] border border-cyan-500/20 rounded-2xl p-6 hover:border-cyan-500/50 transition-all duration-300 shadow-lg hover:shadow-cyan-500/20">
+              <div className="space-glass h-full rounded-lg p-6 transition-all duration-300 group-hover:border-[var(--space-cyan)]/45">
                 {/* Icon */}
                 <motion.div
                   whileHover={{ rotate: 360 }}
@@ -69,7 +69,7 @@ export function Skills() {
                 </motion.div>
 
                 {/* Title */}
-                <h3 className="text-xl font-bold text-white mb-4">{category.title}</h3>
+                <h3 className="font-display text-xl font-bold text-[var(--space-starlight)] mb-4">{category.title}</h3>
 
                 {/* Skills */}
                 <div className="flex flex-wrap gap-2">
@@ -81,7 +81,7 @@ export function Skills() {
                       viewport={{ once: true }}
                       transition={{ delay: index * 0.1 + skillIndex * 0.05 }}
                       whileHover={{ scale: 1.05 }}
-                      className="px-3 py-1 bg-cyan-500/10 border border-cyan-500/30 rounded-full text-cyan-400 text-sm hover:bg-cyan-500/20 transition-colors cursor-default"
+                      className="px-3 py-1 bg-[var(--space-panel)] border border-[var(--space-border)] rounded-full text-[var(--space-cyan)] text-sm hover:bg-[var(--space-panel-strong)] transition-colors cursor-default"
                     >
                       {skill}
                     </motion.span>

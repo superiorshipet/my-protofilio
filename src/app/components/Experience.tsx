@@ -38,7 +38,7 @@ const experiences = [
 
 export function Experience() {
   return (
-    <section id="experience" className="py-20 bg-[#0F172A]">
+    <section id="experience" className="relative overflow-hidden py-20">
       <div className="max-w-6xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -47,17 +47,17 @@ export function Experience() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+          <h2 className="font-display text-4xl md:text-5xl font-bold text-[var(--space-starlight)] mb-4">
             Experience Timeline
           </h2>
-          <p className="text-gray-400 text-lg">
+          <p className="text-[var(--space-moon)] text-lg">
             My engineering journey through different technologies
           </p>
         </motion.div>
 
         <div className="relative">
           {/* Vertical Timeline Line */}
-          <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-cyan-500 via-indigo-500 to-purple-500" />
+          <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-[var(--space-cyan)] via-[var(--space-violet)] to-[var(--space-rose)]" />
 
           <div className="space-y-12">
             {experiences.map((exp, index) => (
@@ -76,29 +76,29 @@ export function Experience() {
                   <div className="flex-1 mb-8 md:mb-0">
                     <motion.div
                       whileHover={{ scale: 1.02, y: -4 }}
-                      className={`bg-gradient-to-br from-[#1E293B] to-[#312E81] border border-cyan-500/20 rounded-2xl p-6 shadow-lg hover:shadow-cyan-500/20 transition-all ${
+                      className={`space-glass rounded-lg p-6 transition-all hover:border-[var(--space-cyan)]/45 ${
                         index % 2 === 0 ? 'md:mr-8' : 'md:ml-8'
                       }`}
                     >
                       {/* Period Badge */}
                       <div className="flex items-center gap-2 mb-3">
-                        <Calendar className="w-4 h-4 text-cyan-400" />
-                        <span className="text-cyan-400 font-mono text-sm">{exp.period}</span>
+                        <Calendar className="w-4 h-4 text-[var(--space-cyan)]" />
+                        <span className="text-[var(--space-cyan)] text-sm">{exp.period}</span>
                       </div>
 
                       {/* Role & Company */}
-                      <h3 className="text-2xl font-bold text-white mb-1">{exp.role}</h3>
-                      <p className="text-gray-400 mb-3">{exp.company}</p>
+                      <h3 className="font-display text-2xl font-bold text-[var(--space-starlight)] mb-1">{exp.role}</h3>
+                      <p className="text-[var(--space-muted)] mb-3">{exp.company}</p>
 
                       {/* Description */}
-                      <p className="text-gray-300 mb-4">{exp.description}</p>
+                      <p className="text-[var(--space-moon)] mb-4">{exp.description}</p>
 
                       {/* Technologies */}
                       <div className="flex flex-wrap gap-2">
                         {exp.technologies.map((tech) => (
                           <span
                             key={tech}
-                            className="px-3 py-1 bg-indigo-500/10 border border-indigo-500/30 rounded-full text-indigo-400 text-sm"
+                            className="px-3 py-1 bg-[var(--space-panel)] border border-[var(--space-border)] rounded-full text-[var(--space-cyan)] text-sm"
                           >
                             {tech}
                           </span>
@@ -115,7 +115,7 @@ export function Experience() {
                       viewport={{ once: true }}
                       transition={{ delay: index * 0.1 + 0.3, type: 'spring', stiffness: 200 }}
                       whileHover={{ scale: 1.2, rotate: 360 }}
-                      className="bg-gradient-to-br from-cyan-500 to-indigo-600 rounded-full p-4 shadow-lg shadow-cyan-500/30"
+                      className="bg-gradient-to-br from-[var(--space-cyan)] to-[var(--space-violet)] rounded-full p-4 shadow-lg shadow-[rgba(100,244,255,0.25)]"
                     >
                       <exp.icon className="w-6 h-6 text-white" />
                     </motion.div>

@@ -22,7 +22,7 @@ export function DevThoughts() {
   }, []);
 
   return (
-    <section className="py-20 bg-[#0F172A] overflow-hidden">
+    <section className="relative overflow-hidden py-20">
       <div className="max-w-5xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0 }}
@@ -31,23 +31,23 @@ export function DevThoughts() {
           className="relative"
         >
           {/* Background Decoration */}
-          <div className="absolute inset-0 flex items-center justify-center opacity-5">
+          <div className="absolute inset-0 flex items-center justify-center text-[var(--space-starlight)] opacity-[0.04]">
             <Code2 className="w-96 h-96" />
           </div>
 
           {/* Content */}
-          <div className="relative bg-gradient-to-br from-[#1E293B]/50 to-[#312E81]/50 backdrop-blur-sm border border-cyan-500/20 rounded-3xl p-12 md:p-16 text-center">
+          <div className="space-glass relative rounded-lg p-12 text-center md:p-16">
             <motion.div
               initial={{ scale: 0 }}
               whileInView={{ scale: 1 }}
               viewport={{ once: true }}
               transition={{ type: 'spring', stiffness: 200 }}
-              className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-cyan-500 to-indigo-600 rounded-2xl mb-8 shadow-lg shadow-cyan-500/30"
+              className="inline-flex h-20 w-20 items-center justify-center rounded-2xl bg-gradient-to-br from-[var(--space-cyan)] to-[var(--space-violet)] mb-8 shadow-lg shadow-[rgba(100,244,255,0.25)]"
             >
               <Lightbulb className="w-10 h-10 text-white" />
             </motion.div>
 
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-8">
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-[var(--space-starlight)] mb-8">
               Developer Mindset
             </h2>
 
@@ -62,7 +62,7 @@ export function DevThoughts() {
                   transition={{ duration: 0.5 }}
                   className="absolute inset-0 flex items-center justify-center"
                 >
-                  <p className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-cyan-400 via-indigo-400 to-purple-400 bg-clip-text text-transparent">
+                  <p className="font-display text-4xl md:text-6xl font-bold bg-gradient-to-r from-[var(--space-cyan)] via-[var(--space-starlight)] to-[var(--space-violet)] bg-clip-text text-transparent">
                     "{thoughts[currentIndex]}"
                   </p>
                 </motion.div>
@@ -77,8 +77,8 @@ export function DevThoughts() {
                   onClick={() => setCurrentIndex(index)}
                   className={`w-2 h-2 rounded-full transition-all duration-300 ${
                     index === currentIndex
-                      ? 'bg-cyan-400 w-8'
-                      : 'bg-cyan-400/30 hover:bg-cyan-400/50'
+                      ? 'bg-[var(--space-cyan)] w-8'
+                      : 'bg-[var(--space-cyan)]/30 hover:bg-[var(--space-cyan)]/50'
                   }`}
                   whileHover={{ scale: 1.2 }}
                   whileTap={{ scale: 0.9 }}
@@ -98,7 +98,7 @@ export function DevThoughts() {
               repeat: Infinity,
               ease: 'easeInOut',
             }}
-            className="absolute -top-8 -right-8 w-16 h-16 bg-gradient-to-br from-cyan-500/20 to-indigo-500/20 rounded-2xl backdrop-blur-sm border border-cyan-500/20"
+            className="absolute -top-8 -right-8 w-16 h-16 rounded-2xl bg-[var(--space-panel)] backdrop-blur-sm border border-[var(--space-border)]"
           />
           <motion.div
             animate={{
@@ -110,7 +110,7 @@ export function DevThoughts() {
               repeat: Infinity,
               ease: 'easeInOut',
             }}
-            className="absolute -bottom-8 -left-8 w-20 h-20 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-2xl backdrop-blur-sm border border-purple-500/20"
+            className="absolute -bottom-8 -left-8 w-20 h-20 rounded-2xl bg-[var(--space-panel)] backdrop-blur-sm border border-[var(--space-border)]"
           />
         </motion.div>
       </div>

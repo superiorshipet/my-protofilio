@@ -10,16 +10,18 @@ import { Footer } from './components/Footer';
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-[#0F172A]" id="home">
-      <Navigation />
-      <Hero />
-      <Skills />
-      <Projects />
-      <Experience />
-      <Statistics />
-      <DevThoughts />
-      <Contact />
-      <Footer />
+    <div className="space-scene space-stars relative min-h-screen overflow-hidden text-[var(--space-starlight)]" id="home">
+      <div className="relative z-10">
+        <Navigation />
+        <Hero />
+        <Skills />
+        <Projects />
+        <Experience />
+        <Statistics />
+        <DevThoughts />
+        <Contact />
+        <Footer />
+      </div>
     </div>
   );
 }

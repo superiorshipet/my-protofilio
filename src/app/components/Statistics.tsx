@@ -45,7 +45,7 @@ function Counter({ value, suffix = "", duration = 2000 }: { value: number; suffi
 
 export function Statistics() {
   return (
-    <section className="py-20 bg-gradient-to-b from-[#1E293B] to-[#0F172A]">
+    <section className="relative overflow-hidden py-20">
       <div className="max-w-7xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -54,10 +54,10 @@ export function Statistics() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+          <h2 className="font-display text-4xl md:text-5xl font-bold text-[var(--space-starlight)] mb-4">
             By The Numbers
           </h2>
-          <p className="text-gray-400 text-lg">
+          <p className="text-[var(--space-moon)] text-lg">
             Measuring growth and impact
           </p>
         </motion.div>
@@ -73,7 +73,7 @@ export function Statistics() {
               whileHover={{ scale: 1.05, y: -8 }}
               className="group"
             >
-              <div className="h-full bg-gradient-to-br from-[#1E293B] to-[#312E81] border border-cyan-500/20 rounded-2xl p-8 hover:border-cyan-500/50 transition-all duration-300 shadow-lg hover:shadow-cyan-500/20 text-center">
+              <div className="space-glass h-full rounded-lg p-8 transition-all duration-300 group-hover:border-[var(--space-cyan)]/45 text-center">
                 {/* Icon */}
                 <motion.div
                   whileHover={{ rotate: 360 }}
@@ -84,12 +84,12 @@ export function Statistics() {
                 </motion.div>
 
                 {/* Number */}
-                <div className="text-5xl font-bold text-white mb-3 tabular-nums">
+                <div className="font-display text-5xl font-bold text-[var(--space-starlight)] mb-3 tabular-nums">
                   <Counter value={stat.value} suffix={stat.suffix} />
                 </div>
 
                 {/* Label */}
-                <p className="text-gray-400 text-lg">{stat.label}</p>
+                <p className="text-[var(--space-moon)] text-lg">{stat.label}</p>
               </div>
             </motion.div>
           ))}

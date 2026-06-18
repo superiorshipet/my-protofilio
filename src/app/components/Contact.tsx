@@ -1,9 +1,12 @@
 import { useState } from 'react';
 import { motion } from 'motion/react';
-import { Mail, Send, Github, Linkedin, Twitter, MapPin } from 'lucide-react';
+import { Download, Github, Linkedin, Mail, MapPin, MessageCircle, Send, Twitter } from 'lucide-react';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Textarea } from './ui/textarea';
+
+const cvUrl = '/Mohamed-Shipet-CV.pdf';
+const whatsappUrl = 'https://wa.me/201000000000?text=Hi%20Mohamed%2C%20I%20saw%20your%20portfolio%20and%20want%20to%20connect.';
 
 export function Contact() {
   const [formData, setFormData] = useState({
@@ -59,7 +62,7 @@ export function Contact() {
   };
 
   return (
-    <section id="contact" className="py-20 bg-gradient-to-b from-[#0F172A] to-[#1E293B]">
+    <section id="contact" className="relative overflow-hidden py-20">
       <div className="max-w-6xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -68,10 +71,10 @@ export function Contact() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+          <h2 className="font-display text-4xl md:text-5xl font-bold text-[var(--space-starlight)] mb-4">
             Let's Connect
           </h2>
-          <p className="text-gray-400 text-lg">
+          <p className="text-[var(--space-moon)] text-lg">
             Have a project in mind? Let's build something amazing together
           </p>
         </motion.div>
@@ -86,36 +89,57 @@ export function Contact() {
             className="space-y-8"
           >
             <div>
-              <h3 className="text-2xl font-bold text-white mb-6">Get in Touch</h3>
-              <p className="text-gray-400 mb-8">
+              <h3 className="font-display text-2xl font-bold text-[var(--space-starlight)] mb-6">Get in Touch</h3>
+              <p className="text-[var(--space-moon)] mb-8">
                 I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.
               </p>
+              <div className="flex flex-wrap gap-3">
+                <Button
+                  asChild
+                  className="h-auto rounded-full bg-[var(--space-button)] px-5 py-4 text-sm font-semibold text-[var(--space-button-text)] hover:bg-[var(--space-cyan)] hover:text-[var(--space-void)]"
+                >
+                  <a href={cvUrl} download>
+                    <Download className="mr-2 h-4 w-4" />
+                    Download CV
+                  </a>
+                </Button>
+                <Button
+                  asChild
+                  variant="outline"
+                  className="h-auto rounded-full border-[var(--space-border)] bg-[var(--space-panel)] px-5 py-4 text-sm text-[var(--space-starlight)] hover:bg-[var(--space-panel-strong)]"
+                >
+                  <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">
+                    <MessageCircle className="mr-2 h-4 w-4" />
+                    WhatsApp
+                  </a>
+                </Button>
+              </div>
             </div>
 
             {/* Contact Details */}
             <div className="space-y-4">
               <motion.div
                 whileHover={{ x: 8 }}
-                className="flex items-center gap-4 text-gray-300 hover:text-cyan-400 transition-colors"
+                className="flex items-center gap-4 text-[var(--space-moon)] hover:text-[var(--space-cyan)] transition-colors"
               >
                 <div className="w-12 h-12 bg-gradient-to-br from-cyan-500 to-indigo-600 rounded-xl flex items-center justify-center shadow-lg">
                   <Mail className="w-6 h-6 text-white" />
                 </div>
                 <div>
-                  <p className="text-sm text-gray-400">Email</p>
-                  <p className="font-mono">mohmedshipet4@gmail.com</p>
+                  <p className="text-sm text-[var(--space-muted)]">Email</p>
+                  <p>mohmedshipet4@gmail.com</p>
                 </div>
               </motion.div>
 
               <motion.div
                 whileHover={{ x: 8 }}
-                className="flex items-center gap-4 text-gray-300 hover:text-cyan-400 transition-colors"
+                className="flex items-center gap-4 text-[var(--space-moon)] hover:text-[var(--space-cyan)] transition-colors"
               >
                 <div className="w-12 h-12 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
                   <MapPin className="w-6 h-6 text-white" />
                 </div>
                 <div>
-                  <p className="text-sm text-gray-400">Location</p>
+                  <p className="text-sm text-[var(--space-muted)]">Location</p>
                   <p>Egypt,Giza</p>
                   <p>Available world wide </p>
                 </div>
@@ -124,14 +148,14 @@ export function Contact() {
 
             {/* Social Links */}
             <div>
-              <h4 className="text-lg font-bold text-white mb-4">Follow Me</h4>
+              <h4 className="text-lg font-bold text-[var(--space-starlight)] mb-4">Follow Me</h4>
               <div className="flex gap-4">
                 <motion.a
                 href="https://github.com/superiorshipet"
                   target="_blank"
                   rel="noopener noreferrer"
                   whileHover={{ scale: 1.1, y: -4 }}
-                  className="w-12 h-12 bg-gradient-to-br from-[#1E293B] to-[#312E81] border border-cyan-500/30 rounded-xl flex items-center justify-center text-gray-400 hover:text-cyan-400 hover:border-cyan-500 transition-all shadow-lg"
+                  className="space-glass w-12 h-12 rounded-xl flex items-center justify-center text-[var(--space-muted)] hover:text-[var(--space-cyan)] hover:border-[var(--space-cyan)]/45 transition-all"
                 >
                   <Github className="w-6 h-6" />
                 </motion.a>
@@ -140,7 +164,7 @@ export function Contact() {
                   target="_blank"
                   rel="noopener noreferrer"
                   whileHover={{ scale: 1.1, y: -4 }}
-                  className="w-12 h-12 bg-gradient-to-br from-[#1E293B] to-[#312E81] border border-cyan-500/30 rounded-xl flex items-center justify-center text-gray-400 hover:text-cyan-400 hover:border-cyan-500 transition-all shadow-lg"
+                  className="space-glass w-12 h-12 rounded-xl flex items-center justify-center text-[var(--space-muted)] hover:text-[var(--space-cyan)] hover:border-[var(--space-cyan)]/45 transition-all"
                 >
                   <Linkedin className="w-6 h-6" />
                 </motion.a>
@@ -149,7 +173,7 @@ export function Contact() {
                   target="_blank"
                   rel="noopener noreferrer"
                   whileHover={{ scale: 1.1, y: -4 }}
-                  className="w-12 h-12 bg-gradient-to-br from-[#1E293B] to-[#312E81] border border-cyan-500/30 rounded-xl flex items-center justify-center text-gray-400 hover:text-cyan-400 hover:border-cyan-500 transition-all shadow-lg"
+                  className="space-glass w-12 h-12 rounded-xl flex items-center justify-center text-[var(--space-muted)] hover:text-[var(--space-cyan)] hover:border-[var(--space-cyan)]/45 transition-all"
                 >
                   <Twitter className="w-6 h-6" />
                 </motion.a>
@@ -168,10 +192,10 @@ export function Contact() {
               onSubmit={handleSubmit}
               className="space-y-6"
             >
-              <div className="bg-gradient-to-br from-[#1E293B] to-[#312E81] border border-cyan-500/20 rounded-2xl p-8 shadow-xl">
+              <div className="space-glass rounded-lg p-8">
                 <div className="space-y-4">
                   <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">
+                    <label htmlFor="name" className="block text-sm font-medium text-[var(--space-moon)] mb-2">
                       Name
                     </label>
                     <Input
@@ -181,12 +205,12 @@ export function Contact() {
                       onChange={handleChange}
                       placeholder="Your name"
                       required
-                      className="bg-[#0F172A]/50 border-cyan-500/30 text-white placeholder:text-gray-500 focus:border-cyan-500"
+                      className="bg-[var(--space-panel)] border-[var(--space-border)] text-[var(--space-starlight)] placeholder:text-[var(--space-muted)] focus:border-[var(--space-cyan)]"
                     />
                   </div>
 
                   <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
+                    <label htmlFor="email" className="block text-sm font-medium text-[var(--space-moon)] mb-2">
                       Email
                     </label>
                     <Input
@@ -197,12 +221,12 @@ export function Contact() {
                       onChange={handleChange}
                       placeholder="your.email@example.com"
                       required
-                      className="bg-[#0F172A]/50 border-cyan-500/30 text-white placeholder:text-gray-500 focus:border-cyan-500"
+                      className="bg-[var(--space-panel)] border-[var(--space-border)] text-[var(--space-starlight)] placeholder:text-[var(--space-muted)] focus:border-[var(--space-cyan)]"
                     />
                   </div>
 
                   <div>
-                    <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-2">
+                    <label htmlFor="message" className="block text-sm font-medium text-[var(--space-moon)] mb-2">
                       Message
                     </label>
                     <Textarea
@@ -213,14 +237,14 @@ export function Contact() {
                       placeholder="Tell me about your project..."
                       rows={5}
                       required
-                      className="bg-[#0F172A]/50 border-cyan-500/30 text-white placeholder:text-gray-500 focus:border-cyan-500 resize-none"
+                      className="bg-[var(--space-panel)] border-[var(--space-border)] text-[var(--space-starlight)] placeholder:text-[var(--space-muted)] focus:border-[var(--space-cyan)] resize-none"
                     />
                   </div>
 
                   <Button
                     type="submit"
                     disabled={submitStatus === 'sending'}
-                    className="w-full bg-gradient-to-r from-cyan-500 to-indigo-600 hover:from-cyan-600 hover:to-indigo-700 text-white py-6 text-lg shadow-lg shadow-cyan-500/30"
+                    className="w-full bg-[var(--space-button)] hover:bg-[var(--space-cyan)] text-[var(--space-button-text)] hover:text-[var(--space-void)] py-6 text-lg shadow-lg shadow-[rgba(100,244,255,0.25)]"
                   >
                     <Send className="w-5 h-5 mr-2" />
                     {submitStatus === 'sending' ? 'Sending...' : 'Send Message'}

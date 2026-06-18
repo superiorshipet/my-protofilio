@@ -2,10 +2,40 @@
 
 :root {
   --font-size: 16px;
-  --background: #ffffff;
-  --foreground: oklch(0.145 0 0);
+  --background: #f6f8ff;
+  --foreground: #11162f;
   --card: #ffffff;
-  --card-foreground: oklch(0.145 0 0);
+  --card-foreground: #11162f;
+  --space-void: #f6f8ff;
+  --space-midnight: #e8edff;
+  --space-panel: rgba(255, 255, 255, 0.74);
+  --space-panel-strong: rgba(255, 255, 255, 0.92);
+  --space-starlight: #11162f;
+  --space-moon: #536183;
+  --space-muted: #6f7894;
+  --space-orbit: rgba(76, 92, 145, 0.18);
+  --space-cyan: #087ea4;
+  --space-violet: #6d45d9;
+  --space-rose: #d73794;
+  --space-sun: #c57700;
+  --space-border: rgba(41, 55, 99, 0.14);
+  --space-star-a: rgba(39, 54, 101, 0.36);
+  --space-star-b: rgba(8, 126, 164, 0.34);
+  --space-body-bg:
+    radial-gradient(circle at 16% 18%, rgba(109, 69, 217, 0.12), transparent 26rem),
+    radial-gradient(circle at 82% 12%, rgba(8, 126, 164, 0.12), transparent 28rem),
+    linear-gradient(180deg, #f6f8ff 0%, #e9eeff 52%, #f7f9ff 100%);
+  --space-scene-bg:
+    radial-gradient(circle at 20% 12%, rgba(109, 69, 217, 0.14), transparent 22rem),
+    radial-gradient(circle at 82% 26%, rgba(8, 126, 164, 0.10), transparent 26rem),
+    radial-gradient(circle at 48% 85%, rgba(215, 55, 148, 0.08), transparent 24rem),
+    linear-gradient(180deg, #f6f8ff 0%, #edf2ff 54%, #f8faff 100%);
+  --space-glass-bg: linear-gradient(145deg, rgba(255, 255, 255, 0.84), rgba(236, 241, 255, 0.76));
+  --space-glass-shadow: 0 24px 80px rgba(42, 53, 94, 0.16);
+  --space-nav-bg: rgba(246, 248, 255, 0.82);
+  --space-overlay: rgba(11, 17, 37, 0.28);
+  --space-button: #11162f;
+  --space-button-text: #ffffff;
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
   --primary: #030213;
@@ -42,10 +72,40 @@
 }
 
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.145 0 0);
-  --card-foreground: oklch(0.985 0 0);
+  --background: #02030a;
+  --foreground: #f8fbff;
+  --card: #080b18;
+  --card-foreground: #f8fbff;
+  --space-void: #02030a;
+  --space-midnight: #070a18;
+  --space-panel: rgba(13, 17, 33, 0.78);
+  --space-panel-strong: rgba(18, 22, 43, 0.92);
+  --space-starlight: #f8fbff;
+  --space-moon: #b9c7ff;
+  --space-muted: #8793b5;
+  --space-orbit: rgba(185, 199, 255, 0.16);
+  --space-cyan: #64f4ff;
+  --space-violet: #8d5cff;
+  --space-rose: #ff4fb8;
+  --space-sun: #ffcf6e;
+  --space-border: rgba(255, 255, 255, 0.1);
+  --space-star-a: rgba(255, 255, 255, 0.72);
+  --space-star-b: rgba(100, 244, 255, 0.45);
+  --space-body-bg:
+    radial-gradient(circle at 16% 18%, rgba(141, 92, 255, 0.18), transparent 26rem),
+    radial-gradient(circle at 82% 12%, rgba(100, 244, 255, 0.15), transparent 28rem),
+    linear-gradient(180deg, #02030a 0%, #070a18 52%, #02030a 100%);
+  --space-scene-bg:
+    radial-gradient(circle at 20% 12%, rgba(141, 92, 255, 0.22), transparent 22rem),
+    radial-gradient(circle at 82% 26%, rgba(100, 244, 255, 0.14), transparent 26rem),
+    radial-gradient(circle at 48% 85%, rgba(255, 79, 184, 0.08), transparent 24rem),
+    linear-gradient(180deg, #02030a 0%, #070a18 54%, #02030a 100%);
+  --space-glass-bg: linear-gradient(145deg, rgba(14, 18, 36, 0.82), rgba(5, 7, 16, 0.78));
+  --space-glass-shadow: 0 24px 80px rgba(0, 0, 0, 0.36);
+  --space-nav-bg: rgba(2, 3, 10, 0.82);
+  --space-overlay: rgba(0, 0, 0, 0.5);
+  --space-button: #ffffff;
+  --space-button-text: #02030a;
   --popover: oklch(0.145 0 0);
   --popover-foreground: oklch(0.985 0 0);
   --primary: oklch(0.985 0 0);
@@ -126,6 +186,15 @@
 
   body {
     @apply bg-background text-foreground;
+    font-family: 'Sora', sans-serif;
+    background: var(--space-body-bg);
+    min-height: 100vh;
+    transition: background 300ms ease, color 300ms ease;
+  }
+
+  ::selection {
+    color: var(--space-void);
+    background: var(--space-cyan);
   }
 
   /**
@@ -141,18 +210,21 @@
     font-size: var(--text-2xl);
     font-weight: var(--font-weight-medium);
     line-height: 1.5;
+    font-family: 'Chakra Petch', sans-serif;
   }
 
   h2 {
     font-size: var(--text-xl);
     font-weight: var(--font-weight-medium);
     line-height: 1.5;
+    font-family: 'Chakra Petch', sans-serif;
   }
 
   h3 {
     font-size: var(--text-lg);
     font-weight: var(--font-weight-medium);
     line-height: 1.5;
+    font-family: 'Chakra Petch', sans-serif;
   }
 
   h4 {
@@ -171,11 +243,68 @@
     font-size: var(--text-base);
     font-weight: var(--font-weight-medium);
     line-height: 1.5;
+    font-family: 'Sora', sans-serif;
   }
 
   input {
     font-size: var(--text-base);
     font-weight: var(--font-weight-normal);
     line-height: 1.5;
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: 'Chakra Petch', sans-serif;
+  }
+
+  .font-body {
+    font-family: 'Sora', sans-serif;
+  }
+
+  .space-scene {
+    position: relative;
+    background: var(--space-scene-bg);
+    transition: background 300ms ease;
+  }
+
+  .space-stars::before,
+  .space-stars::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-repeat: repeat;
+  }
+
+  .space-stars::before {
+    opacity: 0.54;
+    background-image:
+      radial-gradient(circle, var(--space-star-a) 1px, transparent 1.6px),
+      radial-gradient(circle, var(--space-star-b) 1px, transparent 1.5px);
+    background-position: 0 0, 38px 74px;
+    background-size: 140px 160px, 220px 240px;
+  }
+
+  .space-stars::after {
+    opacity: 0.32;
+    background-image:
+      radial-gradient(circle, var(--space-star-a) 1px, transparent 1.4px),
+      radial-gradient(circle, rgba(255, 79, 184, 0.36) 1px, transparent 1.5px);
+    background-position: 72px 40px, 12px 120px;
+    background-size: 260px 300px, 340px 360px;
+  }
+
+  .space-glass {
+    border: 1px solid var(--space-border);
+    background: var(--space-glass-bg);
+    box-shadow: var(--space-glass-shadow);
+    backdrop-filter: blur(18px);
+    transition: background 300ms ease, border-color 300ms ease, box-shadow 300ms ease;
+  }
+
+  .space-orbit {
+    border: 1px solid var(--space-orbit);
+    border-radius: 999px;
   }
 }
