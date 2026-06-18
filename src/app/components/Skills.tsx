@@ -5,25 +5,25 @@ const skillCategories = [
   {
     title: "Frontend",
     icon: Code2,
-    color: "from-cyan-500 to-blue-500",
+    color: "from-[var(--space-cyan)] to-[var(--space-violet)]",
     skills: ["HTML", "CSS", "JavaScript", "React", "Angular"],
   },
   {
     title: "Backend",
     icon: Server,
-    color: "from-indigo-500 to-purple-500",
+    color: "from-[var(--space-violet)] to-[var(--space-rose)]",
     skills: ["Node.js", "Express.js", "PHP", "Laravel", "ASP.NET Core", "C#","GO"],
   },
   {
     title: "Database",
     icon: Database,
-    color: "from-purple-500 to-pink-500",
+    color: "from-[var(--space-rose)] to-[var(--space-sun)]",
     skills: ["SQL Server", "MySQL", "MongoDB", "PostgreSQL", "Redis", "Firebase","Dgraph"],
   },
   {
     title: "Engineering",
     icon: Wrench,
-    color: "from-pink-500 to-cyan-500",
+    color: "from-[var(--space-sun)] to-[var(--space-cyan)]",
     skills: ["Git", "Docker", "Linux", "Networking", "Cloud Computing", "Operating Systems"],
   },
 ];

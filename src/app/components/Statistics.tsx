@@ -3,10 +3,10 @@ import { motion, useInView } from 'motion/react';
 import { FolderGit2, BookOpen, Calendar, Users } from 'lucide-react';
 
 const stats = [
-  { label: "Projects Built", value: 40, suffix: "+", icon: FolderGit2, color: "from-cyan-500 to-blue-600" },
-  { label: "Technologies Learned", value: 15, suffix: "+", icon: BookOpen, color: "from-indigo-500 to-purple-600" },
-  { label: "Years of Learning", value: 5, suffix: "+", icon: Calendar, color: "from-purple-500 to-pink-600" },
-  { label: "Team Collaborations", value: 10, suffix: "+", icon: Users, color: "from-pink-500 to-cyan-600" },
+  { label: "Projects Built", value: 40, suffix: "+", icon: FolderGit2, color: "from-[var(--space-cyan)] to-[var(--space-violet)]" },
+  { label: "Technologies Learned", value: 15, suffix: "+", icon: BookOpen, color: "from-[var(--space-violet)] to-[var(--space-rose)]" },
+  { label: "Years of Learning", value: 5, suffix: "+", icon: Calendar, color: "from-[var(--space-rose)] to-[var(--space-sun)]" },
+  { label: "Team Collaborations", value: 10, suffix: "+", icon: Users, color: "from-[var(--space-sun)] to-[var(--space-cyan)]" },
 ];
 
 function Counter({ value, suffix = "", duration = 2000 }: { value: number; suffix?: string; duration?: number }) {

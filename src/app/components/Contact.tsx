@@ -122,7 +122,7 @@ export function Contact() {
                 whileHover={{ x: 8 }}
                 className="flex items-center gap-4 text-[var(--space-moon)] hover:text-[var(--space-cyan)] transition-colors"
               >
-                <div className="w-12 h-12 bg-gradient-to-br from-cyan-500 to-indigo-600 rounded-xl flex items-center justify-center shadow-lg">
+                <div className="w-12 h-12 bg-gradient-to-br from-[var(--space-cyan)] to-[var(--space-violet)] rounded-xl flex items-center justify-center shadow-lg">
                   <Mail className="w-6 h-6 text-white" />
                 </div>
                 <div>
@@ -135,7 +135,7 @@ export function Contact() {
                 whileHover={{ x: 8 }}
                 className="flex items-center gap-4 text-[var(--space-moon)] hover:text-[var(--space-cyan)] transition-colors"
               >
-                <div className="w-12 h-12 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
+                <div className="w-12 h-12 bg-gradient-to-br from-[var(--space-violet)] to-[var(--space-rose)] rounded-xl flex items-center justify-center shadow-lg">
                   <MapPin className="w-6 h-6 text-white" />
                 </div>
                 <div>
