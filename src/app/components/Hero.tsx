@@ -19,7 +19,7 @@ const typingSequence = [
   { text: 'Full-stack Engineer.', pauseAfter: 900 },
   { text: 'Backend Systems Builder.', pauseAfter: 900 },
   { text: 'Scalable Product Engineer.', pauseAfter: 900 },
-  { text: 'I Build Useful Things.', pauseAfter: 1100 },
+  { text: 'I Build Useful tools.', pauseAfter: 1100 },
 ];
 
 const starTrails = Array.from({ length: 9 }, (_, index) => ({
