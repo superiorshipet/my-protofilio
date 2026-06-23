@@ -1,33 +1,41 @@
 import { motion } from 'motion/react';
-import { Calendar, Code, Database, Cloud, Brain } from 'lucide-react';
+import { Calendar, Code, Database, Cloud, Brain, Star } from 'lucide-react';
 
 const experiences = [
   {
-    period: "2025 - 2026",
-    role: "intern Full Stack Developer",
-    company: "DEPI",
+    period: "2025 (April - present)",
+    role: "junior Full Stack .NET Developer",
+    company: "Star+ Games",
     description: "Building scalable web applications with modern frameworks and cloud infrastructure.",
     technologies: ["React", "Asp.net", "AWS", "Docker","redis","postgresql","Dgraph","sqlsever"],
+    icon: Star,
+  },
+  {
+    period: " 2025 (May - December)",
+    role: "intern Full Stack .NET Developer",
+    company: "DEPI",
+    description: "Building scalable web applications with modern frameworks and cloud infrastructure.",
+    technologies: ["React", "Asp.net","sqlsever"],
     icon: Cloud,
   },
   {
-    period: "2023 - 2024",
-    role: "intern flutter developer",
+    period: "2023 June - 2024 january",
+    role: "intern (Flutter Developer)",
     company: "DEPI",
     description: "Developed cross-platform mobile applications and collaborated with design teams on user experiences.",
     technologies: ["Flutter", "Dart", "Firebase"],
     icon: Database,
   },
   {
-    period: "2022 - 2023",
-    role: "Junior backend Developer",
-    company: "Code Alpha",
+    period: "2022 (November to December)",
+    role: "Intern backend Developer",
+    company: "Code Apha",
     description: "Developed responsive web applications and collaborated with design teams on user experiences.",
     technologies: ["React", "PHP", "Laravel", "MySQL"],
     icon: Code,
   },
   {
-    period: "2021 - 2022",
+    period: "2022 (June to July)",
     role: "summer course at iti for php laravel",
     company: "ITI",
     description: "Completed an intensive summer course focused on PHP and Laravel, building several projects and gaining hands-on experience in web development.",

@@ -4,9 +4,10 @@ import { Download, Github, Linkedin, Mail, MapPin, MessageCircle, Send, Twitter 
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Textarea } from './ui/textarea';
+import cvFile from '../../imports/Mohamed-Shipet-CV.pdf';
 
-const cvUrl = '/Mohamed-Shipet-CV.pdf';
-const whatsappUrl = 'https://wa.me/201000000000?text=Hi%20Mohamed%2C%20I%20saw%20your%20portfolio%20and%20want%20to%20connect.';
+const cvUrl = cvFile;
+const whatsappUrl = 'https://wa.me/+201285544547?text=Hi%20Mohamed%2C%20I%20saw%20your%20portfolio%20and%20want%20to%20connect.';
 
 export function Contact() {
   const [formData, setFormData] = useState({

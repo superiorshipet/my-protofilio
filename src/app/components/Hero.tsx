@@ -3,12 +3,13 @@ import { motion } from 'motion/react';
 import { Cloud, Code2, Database, Download, Github, Linkedin, Mail, MessageCircle, Rocket, Terminal } from 'lucide-react';
 import { Button } from './ui/button';
 import portraitImg from '../../imports/image.png';
+import cvFile from '../../imports/Mohamed-Shipet-CV.pdf';
 
-const cvUrl = '/Mohamed-Shipet-CV.pdf';
-const whatsappUrl = 'https://wa.me/201000000000?text=Hi%20Mohamed%2C%20I%20saw%20your%20portfolio%20and%20want%20to%20connect.';
+const cvUrl = cvFile;
+const whatsappUrl = 'https://wa.me/+201285544547?text=Hi%20Mohamed%2C%20I%20saw%20your%20portfolio%20and%20want%20to%20connect.';
 
 const techIcons = [
-  { Icon: Code2, label: 'Frontend', delay: 0 },
+  { Icon: Code2, label: 'Frontend', delay: 0 }, 
   { Icon: Database, label: 'Data', delay: 0.2 },
   { Icon: Cloud, label: 'Cloud', delay: 0.4 },
   { Icon: Terminal, label: 'Backend', delay: 0.6 },
