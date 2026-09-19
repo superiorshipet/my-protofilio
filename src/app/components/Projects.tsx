@@ -56,7 +56,7 @@ const projects = [
     tech: ['C#', 'React', 'PostgreSQL', 'WebSocket'],
     orbit: 'City guide',
     githubUrl: 'https://github.com/superiorshipet/discover-madina',
-    demoUrl: 'https://discover-madina.vercel.app',
+    demoUrl: 'https://awarded-guy-cake-treasury.trycloudflare.com/discover-madina/',
   },
   {
     title: 'Distributed Database Project',
@@ -82,9 +82,10 @@ const projects = [
     tech: ['JavaScript', 'Node.js', 'PostgreSQL', 'Commerce'],
     orbit: 'Commerce hub',
     githubUrl: 'https://github.com/superiorshipet/SUPVEND',
+    demoUrl: 'https://awarded-guy-cake-treasury.trycloudflare.com/supvend-ui/',
   },
   {
-    title: 'Telegram Training Bot',
+    title: 'Telegram Training Bot',                                             
     description:
       'A Python Telegram bot project for training flows, automation, and message-based user interaction.',
     tech: ['Python', 'Telegram', 'Bot', 'Automation'],
@@ -98,6 +99,7 @@ const projects = [
     tech: ['C#', 'ASP.NET Core', 'SQL Server', 'Entity Framework'],
     orbit: 'Operations',
     githubUrl: 'https://github.com/superiorshipet/pharmacy',
+    demoUrl: 'https://awarded-guy-cake-treasury.trycloudflare.com/pharmacy/'
   },
   {
     title: 'Study Mate',
@@ -115,6 +117,7 @@ const projects = [
     tech: ['C#', 'ASP.NET', 'SQL Server', 'WebSocket'],
     orbit: 'Audio network',
     githubUrl: 'https://github.com/superiorshipet/podcasty',
+    demoUrl: 'https://awarded-guy-cake-treasury.trycloudflare.com/podcasty-ui'
   },
   {
     title: 'Data Mining Cancer Prediction',
