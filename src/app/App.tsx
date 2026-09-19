@@ -1,4 +1,5 @@
 import { Navigation } from './components/Navigation';
+import { AnimatedSpaceBackground } from './components/AnimatedSpaceBackground';
 import { Hero } from './components/Hero';
 import { Skills } from './components/Skills';
 import { Projects } from './components/Projects';
@@ -11,6 +12,7 @@ import { Footer } from './components/Footer';
 export default function App() {
   return (
     <div className="space-scene space-stars relative min-h-screen overflow-hidden text-[var(--space-starlight)]" id="home">
+      <AnimatedSpaceBackground />
       <div className="relative z-10">
         <Navigation />
         <Hero />

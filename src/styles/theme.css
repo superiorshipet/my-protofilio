@@ -278,7 +278,7 @@
   }
 
   .space-stars::before {
-    opacity: 0.54;
+    opacity: 0.22;
     background-image:
       radial-gradient(circle, var(--space-star-a) 1px, transparent 1.6px),
       radial-gradient(circle, var(--space-star-b) 1px, transparent 1.5px);
@@ -287,12 +287,25 @@
   }
 
   .space-stars::after {
-    opacity: 0.32;
+    opacity: 0.14;
     background-image:
       radial-gradient(circle, var(--space-star-a) 1px, transparent 1.4px),
       radial-gradient(circle, rgba(255, 79, 184, 0.36) 1px, transparent 1.5px);
     background-position: 72px 40px, 12px 120px;
     background-size: 260px 300px, 340px 360px;
+  }
+
+  .space-three-bg {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .space-three-bg canvas {
+    display: block;
+    height: 100%;
+    width: 100%;
   }
 
   .space-glass {
