@@ -21,15 +21,7 @@ const projects = [
     tech: ['TypeScript', 'React', 'PHP', 'PostgreSQL'],
     orbit: 'Hiring platform',
     githubUrl: 'https://github.com/superiorshipet/ATS-website',
-    demoUrl: 'https://ats-website-flax.vercel.app',
-  },
-  {
-    title: 'Luxira CRM New',
-    description:
-      'A CRM rebuild focused on .NET backend reliability, route parity, schema migration, and production-ready business workflows.',
-    tech: ['C#', 'ASP.NET Core', 'SQL Server', 'OpenAPI'],
-    orbit: 'CRM system',
-    githubUrl: 'https://github.com/superiorshipet/luxira-crm-new',
+    demoUrl: 'https://awarded-guy-cake-treasury.trycloudflare.com/ats/',
   },
   {
     title: 'Stunning.io Task',
