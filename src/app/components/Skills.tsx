@@ -55,10 +55,10 @@ export function Skills() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              whileHover={{ y: -8, transition: { duration: 0.2 } }}
+              whileHover={{ y: -10, rotateX: 4, rotateY: index % 2 === 0 ? -4 : 4, transition: { duration: 0.2 } }}
               className="group"
             >
-              <div className="space-glass h-full rounded-lg p-6 transition-all duration-300 group-hover:border-[var(--space-cyan)]/45">
+              <div className="portfolio-depth-card space-glass relative h-full rounded-lg p-6 transition-all duration-300 group-hover:border-[var(--space-cyan)]/45">
                 {/* Icon */}
                 <motion.div
                   whileHover={{ rotate: 360 }}

@@ -70,10 +70,10 @@ export function Statistics() {
               whileInView={{ opacity: 1, scale: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              whileHover={{ scale: 1.05, y: -8 }}
+              whileHover={{ scale: 1.05, y: -10, rotateX: 4, rotateY: index % 2 === 0 ? -4 : 4 }}
               className="group"
             >
-              <div className="space-glass h-full rounded-lg p-8 transition-all duration-300 group-hover:border-[var(--space-cyan)]/45 text-center">
+              <div className="portfolio-depth-card space-glass relative h-full rounded-lg p-8 transition-all duration-300 group-hover:border-[var(--space-cyan)]/45 text-center">
                 {/* Icon */}
                 <motion.div
                   whileHover={{ rotate: 360 }}

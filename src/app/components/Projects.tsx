@@ -5,29 +5,97 @@ import { Button } from './ui/button';
 
 const projects = [
   {
-    title: 'ATS Job Portal',
+    title: 'Project Task Management',
     description:
-      'A job platform connecting talented developers with opportunities through real-time features and structured hiring flows.',
-    tech: ['React', 'PHP', 'PostgreSQL', 'WebSocket'],
-    orbit: 'Talent network',
-    githubUrl: 'https://github.com/superiorshipet/ATS-website',
+      'A Laravel workspace for managing projects, tasks, members, assignments, status tracking, and team workflows.',
+    tech: ['Laravel', 'Blade', 'PHP', 'MySQL'],
+    orbit: 'Productivity',
+    githubUrl: 'https://github.com/superiorshipet/project-task-managment',
   },
   {
-    title: 'SUPVEND',
+    title: 'ATS Website',
     description:
-      'An e-commerce system with inventory management, checkout, payment integration, Redis caching, and wallet support.',
-    tech: ['Node.js', 'PostgreSQL', 'React', 'Stripe', 'Redis'],
-    orbit: 'Commerce hub',
-    githubUrl: 'https://github.com/superiorshipet/SUPVEND',
+      'A hiring and applicant tracking platform with a modern frontend, backend API, database flows, and tracking integrations.',
+    tech: ['TypeScript', 'React', 'PHP', 'PostgreSQL'],
+    orbit: 'Hiring platform',
+    githubUrl: 'https://github.com/superiorshipet/ATS-website',
+    demoUrl: 'https://ats-website-flax.vercel.app',
+  },
+  {
+    title: 'Luxira CRM New',
+    description:
+      'A CRM rebuild focused on .NET backend reliability, route parity, schema migration, and production-ready business workflows.',
+    tech: ['C#', 'ASP.NET Core', 'SQL Server', 'OpenAPI'],
+    orbit: 'CRM system',
+    githubUrl: 'https://github.com/superiorshipet/luxira-crm-new',
+  },
+  {
+    title: 'Stunning.io Task',
+    description:
+      'Full-stack task implementation with a .NET service layer and deployed client experience.',
+    tech: ['C#', 'ASP.NET Core', 'React', 'Railway'],
+    orbit: 'Full-stack task',
+    githubUrl: 'https://github.com/superiorshipet/stunning.io-task',
+    demoUrl: 'https://client-pi-ten-32.vercel.app',
+  },
+  {
+    title: 'Luxira Chat',
+    description:
+      'Separate backend and frontend repositories for a chat experience connected to the Luxira ecosystem.',
+    tech: ['C#', 'HTML', 'SignalR', 'API'],
+    orbit: 'Realtime chat',
+    githubUrl: 'https://github.com/superiorshipet/luxira-chatting-backend',
+  },
+  {
+    title: 'Loxx King',
+    description:
+      'A TypeScript web application paired with a C# backend for a modern hosted product experience.',
+    tech: ['TypeScript', 'C#', 'React', 'API'],
+    orbit: 'Product app',
+    githubUrl: 'https://github.com/superiorshipet/loxx-king',
+    demoUrl: 'https://loxx-king.vercel.app',
   },
   {
     title: 'Discover Madina',
     description:
-      'A tourism guide for El Madina with smart visitor assistance, map-inspired exploration, and location-focused features.',
-    tech: ['React', 'Node.js', 'PostgreSQL', 'WebSocket'],
+      'A tourism guide for Madina with attraction discovery, visitor planning, backend services, and a deployed web client.',
+    tech: ['C#', 'React', 'PostgreSQL', 'WebSocket'],
     orbit: 'City guide',
     githubUrl: 'https://github.com/superiorshipet/discover-madina',
-    demoUrl: 'https://discover-madina-production.up.railway.app/',
+    demoUrl: 'https://discover-madina.vercel.app',
+  },
+  {
+    title: 'Distributed Database Project',
+    description:
+      'Go project exploring distributed database behavior, concurrency, and system-level data management concepts.',
+    tech: ['Go', 'Concurrency', 'Databases', 'Systems'],
+    orbit: 'Systems',
+    githubUrl: 'https://github.com/superiorshipet/distribution-database-project-for-eng-farosa',
+  },
+  {
+    title: 'E-commerce for E-products',
+    description:
+      'A digital product marketplace with product browsing, purchase flow, and a deployed TypeScript frontend.',
+    tech: ['TypeScript', 'React', 'E-commerce', 'Payments'],
+    orbit: 'Digital goods',
+    githubUrl: 'https://github.com/superiorshipet/E-commerce-for-E-products',
+    demoUrl: 'https://e-commerce-for-e-products.vercel.app',
+  },
+  {
+    title: 'SUPVEND',
+    description:
+      'A vending and commerce system for product management, purchasing flows, and practical marketplace operations.',
+    tech: ['JavaScript', 'Node.js', 'PostgreSQL', 'Commerce'],
+    orbit: 'Commerce hub',
+    githubUrl: 'https://github.com/superiorshipet/SUPVEND',
+  },
+  {
+    title: 'Telegram Training Bot',
+    description:
+      'A Python Telegram bot project for training flows, automation, and message-based user interaction.',
+    tech: ['Python', 'Telegram', 'Bot', 'Automation'],
+    orbit: 'Training bot',
+    githubUrl: 'https://github.com/superiorshipet/telegram_training_bot',
   },
   {
     title: 'Pharmacy Management',
@@ -38,45 +106,29 @@ const projects = [
     githubUrl: 'https://github.com/superiorshipet/pharmacy',
   },
   {
-    title: 'Discover',
+    title: 'Study Mate',
     description:
-      'A Saudi Arabia tourism platform with ticket integrations, attraction comments, and vacation planning tools.',
-    tech: ['React', 'ASP.NET', 'PostgreSQL', 'WebSocket', 'Redis'],
-    orbit: 'Travel planner',
-    githubUrl: 'https://github.com/superiorshipet/----------------------',
-    demoUrl: 'https://madinaguide.vercel.app',
-  },
-  {
-    title: 'Nour Dental',
-    description:
-      'A dental clinic storefront for equipment sales, backed by ASP.NET services, PostgreSQL, Redis, and hosted delivery.',
-    tech: ['C#', 'ASP.NET Core', 'PostgreSQL', 'Entity Framework', 'Redis'],
-    orbit: 'Clinic commerce',
-    demoUrl: 'https://www.elnordental.shop',
+      'A study platform with interactive learning flows, progress tracking, and collaboration features for students.',
+    tech: ['TypeScript', 'React', 'ASP.NET', 'PostgreSQL'],
+    orbit: 'Learning orbit',
+    githubUrl: 'https://github.com/superiorshipet/study-mate',
+    demoUrl: 'https://study-mate-blush.vercel.app',
   },
   {
     title: 'Podcasty',
     description:
-      'A podcast platform for creating, sharing, and listening to shows with real-time interaction features.',
-    tech: ['React', 'ASP.NET', 'SQL Server', 'WebSocket'],
+      'A podcast platform for creating, sharing, and listening to shows with backend-driven media workflows.',
+    tech: ['C#', 'ASP.NET', 'SQL Server', 'WebSocket'],
     orbit: 'Audio network',
     githubUrl: 'https://github.com/superiorshipet/podcasty',
   },
   {
-    title: 'E-commerce for E-products',
+    title: 'Data Mining Cancer Prediction',
     description:
-      'A digital product marketplace with secure payments, product management, and a clear purchase flow.',
-    tech: ['React', 'ASP.NET', 'PostgreSQL'],
-    orbit: 'Digital goods',
-    githubUrl: 'https://github.com/superiorshipet/E-commerce-for-E-products',
-  },
-  {
-    title: 'Study Mate',
-    description:
-      'A study platform with interactive lessons, quizzes, progress tracking, and collaboration features for students.',
-    tech: ['React', 'ASP.NET', 'PostgreSQL', 'WebSocket'],
-    orbit: 'Learning orbit',
-    githubUrl: 'https://github.com/superiorshipet/study-mate',
+      'A notebook-based machine learning project for cancer prediction and data mining experiments.',
+    tech: ['Jupyter Notebook', 'Python', 'Data Mining', 'ML'],
+    orbit: 'Machine learning',
+    githubUrl: 'https://github.com/superiorshipet/data-mining-cancer-prediction-project',
   },
 ];
 
@@ -118,10 +170,10 @@ export function Projects() {
               transition={{ duration: 0.5, delay: index * 0.07 }}
               onHoverStart={() => setHoveredIndex(index)}
               onHoverEnd={() => setHoveredIndex(null)}
-              whileHover={{ y: -10 }}
+              whileHover={{ y: -12, rotateX: 3, rotateY: index % 2 === 0 ? -3 : 3 }}
               className="group relative"
             >
-              <div className="space-glass relative flex h-full min-h-[25rem] flex-col overflow-hidden rounded-lg p-6 transition-colors duration-300 group-hover:border-[var(--space-cyan)]/45">
+              <div className="portfolio-depth-card space-glass relative flex h-full min-h-[25rem] flex-col overflow-hidden rounded-lg p-6 transition-colors duration-300 group-hover:border-[var(--space-cyan)]/45">
                 <motion.div
                   className="absolute -right-16 -top-16 h-40 w-40 rounded-full border border-[var(--space-border)]"
                   animate={{ rotate: hoveredIndex === index ? 35 : 0 }}

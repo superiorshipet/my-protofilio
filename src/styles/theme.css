@@ -307,4 +307,25 @@
     border: 1px solid var(--space-orbit);
     border-radius: 999px;
   }
+
+  .portfolio-depth-card {
+    transform-style: preserve-3d;
+    will-change: transform;
+  }
+
+  .portfolio-depth-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    border-radius: inherit;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.24), transparent 34%, rgba(100, 244, 255, 0.1));
+    opacity: 0;
+    transition: opacity 260ms ease;
+  }
+
+  .group:hover .portfolio-depth-card::before {
+    opacity: 1;
+  }
+
 }

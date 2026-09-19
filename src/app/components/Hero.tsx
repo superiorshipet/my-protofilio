@@ -189,14 +189,19 @@ export function Hero() {
           />
           <div className="absolute inset-[18%] rounded-full bg-[var(--space-cyan)]/12 blur-3xl" />
 
-          <div className="relative h-[68%] w-[68%] overflow-hidden rounded-full border border-[var(--space-border)] bg-[var(--space-panel)] p-2 shadow-[0_0_90px_rgba(141,92,255,0.28)] backdrop-blur">
+          <motion.div
+            whileHover={{ rotateX: 6, rotateY: -8, scale: 1.025 }}
+            transition={{ type: 'spring', stiffness: 170, damping: 18 }}
+            className="relative h-[68%] w-[68%] overflow-hidden rounded-full border border-[var(--space-border)] bg-[var(--space-panel)] p-2 shadow-[0_0_90px_rgba(141,92,255,0.28)] backdrop-blur"
+            style={{ transformStyle: 'preserve-3d' }}
+          >
             <img
               src={portraitImg}
               alt="Mohamed Shipet"
               className="h-full w-full rounded-full object-cover object-[center_35%]"
             />
             <div className="absolute inset-2 rounded-full bg-gradient-to-tr from-[var(--space-violet)]/30 via-transparent to-[var(--space-cyan)]/24" />
-          </div>
+          </motion.div>
 
           {techIcons.map(({ Icon, label, delay }, index) => (
             <motion.div

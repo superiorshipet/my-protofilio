@@ -3,42 +3,58 @@ import { Calendar, Code, Database, Cloud, Brain, Star } from 'lucide-react';
 
 const experiences = [
   {
-    period: "2025 (April - present)",
-    role: "junior Full Stack .NET Developer",
-    company: "Star+ Games",
-    description: "Building scalable web applications with modern frameworks and cloud infrastructure.",
-    technologies: ["React", "Asp.net", "AWS", "Docker","redis","postgresql","Dgraph","sqlsever"],
+    period: "2026 June - Present",
+    role: "Full-Stack .NET Developer (Full-Time)",
+    company: "Luxira Holding",
+    description: "Developing and maintaining a production CRM platform with business-critical workflows across order management, delivery operations, employee management, and customer support modules.",
+    technologies: ["ASP.NET Core MVC", "C#", "Entity Framework Core", "SQL Server", "JavaScript", "SignalR", "CRM"],
     icon: Star,
   },
   {
-    period: " 2025 (May - December)",
-    role: "intern Full Stack .NET Developer",
+    period: "2024 - Present",
+    role: "Freelance Full-Stack Developer",
+    company: "Nafezly & Mostaql",
+    description: "Delivered 15+ custom web applications for clients across healthcare, e-commerce, and business sectors, from requirements gathering to deployment and ongoing support.",
+    technologies: ["Node.js", "React", "SQL Server", "PostgreSQL", "REST APIs", "JWT", "Clean Architecture", "SOLID"],
+    icon: Code,
+  },
+  {
+    period: "2025 April - 2026 June",
+    role: "Full-Stack .NET Developer (Part-Time)",
+    company: "Star+ Games Startup",
+    description: "Developed and maintained production features, designed REST APIs, optimized backend functionality, fixed production issues, and collaborated with the team using Git and Agile workflows.",
+    technologies: ["ASP.NET Core", "React", "REST APIs", "Git", "Agile", "Backend Optimization"],
+    icon: Star,
+  },
+  {
+    period: "2025 (May - December)",
+    role: "Intern Full Stack .NET Developer",
     company: "DEPI",
-    description: "Building scalable web applications with modern frameworks and cloud infrastructure.",
-    technologies: ["React", "Asp.net","sqlsever"],
+    description: "Built scalable web applications with modern frameworks and backend infrastructure during an intensive full-stack .NET internship.",
+    technologies: ["React", "ASP.NET", "SQL Server"],
     icon: Cloud,
   },
   {
-    period: "2023 June - 2024 january",
-    role: "intern (Flutter Developer)",
+    period: "2023 June - 2024 January",
+    role: "Intern Flutter Developer",
     company: "DEPI",
     description: "Developed cross-platform mobile applications and collaborated with design teams on user experiences.",
     technologies: ["Flutter", "Dart", "Firebase"],
     icon: Database,
   },
   {
-    period: "2022 (November to December)",
-    role: "Intern backend Developer",
-    company: "Code Apha",
-    description: "Developed responsive web applications and collaborated with design teams on user experiences.",
+    period: "2022 (November - December)",
+    role: "Intern Backend Developer",
+    company: "Code Alpha",
+    description: "Developed responsive web applications and backend features while practicing practical web development workflows.",
     technologies: ["React", "PHP", "Laravel", "MySQL"],
     icon: Code,
   },
   {
-    period: "2022 (June to July)",
-    role: "summer course at iti for php laravel",
+    period: "2022 (June - July)",
+    role: "Summer Course - PHP Laravel",
     company: "ITI",
-    description: "Completed an intensive summer course focused on PHP and Laravel, building several projects and gaining hands-on experience in web development.",
+    description: "Completed an intensive summer course focused on PHP and Laravel, building several projects and gaining hands-on web development experience.",
     technologies: ["PHP", "Laravel", "MySQL", "JavaScript"],
     icon: Brain,
   },
@@ -83,8 +99,8 @@ export function Experience() {
                   {/* Content Card */}
                   <div className="flex-1 mb-8 md:mb-0">
                     <motion.div
-                      whileHover={{ scale: 1.02, y: -4 }}
-                      className={`space-glass rounded-lg p-6 transition-all hover:border-[var(--space-cyan)]/45 ${
+                      whileHover={{ scale: 1.02, y: -6, rotateX: 3, rotateY: index % 2 === 0 ? -3 : 3 }}
+                      className={`portfolio-depth-card space-glass relative rounded-lg p-6 transition-all hover:border-[var(--space-cyan)]/45 ${
                         index % 2 === 0 ? 'md:mr-8' : 'md:ml-8'
                       }`}
                     >
