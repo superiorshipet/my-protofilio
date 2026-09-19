@@ -11,6 +11,7 @@ const projects = [
     tech: ['Laravel', 'Blade', 'PHP', 'MySQL'],
     orbit: 'Productivity',
     githubUrl: 'https://github.com/superiorshipet/project-task-managment',
+    demoUrl: 'https://project-task-management.vercel.app',
   },
   {
     title: 'ATS Website',
@@ -19,7 +20,7 @@ const projects = [
     tech: ['TypeScript', 'React', 'PHP', 'PostgreSQL'],
     orbit: 'Hiring platform',
     githubUrl: 'https://github.com/superiorshipet/ATS-website',
-    demoUrl: 'https://ats-website-flax.vercel.app',
+    demoUrl: 'https://awarded-guy-cake-treasury.trycloudflare.com/login',
   },
   {
     title: 'Luxira CRM New',
