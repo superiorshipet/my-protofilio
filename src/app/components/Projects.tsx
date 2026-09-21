@@ -85,7 +85,7 @@ const projects = [
     demoUrl: 'https://awarded-guy-cake-treasury.trycloudflare.com/supvend-ui/',
   },
   {
-    title: 'Telegram Training Bot',                                             
+    title: 'Telegram Training Bot',                                           
     description:
       'A Python Telegram bot project for training flows, automation, and message-based user interaction.',
     tech: ['Python', 'Telegram', 'Bot', 'Automation'],
@@ -118,6 +118,22 @@ const projects = [
     orbit: 'Audio network',
     githubUrl: 'https://github.com/superiorshipet/podcasty',
     demoUrl: 'https://awarded-guy-cake-treasury.trycloudflare.com/podcasty-ui'
+  },
+  {
+    title: 'Belvie',
+    description:
+      'A furniture e-commerce platform with a polished storefront, product browsing, authentication, admin flows, and a connected backend API.',
+    tech: ['React', 'ASP.NET Core', 'PostgreSQL', 'E-commerce'],
+    orbit: 'Furniture store',
+    demoUrl: 'https://awarded-guy-cake-treasury.trycloudflare.com/belvie/',
+  },
+  {
+    title: 'Arabic Perfume Shop',
+    description:
+      'An Arabic perfume e-commerce experience with product discovery, storefront pages, authentication, and backend-powered shop data.',
+    tech: ['React', 'ASP.NET Core', 'PostgreSQL', 'Commerce'],
+    orbit: 'Perfume shop',
+    demoUrl: 'https://awarded-guy-cake-treasury.trycloudflare.com/arabic-perfume/',
   },
   {
     title: 'Data Mining Cancer Prediction',
