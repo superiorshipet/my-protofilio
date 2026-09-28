@@ -30,7 +30,7 @@ const projects = [
     tech: ['C#', 'ASP.NET Core', 'React', 'Railway'],
     orbit: 'Full-stack task',
     githubUrl: 'https://github.com/superiorshipet/stunning.io-task',
-    demoUrl: 'https://client-pi-ten-32.vercel.app',
+    demoUrl: 'https://requests-nobody-atom-olympus.trycloudflare.com/stunning.io-task/',
   },
   {
     title: 'Luxira Chat',
