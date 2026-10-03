@@ -22,37 +22,33 @@ export function DevThoughts() {
   }, []);
 
   return (
-    <section className="relative overflow-hidden py-20">
-      <div className="max-w-5xl mx-auto px-6">
+    <section className="relative overflow-hidden border-b border-[var(--space-border)] py-24 md:py-32">
+      <div className="mx-auto max-w-7xl px-6">
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           className="relative"
         >
-          {/* Background Decoration */}
-          <div className="absolute inset-0 flex items-center justify-center text-[var(--space-starlight)] opacity-[0.04]">
-            <Code2 className="w-96 h-96" />
-          </div>
-
-          {/* Content */}
-          <div className="space-glass relative rounded-lg p-12 text-center md:p-16">
+          <div className="editorial-surface relative overflow-hidden rounded-[2.5rem] p-8 md:p-16">
+            <Code2 className="absolute -right-16 -top-16 h-72 w-72 text-[var(--space-starlight)] opacity-[0.035]" />
+            <span className="section-kicker">05 / Principles</span>
             <motion.div
               initial={{ scale: 0 }}
               whileInView={{ scale: 1 }}
               viewport={{ once: true }}
               transition={{ type: 'spring', stiffness: 200 }}
-              className="inline-flex h-20 w-20 items-center justify-center rounded-2xl bg-gradient-to-br from-[var(--space-cyan)] to-[var(--space-violet)] mb-8 shadow-lg shadow-[rgba(100,244,255,0.25)]"
+              className="mt-12 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-[var(--space-button)] text-[var(--space-button-text)]"
             >
-              <Lightbulb className="w-10 h-10 text-white" />
+              <Lightbulb className="h-5 w-5" />
             </motion.div>
 
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-[var(--space-starlight)] mb-8">
+            <h2 className="mt-6 font-display text-3xl font-semibold text-[var(--space-starlight)] md:text-5xl">
               Developer Mindset
             </h2>
 
             {/* Rotating Thoughts */}
-            <div className="relative h-32 flex items-center justify-center">
+            <div className="relative mt-8 flex h-40 items-center">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={currentIndex}
@@ -60,9 +56,9 @@ export function DevThoughts() {
                   animate={{ opacity: 1, y: 0, rotateX: 0 }}
                   exit={{ opacity: 0, y: -20, rotateX: 90 }}
                   transition={{ duration: 0.5 }}
-                  className="absolute inset-0 flex items-center justify-center"
+                  className="absolute inset-0 flex items-center"
                 >
-                  <p className="font-display text-4xl md:text-6xl font-bold bg-gradient-to-r from-[var(--space-cyan)] via-[var(--space-starlight)] to-[var(--space-violet)] bg-clip-text text-transparent">
+                  <p className="font-display text-5xl font-semibold leading-none text-[var(--space-starlight)] md:text-8xl">
                     "{thoughts[currentIndex]}"
                   </p>
                 </motion.div>
@@ -70,7 +66,7 @@ export function DevThoughts() {
             </div>
 
             {/* Dots Indicator */}
-            <div className="flex justify-center gap-2 mt-8">
+            <div className="mt-8 flex gap-2">
               {thoughts.map((_, index) => (
                 <motion.button
                   key={index}
@@ -87,31 +83,6 @@ export function DevThoughts() {
             </div>
           </div>
 
-          {/* Floating Elements */}
-          <motion.div
-            animate={{
-              y: [0, -20, 0],
-              rotate: [0, 5, 0],
-            }}
-            transition={{
-              duration: 4,
-              repeat: Infinity,
-              ease: 'easeInOut',
-            }}
-            className="absolute -top-8 -right-8 w-16 h-16 rounded-2xl bg-[var(--space-panel)] backdrop-blur-sm border border-[var(--space-border)]"
-          />
-          <motion.div
-            animate={{
-              y: [0, 20, 0],
-              rotate: [0, -5, 0],
-            }}
-            transition={{
-              duration: 5,
-              repeat: Infinity,
-              ease: 'easeInOut',
-            }}
-            className="absolute -bottom-8 -left-8 w-20 h-20 rounded-2xl bg-[var(--space-panel)] backdrop-blur-sm border border-[var(--space-border)]"
-          />
         </motion.div>
       </div>
     </section>

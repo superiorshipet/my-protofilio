@@ -87,10 +87,20 @@ export function AnimatedSpaceBackground() {
   const wrapRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
+    const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    if (reducedMotionQuery.matches) return;
+
     let cleanup: (() => void) | null = null;
     let cancelled = false;
 
     const boot = async () => {
+      const probe = document.createElement('canvas');
+      const gl = probe.getContext('webgl2') ?? probe.getContext('webgl');
+
+      if (!gl) return;
+
+      gl.getExtension('WEBGL_lose_context')?.loseContext();
+
       const THREE = await import('three');
       const wrap = wrapRef.current;
 
@@ -183,6 +193,11 @@ export function AnimatedSpaceBackground() {
 
       const animate = (now: number) => {
         animationFrame = requestAnimationFrame(animate);
+
+        if (document.hidden) {
+          last = now;
+          return;
+        }
 
         const dt = Math.min((now - last) / 1000, 0.05);
         last = now;

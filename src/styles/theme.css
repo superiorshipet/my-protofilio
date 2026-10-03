@@ -2,40 +2,37 @@
 
 :root {
   --font-size: 16px;
-  --background: #f6f8ff;
-  --foreground: #11162f;
-  --card: #ffffff;
-  --card-foreground: #11162f;
-  --space-void: #f6f8ff;
-  --space-midnight: #e8edff;
-  --space-panel: rgba(255, 255, 255, 0.74);
-  --space-panel-strong: rgba(255, 255, 255, 0.92);
-  --space-starlight: #11162f;
-  --space-moon: #536183;
-  --space-muted: #6f7894;
-  --space-orbit: rgba(76, 92, 145, 0.18);
-  --space-cyan: #087ea4;
-  --space-violet: #6d45d9;
-  --space-rose: #d73794;
-  --space-sun: #c57700;
-  --space-border: rgba(41, 55, 99, 0.14);
-  --space-star-a: rgba(39, 54, 101, 0.36);
-  --space-star-b: rgba(8, 126, 164, 0.34);
-  --space-body-bg:
-    radial-gradient(circle at 16% 18%, rgba(109, 69, 217, 0.12), transparent 26rem),
-    radial-gradient(circle at 82% 12%, rgba(8, 126, 164, 0.12), transparent 28rem),
-    linear-gradient(180deg, #f6f8ff 0%, #e9eeff 52%, #f7f9ff 100%);
+  --background: #f1f0eb;
+  --foreground: #171714;
+  --card: #f8f7f2;
+  --card-foreground: #171714;
+  --space-void: #f1f0eb;
+  --space-midnight: #e9e7df;
+  --space-panel: rgba(248, 247, 242, 0.78);
+  --space-panel-strong: rgba(255, 255, 252, 0.96);
+  --space-starlight: #171714;
+  --space-moon: #4f504b;
+  --space-muted: #797a74;
+  --space-orbit: rgba(23, 23, 20, 0.15);
+  --space-cyan: #087f8f;
+  --space-violet: #5167a8;
+  --space-rose: #bd4f6c;
+  --space-sun: #b56f2c;
+  --space-border: rgba(23, 23, 20, 0.14);
+  --space-star-a: rgba(23, 23, 20, 0.22);
+  --space-star-b: rgba(8, 127, 143, 0.2);
+  --space-body-bg: #f1f0eb;
   --space-scene-bg:
-    radial-gradient(circle at 20% 12%, rgba(109, 69, 217, 0.14), transparent 22rem),
-    radial-gradient(circle at 82% 26%, rgba(8, 126, 164, 0.10), transparent 26rem),
-    radial-gradient(circle at 48% 85%, rgba(215, 55, 148, 0.08), transparent 24rem),
-    linear-gradient(180deg, #f6f8ff 0%, #edf2ff 54%, #f8faff 100%);
-  --space-glass-bg: linear-gradient(145deg, rgba(255, 255, 255, 0.84), rgba(236, 241, 255, 0.76));
-  --space-glass-shadow: 0 24px 80px rgba(42, 53, 94, 0.16);
-  --space-nav-bg: rgba(246, 248, 255, 0.82);
+    linear-gradient(rgba(23, 23, 20, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(23, 23, 20, 0.045) 1px, transparent 1px),
+    #f1f0eb;
+  --space-glass-bg: rgba(248, 247, 242, 0.84);
+  --space-glass-shadow: 0 20px 54px rgba(23, 23, 20, 0.09);
+  --space-nav-bg: rgba(23, 23, 20, 0.94);
+  --space-nav-text: #f8f7f2;
   --space-overlay: rgba(11, 17, 37, 0.28);
-  --space-button: #11162f;
-  --space-button-text: #ffffff;
+  --space-button: #171714;
+  --space-button-text: #f8f7f2;
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
   --primary: #030213;
@@ -91,18 +88,15 @@
   --space-border: rgba(255, 255, 255, 0.1);
   --space-star-a: rgba(255, 255, 255, 0.72);
   --space-star-b: rgba(100, 244, 255, 0.45);
-  --space-body-bg:
-    radial-gradient(circle at 16% 18%, rgba(141, 92, 255, 0.18), transparent 26rem),
-    radial-gradient(circle at 82% 12%, rgba(100, 244, 255, 0.15), transparent 28rem),
-    linear-gradient(180deg, #02030a 0%, #070a18 52%, #02030a 100%);
+  --space-body-bg: #0d0e0d;
   --space-scene-bg:
-    radial-gradient(circle at 20% 12%, rgba(141, 92, 255, 0.22), transparent 22rem),
-    radial-gradient(circle at 82% 26%, rgba(100, 244, 255, 0.14), transparent 26rem),
-    radial-gradient(circle at 48% 85%, rgba(255, 79, 184, 0.08), transparent 24rem),
-    linear-gradient(180deg, #02030a 0%, #070a18 54%, #02030a 100%);
-  --space-glass-bg: linear-gradient(145deg, rgba(14, 18, 36, 0.82), rgba(5, 7, 16, 0.78));
-  --space-glass-shadow: 0 24px 80px rgba(0, 0, 0, 0.36);
-  --space-nav-bg: rgba(2, 3, 10, 0.82);
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    #0d0e0d;
+  --space-glass-bg: rgba(20, 21, 20, 0.84);
+  --space-glass-shadow: 0 24px 70px rgba(0, 0, 0, 0.3);
+  --space-nav-bg: rgba(248, 247, 242, 0.94);
+  --space-nav-text: #171714;
   --space-overlay: rgba(0, 0, 0, 0.5);
   --space-button: #ffffff;
   --space-button-text: #02030a;
@@ -210,21 +204,21 @@
     font-size: var(--text-2xl);
     font-weight: var(--font-weight-medium);
     line-height: 1.5;
-    font-family: 'Chakra Petch', sans-serif;
+    font-family: 'Sora', sans-serif;
   }
 
   h2 {
     font-size: var(--text-xl);
     font-weight: var(--font-weight-medium);
     line-height: 1.5;
-    font-family: 'Chakra Petch', sans-serif;
+    font-family: 'Sora', sans-serif;
   }
 
   h3 {
     font-size: var(--text-lg);
     font-weight: var(--font-weight-medium);
     line-height: 1.5;
-    font-family: 'Chakra Petch', sans-serif;
+    font-family: 'Sora', sans-serif;
   }
 
   h4 {
@@ -255,7 +249,8 @@
 
 @layer utilities {
   .font-display {
-    font-family: 'Chakra Petch', sans-serif;
+    font-family: 'Sora', sans-serif;
+    letter-spacing: -0.045em;
   }
 
   .font-body {
@@ -266,6 +261,36 @@
     position: relative;
     background: var(--space-scene-bg);
     transition: background 300ms ease;
+  }
+
+  .editorial-grid {
+    background-size: 72px 72px;
+  }
+
+  .section-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--space-muted);
+  }
+
+  .section-kicker::before {
+    content: '';
+    width: 2.25rem;
+    height: 1px;
+    background: currentColor;
+  }
+
+  .editorial-surface {
+    border: 1px solid var(--space-border);
+    background: var(--space-panel);
+    box-shadow: var(--space-glass-shadow);
+    backdrop-filter: blur(20px);
   }
 
   .space-stars::before,
@@ -300,6 +325,12 @@
     inset: 0;
     z-index: 0;
     pointer-events: none;
+    opacity: 0.12;
+    transition: opacity 300ms ease;
+  }
+
+  .dark .space-three-bg {
+    opacity: 0.42;
   }
 
   .space-three-bg canvas {
@@ -339,6 +370,25 @@
 
   .group:hover .portfolio-depth-card::before {
     opacity: 1;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto !important;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      scroll-behavior: auto !important;
+      transition-duration: 0.01ms !important;
+    }
+
+    .space-three-bg {
+      display: none;
+    }
   }
 
 }

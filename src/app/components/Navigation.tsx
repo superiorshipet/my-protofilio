@@ -52,15 +52,16 @@ export function Navigation() {
       <motion.nav
         initial={{ y: -100 }}
         animate={{ y: 0 }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          isScrolled
-            ? 'bg-[var(--space-nav-bg)] backdrop-blur-xl border-b border-[var(--space-border)] shadow-[0_18px_70px_rgba(0,0,0,0.16)]'
-            : 'bg-transparent'
-        }`}
+        className="fixed left-0 right-0 top-4 z-50 px-4"
       >
-        <div className="max-w-7xl mx-auto px-6 py-4">
+        <div
+          className={`mx-auto max-w-3xl rounded-[1.4rem] border px-3 py-2 text-[var(--space-nav-text)] backdrop-blur-xl transition-all duration-300 ${
+            isScrolled
+              ? 'border-white/10 bg-[var(--space-nav-bg)] shadow-[0_18px_55px_rgba(0,0,0,0.2)]'
+              : 'border-white/10 bg-[var(--space-nav-bg)]/95 shadow-[0_12px_40px_rgba(0,0,0,0.14)]'
+          }`}
+        >
           <div className="flex justify-between items-center">
-            {/* Logo */}
             <motion.a
               href="#home"
               onClick={(e) => {
@@ -68,13 +69,18 @@ export function Navigation() {
                 scrollToSection('#home');
               }}
               whileHover={{ scale: 1.05 }}
-              className="font-display text-2xl font-bold tracking-wide bg-gradient-to-r from-[var(--space-cyan)] via-[var(--space-starlight)] to-[var(--space-violet)] bg-clip-text text-transparent"
+              className="flex items-center gap-2 rounded-xl px-2 py-1 font-display text-sm font-bold tracking-tight"
             >
-              Shipet
+              <span className="grid h-7 w-7 grid-cols-2 gap-0.5 rounded-lg bg-[var(--space-cyan)] p-1.5" aria-hidden="true">
+                <span className="rounded-full bg-white" />
+                <span className="rounded-full bg-white/70" />
+                <span className="rounded-full bg-white/70" />
+                <span className="rounded-full bg-white" />
+              </span>
+              Mohamed Shipet
             </motion.a>
 
-            {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center gap-8">
+            <div className="hidden items-center gap-1 md:flex">
               {navItems.map((item, index) => (
                 <motion.a
                   key={item.label}
@@ -86,8 +92,8 @@ export function Navigation() {
                   initial={{ opacity: 0, y: -20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 }}
-                  whileHover={{ y: -2, color: '#64f4ff' }}
-                  className="text-sm text-[var(--space-moon)] hover:text-[var(--space-cyan)] transition-colors"
+                  whileHover={{ y: -1 }}
+                  className="rounded-xl px-3 py-2 text-xs text-[var(--space-nav-text)]/68 transition-colors hover:bg-white/10 hover:text-[var(--space-nav-text)]"
                 >
                   {item.label}
                 </motion.a>
@@ -100,7 +106,7 @@ export function Navigation() {
                 whileHover={{ y: -1 }}
                 onClick={toggleTheme}
                 aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
-                className="flex h-10 w-10 items-center justify-center rounded-full border border-[var(--space-border)] bg-[var(--space-panel)] text-[var(--space-starlight)] backdrop-blur transition-colors hover:text-[var(--space-cyan)]"
+                className="flex h-9 w-9 items-center justify-center rounded-xl border border-current/15 bg-white/8 text-[var(--space-nav-text)] transition-colors hover:bg-white/15"
               >
                 {theme === 'dark' ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
               </motion.button>
@@ -109,7 +115,8 @@ export function Navigation() {
               <motion.button
                 whileTap={{ scale: 0.9 }}
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="p-2 text-[var(--space-cyan)] md:hidden"
+                aria-label="Toggle navigation menu"
+                className="p-2 text-[var(--space-nav-text)] md:hidden"
               >
                 {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
               </motion.button>
@@ -126,9 +133,9 @@ export function Navigation() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: '100%' }}
             transition={{ type: 'tween' }}
-            className="fixed top-0 right-0 bottom-0 w-64 bg-[var(--space-nav-bg)] backdrop-blur-xl border-l border-[var(--space-border)] z-40 md:hidden"
+            className="fixed inset-x-4 top-20 z-40 rounded-[1.75rem] border border-[var(--space-border)] bg-[var(--space-panel-strong)] p-2 shadow-[0_24px_80px_rgba(0,0,0,0.24)] backdrop-blur-xl md:hidden"
           >
-            <div className="flex flex-col gap-4 p-8 mt-20">
+            <div className="flex flex-col gap-1 p-3">
               {navItems.map((item, index) => (
                 <motion.a
                   key={item.label}
@@ -140,7 +147,7 @@ export function Navigation() {
                   initial={{ opacity: 0, x: 50 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: index * 0.1 }}
-                  className="text-lg text-[var(--space-moon)] hover:text-[var(--space-cyan)] transition-colors py-2 border-b border-[var(--space-border)]"
+                  className="rounded-xl px-4 py-3 text-lg text-[var(--space-moon)] transition-colors hover:bg-[var(--space-midnight)] hover:text-[var(--space-starlight)]"
                 >
                   {item.label}
                 </motion.a>

@@ -5,7 +5,8 @@ export function Footer() {
   return (
     <footer className="relative border-t border-[var(--space-border)] py-8">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="flex flex-col md:flex-row justify-center items-center gap-4">
+        <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
+          <span className="font-display text-xl font-semibold text-[var(--space-starlight)]">Mohamed Shipet</span>
           <motion.p
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
@@ -21,6 +22,7 @@ export function Footer() {
             </motion.span>
             by Mohamed
           </motion.p>
+          <a href="#home" className="font-mono text-xs uppercase tracking-[0.14em] text-[var(--space-muted)] hover:text-[var(--space-cyan)]">Back to top ↑</a>
         </div>
       </div>
     </footer>

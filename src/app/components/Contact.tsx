@@ -63,34 +63,33 @@ export function Contact() {
   };
 
   return (
-    <section id="contact" className="relative overflow-hidden py-20">
-      <div className="max-w-6xl mx-auto px-6">
+    <section id="contact" className="relative overflow-hidden py-24 md:py-32">
+      <div className="mx-auto max-w-7xl px-6">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="mb-16"
         >
-          <h2 className="font-display text-4xl md:text-5xl font-bold text-[var(--space-starlight)] mb-4">
-            Let's Connect
+          <span className="section-kicker">06 / Contact</span>
+          <h2 className="mt-6 max-w-6xl font-display text-[clamp(3.6rem,9vw,8.5rem)] font-semibold leading-[0.86] text-[var(--space-starlight)]">
+            Got a project worth building?
           </h2>
-          <p className="text-[var(--space-moon)] text-lg">
-            Have a project in mind? Let's build something amazing together
-          </p>
+          <p className="mt-8 max-w-xl text-lg leading-8 text-[var(--space-moon)]">Tell me what needs to work, who it needs to serve, and where it needs to scale. We will build the right way there.</p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-12">
+        <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr]">
           {/* Contact Info */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="space-y-8"
+            className="editorial-surface space-y-8 rounded-[2.25rem] p-7 md:p-9"
           >
             <div>
-              <h3 className="font-display text-2xl font-bold text-[var(--space-starlight)] mb-6">Get in Touch</h3>
+              <h3 className="mb-6 font-display text-4xl font-semibold text-[var(--space-starlight)]">Get in touch.</h3>
               <p className="text-[var(--space-moon)] mb-8">
                 I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.
               </p>
@@ -121,10 +120,10 @@ export function Contact() {
             <div className="space-y-4">
               <motion.div
                 whileHover={{ x: 8 }}
-                className="flex items-center gap-4 text-[var(--space-moon)] hover:text-[var(--space-cyan)] transition-colors"
+                className="flex items-center gap-4 border-t border-[var(--space-border)] pt-4 text-[var(--space-moon)] transition-colors hover:text-[var(--space-cyan)]"
               >
-                <div className="w-12 h-12 bg-gradient-to-br from-[var(--space-cyan)] to-[var(--space-violet)] rounded-xl flex items-center justify-center shadow-lg">
-                  <Mail className="w-6 h-6 text-white" />
+                <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[var(--space-button)] text-[var(--space-button-text)]">
+                  <Mail className="h-4 w-4" />
                 </div>
                 <div>
                   <p className="text-sm text-[var(--space-muted)]">Email</p>
@@ -134,10 +133,10 @@ export function Contact() {
 
               <motion.div
                 whileHover={{ x: 8 }}
-                className="flex items-center gap-4 text-[var(--space-moon)] hover:text-[var(--space-cyan)] transition-colors"
+                className="flex items-center gap-4 border-t border-[var(--space-border)] pt-4 text-[var(--space-moon)] transition-colors hover:text-[var(--space-cyan)]"
               >
-                <div className="w-12 h-12 bg-gradient-to-br from-[var(--space-violet)] to-[var(--space-rose)] rounded-xl flex items-center justify-center shadow-lg">
-                  <MapPin className="w-6 h-6 text-white" />
+                <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[var(--space-button)] text-[var(--space-button-text)]">
+                  <MapPin className="h-4 w-4" />
                 </div>
                 <div>
                   <p className="text-sm text-[var(--space-muted)]">Location</p>
@@ -156,7 +155,7 @@ export function Contact() {
                   target="_blank"
                   rel="noopener noreferrer"
                   whileHover={{ scale: 1.1, y: -4 }}
-                  className="space-glass w-12 h-12 rounded-xl flex items-center justify-center text-[var(--space-muted)] hover:text-[var(--space-cyan)] hover:border-[var(--space-cyan)]/45 transition-all"
+                  className="editorial-surface flex h-11 w-11 items-center justify-center rounded-2xl text-[var(--space-muted)] transition-all hover:border-[var(--space-cyan)]/45 hover:text-[var(--space-cyan)]"
                 >
                   <Github className="w-6 h-6" />
                 </motion.a>
@@ -165,7 +164,7 @@ export function Contact() {
                   target="_blank"
                   rel="noopener noreferrer"
                   whileHover={{ scale: 1.1, y: -4 }}
-                  className="space-glass w-12 h-12 rounded-xl flex items-center justify-center text-[var(--space-muted)] hover:text-[var(--space-cyan)] hover:border-[var(--space-cyan)]/45 transition-all"
+                  className="editorial-surface flex h-11 w-11 items-center justify-center rounded-2xl text-[var(--space-muted)] transition-all hover:border-[var(--space-cyan)]/45 hover:text-[var(--space-cyan)]"
                 >
                   <Linkedin className="w-6 h-6" />
                 </motion.a>
@@ -174,7 +173,7 @@ export function Contact() {
                   target="_blank"
                   rel="noopener noreferrer"
                   whileHover={{ scale: 1.1, y: -4 }}
-                  className="space-glass w-12 h-12 rounded-xl flex items-center justify-center text-[var(--space-muted)] hover:text-[var(--space-cyan)] hover:border-[var(--space-cyan)]/45 transition-all"
+                  className="editorial-surface flex h-11 w-11 items-center justify-center rounded-2xl text-[var(--space-muted)] transition-all hover:border-[var(--space-cyan)]/45 hover:text-[var(--space-cyan)]"
                 >
                   <Twitter className="w-6 h-6" />
                 </motion.a>
@@ -191,9 +190,10 @@ export function Contact() {
           >
             <form
               onSubmit={handleSubmit}
-              className="space-y-6"
+              className="h-full"
             >
-              <div className="space-glass rounded-lg p-8">
+              <div className="editorial-surface h-full rounded-[2.25rem] p-7 md:p-9">
+                <div className="mb-8 flex items-center justify-between"><h3 className="font-display text-3xl font-semibold text-[var(--space-starlight)]">Start a conversation.</h3><span className="font-mono text-xs text-[var(--space-muted)]">Usually replies soon</span></div>
                 <div className="space-y-4">
                   <div>
                     <label htmlFor="name" className="block text-sm font-medium text-[var(--space-moon)] mb-2">
@@ -245,7 +245,7 @@ export function Contact() {
                   <Button
                     type="submit"
                     disabled={submitStatus === 'sending'}
-                    className="w-full bg-[var(--space-button)] hover:bg-[var(--space-cyan)] text-[var(--space-button-text)] hover:text-[var(--space-void)] py-6 text-lg shadow-lg shadow-[rgba(100,244,255,0.25)]"
+                    className="w-full rounded-full bg-[var(--space-button)] py-6 text-lg text-[var(--space-button-text)] hover:bg-[var(--space-cyan)] hover:text-white"
                   >
                     <Send className="w-5 h-5 mr-2" />
                     {submitStatus === 'sending' ? 'Sending...' : 'Send Message'}

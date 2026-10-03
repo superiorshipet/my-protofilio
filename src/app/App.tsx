@@ -11,7 +11,7 @@ import { Footer } from './components/Footer';
 
 export default function App() {
   return (
-    <div className="space-scene space-stars relative min-h-screen overflow-hidden text-[var(--space-starlight)]" id="home">
+    <div className="space-scene editorial-grid relative min-h-screen overflow-hidden text-[var(--space-starlight)]" id="home">
       <AnimatedSpaceBackground />
       <div className="relative z-10">
         <Navigation />
