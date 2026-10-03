@@ -11,7 +11,7 @@ const projects = [
     tech: ['Laravel', 'Blade', 'PHP', 'MySQL'],
     orbit: 'Productivity',
     githubUrl: 'https://github.com/superiorshipet/project-task-managment',
-    demoUrl: 'https://requests-nobody-atom-olympus.trycloudflare.com/login',
+    demoUrl: 'https://tasharuky.duckdns.org/login',
     
   },
   {
@@ -21,7 +21,7 @@ const projects = [
     tech: ['TypeScript', 'React', 'PHP', 'PostgreSQL'],
     orbit: 'Hiring platform',
     githubUrl: 'https://github.com/superiorshipet/ATS-website',
-    demoUrl: 'https://requests-nobody-atom-olympus.trycloudflare.com/ats/',
+    demoUrl: 'https://the-ats-pro.duckdns.org/ats/',
   },
   {
     title: 'Stunning.io Task',
@@ -30,7 +30,7 @@ const projects = [
     tech: ['C#', 'ASP.NET Core', 'React', 'Railway'],
     orbit: 'Full-stack task',
     githubUrl: 'https://github.com/superiorshipet/stunning.io-task',
-    demoUrl: 'https://requests-nobody-atom-olympus.trycloudflare.com/stunning.io-task/',
+    demoUrl: 'https://tasharuky.duckdns.org/stunning.io-task/',
   },
   {
     title: 'Luxira Chat',
@@ -56,7 +56,7 @@ const projects = [
     tech: ['C#', 'React', 'PostgreSQL', 'WebSocket'],
     orbit: 'City guide',
     githubUrl: 'https://github.com/superiorshipet/discover-madina',
-    demoUrl: 'https://requests-nobody-atom-olympus.trycloudflare.com/discover-madina/',
+    demoUrl: 'https://discover-madina.duckdns.org/',
   },
   {
     title: 'Distributed Database Project',
@@ -82,7 +82,7 @@ const projects = [
     tech: ['JavaScript', 'Node.js', 'PostgreSQL', 'Commerce'],
     orbit: 'Commerce hub',
     githubUrl: 'https://github.com/superiorshipet/SUPVEND',
-    demoUrl: 'https://requests-nobody-atom-olympus.trycloudflare.com/supvend-ui/',
+    demoUrl: 'https://supvend.duckdns.org/supvend-ui/',
   },
   {
     title: 'Telegram Training Bot',                                           
@@ -99,7 +99,7 @@ const projects = [
     tech: ['C#', 'ASP.NET Core', 'SQL Server', 'Entity Framework'],
     orbit: 'Operations',
     githubUrl: 'https://github.com/superiorshipet/pharmacy',
-    demoUrl: 'https://requests-nobody-atom-olympus.trycloudflare.com/pharmacy/'
+    demoUrl: 'https://tasharuky.duckdns.org/pharmacy/'
   },
   {
     title: 'Study Mate',
@@ -117,7 +117,7 @@ const projects = [
     tech: ['C#', 'ASP.NET', 'SQL Server', 'WebSocket'],
     orbit: 'Audio network',
     githubUrl: 'https://github.com/superiorshipet/podcasty',
-    demoUrl: 'https://requests-nobody-atom-olympus.trycloudflare.com/podcasty-ui'
+    demoUrl: 'https://tasharuky.duckdns.org/podcasty-ui/'
   },
   {
     title: 'Belvie',
@@ -125,7 +125,7 @@ const projects = [
       'A furniture e-commerce platform with a polished storefront, product browsing, authentication, admin flows, and a connected backend API.',
     tech: ['React', 'ASP.NET Core', 'PostgreSQL', 'E-commerce'],
     orbit: 'Furniture store',
-    demoUrl: 'https://requests-nobody-atom-olympus.trycloudflare.com/belvie/',
+    demoUrl: 'https://belvie-arc.duckdns.org/belvie/',
   },
   {
     title: 'Arabic Perfume Shop',
@@ -133,7 +133,7 @@ const projects = [
       'An Arabic perfume e-commerce experience with product discovery, storefront pages, authentication, and backend-powered shop data.',
     tech: ['React', 'ASP.NET Core', 'PostgreSQL', 'Commerce'],
     orbit: 'Perfume shop',
-    demoUrl: 'https://requests-nobody-atom-olympus.trycloudflare.com/arabic-perfume/',
+    demoUrl: 'https://arabic-perfume.duckdns.org/arabic-perfume/',
   },
   {
     title: 'Data Mining Cancer Prediction',
