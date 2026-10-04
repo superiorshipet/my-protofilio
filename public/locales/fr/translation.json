@@ -1,0 +1,139 @@
+{
+  "simpleContent": "Contenu simple",
+  "nav": {
+    "home": "Accueil",
+    "about": "À propos",
+    "projects": "Projets",
+    "experiences": "Expériences",
+    "contact": "Contact",
+    "downloadCv": "Télécharger CV",
+    "language": "Langue"
+  },
+  "hero": {
+    "greeting": "Salut! Je suis Hussein AL-Sayed 👋🏻",
+    "role": "Développeur Web Frontend basé à Le Caire.",
+    "building": "développement de",
+    "secure": "sécurisées",
+    "modern": "modernes",
+    "scalable": "évolutives",
+    "webSolutions": "Solutions Web",
+    "webApplications": "Applications Web"
+  },
+  "about": {
+    "title": "À Propos de Moi",
+    "greeting": "Salut! Je suis Hussein AL-Sayed 👋🏻",
+    "bio": "Je suis un développeur Frontend de Tanta, travaillant chez Sync8Solutions, Delta Dev et Developer 30. Spécialisé dans la création d'interfaces web réactives, modernes et performantes.",
+    "codeIsCraft": "LE CODE EST UN ART",
+    "timeZoneTitle": "Fuseau Horaire",
+    "timeZoneSub": "Je suis basé à Tanta, disponible pour travailler à distance",
+    "startProject": "Vous voulez démarrer un projet ensemble?",
+    "copyEmail": "Copier l'Adresse Email",
+    "emailCopied": "Email Copié",
+    "techStackTitle": "Technologies",
+    "techStackSub": "Je me spécialise dans une variété de langages, frameworks et outils me permettant de construire des applications robustes et évolutives"
+  },
+  "projects": {
+    "title": "Mes Projets Sélectionnés",
+    "readMore": "En savoir plus",
+    "tryNow": "Essayer maintenant",
+    "pagination": {
+      "previous": "Précédent",
+      "next": "Suivant",
+      "pageOf": "Page {{current}} sur {{total}}",
+      "showingProjects": "Affichage de {{start}} - {{end}} sur {{total}} projets"
+    },
+    "medibroking": {
+      "title": "MediBroking",
+      "description": "Renforcer l'excellence des soins de santé et l'innovation en laboratoire. Plateforme de produits et solutions médicales."
+    },
+    "beetsah": {
+      "title": "Beetsah",
+      "description": "Trouvez la maison de vos rêves au cœur de la ville. Une plateforme immobilière moderne pour découvrir des propriétés de premier ordre."
+    },
+    "disil": {
+      "title": "Disil",
+      "description": "Déplacez du fret partout en quelques secondes depuis votre téléphone. Expédition instantanée, transporteurs vérifiés et suivi en temps réel."
+    },
+    "gamersStation": {
+      "title": "Gamers Station",
+      "description": "Achetez les derniers jeux et consoles tels que PlayStation 5, Xbox Series X, Nintendo Switch et PC avec les meilleures offres de vendeurs vérifiés."
+    },
+    "trekio": {
+      "title": "Trekio (App de Tourisme)",
+      "description": "Conception et mise en œuvre d'un tableau de bord de modération d'images avec approbations par lots et vues basées sur les rôles; réduction du temps de modération de 42%."
+    },
+    "elmullim": {
+      "title": "Plateforme Elmullim",
+      "description": "Conception et développement d'une plateforme pour étudiants, enseignants et parents, incluant des examens en ligne et l'intégration de paiements."
+    },
+    "foodOrdering": {
+      "title": "Site de Commande de Nourriture",
+      "description": "Développement d'une application de commande de nourriture avec affichage du menu, panier et gestion des commandes."
+    },
+    "hotel": {
+      "title": "Site Web d'Hôtel",
+      "description": "Plateforme de réservation d'hôtel avec parcours de chambres et authentification Clerk."
+    },
+    "portfolio": {
+      "title": "Portfolio",
+      "description": "Développement d'une application portfolio"
+    },
+    "factoryPro": {
+      "title": "Factory Pro",
+      "description": "L'excellence au service de l'innovation industrielle moderne grâce à une technologie de pointe."
+    },
+    "coffeeShop": {
+      "title": "Site Web de Café",
+      "description": "Conception d'un site web réactif pour un café avec des animations, axé sur l'UI/UX et la performance."
+    },
+    "ecommerce": {
+      "title": "Site E-Commerce",
+      "description": "Boutique en ligne avec filtrage de produits, panier, commande et authentification"
+    }
+  },
+  "experiences": {
+    "title": "Expérience Professionnelle",
+    "subTitle": "Mon parcours professionnel et mes réalisations",
+    "deltaDev": {
+      "title": "Développeur Front End",
+      "job": "Delta Dev",
+      "date": "Nov 2025 – Présent",
+      "p1": "• Développement d'applications web réactives avec React.js, Next.js, Tailwind CSS.",
+      "p2": "• Création d'une bibliothèque de composants réutilisables",
+      "p3": "• Revue de code et mentorat de développeurs juniors."
+    },
+    "sync8": {
+      "title": "Développeur Front End",
+      "job": "Sync8Solutions",
+      "date": "Juil 2025 - Nov 2025",
+      "p1": "Conception et maintenance d'interfaces web prêtes pour la production avec React, Inertia.js, Tailwind CSS.",
+      "p2": "Trekio: Tableau de bord de modération d'images avec approbations par lots.",
+      "p3": "Crypto Dashboard: Interface de gestion de portefeuille et suivi des prix en direct.",
+      "p4": "Amélioration de l'ergonomie avec Windows Forms et WPF.",
+      "p5": "Conversions XML vers SVG avec X-DOM."
+    },
+    "freelance": {
+      "title": "Développeur Front End Indépendant",
+      "job": "Freelance",
+      "date": "2024 - Présent",
+      "p1": "Création d'interfaces utilisateur réactives et ergonomiques pour plusieurs clients.",
+      "p2": "E-commerce Storefront: Liste de produits, filtres et processus de paiement.",
+      "p3": "Elmullim_Frontend: Plateforme éducative avec examens en ligne et paiement Stripe.",
+      "p4": "Mise en place d'un suivi de progression en temps réel.",
+      "p5": "Intégration de flux de paiement et d'abonnements sécurisés.",
+      "p6": "Collaboration à distance avec Git, Trello et Slack."
+    }
+  },
+  "contact": {
+    "title": "Contactez-moi",
+    "subTitle": "N'hésitez pas à me contacter via le formulaire ci-dessous.",
+    "fullName": "Nom complet",
+    "emailAddress": "Adresse Email",
+    "message": "Message",
+    "messagePlaceholder": "Partagez vos pensées....",
+    "send": "Envoyer",
+    "sending": "Envoi en cours...",
+    "successMessage": "Votre message a été envoyé!",
+    "errorMessage": "Une erreur est survenue!"
+  }
+}
