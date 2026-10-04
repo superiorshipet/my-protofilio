@@ -1,0 +1,140 @@
+{
+  "simpleContent": "Simple Content",
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "projects": "Projects",
+    "experiences": "Experiences",
+    "contact": "Contact",
+    "downloadCv": "Download CV",
+    "language": "Language",
+    "theme": "Toggle Theme"
+  },
+  "hero": {
+    "greeting": "Hi! I’m Hussein AL-Sayed 👋🏻",
+    "role": "frontend web developer based in cairo.",
+    "building": "building",
+    "secure": "secure",
+    "modern": "modern",
+    "scalable": "scalable",
+    "webSolutions": "Web Solutions",
+    "webApplications": "Web Applications"
+  },
+  "about": {
+    "title": "About Me",
+    "greeting": "Hi! I’m Hussein AL-Sayed 👋🏻",
+    "bio": "I’m a Frontend Developer from Tanta, working at Sync8Solutions, Delta Dev, and Developer 30. Specialized in building responsive, modern, and high-performance web interfaces.",
+    "codeIsCraft": "CODE IS CRAFT",
+    "timeZoneTitle": "Time Zone",
+    "timeZoneSub": "I’m based in Tanta, open to work remotely",
+    "startProject": "Do you want to start a project together?",
+    "copyEmail": "Copy Email Address",
+    "emailCopied": "Email has Copied",
+    "techStackTitle": "Teck Stack",
+    "techStackSub": "I specialize in a variety of languages, frameworks, and tools that allow me to build robust and scalable applications"
+  },
+  "projects": {
+    "title": "My Selected Projects",
+    "readMore": "Read More",
+    "tryNow": "Try now",
+    "pagination": {
+      "previous": "Previous",
+      "next": "Next",
+      "pageOf": "Page {{current}} of {{total}}",
+      "showingProjects": "Showing {{start}} - {{end}} of {{total}} projects"
+    },
+    "medibroking": {
+      "title": "MediBroking",
+      "description": "Empowering Healthcare Excellence & Laboratory Innovation. A comprehensive medical products and healthcare solutions platform."
+    },
+    "beetsah": {
+      "title": "Beetsah",
+      "description": "Find Your Dream Home in The Heart of The City. A modern real estate platform for discovering and browsing premium properties."
+    },
+    "disil": {
+      "title": "Disil",
+      "description": "Move Cargo Anywhere in Seconds, Right From Your Phone. Instant dispatch, verified carriers & real-time cargo tracking."
+    },
+    "gamersStation": {
+      "title": "Gamers Station",
+      "description": "Shop the latest games and consoles including PlayStation 5, Xbox Series X, Nintendo Switch, and PC gaming gear with competitive deals from trusted sellers."
+    },
+    "trekio": {
+      "title": "Trekio (Tourism App)",
+      "description": "Designed and implemented an image moderation dashboard with batch approvals and role-based views; reduced moderation review time by 42% and enabled 2,500+ weekly reviews."
+    },
+    "elmullim": {
+      "title": "Elmullim Platform",
+      "description": "Designed and developed a platform for students, teachers, and parents, including online exams, payment gateway integration, and role-based dashboards."
+    },
+    "foodOrdering": {
+      "title": "Food Ordering Website",
+      "description": "Developed a food ordering app with menu display, cart & order pages, and authentication.."
+    },
+    "hotel": {
+      "title": "Hotel Website",
+      "description": "Built a booking platform with room browsing, booking, and Clerk-based authentication."
+    },
+    "portfolio": {
+      "title": "Portfolio",
+      "description": "Developed a portfolio app"
+    },
+    "factoryPro": {
+      "title": "Factory Pro",
+      "description": "Excellence innovating industry for today At the heart of our operations is a commitment to delivering superior products through cutting- edge technology and innovative processes."
+    },
+    "coffeeShop": {
+      "title": "Coffee Shop Website",
+      "description": "Designed a responsive coffee shop site with animations, focusing on UI/UX and performance."
+    },
+    "ecommerce": {
+      "title": "E-Commerce Website",
+      "description": "Built online store with product filtering, cart, order placement, and authentication"
+    }
+  },
+  "experiences": {
+    "title": "Work Experience",
+    "subTitle": "My career path and achievements",
+    "deltaDev": {
+      "title": "Front End Developer",
+      "job": "Delta Dev",
+      "date": "Nov 2025 – Present",
+      "p1": "• Developed responsive web apps using React.js, Next.js, Tailwind CSS.",
+      "p2": "• Developed a reusable component library, cutting duplicate UI work",
+      "p3": "• Led code reviews and mentored junior developers on performance and accessibility."
+    },
+    "sync8": {
+      "title": "Front End Developer",
+      "job": "Sync8Solutions",
+      "date": "July 2025 - Nov 2025",
+      "p1": "Built and maintained production-ready web interfaces using React, Inertia.js, Tailwind CSS, and Ant Design; ensured responsive, accessible UX across devices.",
+      "p2": "Trekio (Tourism App): Designed and implemented an image moderation dashboard with batch approvals and role-based views; reduced moderation review time by 42% and enabled 2,500+ weekly reviews.",
+      "p3": "Crypto Dashboard: Developed wallet management and live price-tracking UI (React, WebSockets, Axios); optimized rendering and caching to cut mobile load time by 35% and reduce memory usage by 20%.",
+      "p4": "Enhanced responsiveness and usability of applications using Windows Forms and WPF frameworks.",
+      "p5": "Executed XML to SVG conversions using X-DOM, ensuring dynamic and efficient data visualization."
+    },
+    "freelance": {
+      "title": "Front End Developer",
+      "job": "Freelancer",
+      "date": "2024 - Present",
+      "p1": "Delivered responsive, user-friendly UIs for multiple clients using React, HTML, CSS, and JavaScript (ES6+). (2024 – Present)",
+      "p2": "E-commerce Storefront: Built product listing, filters, and checkout flow (React, Redux Toolkit, Tailwind CSS); improved pilot checkout conversion by 18%.",
+      "p3": "Elmullim_Frontend (Educational Platform): Architected and developed platform including online exams, payment integration (Stripe), and role-based dashboards; supported 1,000+ users and streamlined grading workflows.",
+      "p4": "Implemented real-time progress tracking and automated performance reports for teachers and parents, increasing engagement and reducing manual grading overhead.",
+      "p5": "Integrated secure subscription and payment flows with recurring billing and admin dashboards to manage subscriptions and refunds.",
+      "p6": "Collaborated remotely with distributed teams using Git, Trello, and Slack, ensuring smooth version control and communication."
+    }
+  },
+  "contact": {
+    "title": "get in touch",
+    "subTitle": "I'd love to hear from you! If you have any questions, comments or feedback, please use the form below.",
+    "fullName": "Full name",
+    "emailAddress": "Email Address",
+    "message": "Message",
+    "messagePlaceholder": "Share your thoughts....",
+    "send": "Send",
+    "sending": "Sending...",
+    "successMessage": "You message has been sent!",
+    "errorMessage": "Somthing went wrong!"
+  }
+}
