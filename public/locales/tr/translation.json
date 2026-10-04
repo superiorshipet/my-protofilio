@@ -1,0 +1,139 @@
+{
+  "simpleContent": "Basit İçerik",
+  "nav": {
+    "home": "Ana Sayfa",
+    "about": "Hakkımda",
+    "projects": "Projeler",
+    "experiences": "Deneyimler",
+    "contact": "İletişim",
+    "downloadCv": "CV İndir",
+    "language": "Dil"
+  },
+  "hero": {
+    "greeting": "Merhaba! Ben Hussein AL-Sayed 👋🏻",
+    "role": "Kahire merkezli Ön Yüz (Frontend) Geliştirici.",
+    "building": "geliştiriyorum",
+    "secure": "güvenli",
+    "modern": "modern",
+    "scalable": "ölçeklenebilir",
+    "webSolutions": "Web Çözümleri",
+    "webApplications": "Web Uygulamaları"
+  },
+  "about": {
+    "title": "Hakkımda",
+    "greeting": "Merhaba! Ben Hussein AL-Sayed 👋🏻",
+    "bio": "Tanta'lı bir Ön Yüz Geliştiricisiyim; Sync8Solutions, Delta Dev ve Developer 30'da çalışıyorum. Duyarlı, modern ve yüksek performanslı web arayüzleri oluşturmada uzmanım.",
+    "codeIsCraft": "KOD BİR SANATTIR",
+    "timeZoneTitle": "Zaman Dilimi",
+    "timeZoneSub": "Tanta merkezliyim, uzaktan çalışmaya açığım",
+    "startProject": "Birlikte bir projeye başlamak ister misiniz?",
+    "copyEmail": "E-postayı Kopyala",
+    "emailCopied": "E-posta Kopyalandı",
+    "techStackTitle": "Teknoloji Yığını",
+    "techStackSub": "Güçlü ve ölçeklenebilir uygulamalar oluşturmamı sağlayan çeşitli dil, framework ve araçlarda uzmanım"
+  },
+  "projects": {
+    "title": "Seçilmiş Projelerim",
+    "readMore": "Daha Fazla Oku",
+    "tryNow": "Şimdi Dene",
+    "pagination": {
+      "previous": "Önceki",
+      "next": "Sonraki",
+      "pageOf": "Sayfa {{current}} / {{total}}",
+      "showingProjects": "{{total}} projeden {{start}} - {{end}} arası gösteriliyor"
+    },
+    "medibroking": {
+      "title": "MediBroking",
+      "description": "Sağlıkta mükemmelliği ve laboratuvar yeniliklerini güçlendiren kapsamlı tıbbi ürünler ve sağlık çözümleri platformu."
+    },
+    "beetsah": {
+      "title": "Beetsah",
+      "description": "Şehrin kalbinde hayalinizdeki evi bulun. Seçkin gayrimenkulleri keşfetmek için modern bir emlak platformu."
+    },
+    "disil": {
+      "title": "Disil",
+      "description": "Yüklerinizi saniyeler içinde doğrudan telefonunuzdan taşıyın. Anında sevkiyat, onaylı taşıyıcılar ve gerçek zamanlı takip."
+    },
+    "gamersStation": {
+      "title": "Gamers Station",
+      "description": "PlayStation 5, Xbox Series X, Nintendo Switch ve PC dahil en yeni oyun ve konsolları güvenilir satıcıların en iyi fırsatlarıyla satın alın."
+    },
+    "trekio": {
+      "title": "Trekio (Turizm Uygulaması)",
+      "description": "Toplu onaylar ve rol tabanlı görünümler içeren bir görsel moderasyon paneli tasarlandı ve uygulandı; moderasyon süresi %42 azaltıldı."
+    },
+    "elmullim": {
+      "title": "Elmullim Platformu",
+      "description": "Öğrenciler, öğretmenler ve veliler için çevrimiçi sınavlar ve ödeme entegrasyonu içeren bir platform tasarlandı ve geliştirildi."
+    },
+    "foodOrdering": {
+      "title": "Yemek Sipariş Sitesi",
+      "description": "Menü gösterimi, sepet ve sipariş sayfaları ile kimlik doğrulama içeren bir yemek sipariş uygulaması geliştirildi."
+    },
+    "hotel": {
+      "title": "Otel Web Sitesi",
+      "description": "Oda gezintisi, rezervasyon ve Clerk tabanlı kimlik doğrulama içeren bir rezervasyon platformu kuruldu."
+    },
+    "portfolio": {
+      "title": "Portfolyo",
+      "description": "Bir portfolyo uygulaması geliştirildi"
+    },
+    "factoryPro": {
+      "title": "Factory Pro",
+      "description": "Son teknoloji ve yenilikçi süreçlerle üstün ürünler sunma taahhüdü."
+    },
+    "coffeeShop": {
+      "title": "Kahve Dükkanı Sitesi",
+      "description": "Kullanıcı deneyimi ve performansa odaklanan, animasyonlu ve duyarlı bir kahve dükkanı sitesi tasarlandı."
+    },
+    "ecommerce": {
+      "title": "E-Ticaret Sitesi",
+      "description": "Ürün filtreleme, sepet, sipariş verme ve kimlik doğrulama içeren çevrimiçi mağaza kuruldu"
+    }
+  },
+  "experiences": {
+    "title": "İş Deneyimi",
+    "subTitle": "Kariyer yolum ve başarılarım",
+    "deltaDev": {
+      "title": "Ön Yüz Geliştirici",
+      "job": "Delta Dev",
+      "date": "Kasım 2025 – Halen",
+      "p1": "• React.js, Next.js, Tailwind CSS kullanarak duyarlı web uygulamaları geliştirildi.",
+      "p2": "• Yeniden kullanılabilir bileşen kütüphanesi geliştirildi",
+      "p3": "• Kod incelemelerine liderlik edildi ve genç geliştiricilere rehberlik edildi."
+    },
+    "sync8": {
+      "title": "Ön Yüz Geliştirici",
+      "job": "Sync8Solutions",
+      "date": "Temmuz 2025 - Kasım 2025",
+      "p1": "React, Inertia.js, Tailwind CSS kullanarak üretime hazır web arayüzleri oluşturuldu.",
+      "p2": "Trekio: Toplu onaylı görsel moderasyon paneli uygulandı.",
+      "p3": "Kripto Paneli: Cüzdan yönetimi ve canlı fiyat takibi arayüzü geliştirildi.",
+      "p4": "Windows Forms ve WPF ile uygulama kullanılabilirliği artırıldı.",
+      "p5": "X-DOM kullanılarak XML'den SVG'ye dönüştürmeler gerçekleştirildi."
+    },
+    "freelance": {
+      "title": "Serbest Ön Yüz Geliştirici",
+      "job": "Freelancer",
+      "date": "2024 - Halen",
+      "p1": "Çeşitli müşteriler için duyarlı ve kullanıcı dostu arayüzler sunuldu.",
+      "p2": "E-ticaret Mağazası: Ürün listeleme, filtreler ve ödeme akışı oluşturuldu.",
+      "p3": "Elmullim_Frontend: Çevrimiçi sınavlar ve Stripe ödeme entegrasyonu olan eğitim platformu mimarisi kuruldu.",
+      "p4": "Gerçek zamanlı ilerleme takibi ve otomatik performans raporları uygulandı.",
+      "p5": "Güvenli abonelik ve ödeme akışları entegre edildi.",
+      "p6": "Git, Trello ve Slack kullanılarak uzaktan ekiplerle iş birliği yapıldı."
+    }
+  },
+  "contact": {
+    "title": "İletişime Geçin",
+    "subTitle": "Sizden haber almayı çok isterim! Sorularınız veya geri bildirimleriniz için aşağıdaki formu kullanabilirsiniz.",
+    "fullName": "Ad Soyad",
+    "emailAddress": "E-posta Adresi",
+    "message": "Mesajınız",
+    "messagePlaceholder": "Düşüncelerinizi paylaşın....",
+    "send": "Gönder",
+    "sending": "Gönderiliyor...",
+    "successMessage": "Mesajınız başarıyla gönderildi!",
+    "errorMessage": "Bir şeyler yanlış gitti!"
+  }
+}
