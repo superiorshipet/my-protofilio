@@ -121,3 +121,4 @@ export function Astronaut(props) {
 }
 
 useGLTF.preload("/models/tenhun_falling_spaceman_fanart.glb");
+
