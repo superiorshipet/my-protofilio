@@ -71,3 +71,9 @@ export default defineConfig([
   },
 ])
 ```
+
+
+## 🌟 Highlights
+- **3D Graphics**: Interactive Three.js Falling Spaceman and WebGL Earth Globe
+- **Internationalization**: 4 languages supported (English, Arabic, French, Turkish)
+- **Modern Stack**: React 19, Vite, Tailwind CSS v4, Motion
