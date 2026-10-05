@@ -1,6 +1,20 @@
 import { useEffect, useState } from 'react';
-import { motion } from 'motion/react';
-import { Cloud, Code2, Database, Download, Github, Linkedin, Mail, MessageCircle, Rocket, Terminal } from 'lucide-react';
+import { motion, useMotionValue, useSpring, useTransform } from 'motion/react';
+import {
+  Activity,
+  Cloud,
+  Code2,
+  Database,
+  Download,
+  Github,
+  Linkedin,
+  Mail,
+  MessageCircle,
+  Rocket,
+  ShieldCheck,
+  Sparkles,
+  Terminal,
+} from 'lucide-react';
 import { Button } from './ui/button';
 import portraitImg from '../../imports/image.png';
 import cvFile from '../../imports/Mohamed-Shipet-CV.pdf';
@@ -15,11 +29,17 @@ const techIcons = [
   { Icon: Terminal, label: 'Backend', delay: 0.6 },
 ];
 
+const systemStats = [
+  { value: '16+', label: 'Products & Systems' },
+  { value: '5+', label: 'Backend & Cloud Stacks' },
+  { value: '100%', label: 'Clean Code & Dedication' },
+];
+
 const typingSequence = [
   { text: 'Full-stack Engineer.', pauseAfter: 900 },
-  { text: 'Backend Systems Builder.', pauseAfter: 900 },
+  { text: 'Backend Systems Architect.', pauseAfter: 900 },
   { text: 'Scalable Product Engineer.', pauseAfter: 900 },
-  { text: 'I Build Useful tools.', pauseAfter: 1100 },
+  { text: 'Building Resilient Software.', pauseAfter: 1100 },
 ];
 
 const starTrails = Array.from({ length: 9 }, (_, index) => ({
@@ -33,6 +53,28 @@ export function Hero() {
   const [displayText, setDisplayText] = useState('');
   const [currentSequenceIndex, setCurrentSequenceIndex] = useState(0);
   const [isTyping, setIsTyping] = useState(true);
+
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  const springX = useSpring(mouseX, { stiffness: 180, damping: 20 });
+  const springY = useSpring(mouseY, { stiffness: 180, damping: 20 });
+  const rotateX = useTransform(springY, [-0.5, 0.5], ['14deg', '-14deg']);
+  const rotateY = useTransform(springX, [-0.5, 0.5], ['-14deg', '14deg']);
+
+  const handlePortraitMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const width = rect.width;
+    const height = rect.height;
+    const mousePosFromCenterX = (e.clientX - rect.left) / width - 0.5;
+    const mousePosFromCenterY = (e.clientY - rect.top) / height - 0.5;
+    mouseX.set(mousePosFromCenterX);
+    mouseY.set(mousePosFromCenterY);
+  };
+
+  const handlePortraitMouseLeave = () => {
+    mouseX.set(0);
+    mouseY.set(0);
+  };
 
   useEffect(() => {
     const currentPhrase = typingSequence[currentSequenceIndex];
@@ -118,9 +160,23 @@ export function Hero() {
             />
           </h1>
 
-          <p className="mb-9 max-w-2xl text-lg leading-8 text-[var(--space-moon)] md:text-xl">
+          <p className="mb-8 max-w-2xl text-lg leading-8 text-[var(--space-moon)] md:text-xl">
             I am Mohamed Shipet, also known as Superior. I build scalable systems, practical web products, and clean user experiences with the kind of engineering that stays steady after launch.
           </p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.35 }}
+            className="mb-8 grid max-w-2xl grid-cols-1 gap-3 sm:grid-cols-3"
+          >
+            {systemStats.map((stat) => (
+              <div key={stat.label} className="space-glass rounded-xl px-4 py-3 border border-[var(--space-border)]">
+                <div className="font-display text-2xl font-bold text-[var(--space-cyan)]">{stat.value}</div>
+                <div className="text-xs uppercase tracking-[0.14em] text-[var(--space-muted)] mt-1">{stat.label}</div>
+              </div>
+            ))}
+          </motion.div>
 
           <div className="mb-9 flex flex-wrap gap-4">
             <Button
@@ -171,59 +227,93 @@ export function Hero() {
           </div>
         </motion.div>
 
+        {/* Full 3D Interactive Portrait Card */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.92, y: 28 }}
+          initial={{ opacity: 0, scale: 0.9, y: 28 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.2, ease: 'easeOut' }}
-          className="relative mx-auto flex aspect-square w-[min(33rem,88vw)] items-center justify-center"
+          className="relative mx-auto flex w-full max-w-[440px] items-center justify-center py-4"
+          style={{ perspective: 1200 }}
+          onMouseMove={handlePortraitMouseMove}
+          onMouseLeave={handlePortraitMouseLeave}
         >
-          <motion.div
-            className="space-orbit absolute inset-2"
-            animate={{ rotate: 360 }}
-            transition={{ duration: 34, repeat: Infinity, ease: 'linear' }}
-          />
-          <motion.div
-            className="space-orbit absolute inset-12 border-dashed"
-            animate={{ rotate: -360 }}
-            transition={{ duration: 28, repeat: Infinity, ease: 'linear' }}
-          />
-          <div className="absolute inset-[18%] rounded-full bg-[var(--space-cyan)]/12 blur-3xl" />
+          {/* Ambient Cosmic Aura Glow */}
+          <div className="absolute inset-4 rounded-3xl bg-gradient-to-tr from-[var(--space-violet)]/35 via-[var(--space-cyan)]/25 to-transparent blur-3xl pointer-events-none" />
 
+          {/* 3D Tilting Hologram Card */}
           <motion.div
-            whileHover={{ rotateX: 6, rotateY: -8, scale: 1.025 }}
-            transition={{ type: 'spring', stiffness: 170, damping: 18 }}
-            className="relative h-[68%] w-[68%] overflow-hidden rounded-full border border-[var(--space-border)] bg-[var(--space-panel)] p-2 shadow-[0_0_90px_rgba(141,92,255,0.28)] backdrop-blur"
-            style={{ transformStyle: 'preserve-3d' }}
+            style={{
+              rotateX,
+              rotateY,
+              transformStyle: 'preserve-3d',
+            }}
+            className="group relative w-full aspect-[2/3] max-w-[340px] md:max-w-[370px] rounded-3xl p-3 border border-[var(--space-border)] bg-[var(--space-panel)] shadow-[0_25px_80px_rgba(0,0,0,0.6)] backdrop-blur-xl transition-all duration-300 hover:shadow-[0_30px_90px_rgba(100,244,255,0.25)] hover:border-[var(--space-cyan)]/60 cursor-pointer"
           >
-            <img
-              src={portraitImg}
-              alt="Mohamed Shipet"
-              className="h-full w-full rounded-full object-cover object-[center_35%]"
-            />
-            <div className="absolute inset-2 rounded-full bg-gradient-to-tr from-[var(--space-violet)]/30 via-transparent to-[var(--space-cyan)]/24" />
-          </motion.div>
-
-          {techIcons.map(({ Icon, label, delay }, index) => (
-            <motion.div
-              key={label}
-              initial={{ opacity: 0, scale: 0.4 }}
-              animate={{ opacity: 1, scale: 1, y: [0, -10, 0] }}
-              transition={{
-                opacity: { delay: 0.8 + delay, duration: 0.4 },
-                scale: { delay: 0.8 + delay, duration: 0.4 },
-                y: { delay: 1.2 + delay, duration: 2.6 + index * 0.2, repeat: Infinity, ease: 'easeInOut' },
-              }}
-              className="absolute"
-              style={{
-                top: `${Math.sin((index * Math.PI) / 2) * 43 + 49}%`,
-                left: `${Math.cos((index * Math.PI) / 2) * 43 + 49}%`,
-              }}
+            {/* The full photo in complete height */}
+            <div
+              className="relative h-full w-full overflow-hidden rounded-2xl border border-white/10"
+              style={{ transform: 'translateZ(20px)' }}
             >
-              <div className="space-glass flex h-14 w-14 items-center justify-center rounded-full">
-                <Icon className="h-5 w-5 text-[var(--space-cyan)]" />
+              <img
+                src={portraitImg}
+                alt="Mohamed Shipet (Superior)"
+                className="h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+              />
+              {/* Subtle gradient vignette for depth */}
+              <div className="absolute inset-0 bg-gradient-to-t from-[var(--space-midnight)]/90 via-transparent to-transparent pointer-events-none" />
+              
+              {/* Holographic Nameplate inside bottom of photo */}
+              <div
+                className="absolute bottom-4 left-4 right-4 flex items-center justify-between rounded-xl border border-white/10 bg-black/50 px-4 py-3 backdrop-blur-md shadow-lg"
+                style={{ transform: 'translateZ(40px)' }}
+              >
+                <div>
+                  <div className="font-display text-base font-bold text-white flex items-center gap-2">
+                    Mohamed Shipet
+                    <span className="rounded-full bg-[var(--space-cyan)]/20 border border-[var(--space-cyan)]/40 px-2 py-0.5 text-[10px] font-mono text-[var(--space-cyan)]">
+                      Superior
+                    </span>
+                  </div>
+                  <div className="text-[11px] text-gray-300 font-medium mt-0.5">
+                    Full Stack & Systems Engineer
+                  </div>
+                </div>
+                <div className="flex h-3 w-3 rounded-full bg-emerald-400 shadow-[0_0_10px_#34d399] animate-pulse" />
               </div>
-            </motion.div>
-          ))}
+            </div>
+
+            {/* Floating Orbiting Tech Badges in 3D Space */}
+            {techIcons.map(({ Icon, label, delay }, index) => {
+              const positions = [
+                { top: '-14px', right: '-14px' },
+                { bottom: '20%', right: '-22px' },
+                { top: '30%', left: '-22px' },
+                { bottom: '-14px', left: '-14px' },
+              ];
+              const pos = positions[index] || {};
+              return (
+                <motion.div
+                  key={label}
+                  initial={{ opacity: 0, scale: 0.4 }}
+                  animate={{ opacity: 1, scale: 1, y: [0, -6, 0] }}
+                  transition={{
+                    opacity: { delay: 0.8 + delay, duration: 0.4 },
+                    scale: { delay: 0.8 + delay, duration: 0.4 },
+                    y: { delay: 1.2 + delay, duration: 2.8 + index * 0.3, repeat: Infinity, ease: 'easeInOut' },
+                  }}
+                  className="absolute z-30 pointer-events-none"
+                  style={{
+                    ...pos,
+                    transform: 'translateZ(60px)',
+                  }}
+                >
+                  <div className="space-glass flex h-12 w-12 items-center justify-center rounded-2xl border border-[var(--space-border)] bg-[var(--space-midnight)]/90 text-[var(--space-cyan)] shadow-[0_8px_24px_rgba(0,0,0,0.5)] backdrop-blur-md">
+                    <Icon className="h-5 w-5" />
+                  </div>
+                </motion.div>
+              );
+            })}
+          </motion.div>
         </motion.div>
       </div>
     </section>
