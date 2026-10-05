@@ -170,3 +170,5 @@ html:not(.dark) body {
 ::-webkit-scrollbar-track { background: #03040b; }
 ::-webkit-scrollbar-thumb { background: #1f293d; border-radius: 4px; }
 ::-webkit-scrollbar-thumb:hover { background: #374151; }
+
+html { scroll-behavior: smooth; }
