@@ -4,7 +4,7 @@ import { Menu, Moon, Sun, X } from 'lucide-react';
 
 const navItems = [
   { label: 'Home', href: '#home' },
-  { label: 'Skills', href: '#skills' },
+  { label: 'About', href: '#about' },
   { label: 'Projects', href: '#projects' },
   { label: 'Experience', href: '#experience' },
   { label: 'Contact', href: '#contact' },
@@ -26,8 +26,7 @@ export function Navigation() {
 
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme');
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const initialTheme = savedTheme === 'light' || savedTheme === 'dark' ? savedTheme : prefersDark ? 'dark' : 'light';
+    const initialTheme = savedTheme === 'light' || savedTheme === 'dark' ? savedTheme : 'dark';
 
     setTheme(initialTheme);
     document.documentElement.classList.toggle('dark', initialTheme === 'dark');
