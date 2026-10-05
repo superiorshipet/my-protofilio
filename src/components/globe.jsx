@@ -13,7 +13,7 @@ const GLOBE_CONFIG = {
   height: 800,
   onRender: () => {},
   devicePixelRatio: 2,
-  phi: 0,
+  phi: 0.1,
   theta: 0.3,
   dark: 1,
   diffuse: 0.4,
