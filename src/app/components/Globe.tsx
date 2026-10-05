@@ -2,13 +2,35 @@ import createGlobe from 'cobe';
 import { useMotionValue, useSpring } from 'motion/react';
 import { useEffect, useRef } from 'react';
 
-const MOVEMENT_DAMPING = 1400;
+const GLOBE_CONFIG = {
+  width: 800,
+  height: 800,
+  devicePixelRatio: 2,
+  phi: 0.1,
+  theta: 0.3,
+  dark: 1,
+  diffuse: 0.4,
+  mapSamples: 16000,
+  mapBrightness: 1.2,
+  baseColor: [1, 1, 1] as [number, number, number],
+  markerColor: [0.39, 0.96, 1] as [number, number, number],
+  glowColor: [1, 1, 1] as [number, number, number],
+  markers: [
+    { location: [30.0444, 31.2357] as [number, number], size: 0.09 }, // Cairo, Egypt
+    { location: [40.7128, -74.006] as [number, number], size: 0.07 }, // New York
+    { location: [51.5074, -0.1278] as [number, number], size: 0.06 }, // London
+    { location: [35.6762, 139.6503] as [number, number], size: 0.06 }, // Tokyo
+    { location: [25.2048, 55.2708] as [number, number], size: 0.07 }, // Dubai
+    { location: [-23.5505, -46.6333] as [number, number], size: 0.07 }, // Sao Paulo
+    { location: [19.076, 72.8777] as [number, number], size: 0.07 }, // Mumbai
+    { location: [14.5995, 120.9842] as [number, number], size: 0.05 }, // Manila
+  ],
+};
 
 export function Globe({ className = '' }: { className?: string }) {
   let phi = 0;
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const pointerInteracting = useRef<number | null>(null);
-  const pointerInteractionMovement = useRef(0);
 
   const r = useMotionValue(0);
   const rs = useSpring(r, {
@@ -27,8 +49,8 @@ export function Globe({ className = '' }: { className?: string }) {
   const updateMovement = (clientX: number) => {
     if (pointerInteracting.current !== null) {
       const delta = clientX - pointerInteracting.current;
-      pointerInteractionMovement.current = delta;
-      r.set(r.get() + delta / MOVEMENT_DAMPING);
+      pointerInteracting.current = clientX;
+      r.set(r.get() + delta / 350);
     }
   };
 
@@ -47,32 +69,11 @@ export function Globe({ className = '' }: { className?: string }) {
     onResize();
 
     const globe = createGlobe(canvas, {
-      devicePixelRatio: 2,
-      width: (width || 300) * 2,
-      height: (width || 300) * 2,
-      phi: 0.1,
-      theta: 0.3,
-      dark: 1,
-      diffuse: 1.2,
-      mapSamples: 16000,
-      mapBrightness: 6,
-      baseColor: [0.1, 0.15, 0.3],
-      markerColor: [0.39, 0.96, 1],
-      glowColor: [0.2, 0.4, 0.8],
-      markers: [
-        // Cairo, Egypt
-        { location: [30.0444, 31.2357], size: 0.1 },
-        // London
-        { location: [51.5074, -0.1278], size: 0.05 },
-        // New York
-        { location: [40.7128, -74.006], size: 0.06 },
-        // Tokyo
-        { location: [35.6762, 139.6503], size: 0.05 },
-        // Dubai
-        { location: [25.2048, 55.2708], size: 0.07 },
-      ],
+      ...GLOBE_CONFIG,
+      width: (width || 320) * 2,
+      height: (width || 320) * 2,
       onRender: (state) => {
-        if (!pointerInteracting.current) {
+        if (pointerInteracting.current === null) {
           phi += 0.005;
         }
         state.phi = phi + rs.get();
@@ -97,15 +98,26 @@ export function Globe({ className = '' }: { className?: string }) {
     <div className={`relative mx-auto flex items-center justify-center w-full ${className}`}>
       <canvas
         ref={canvasRef}
-        className="w-full aspect-square max-w-[280px] opacity-0 transition-opacity duration-700 [contain:layout_paint_size] cursor-grab touch-none"
+        className="w-full aspect-square max-w-[340px] opacity-0 transition-opacity duration-700 [contain:layout_paint_size] cursor-grab touch-none select-none"
         onPointerDown={(e) => {
           pointerInteracting.current = e.clientX;
           updatePointerInteraction(e.clientX);
+          try {
+            e.currentTarget.setPointerCapture(e.pointerId);
+          } catch {}
         }}
-        onPointerUp={() => updatePointerInteraction(null)}
-        onPointerOut={() => updatePointerInteraction(null)}
-        onMouseMove={(e) => updateMovement(e.clientX)}
-        onTouchMove={(e) => e.touches[0] && updateMovement(e.touches[0].clientX)}
+        onPointerUp={(e) => {
+          updatePointerInteraction(null);
+          try {
+            e.currentTarget.releasePointerCapture(e.pointerId);
+          } catch {}
+        }}
+        onPointerCancel={() => updatePointerInteraction(null)}
+        onPointerMove={(e) => {
+          if (pointerInteracting.current !== null) {
+            updateMovement(e.clientX);
+          }
+        }}
       />
     </div>
   );
