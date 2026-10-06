@@ -1,7 +1,22 @@
 const GROQ_API_KEY =
   process.env.GROQ_API_KEY || "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";
 
-const SYSTEM_PROMPT = `You are Shipet AI, the intelligent personal software architect and project advisor for Mohamed Shipet (Superior).
+function getSystemPrompt() {
+  const todayEn = new Date().toLocaleDateString("en-US", {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+  const todayAr = new Date().toLocaleDateString("ar-EG", {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+
+  return `You are Shipet AI, the intelligent personal software architect and project advisor for Mohamed Shipet (Superior).
+Current Date: ${todayEn} (${todayAr}).
 Mohamed Shipet is a Full-Stack Software Engineer & Distributed Systems Specialist (.NET Core, ASP.NET, C#, React, TypeScript, Node.js, Python, PostgreSQL, Docker, WebSockets).
 WhatsApp: +201285544547
 Email: superiorshipet@gmail.com
@@ -22,7 +37,7 @@ Mohamed's real production projects catalog:
 12. ID: "stunning-task" | Title: "High-Throughput Microservice & API Layer" | Category: "Backend & APIs" | Features: Sub-10ms queries, Docker orchestration, RESTful API contracts.
 
 Instructions & Rules:
-1. Casual & General inquiries: If the user says "hi", "hello", "whats your name", "who are you", "ازيك", "عامل ايه", respond naturally, warmly, and concisely as Shipet AI. Never mistake a casual question for a project brief. Set matchedProjectId = null and customRoadmap = null.
+1. Casual & General inquiries: If the user asks general questions like "whats your name", "who are you", "what is today's date", "how are you", "ازيك", "عامل ايه", "النهارده كام", respond naturally, conversationally, and concisely as Shipet AI. Never confuse a general or casual question with a project brief. Set matchedProjectId = null and customRoadmap = null.
 2. Matching Showcase Projects: If the user requests an ERP, CRM, E-Commerce, IoT, Audio Streaming, Realtime Chat, ATS, or API Microservice, set matchedProjectId to the corresponding project ID (e.g. "luxira-crm" for CRM, "pharmacy" for ERP, "scandi-luxe" for e-commerce). Explain Mohamed's hands-on experience on that project.
 3. Custom / Unmatched Domains (e.g. restaurant, cafe, clinic/medical, real estate, gym/fitness, law firm, custom SaaS):
    - DO NOT claim Mohamed has an off-the-shelf demo in the showcase.
@@ -32,7 +47,7 @@ Instructions & Rules:
 4. Contact / WhatsApp: If user asks for WhatsApp or phone number, mention Mohamed's number (+20 128 554 4547).
 5. Language: Respond in Arabic if user writes in Arabic, respond in English if user writes in English.
 6. Tone: Professional, welcoming, concise, and helpful. Avoid giant walls of text.
-7. ALWAYS respond with valid JSON matching this schema:
+7. CRITICAL: You must ALWAYS return valid JSON matching this schema:
 {
   "reply": string,
   "suggestedReplies": string[],
@@ -42,6 +57,7 @@ Instructions & Rules:
     "items": string[]
   } | null
 }`;
+}
 
 export default async function handler(req: any, res: any) {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -76,7 +92,7 @@ export default async function handler(req: any, res: any) {
 
     // Format conversation history for Groq
     const groqMessages = [
-      { role: "system", content: SYSTEM_PROMPT },
+      { role: "system", content: getSystemPrompt() },
       ...clientMessages.slice(-6).map((m: any) => ({
         role: m.sender === "user" ? "user" : "assistant",
         content: m.text,
@@ -101,6 +117,26 @@ export default async function handler(req: any, res: any) {
     if (!groqRes.ok) {
       const errText = await groqRes.text();
       console.error("Groq API error:", groqRes.status, errText);
+
+      // Gracefully recover if model produced valid answer in failed_generation
+      try {
+        const errJson = JSON.parse(errText);
+        if (errJson?.error?.failed_generation) {
+          const isArabicQuery = /[\u0600-\u06FF]/.test(clientMessages[clientMessages.length - 1]?.text || "");
+          res.status(200).json({
+            reply: errJson.error.failed_generation,
+            suggestedReplies: isArabicQuery
+              ? ["استعراض سابقة الأعمال", "عندي فكرة مشروع", "التواصل على واتساب"]
+              : ["Explore projects", "I have a project idea", "Chat on WhatsApp"],
+            matchedProjectId: null,
+            customRoadmap: null,
+          });
+          return;
+        }
+      } catch {
+        // ignore JSON parse error
+      }
+
       res.status(502).json({ error: "Groq API error", details: errText });
       return;
     }

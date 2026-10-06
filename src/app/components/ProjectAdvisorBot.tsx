@@ -31,28 +31,35 @@ export function ProjectAdvisorBot() {
 
   const [inputVal, setInputVal] = useState("");
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     if (isOpen) {
       messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+      inputRef.current?.focus();
     }
   }, [messages, isTyping, isOpen]);
 
   useEffect(() => {
-    const handleOpen = () => setIsOpen(true);
+    const handleOpen = () => {
+      setIsOpen(true);
+      setTimeout(() => inputRef.current?.focus(), 60);
+    };
     window.addEventListener("open-project-advisor", handleOpen);
     return () => window.removeEventListener("open-project-advisor", handleOpen);
   }, [setIsOpen]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!inputVal.trim()) return;
+    if (!inputVal.trim() || isTyping) return;
     sendMessage(inputVal);
     setInputVal("");
+    inputRef.current?.focus();
   };
 
   const handleQuickReply = (text: string) => {
     sendMessage(text);
+    inputRef.current?.focus();
   };
 
   return (
@@ -360,16 +367,17 @@ export function ProjectAdvisorBot() {
             >
               <div className="flex items-center gap-2">
                 <input
+                  ref={inputRef}
                   type="text"
                   value={inputVal}
                   onChange={(e) => setInputVal(e.target.value)}
-                  placeholder={isTyping ? "AI is thinking..." : "Describe your project, app, or idea..."}
-                  disabled={isTyping}
-                  className="flex-1 rounded-xl border border-[var(--space-border)] bg-[var(--space-void)] px-3.5 py-2.5 text-xs sm:text-sm text-[var(--space-starlight)] placeholder:text-[var(--space-muted)] focus:border-[var(--space-cyan)] focus:outline-none transition-colors disabled:opacity-60"
+                  placeholder="Describe your project, app, or idea..."
+                  className="flex-1 rounded-xl border border-[var(--space-border)] bg-[var(--space-void)] px-3.5 py-2.5 text-xs sm:text-sm text-[var(--space-starlight)] placeholder:text-[var(--space-muted)] focus:border-[var(--space-cyan)] focus:outline-none transition-colors"
                 />
                 <button
                   type="submit"
                   disabled={!inputVal.trim() || isTyping}
+                  onMouseDown={(e) => e.preventDefault()}
                   className="flex h-10 w-10 items-center justify-center rounded-xl bg-[var(--space-button)] text-[var(--space-button-text)] disabled:opacity-40 hover:bg-[var(--space-cyan)] hover:text-[var(--space-void)] transition-all cursor-pointer shadow-[0_0_14px_rgba(100,244,255,0.25)] shrink-0"
                 >
                   <Send className="h-4 w-4" />
