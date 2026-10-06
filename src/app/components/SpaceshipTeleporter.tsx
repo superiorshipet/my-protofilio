@@ -256,32 +256,7 @@ export function SpaceshipTeleporter({ techIcons }: SpaceshipTeleporterProps) {
         </motion.div>
       </div>
 
-      {/* 4. 3D Cosmic Orbit Teleporter Rings beneath figure */}
-      <div
-        className="pointer-events-none absolute -bottom-1 left-1/2 -translate-x-1/2 w-60 sm:w-72 md:w-84 h-20 rounded-[100%] border border-[var(--space-cyan)]/35 shadow-[0_0_30px_rgba(100,244,255,0.3)] z-10"
-        style={{
-          transform: 'rotateX(75deg) translateZ(-30px)',
-        }}
-      >
-        {/* Floor Teleport Shockwave impact ring on initial materialize */}
-        {isBeaming && (
-          <motion.div
-            initial={{ scale: 0.4, opacity: 1 }}
-            animate={{ scale: 1.25, opacity: 0 }}
-            transition={{ duration: 1.2, delay: 1.2, ease: 'easeOut' }}
-            className="absolute inset-0 rounded-[100%] border-2 border-cyan-200 shadow-[0_0_25px_rgba(100,244,255,0.9)]"
-          />
-        )}
-      </div>
-
-      <div
-        className="pointer-events-none absolute bottom-3 left-1/2 -translate-x-1/2 w-44 sm:w-56 md:w-68 h-14 rounded-[100%] border border-[var(--space-cyan)]/20 z-10"
-        style={{
-          transform: 'rotateX(75deg) translateZ(-20px)',
-        }}
-      />
-
-      {/* 5. Orbiting 3D Tech Satellites floating around Mohamed */}
+      {/* 4. Orbiting 3D Tech Satellites floating around Mohamed */}
       {techIcons.map(({ Icon, label, delay }, index) => {
         const positions = [
           { top: '20%', right: '-8px' },
