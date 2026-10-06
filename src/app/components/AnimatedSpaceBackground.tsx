@@ -13,7 +13,33 @@ type ShootingStar = {
   speed: number;
 };
 
-function makeStars(THREE: ThreeModule, count: number, spread: number, size: number, color: number, opacity: number) {
+function createStarTexture(THREE: ThreeModule) {
+  const canvas = document.createElement('canvas');
+  canvas.width = 32;
+  canvas.height = 32;
+  const ctx = canvas.getContext('2d');
+  if (!ctx) return undefined;
+
+  const grad = ctx.createRadialGradient(16, 16, 0, 16, 16, 16);
+  grad.addColorStop(0, 'rgba(255, 255, 255, 1)');
+  grad.addColorStop(0.6, 'rgba(255, 255, 255, 0.8)');
+  grad.addColorStop(1, 'rgba(255, 255, 255, 0)');
+  ctx.fillStyle = grad;
+  ctx.fillRect(0, 0, 32, 32);
+
+  const tex = new THREE.CanvasTexture(canvas);
+  return tex;
+}
+
+function makeStars(
+  THREE: ThreeModule,
+  count: number,
+  spread: number,
+  size: number,
+  color: number,
+  opacity: number,
+  map?: Three.Texture
+) {
   const geo = new THREE.BufferGeometry();
   const positions = new Float32Array(count * 3);
 
@@ -30,6 +56,8 @@ function makeStars(THREE: ThreeModule, count: number, spread: number, size: numb
     size,
     transparent: true,
     opacity,
+    map,
+    depthWrite: false,
     sizeAttenuation: true,
   });
 
@@ -126,13 +154,40 @@ export function AnimatedSpaceBackground() {
       renderer.domElement.setAttribute('aria-hidden', 'true');
       wrap.appendChild(renderer.domElement);
 
-      const starsFar = makeStars(THREE, 1400, 1400, 1, 0x8fa3c8, 0.5);
-      const starsMid = makeStars(THREE, 700, 800, 1.5, 0xbfe8ff, 0.65);
-      const starsNear = makeStars(THREE, 260, 460, 2, 0x2ee6d6, 0.75);
+      const starTexture = createStarTexture(THREE);
+      const isInitialDark = document.documentElement.classList.contains('dark');
+
+      const starsFar = makeStars(
+        THREE,
+        1400,
+        1400,
+        1.4,
+        isInitialDark ? 0x94a3b8 : 0x1e293b,
+        isInitialDark ? 0.5 : 0.65,
+        starTexture
+      );
+      const starsMid = makeStars(
+        THREE,
+        700,
+        800,
+        2.0,
+        isInitialDark ? 0xe2e8f0 : 0x0f172a,
+        isInitialDark ? 0.65 : 0.8,
+        starTexture
+      );
+      const starsNear = makeStars(
+        THREE,
+        260,
+        460,
+        2.8,
+        isInitialDark ? 0xffffff : 0x020617,
+        isInitialDark ? 0.75 : 0.95,
+        starTexture
+      );
       scene.add(starsFar, starsMid, starsNear);
 
-      const nebula1 = makeGlowSprite(THREE, 'rgba(46,230,214,0.55)', 300, 0.45);
-      const nebula2 = makeGlowSprite(THREE, 'rgba(123,91,255,0.5)', 360, 0.4);
+      const nebula1 = makeGlowSprite(THREE, 'rgba(46,230,214,0.55)', 300, isInitialDark ? 0.45 : 0.05);
+      const nebula2 = makeGlowSprite(THREE, 'rgba(123,91,255,0.5)', 360, isInitialDark ? 0.4 : 0.05);
 
       if (nebula1) {
         nebula1.position.set(-140, 40, -220);
@@ -149,11 +204,14 @@ export function AnimatedSpaceBackground() {
         const positions = new Float32Array(12 * 3);
         geo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
 
+        const isDark = document.documentElement.classList.contains('dark');
         const mat = new THREE.PointsMaterial({
-          color: 0xffffff,
-          size: 1.5,
+          color: isDark ? 0xffffff : 0x0f172a,
+          size: 1.8,
           transparent: true,
           opacity: 0.9,
+          map: starTexture,
+          depthWrite: false,
           sizeAttenuation: true,
         });
 
@@ -172,6 +230,39 @@ export function AnimatedSpaceBackground() {
       };
 
       const shootingStars = [makeShootingStar(), makeShootingStar()];
+
+      const applyThemeColors = () => {
+        const isDark = document.documentElement.classList.contains('dark');
+        if (isDark) {
+          (starsFar.material as Three.PointsMaterial).color.setHex(0x94a3b8);
+          (starsFar.material as Three.PointsMaterial).opacity = 0.5;
+          (starsMid.material as Three.PointsMaterial).color.setHex(0xe2e8f0);
+          (starsMid.material as Three.PointsMaterial).opacity = 0.65;
+          (starsNear.material as Three.PointsMaterial).color.setHex(0xffffff);
+          (starsNear.material as Three.PointsMaterial).opacity = 0.75;
+          shootingStars.forEach((star) => {
+            (star.points.material as Three.PointsMaterial).color.setHex(0xffffff);
+          });
+          if (nebula1) (nebula1.material as Three.SpriteMaterial).opacity = 0.45;
+          if (nebula2) (nebula2.material as Three.SpriteMaterial).opacity = 0.4;
+        } else {
+          // Dark black stars for light background to give high focus and clarity
+          (starsFar.material as Three.PointsMaterial).color.setHex(0x1e293b);
+          (starsFar.material as Three.PointsMaterial).opacity = 0.65;
+          (starsMid.material as Three.PointsMaterial).color.setHex(0x0f172a);
+          (starsMid.material as Three.PointsMaterial).opacity = 0.8;
+          (starsNear.material as Three.PointsMaterial).color.setHex(0x020617);
+          (starsNear.material as Three.PointsMaterial).opacity = 0.95;
+          shootingStars.forEach((star) => {
+            (star.points.material as Three.PointsMaterial).color.setHex(0x0f172a);
+          });
+          if (nebula1) (nebula1.material as Three.SpriteMaterial).opacity = 0.05;
+          if (nebula2) (nebula2.material as Three.SpriteMaterial).opacity = 0.05;
+        }
+      };
+
+      const themeObserver = new MutationObserver(() => applyThemeColors());
+      themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
 
       const launch = (star: ShootingStar) => {
         star.start.set((Math.random() - 0.5) * 300 + 120, Math.random() * 90 + 30, -100 - Math.random() * 150);
@@ -263,6 +354,8 @@ export function AnimatedSpaceBackground() {
 
       cleanup = () => {
         cancelAnimationFrame(animationFrame);
+        themeObserver.disconnect();
+        starTexture?.dispose();
         window.removeEventListener('mousemove', handleMouseMove);
         window.removeEventListener('resize', handleResize);
         disposeObject(THREE, scene);

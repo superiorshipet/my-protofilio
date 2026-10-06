@@ -18,9 +18,8 @@
   --space-violet: #6d45d9;
   --space-rose: #d73794;
   --space-sun: #c57700;
-  --space-border: rgba(41, 55, 99, 0.14);
-  --space-star-a: rgba(39, 54, 101, 0.36);
-  --space-star-b: rgba(8, 126, 164, 0.34);
+  --space-star-a: rgba(15, 23, 42, 0.72);
+  --space-star-b: rgba(0, 0, 0, 0.58);
   --space-body-bg:
     radial-gradient(circle at 16% 18%, rgba(109, 69, 217, 0.12), transparent 26rem),
     radial-gradient(circle at 82% 12%, rgba(8, 126, 164, 0.12), transparent 28rem),
@@ -271,7 +270,7 @@
   }
 
   .space-stars::before {
-    opacity: 0.22;
+    opacity: 0.32;
     background-image:
       radial-gradient(circle, var(--space-star-a) 1px, transparent 1.6px),
       radial-gradient(circle, var(--space-star-b) 1px, transparent 1.5px);
@@ -280,10 +279,10 @@
   }
 
   .space-stars::after {
-    opacity: 0.14;
+    opacity: 0.22;
     background-image:
-      radial-gradient(circle, var(--space-star-a) 1px, transparent 1.4px),
-      radial-gradient(circle, rgba(255, 79, 184, 0.36) 1px, transparent 1.5px);
+      radial-gradient(circle, var(--space-star-a) 1.2px, transparent 1.6px),
+      radial-gradient(circle, var(--space-star-b) 1.1px, transparent 1.5px);
     background-position: 72px 40px, 12px 120px;
     background-size: 260px 300px, 340px 360px;
   }

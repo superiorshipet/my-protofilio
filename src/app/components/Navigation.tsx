@@ -26,8 +26,15 @@ export function Navigation() {
   }, []);
 
   useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const themeParam = urlParams.get('theme');
     const savedTheme = localStorage.getItem('theme');
-    const initialTheme = savedTheme === 'light' || savedTheme === 'dark' ? savedTheme : 'dark';
+    const initialTheme =
+      themeParam === 'light' || themeParam === 'dark'
+        ? themeParam
+        : savedTheme === 'light' || savedTheme === 'dark'
+        ? savedTheme
+        : 'dark';
 
     setTheme(initialTheme);
     document.documentElement.classList.toggle('dark', initialTheme === 'dark');
@@ -86,8 +93,8 @@ export function Navigation() {
                   initial={{ opacity: 0, y: -20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 }}
-                  whileHover={{ y: -2, color: '#64f4ff' }}
-                  className="text-sm text-[var(--space-moon)] hover:text-[var(--space-cyan)] transition-colors"
+                  whileHover={{ y: -2 }}
+                  className="text-sm font-bold tracking-wide text-[var(--space-starlight)] hover:text-[var(--space-cyan)] transition-colors cursor-pointer"
                 >
                   {item.label}
                 </motion.a>
@@ -162,7 +169,7 @@ export function Navigation() {
                   initial={{ opacity: 0, x: 50 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: index * 0.1 }}
-                  className="text-lg text-[var(--space-moon)] hover:text-[var(--space-cyan)] transition-colors py-2 border-b border-[var(--space-border)]"
+                  className="text-lg font-bold text-[var(--space-starlight)] hover:text-[var(--space-cyan)] transition-colors py-2 border-b border-[var(--space-border)]"
                 >
                   {item.label}
                 </motion.a>
