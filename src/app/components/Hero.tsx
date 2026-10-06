@@ -16,7 +16,7 @@ import {
   Terminal,
 } from 'lucide-react';
 import { Button } from './ui/button';
-import portraitImg from '../../imports/image.png';
+import { SpaceshipTeleporter } from './SpaceshipTeleporter';
 import cvFile from '../../imports/Mohamed-Shipet-CV.pdf';
 
 const cvUrl = cvFile;
@@ -258,70 +258,7 @@ export function Hero() {
             }}
             className="relative flex flex-col items-center justify-center cursor-pointer select-none"
           >
-            {/* 3D Cosmic Orbit Rings beneath figure */}
-            <div
-              className="pointer-events-none absolute bottom-4 left-1/2 -translate-x-1/2 w-64 sm:w-80 md:w-92 h-24 rounded-[100%] border border-[var(--space-cyan)]/25 shadow-[0_0_25px_rgba(100,244,255,0.2)]"
-              style={{
-                transform: 'rotateX(75deg) translateZ(-30px)',
-              }}
-            />
-            <div
-              className="pointer-events-none absolute bottom-7 left-1/2 -translate-x-1/2 w-48 sm:w-64 md:w-72 h-16 rounded-[100%] border border-[var(--space-cyan)]/15"
-              style={{
-                transform: 'rotateX(75deg) translateZ(-20px)',
-              }}
-            />
-
-            {/* Pure Frameless 3D Cutout of Mohamed */}
-            <div
-              className="relative w-full max-w-[260px] sm:max-w-[320px] md:max-w-[360px]"
-              style={{ transform: 'translateZ(45px)' }}
-            >
-              <img
-                src={portraitImg}
-                alt="Mohamed Shipet (Superior)"
-                className="w-full h-auto object-contain transition-transform duration-500 hover:scale-105"
-                style={{
-                  filter:
-                    'drop-shadow(0 25px 35px rgba(0, 0, 0, 0.85)) drop-shadow(0 0 35px rgba(100, 244, 255, 0.22))',
-                }}
-              />
-            </div>
-
-            {/* Orbiting 3D Tech Satellites floating around Mohamed */}
-            {techIcons.map(({ Icon, label, delay }, index) => {
-              const positions = [
-                { top: '8%', right: '-6px' },
-                { bottom: '26%', right: '-10px' },
-                { top: '22%', left: '-10px' },
-                { bottom: '10%', left: '-6px' },
-              ];
-              const pos = positions[index] || {};
-              return (
-                <motion.div
-                  key={label}
-                  initial={{ opacity: 0, scale: 0.4 }}
-                  animate={{ opacity: 1, scale: 1, y: [0, -8, 0] }}
-                  transition={{
-                    opacity: { delay: 0.8 + delay, duration: 0.4 },
-                    scale: { delay: 0.8 + delay, duration: 0.4 },
-                    y: { delay: 1.2 + delay, duration: 3 + index * 0.4, repeat: Infinity, ease: 'easeInOut' },
-                  }}
-                  className="absolute z-30 pointer-events-none"
-                  style={{
-                    top: pos.top,
-                    bottom: pos.bottom,
-                    right: pos.right,
-                    left: pos.left,
-                    transform: index % 2 === 0 ? 'translateZ(75px)' : 'translateZ(90px)',
-                  }}
-                >
-                  <div className="flex h-9 w-9 sm:h-11 sm:w-11 items-center justify-center rounded-2xl border border-[var(--space-cyan)]/35 bg-[var(--space-panel)]/90 text-[var(--space-cyan)] shadow-[0_8px_24px_rgba(0,0,0,0.6),0_0_15px_rgba(100,244,255,0.2)] backdrop-blur-md">
-                    <Icon className="h-4 w-4 sm:h-5 sm:w-5" />
-                  </div>
-                </motion.div>
-              );
-            })}
+            <SpaceshipTeleporter techIcons={techIcons} />
           </motion.div>
         </motion.div>
       </div>
