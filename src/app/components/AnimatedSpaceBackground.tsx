@@ -91,6 +91,24 @@ export function AnimatedSpaceBackground() {
     let cancelled = false;
 
     const boot = async () => {
+      // Phones / reduced-motion / data-saver users keep the static CSS star field
+      // (`space-stars`) and never download the ~190KB-gzip Three.js bundle.
+      const nav = navigator as Navigator & { connection?: { saveData?: boolean } };
+      const lite =
+        window.matchMedia('(max-width: 768px)').matches ||
+        window.matchMedia('(pointer: coarse)').matches ||
+        window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
+        nav.connection?.saveData === true;
+      if (lite) return;
+
+      // Let the hero paint and become interactive before spending time on WebGL.
+      await new Promise<void>((resolve) => {
+        const w = window as Window & { requestIdleCallback?: (cb: () => void, o?: { timeout: number }) => number };
+        if (w.requestIdleCallback) w.requestIdleCallback(() => resolve(), { timeout: 2500 });
+        else setTimeout(resolve, 1200);
+      });
+      if (cancelled) return;
+
       const THREE = await import('three');
       const wrap = wrapRef.current;
 
@@ -104,13 +122,13 @@ export function AnimatedSpaceBackground() {
 
       const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
       renderer.setSize(window.innerWidth, window.innerHeight);
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
       renderer.domElement.setAttribute('aria-hidden', 'true');
       wrap.appendChild(renderer.domElement);
 
-      const starsFar = makeStars(THREE, 2200, 1400, 1, 0x8fa3c8, 0.5);
-      const starsMid = makeStars(THREE, 1100, 800, 1.5, 0xbfe8ff, 0.65);
-      const starsNear = makeStars(THREE, 400, 460, 2, 0x2ee6d6, 0.75);
+      const starsFar = makeStars(THREE, 1400, 1400, 1, 0x8fa3c8, 0.5);
+      const starsMid = makeStars(THREE, 700, 800, 1.5, 0xbfe8ff, 0.65);
+      const starsNear = makeStars(THREE, 260, 460, 2, 0x2ee6d6, 0.75);
       scene.add(starsFar, starsMid, starsNear);
 
       const nebula1 = makeGlowSprite(THREE, 'rgba(46,230,214,0.55)', 300, 0.45);
@@ -183,6 +201,10 @@ export function AnimatedSpaceBackground() {
 
       const animate = (now: number) => {
         animationFrame = requestAnimationFrame(animate);
+        if (document.hidden) {
+          last = now;
+          return;
+        }
 
         const dt = Math.min((now - last) / 1000, 0.05);
         last = now;

@@ -205,15 +205,34 @@ export function Globe({
     window.addEventListener('resize', onResize);
     width = canvas.offsetWidth || 500;
 
+    // Lighter WebGL settings on phones: lower pixel ratio and fewer map samples.
+    const isMobile = window.matchMedia('(max-width: 768px)').matches;
+    const dpr = isMobile ? 1.5 : 2;
     globe = createGlobe(canvas, {
       ...config,
+      devicePixelRatio: dpr,
+      mapSamples: isMobile ? 9000 : config.mapSamples,
       width: (width || 500) * 2,
       height: (width || 500) * 2,
     });
 
+    // Skip all rendering work while the globe is off-screen or the tab is hidden.
+    let visible = true;
+    const io =
+      typeof IntersectionObserver !== 'undefined'
+        ? new IntersectionObserver(([entry]) => {
+            visible = entry.isIntersecting;
+          })
+        : null;
+    io?.observe(canvas);
+
     let animId: number;
 
     const animate = () => {
+      if (!visible || document.hidden) {
+        animId = requestAnimationFrame(animate);
+        return;
+      }
       // Smooth targeting rotation or ambient spin
       if (targetPhiRef.current !== null && !pointerInteracting.current) {
         const currentPhi = phi + rs.get();
@@ -275,6 +294,7 @@ export function Globe({
 
     return () => {
       cancelAnimationFrame(animId);
+      io?.disconnect();
       globe.destroy();
       window.removeEventListener('resize', onResize);
     };
