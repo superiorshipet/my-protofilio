@@ -20,10 +20,10 @@ export const GLOBE_CONFIG = {
   markerColor: [0.39, 0.96, 1] as [number, number, number], // Space Cyan markers
   glowColor: [0.39, 0.96, 1] as [number, number, number], // Space Cyan atmospheric glow
   markers: [
-    { location: [30.0444, 31.2357], size: 0.08 }, // Egypt
-    { location: [24.7136, 46.6753], size: 0.08 }, // Saudi Arabia
-    { location: [41.0082, 28.9784], size: 0.08 }, // Turkey
-    { location: [40.7128, -74.006], size: 0.08 }, // USA
+    { location: [30.0444, 31.2357], size: 0.02 }, // Egypt - delicate glowing dot
+    { location: [24.7136, 46.6753], size: 0.02 }, // Saudi Arabia - delicate glowing dot
+    { location: [41.0082, 28.9784], size: 0.02 }, // Turkey - delicate glowing dot
+    { location: [40.7128, -74.006], size: 0.02 }, // USA - delicate glowing dot
   ],
 };
 
