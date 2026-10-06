@@ -148,38 +148,7 @@ export function Contact() {
             </div>
 
             {/* Social Links */}
-            <div>
-              <h4 className="text-lg font-bold text-[var(--space-starlight)] mb-4">Follow Me</h4>
-              <div className="flex gap-4">
-                <motion.a
-                href="https://github.com/superiorshipet"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  whileHover={{ scale: 1.1, y: -4 }}
-                  className="space-glass w-12 h-12 rounded-xl flex items-center justify-center text-[var(--space-muted)] hover:text-[var(--space-cyan)] hover:border-[var(--space-cyan)]/45 transition-all"
-                >
-                  <Github className="w-6 h-6" />
-                </motion.a>
-                <motion.a
-                href="https://www.linkedin.com/in/mohamed-shipet-700864266/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  whileHover={{ scale: 1.1, y: -4 }}
-                  className="space-glass w-12 h-12 rounded-xl flex items-center justify-center text-[var(--space-muted)] hover:text-[var(--space-cyan)] hover:border-[var(--space-cyan)]/45 transition-all"
-                >
-                  <Linkedin className="w-6 h-6" />
-                </motion.a>
-                <motion.a
-                  href="https://x.com/M_shipet004"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  whileHover={{ scale: 1.1, y: -4 }}
-                  className="space-glass w-12 h-12 rounded-xl flex items-center justify-center text-[var(--space-muted)] hover:text-[var(--space-cyan)] hover:border-[var(--space-cyan)]/45 transition-all"
-                >
-                  <Twitter className="w-6 h-6" />
-                </motion.a>
-              </div>
-            </div>
+        
           </motion.div>
 
           {/* Contact Form */}

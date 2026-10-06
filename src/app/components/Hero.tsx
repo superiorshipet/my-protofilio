@@ -206,25 +206,7 @@ export function Hero() {
             </Button>
           </div>
 
-          <div className="flex gap-5">
-            {[
-              { href: 'https://github.com/superiorshipet', Icon: Github, label: 'GitHub' },
-              { href: 'https://www.linkedin.com/in/mohamed-shipet-700864266/', Icon: Linkedin, label: 'LinkedIn' },
-              { href: 'mailto:mohmedshipet4@gmail.com', Icon: Mail, label: 'Email' },
-            ].map(({ href, Icon, label }) => (
-              <motion.a
-                key={label}
-                href={href}
-                target={href.startsWith('mailto:') ? undefined : '_blank'}
-                rel={href.startsWith('mailto:') ? undefined : 'noopener noreferrer'}
-                aria-label={label}
-                whileHover={{ scale: 1.1, y: -2 }}
-                className="text-[var(--space-muted)] transition-colors hover:text-[var(--space-cyan)]"
-              >
-                <Icon className="h-6 w-6" />
-              </motion.a>
-            ))}
-          </div>
+         
         </motion.div>
 
         {/* Full 3D Interactive Portrait Card */}
