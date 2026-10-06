@@ -177,10 +177,13 @@ export function Globe({
       }
 
       const currentPhi = phi + rs.get();
+      const baseTheta = config.theta ?? 0.3;
+      const currentTheta = baseTheta + thetaSpring.get();
 
       if (globe && typeof (globe as any).update === 'function') {
         (globe as any).update({
           phi: currentPhi,
+          theta: currentTheta,
           width: (width || 500) * 2,
           height: (width || 500) * 2,
         });
@@ -190,7 +193,7 @@ export function Globe({
       GLOBE_HUBS.forEach((hub) => {
         const pinEl = pinRefs.current[hub.id];
         if (!pinEl) return;
-        const { xPct, yPct, isFront } = cobeProject(hub.lat, hub.lon, currentPhi, (config.theta ?? 0.3));
+        const { xPct, yPct, isFront } = cobeProject(hub.lat, hub.lon, currentPhi, currentTheta);
 
         if (isFront) {
           pinEl.style.left = `${xPct}%`;
@@ -219,7 +222,7 @@ export function Globe({
       globe.destroy();
       window.removeEventListener('resize', onResize);
     };
-  }, [rs, config]);
+  }, [rs, thetaSpring, config]);
 
   return (
     <div
