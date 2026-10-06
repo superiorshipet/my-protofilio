@@ -6,6 +6,8 @@ import { User } from 'lucide-react';
 
 // Tuned for silky-smooth, effortless 1:1 rotation when dragging left and right
 const MOVEMENT_DAMPING = 360;
+// Gentle vertical damping prevents accidental tilt during horizontal spins
+const VERTICAL_DAMPING = 1200;
 const PI = Math.PI;
 
 export const GLOBE_CONFIG = {
@@ -168,9 +170,9 @@ export function Globe({
       pointerInteractionMovement.current = deltaX;
       r.set(r.get() + deltaX / MOVEMENT_DAMPING);
 
-      // Clamp vertical motion to maintain natural planetary orientation
-      const nextTheta = thetaMotion.get() + deltaY / MOVEMENT_DAMPING;
-      const clampedTheta = Math.max(-0.85, Math.min(0.85, nextTheta));
+      // Stabilized vertical motion so horizontal spinning remains fluid and prioritized
+      const nextTheta = thetaMotion.get() + deltaY / VERTICAL_DAMPING;
+      const clampedTheta = Math.max(-0.6, Math.min(0.6, nextTheta));
       thetaMotion.set(clampedTheta);
 
       pointerInteracting.current = { x: clientX, y: clientY };
