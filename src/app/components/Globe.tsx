@@ -213,7 +213,7 @@ export function Globe({
     globe = createGlobe(canvas, {
       ...config,
       devicePixelRatio: dpr,
-      mapSamples: isMobile ? 6000 : config.mapSamples,
+      mapSamples: isMobile ? 4000 : config.mapSamples,
       width: initialWidth * sizeMultiplier,
       height: initialWidth * sizeMultiplier,
     });
@@ -259,11 +259,19 @@ export function Globe({
     };
     document.addEventListener('visibilitychange', onVisibilityChange);
 
-    const animate = () => {
+    // Phones render the globe at ~30fps (ambient spin is doubled per frame to keep the same speed).
+    const frameStep = isMobile ? 2 : 1;
+    let lastFrameTime = 0;
+    const animate = (now: number = 0) => {
       if (!visible || document.hidden) {
         isRunning = false;
         return;
       }
+      if (isMobile && now - lastFrameTime < 32) {
+        animId = requestAnimationFrame(animate);
+        return;
+      }
+      lastFrameTime = now;
       // Smooth targeting rotation or ambient spin
       if (targetPhiRef.current !== null && !pointerInteracting.current) {
         const currentPhi = phi + rs.get();
@@ -276,11 +284,11 @@ export function Globe({
         }
       } else if (!pointerInteracting.current) {
         if (Math.abs(velocityRef.current) > 0.0001) {
-          phi += velocityRef.current;
+          phi += velocityRef.current * frameStep;
           velocityRef.current *= 0.94;
         } else {
           velocityRef.current = 0;
-          phi += 0.003;
+          phi += 0.003 * frameStep;
         }
       }
 

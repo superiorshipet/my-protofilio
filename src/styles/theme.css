@@ -490,3 +490,65 @@
     scroll-behavior: smooth;
   }
 }
+
+/* ===== Mobile / touch performance overrides =====
+   Phones struggle with backdrop-filter, big blurs, filter drop-shadows and endless decorative
+   animations. Everything below is purely cosmetic and only applies to small/touch screens. */
+@media (max-width: 768px), (pointer: coarse) {
+  *, *::before, *::after {
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+  }
+
+  /* Decorative blurred glow blobs: expensive to rasterise, hide them on phones */
+  [class^="blur-"], [class*=" blur-"] {
+    display: none !important;
+  }
+
+  /* Filter-based drop shadows force an offscreen repaint every frame */
+  [class*="drop-shadow-"] {
+    filter: none !important;
+  }
+
+  /* Endless decorative loops keep the GPU/compositor busy while idle */
+  .animate-pulse,
+  .animate-satellite-float-0,
+  .animate-satellite-float-1,
+  .animate-satellite-float-2,
+  .animate-satellite-float-3,
+  .animate-thought-float-1,
+  .animate-thought-float-2 {
+    animation: none !important;
+  }
+
+  /* One fixed full-screen star layer is enough on phones */
+  .space-stars::after {
+    display: none !important;
+  }
+  .space-stars::before {
+    will-change: auto !important;
+  }
+
+  /* Avoid per-element transitions on every node while switching theme */
+  html.theme-transitioning,
+  html.theme-transitioning *,
+  html.theme-transitioning *::before,
+  html.theme-transitioning *::after {
+    transition: none !important;
+  }
+
+  /* Make glass panels slightly more opaque since blur is gone */
+  .space-glass {
+    transform: none !important;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+
+  /* Without backdrop blur the translucent bars must be opaque so content doesn't bleed through */
+  nav.fixed,
+  .fixed[class*="space-nav-bg"] {
+    background-color: var(--space-void) !important;
+  }
+}
