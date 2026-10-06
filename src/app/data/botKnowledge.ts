@@ -222,42 +222,276 @@ export const projectKnowledgeBase: ProjectSolution[] = [
   },
 ];
 
+export type ConversationalIntent =
+  | "how_are_you"
+  | "greeting"
+  | "who_are_you"
+  | "about_mohamed"
+  | "gratitude"
+  | "pricing";
+
+const STOP_WORDS = new Set([
+  "how", "are", "you", "and", "the", "for", "with", "have", "need", "want", "like", "can",
+  "what", "who", "when", "where", "why", "this", "that", "from", "is", "it", "to", "in",
+  "on", "at", "by", "or", "an", "be", "do", "we", "i", "me", "my", "your", "ur", "u", "r",
+  "please", "tell", "about", "some", "any", "good", "fine", "ok", "okay",
+  "انا", "عايز", "محتاج", "في", "من", "على", "عن", "مع", "هل", "هو", "هي", "لو", "ايه", "اي", "شو", "ليه", "مين", "كام"
+]);
+
+export function getConversationalIntent(query: string): ConversationalIntent | null {
+  const q = query.toLowerCase().trim();
+  if (!q) return null;
+
+  // 1. How are you / Status
+  if (
+    /^(how\s*(are|r)\s*(u|you)|how('s|s)\s*it\s*going|how\s*do\s*you\s*do|what('s|s)\s*up|whats\s*up|sup)(\b|[?!.])/i.test(q) ||
+    /^(ازيك|عامل ايه|عامل إيه|اخبارك|أخبارك|كيف حالك|كيفك|شخبارك|شلونك|تمام\?|كله تمام)(\b|[?!.])/i.test(q) ||
+    q === "how are u" ||
+    q === "how are you" ||
+    q === "how r u" ||
+    q === "ازيك" ||
+    q === "عامل ايه" ||
+    q === "اخبارك" ||
+    q === "كيف حالك"
+  ) {
+    return "how_are_you";
+  }
+
+  // 2. Greetings
+  if (
+    /^(hi|hello|hey|hiya|yo|greetings|good\s*(morning|afternoon|evening|day))(\b|[?!.])/i.test(q) ||
+    /^(اهلا|أهلا|اهلين|مرحبا|مرحباً|سلام|السلام عليكم|سلام عليكم|صباح الخير|مساء الخير|هلا|هاي)(\b|[?!.])/i.test(q) ||
+    q === "hi" ||
+    q === "hello" ||
+    q === "hey" ||
+    q === "سلام" ||
+    q === "مرحبا" ||
+    q === "اهلا"
+  ) {
+    return "greeting";
+  }
+
+  // 3. Who are you / Bot identity
+  if (
+    /(who\s*(are|r)\s*(u|you)|what\s*(are|r)\s*(u|you)|what\s*can\s*you\s*do|tell\s*me\s*about\s*yourself|what\s*is\s*this\s*bot)/i.test(q) ||
+    /(مين انت|انت مين|أنت مين|مين حضرتك|بتعمل ايه|شو وظيفتك|عرفني بنفسك|من أنت|من انت)/i.test(q)
+  ) {
+    return "who_are_you";
+  }
+
+  // 4. About Mohamed Shipet
+  if (
+    /(who\s*is\s*(mohamed|mohammad|muhamed|shipet)|about\s*(mohamed|shipet)|who\s*made\s*you|who\s*created\s*you)/i.test(q) ||
+    /(مين محمد|مين شيبت|من هو محمد|من محمد|معلومات عن محمد|مين صاحب الموقع)/i.test(q)
+  ) {
+    return "about_mohamed";
+  }
+
+  // 5. Gratitude / Thanks
+  if (
+    /^(thanks|thank\s*you|thx|appreciate\s*it|great\s*job|perfect|awesome)(\b|[?!.])/i.test(q) ||
+    /^(شكرا|شكراً|تسلم|مشكور|الله يعطيك العافية|الف شكر|ألف شكر|تسلم ايدك)(\b|[?!.])/i.test(q)
+  ) {
+    return "gratitude";
+  }
+
+  // 6. Pricing / Rates
+  if (
+    /(how\s*much|pricing|price|cost|quote|rates|budget)/i.test(q) ||
+    /(بكام|كم السعر|السعر|الاسعار|الأسعار|التكلفة|الميزانية)/i.test(q)
+  ) {
+    return "pricing";
+  }
+
+  return null;
+}
+
+export function getConversationalResponse(
+  intent: ConversationalIntent,
+  isArabic: boolean
+): { text: string; suggestedReplies: string[] } {
+  switch (intent) {
+    case "how_are_you":
+      return isArabic
+        ? {
+            text: "الحمد لله بخير وكله تمام، تسلم لذوقك وسؤالك! ⚡\n\nأنا المستشار الذكي لمشاريع محمد شيبت. أقدر أساعدك في هندسة فكرتك البرمجية، واقتراح نماذج جاهزة وحية اشتغلنا عليها، أو تحضير متطلبات مشروعك فوراً. إيه فكرة المشروع أو السيستم اللي بتفكر فيه؟",
+            suggestedReplies: [
+              "عايز متجر إلكتروني",
+              "محتاج نظام إدارة ومهمات",
+              "محتاج شات ومحادثات فورية",
+              "عندي فكرة مشروع مخصصة",
+            ],
+          }
+        : {
+            text: "I'm doing great and running at full speed! ⚡ Thank you for asking.\n\nI'm Mohamed Shipet's AI Project Advisor. I'm here to help you scope ideas, explore existing software architectures, or inspect live production systems. How can I assist you with your project today?",
+            suggestedReplies: [
+              "Show me E-Commerce projects",
+              "Need a Realtime Web App",
+              "Need an Automated Bot / Script",
+              "I have a custom project idea...",
+            ],
+          };
+
+    case "greeting":
+      return isArabic
+        ? {
+            text: "أهلاً وسهلاً بك! 👋 منوّر في موقع محمد شيبت. أنا مستشارك التقني الذكي.\n\nسواء كنت محتاج تبني متجر إلكتروني، سيستم إدارة ERP، نظام شات فوري، أو مايكروسيرفس سريعة، أقدر أساعدك وأوريك نماذج حية شغالة. حابب نبدأ بأي نوع من الأنظمة؟",
+            suggestedReplies: [
+              "محتاج متجر إلكتروني",
+              "محتاج نظام إدارة مهام وفريق",
+              "محتاج شات فوري ومراسلات",
+              "عندي فكرة منتج جديد",
+            ],
+          }
+        : {
+            text: "Hello! 👋 Welcome to Mohamed Shipet's portfolio. I'm his AI Project Advisor.\n\nWhether you're looking for a high-performance backend, a modern full-stack web application, or an enterprise ERP, I can help you find relevant live demos and prepare a technical brief. What are you looking to build?",
+            suggestedReplies: [
+              "I need an E-Commerce Store",
+              "I need a Task / CRM Platform",
+              "I need a Realtime Chat System",
+              "I have a custom product idea...",
+            ],
+          };
+
+    case "who_are_you":
+      return isArabic
+        ? {
+            text: "أنا المستشار التقني الذكي لمحمد شيبت 🤖\n\nدوري أسمع فكرة تطبيقك أو مشروعك، وأطابقها مع أكثر من 16 مشروعاً حياً ومبنياً بأحدث التقنيات (.NET, React, TypeScript, PHP, Python)، وأجمعلك ملخصاً تقنياً منظماً تقدر تبعته مباشرة لمحمد لبدء التنفيذ فوراً.",
+            suggestedReplies: [
+              "استعرض أهم المشاريع",
+              "إيه التقنيات اللي بتشتغلوا بيها؟",
+              "عندي مشروع عايز أنفذه",
+            ],
+          }
+        : {
+            text: "I am Mohamed Shipet's AI Project Advisor & System Architect 🤖\n\nMy role is to discuss your software ideas, match your needs against 16+ real production projects Mohamed has built (.NET, React, TypeScript, PHP, Python), and assemble a clean project brief that you can send directly to Mohamed for kickoff.",
+            suggestedReplies: [
+              "Show me top projects",
+              "What tech stacks do you use?",
+              "I have a project to build",
+            ],
+          };
+
+    case "about_mohamed":
+      return isArabic
+        ? {
+            text: "محمد شيبت هو مهندس برمجيات Full-Stack ومتخصص في الـ Backend وهندسة الأنظمة الموزعة (.NET Core, C#, React, TypeScript, PostgreSQL, Docker, WebSockets).\n\nقام بتصميم وتنفيذ أنظمة حيوية مثل ERP الصيدليات والمنشآت الطبية، ومايكروسيرفس عالية الضغط، ومتاجر إلكترونية راقية، وأنظمة محادثات وبث صوتي لحظية.",
+            suggestedReplies: [
+              "استعراض مشاريع محمد",
+              "التواصل عبر واتساب",
+              "عايز أبدأ مشروعي",
+            ],
+          }
+        : {
+            text: "Mohamed Shipet is a Full-Stack Engineer and Backend Specialist with deep expertise in scalable distributed systems (.NET Core, ASP.NET, C#, React, PostgreSQL, Docker, and IoT/WebSockets).\n\nHe has architected mission-critical pharmacy ERPs, high-throughput microservices, Scandinavian luxury commerce platforms, and real-time streaming engines.",
+            suggestedReplies: [
+              "View Mohamed's projects",
+              "Contact on WhatsApp",
+              "I want to start a project",
+            ],
+          };
+
+    case "gratitude":
+      return isArabic
+        ? {
+            text: "العفو، تسلم يا رب ودايماً في الخدمة! 😊 في أي وقت تحب تناقش فكرة مشروعك أو تبدأ فيه، أنا هنا وجاهز لمساعدتك.",
+            suggestedReplies: [
+              "معاينة النماذج الحية",
+              "التواصل على واتساب",
+            ],
+          }
+        : {
+            text: "You're very welcome! 😊 Whenever you have a project idea, questions about architecture, or want to discuss timelines, just let me know.",
+            suggestedReplies: [
+              "Check live demos",
+              "Send WhatsApp message",
+            ],
+          };
+
+    case "pricing":
+      return isArabic
+        ? {
+            text: "تحديد التكلفة بيعتمد على حجم المشروع، وبوابات الدفع والربط المطلوب، وسرعة التسليم.\n\nتقدر توصف الميزات الأساسية لمشروعك عشان أجمعلك المتطلبات، أو تضغط للتحويل مباشرة إلى واتساب لمناقشة السعر والمواعيد مع محمد!",
+            suggestedReplies: [
+              "تسليم خلال أسبوعين إلى شهر",
+              "مشروع متكامل للشركات",
+              "تواصل عبر واتساب",
+            ],
+          }
+        : {
+            text: "Pricing is determined by your system scope, required integrations (e.g. payment gateways, real-time sockets, ERP database scale), and launch timeline.\n\nTell me the core features you need, or click below to connect with Mohamed directly on WhatsApp for an accurate quote!",
+            suggestedReplies: [
+              "I need MVP in 2-4 weeks",
+              "Need complete enterprise system",
+              "Connect on WhatsApp",
+            ],
+          };
+
+    default:
+      return {
+        text: isArabic
+          ? "يسعدني مساعدتك! كيف يمكنني دعم مشروعك اليوم؟"
+          : "I'm happy to help! How can I assist with your software project today?",
+        suggestedReplies: [
+          "Explore live projects",
+          "I have a product idea",
+        ],
+      };
+  }
+}
+
 export function findMatchingProjects(query: string): ProjectSolution[] {
   const normalized = query.toLowerCase().trim();
   if (!normalized) return [];
 
-  const words = normalized.split(/\s+/).filter((w) => w.length > 1);
+  // If this is purely a conversational or greeting query, do not falsely match projects
+  if (getConversationalIntent(query) !== null) {
+    return [];
+  }
+
+  const words = normalized
+    .split(/\s+/)
+    .map((w) => w.replace(/[^\w\u0600-\u06FF]/g, ""))
+    .filter((w) => w.length >= 3 && !STOP_WORDS.has(w));
+
+  if (words.length === 0 && normalized.length < 5) {
+    return [];
+  }
 
   const scored = projectKnowledgeBase.map((proj) => {
     let score = 0;
 
     if (normalized.includes(proj.title.toLowerCase()) || normalized.includes(proj.arabicTitle.toLowerCase())) {
-      score += 15;
+      score += 20;
     }
 
     for (const kw of proj.keywords) {
       if (normalized.includes(kw)) {
-        score += 6;
+        score += 8;
       }
       for (const word of words) {
-        if (word === kw) score += 4;
-        else if (word.includes(kw) || kw.includes(word)) score += 2;
+        if (word === kw) score += 5;
+        else if (word.length >= 4 && kw.length >= 4 && (word.includes(kw) || kw.includes(word))) {
+          score += 2;
+        }
       }
     }
 
     for (const akw of proj.arabicKeywords) {
       if (normalized.includes(akw)) {
-        score += 8;
+        score += 10;
       }
       for (const word of words) {
-        if (word === akw) score += 6;
-        else if (word.includes(akw) || akw.includes(word)) score += 3;
+        if (word === akw) score += 7;
+        else if (word.length >= 4 && akw.length >= 4 && (word.includes(akw) || akw.includes(word))) {
+          score += 3;
+        }
       }
     }
 
     for (const t of proj.tech) {
       if (normalized.includes(t.toLowerCase())) {
-        score += 4;
+        score += 5;
       }
     }
 
@@ -265,7 +499,7 @@ export function findMatchingProjects(query: string): ProjectSolution[] {
   });
 
   return scored
-    .filter((s) => s.score > 0)
+    .filter((s) => s.score >= 5)
     .sort((a, b) => b.score - a.score)
     .map((s) => s.project);
 }

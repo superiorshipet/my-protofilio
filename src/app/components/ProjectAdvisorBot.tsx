@@ -11,7 +11,7 @@ import {
   CheckCircle2,
   Layers,
   ArrowRight,
-  Bot,
+  BrainCircuit,
   User,
 } from "lucide-react";
 import { useProjectAdvisor } from "../hooks/useProjectAdvisor";
@@ -62,15 +62,17 @@ export function ProjectAdvisorBot() {
         onClick={() => setIsOpen(!isOpen)}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
-        className="fixed bottom-6 right-5 z-40 flex items-center gap-2.5 rounded-full border border-[var(--space-cyan)]/40 bg-[var(--space-panel-strong)]/90 px-4 py-2.5 text-xs font-semibold text-[var(--space-starlight)] shadow-[0_10px_35px_rgba(0,0,0,0.6),0_0_25px_rgba(100,244,255,0.25)] backdrop-blur-xl transition-all hover:border-[var(--space-cyan)] hover:shadow-[0_12px_45px_rgba(100,244,255,0.35)] cursor-pointer"
+        className="fixed bottom-6 right-5 z-40 flex items-center gap-2.5 rounded-full border border-[var(--space-cyan)]/40 bg-[var(--space-panel-strong)]/90 px-4 py-2.5 text-xs font-semibold text-[var(--space-starlight)] shadow-[0_10px_35px_rgba(0,0,0,0.6),0_0_25px_rgba(100,244,255,0.25)] backdrop-blur-xl transition-all hover:border-[var(--space-cyan)] hover:shadow-[0_12px_45px_rgba(100,244,255,0.35)] cursor-pointer group"
         aria-label="Open AI Project Advisor"
       >
-        <span className="relative flex h-2.5 w-2.5">
-          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--space-cyan)] opacity-75" />
-          <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-[var(--space-cyan)]" />
-        </span>
-        <Sparkles className="h-4 w-4 text-[var(--space-cyan)]" />
-        <span className="hidden sm:inline font-mono">Ask AI Architect</span>
+        <div className="relative flex h-6 w-6 items-center justify-center rounded-lg bg-[var(--space-cyan)]/20 text-[var(--space-cyan)] group-hover:bg-[var(--space-cyan)] group-hover:text-[var(--space-void)] transition-all">
+          <BrainCircuit className="h-4 w-4" />
+          <span className="absolute -top-0.5 -right-0.5 flex h-2 w-2">
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+            <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
+          </span>
+        </div>
+        <span className="hidden sm:inline font-mono tracking-wide">Ask AI Architect</span>
         <span className="sm:hidden font-mono">AI Advisor</span>
       </motion.button>
 
@@ -87,15 +89,19 @@ export function ProjectAdvisorBot() {
             {/* Header */}
             <div className="flex items-center justify-between border-b border-[var(--space-border)] bg-[var(--space-panel)]/80 px-4 py-3 sm:px-5">
               <div className="flex items-center gap-3">
-                <div className="flex h-9 w-9 items-center justify-center rounded-xl border border-[var(--space-cyan)]/40 bg-[var(--space-cyan)]/15 text-[var(--space-cyan)] shadow-[0_0_15px_rgba(100,244,255,0.25)]">
-                  <Bot className="h-5 w-5" />
+                <div className="relative flex h-10 w-10 items-center justify-center rounded-2xl border border-[var(--space-cyan)]/50 bg-gradient-to-br from-[var(--space-cyan)]/25 via-[var(--space-panel)] to-purple-500/20 text-[var(--space-cyan)] shadow-[0_0_20px_rgba(100,244,255,0.3)]">
+                  <BrainCircuit className="h-5 w-5" />
+                  <span className="absolute -top-0.5 -right-0.5 flex h-2.5 w-2.5">
+                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+                    <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-400" />
+                  </span>
                 </div>
                 <div>
                   <div className="flex items-center gap-2">
                     <span className="font-display text-sm font-bold text-[var(--space-starlight)]">
                       Shipet AI Architect
                     </span>
-                    <span className="rounded bg-[var(--space-cyan)]/20 px-1.5 py-0.2 font-mono text-[9px] font-semibold text-[var(--space-cyan)]">
+                    <span className="rounded bg-emerald-500/20 px-1.5 py-0.2 font-mono text-[9px] font-semibold text-emerald-400 border border-emerald-500/30">
                       ONLINE
                     </span>
                   </div>
@@ -149,6 +155,12 @@ export function ProjectAdvisorBot() {
                     key={msg.id}
                     className={`flex flex-col ${isUser ? "items-end" : "items-start"}`}
                   >
+                    {!isUser && (
+                      <div className="mb-1 flex items-center gap-1.5 pl-1 text-[10px] font-mono font-medium text-[var(--space-cyan)]">
+                        <BrainCircuit className="h-3 w-3" />
+                        <span>Shipet AI</span>
+                      </div>
+                    )}
                     <div
                       className={`max-w-[88%] rounded-2xl px-4 py-3 text-xs leading-relaxed sm:text-sm ${
                         isUser

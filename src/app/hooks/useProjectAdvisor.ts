@@ -1,5 +1,10 @@
 import { useState, useCallback, useMemo } from "react";
-import { findMatchingProjects, ProjectSolution } from "../data/botKnowledge";
+import {
+  findMatchingProjects,
+  getConversationalIntent,
+  getConversationalResponse,
+  ProjectSolution,
+} from "../data/botKnowledge";
 
 export interface ProjectScope {
   projectType: string;
@@ -68,6 +73,24 @@ export function useProjectAdvisor() {
 
     setTimeout(() => {
       const arabic = isArabic(userText);
+      const convIntent = getConversationalIntent(userText);
+
+      // Handle simple conversational queries (how are you, greetings, identity, etc.)
+      if (convIntent) {
+        const conv = getConversationalResponse(convIntent, arabic);
+        const botMessage: ChatMessage = {
+          id: `bot-${Date.now()}`,
+          sender: "assistant",
+          text: conv.text,
+          matchedProjects: [],
+          suggestedReplies: conv.suggestedReplies,
+          isFinalScope: false,
+          timestamp: Date.now(),
+        };
+        setMessages((prev) => [...prev, botMessage]);
+        return;
+      }
+
       const matches = findMatchingProjects(userText);
 
       const timelineKeywords = ["week", "month", "asap", "urgent", "flexible", "أسبوع", "شهر", "عاجل", "سريع", "مرن", "يوم"];
