@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { LucideIcon } from 'lucide-react';
 import ufoSaucerImg from '../../imports/ufo_saucer.png';
@@ -15,20 +15,47 @@ interface SpaceshipTeleporterProps {
 }
 
 export function SpaceshipTeleporter({ techIcons }: SpaceshipTeleporterProps) {
+  const [teleportKey, setTeleportKey] = useState(0);
   const [isBeaming, setIsBeaming] = useState(true);
+  const lastTriggerRef = useRef(0);
+
+  // Trigger / replay the primary UFO entrance and teleportation sequence
+  const handleReplay = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    const now = Date.now();
+    if (now - lastTriggerRef.current < 600) return; // Prevent spamming while animation initializes
+    lastTriggerRef.current = now;
+    setIsBeaming(true);
+    setTeleportKey((prev) => prev + 1);
+  };
 
   // Auto-finish high-intensity beaming state after 2.6 seconds
   useEffect(() => {
+    setIsBeaming(true);
     const timer = setTimeout(() => {
       setIsBeaming(false);
     }, 2600);
     return () => clearTimeout(timer);
-  }, []);
+  }, [teleportKey]);
 
   return (
-    <div className="relative flex flex-col items-center justify-center w-full select-none pt-2 sm:pt-4">
-      {/* 1. 3D Hovering UFO Saucer (Arrives smoothly from space on mount) */}
+    <div
+      key={teleportKey}
+      className="relative flex flex-col items-center justify-center w-full select-none pt-2 sm:pt-4"
+    >
+      {/* 1. 3D Hovering UFO Saucer (Click to replay teleporter animation) */}
       <motion.div
+        role="button"
+        tabIndex={0}
+        onClick={handleReplay}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            handleReplay(e as any);
+          }
+        }}
+        aria-label="Replay teleporter animation"
+        title="Click to replay UFO teleportation"
         initial={{
           scale: 0.15,
           y: 70,
@@ -45,16 +72,16 @@ export function SpaceshipTeleporter({ techIcons }: SpaceshipTeleporterProps) {
           duration: 1.15,
           ease: [0.16, 1, 0.3, 1], // Smooth cinematic arrival curve
         }}
-        className="relative z-40 mb-1 sm:mb-2 select-none"
+        className="relative z-40 mb-1 sm:mb-2 select-none cursor-pointer group focus:outline-none"
         style={{
           transform: 'translateZ(95px)',
           transformStyle: 'preserve-3d',
         }}
       >
         {/* Ambient Saucer Energy Aura Glow */}
-        <div className="absolute inset-0 -z-10 rounded-full bg-[var(--space-cyan)]/25 blur-2xl opacity-75" />
+        <div className="absolute inset-0 -z-10 rounded-full bg-[var(--space-cyan)]/25 blur-2xl opacity-75 group-hover:opacity-100 group-hover:bg-[var(--space-cyan)]/40 transition-all duration-300" />
 
-        {/* Continuous Space Hovering Motion with Clean Scale-on-Hover (No Re-triggering) */}
+        {/* Continuous Space Hovering Motion with Clean Scale-on-Hover & Click-feedback */}
         <motion.div
           animate={{
             y: [0, -6, 0],
@@ -64,7 +91,7 @@ export function SpaceshipTeleporter({ techIcons }: SpaceshipTeleporterProps) {
             y: { duration: 3.8, repeat: Infinity, ease: 'easeInOut' },
             rotateZ: { duration: 4.6, repeat: Infinity, ease: 'easeInOut' },
           }}
-          className="relative w-44 sm:w-56 md:w-64 drop-shadow-[0_12px_28px_rgba(0,0,0,0.85)] transition-transform duration-300 hover:scale-105"
+          className="relative w-44 sm:w-56 md:w-64 drop-shadow-[0_12px_28px_rgba(0,0,0,0.85)] transition-all duration-200 group-hover:scale-105 group-active:scale-95"
         >
           {/* High-Resolution 3D UFO Saucer Asset */}
           <img
@@ -75,14 +102,14 @@ export function SpaceshipTeleporter({ techIcons }: SpaceshipTeleporterProps) {
 
           {/* Glowing Ventral Emitter Core Portal on Saucer Bottom */}
           <div
-            className="absolute left-1/2 bottom-[1%] -translate-x-1/2 w-10 sm:w-14 h-4 sm:h-5 rounded-full bg-cyan-100 blur-[1px] shadow-[0_0_28px_10px_rgba(100,244,255,0.95)]"
+            className="absolute left-1/2 bottom-[1%] -translate-x-1/2 w-10 sm:w-14 h-4 sm:h-5 rounded-full bg-cyan-100 blur-[1px] shadow-[0_0_28px_10px_rgba(100,244,255,0.95)] group-hover:shadow-[0_0_36px_14px_rgba(100,244,255,1)] transition-shadow duration-300"
             style={{
               animation: 'pulse 1.8s infinite ease-in-out',
             }}
           />
 
           {/* Energy Rings Aura around Saucer perimeter */}
-          <div className="absolute -inset-1 rounded-full border border-[var(--space-cyan)]/20 pointer-events-none animate-pulse opacity-60" />
+          <div className="absolute -inset-1 rounded-full border border-[var(--space-cyan)]/20 pointer-events-none animate-pulse opacity-60 group-hover:border-[var(--space-cyan)]/50 transition-colors" />
         </motion.div>
       </motion.div>
 
