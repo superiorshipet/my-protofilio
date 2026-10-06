@@ -122,9 +122,9 @@ export function Globe({
 
   const r = useMotionValue(0);
   const rs = useSpring(r, {
-    mass: 1,
-    damping: 30,
-    stiffness: 100,
+    mass: 0.9,
+    damping: 26,
+    stiffness: 120,
   });
 
   const thetaMotion = useMotionValue(0);
