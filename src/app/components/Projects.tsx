@@ -207,9 +207,7 @@ export function Projects() {
   };
 
   return (
-    <section id="projects" ref={sectionRef} className="relative overflow-hidden py-24">
-      {/* Background divider glow */}
-      <div className="absolute left-1/2 top-12 h-px w-[74vw] -translate-x-1/2 bg-gradient-to-r from-transparent via-[var(--space-starlight)]/20 to-transparent" />
+    <section id="projects" ref={sectionRef} className="relative py-24">
 
       <div className="relative z-10 mx-auto max-w-7xl px-6">
         {/* Header */}

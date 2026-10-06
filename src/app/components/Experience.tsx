@@ -83,10 +83,7 @@ export function Experience() {
   const beamOpacity = useTransform(scrollYProgress, [0, 0.1], [0, 1]);
 
   return (
-    <section id="experience" ref={containerRef} className="relative overflow-hidden py-24">
-      {/* Background ambient glow */}
-      <div className="pointer-events-none absolute -bottom-20 left-1/2 h-96 w-[70vw] -translate-x-1/2 bg-gradient-to-t from-[var(--space-violet)]/10 via-[var(--space-cyan)]/8 to-transparent blur-3xl" />
-
+    <section id="experience" ref={containerRef} className="relative py-24">
       <div className="relative z-10 mx-auto max-w-5xl px-6">
         <motion.div
           initial={{ opacity: 0, y: 30 }}

@@ -91,15 +91,8 @@
   --space-border: rgba(255, 255, 255, 0.1);
   --space-star-a: rgba(255, 255, 255, 0.72);
   --space-star-b: rgba(100, 244, 255, 0.45);
-  --space-body-bg:
-    radial-gradient(circle at 16% 18%, rgba(141, 92, 255, 0.18), transparent 26rem),
-    radial-gradient(circle at 82% 12%, rgba(100, 244, 255, 0.15), transparent 28rem),
-    linear-gradient(180deg, #02030a 0%, #070a18 52%, #02030a 100%);
-  --space-scene-bg:
-    radial-gradient(circle at 20% 12%, rgba(141, 92, 255, 0.22), transparent 22rem),
-    radial-gradient(circle at 82% 26%, rgba(100, 244, 255, 0.14), transparent 26rem),
-    radial-gradient(circle at 48% 85%, rgba(255, 79, 184, 0.08), transparent 24rem),
-    linear-gradient(180deg, #02030a 0%, #070a18 54%, #02030a 100%);
+  --space-body-bg: #02030a;
+  --space-scene-bg: transparent;
   --space-glass-bg: linear-gradient(145deg, rgba(14, 18, 36, 0.82), rgba(5, 7, 16, 0.78));
   --space-glass-shadow: 0 24px 80px rgba(0, 0, 0, 0.36);
   --space-nav-bg: rgba(2, 3, 10, 0.82);
