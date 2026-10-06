@@ -1,11 +1,40 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef, lazy, Suspense } from 'react';
 import { motion } from 'motion/react';
 import { Globe2, Clock } from 'lucide-react';
-import { Globe, HubId } from './Globe';
+import type { HubId } from './Globe';
 import { WorkHubModal } from './WorkHubModal';
 import { WORK_HUBS } from '../data/workHubs';
 
+// cobe + its WebGL context are only created once the globe is near the viewport.
+const Globe = lazy(() => import('./Globe').then((m) => ({ default: m.Globe })));
+
+function useNearViewport<T extends Element>(rootMargin = '300px') {
+  const ref = useRef<T | null>(null);
+  const [near, setNear] = useState(false);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el || near) return;
+    if (typeof IntersectionObserver === 'undefined') {
+      setNear(true);
+      return;
+    }
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setNear(true);
+          io.disconnect();
+        }
+      },
+      { rootMargin }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, [near, rootMargin]);
+  return [ref, near] as const;
+}
+
 export function AboutBento() {
+  const [globeRef, globeNear] = useNearViewport<HTMLDivElement>();
   const [time, setTime] = useState('');
   const [selectedHubId, setSelectedHubId] = useState<HubId | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -83,13 +112,18 @@ export function AboutBento() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
-            className="flex items-center justify-center relative"
+            ref={globeRef}
+            className="flex items-center justify-center relative min-h-[320px] w-full"
           >
-            <Globe
-              activeHubId={selectedHubId}
-              targetPhi={targetPhi}
-              onSelectHub={handleSelectHub}
-            />
+            {globeNear && (
+              <Suspense fallback={null}>
+                <Globe
+                  activeHubId={selectedHubId}
+                  targetPhi={targetPhi}
+                  onSelectHub={handleSelectHub}
+                />
+              </Suspense>
+            )}
           </motion.div>
         </div>
       </div>
