@@ -16,9 +16,72 @@ function figmaAssetResolver() {
   }
 }
 
+function groqApiDevPlugin() {
+  return {
+    name: 'groq-api-dev-plugin',
+    configureServer(server: any) {
+      server.middlewares.use('/api/chat', async (req: any, res: any) => {
+        res.setHeader('Access-Control-Allow-Origin', '*');
+        res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+        res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
+        if (req.method === 'OPTIONS') {
+          res.statusCode = 200;
+          res.end();
+          return;
+        }
+
+        if (req.method !== 'POST') {
+          res.statusCode = 405;
+          res.setHeader('Content-Type', 'application/json');
+          res.end(JSON.stringify({ error: 'Method not allowed' }));
+          return;
+        }
+
+        let bodyData = '';
+        req.on('data', (chunk: any) => {
+          bodyData += chunk;
+        });
+
+        req.on('end', async () => {
+          try {
+            const body = JSON.parse(bodyData || '{}');
+            const handlerModule = await server.ssrLoadModule(path.resolve(__dirname, 'api/chat.ts'));
+            const mockReq = { ...req, body };
+            const mockRes = {
+              setHeader(k: string, v: string) {
+                res.setHeader(k, v);
+              },
+              status(code: number) {
+                res.statusCode = code;
+                return {
+                  json(data: any) {
+                    res.setHeader('Content-Type', 'application/json');
+                    res.end(JSON.stringify(data));
+                  },
+                  end() {
+                    res.end();
+                  },
+                };
+              },
+            };
+            await handlerModule.default(mockReq, mockRes);
+          } catch (err: any) {
+            console.error('Error in dev /api/chat middleware:', err);
+            res.statusCode = 500;
+            res.setHeader('Content-Type', 'application/json');
+            res.end(JSON.stringify({ error: 'Dev server error', message: err?.message }));
+          }
+        });
+      });
+    },
+  };
+}
+
 export default defineConfig({
   plugins: [
     figmaAssetResolver(),
+    groqApiDevPlugin(),
     // The React and Tailwind plugins are both required for Make, even if
     // Tailwind is not being actively used – do not remove them
     react(),
