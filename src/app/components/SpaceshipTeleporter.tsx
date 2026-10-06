@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion } from 'motion/react';
 import { LucideIcon } from 'lucide-react';
 import ufoSaucerImg from '../../imports/ufo_saucer.webp';
 import portraitImg from '../../imports/portrait.webp';
@@ -57,19 +57,17 @@ export function SpaceshipTeleporter({ techIcons }: SpaceshipTeleporterProps) {
         aria-label="Replay teleporter animation"
         title="Click to replay UFO teleportation"
         initial={{
-          scale: 0.15,
-          y: 70,
+          scale: 0.2,
+          y: 50,
           opacity: 0,
-          filter: 'blur(8px) brightness(2.2)',
         }}
         animate={{
           scale: 1,
           y: 0,
           opacity: 1,
-          filter: 'blur(0px) brightness(1)',
         }}
         transition={{
-          duration: 1.15,
+          duration: 1.0,
           ease: [0.16, 1, 0.3, 1], // Smooth cinematic arrival curve
         }}
         className="relative z-40 mb-1 sm:mb-2 select-none cursor-pointer group focus:outline-none"
@@ -193,7 +191,7 @@ export function SpaceshipTeleporter({ techIcons }: SpaceshipTeleporterProps) {
                   ease: 'linear',
                   delay: 1.0 + ringIdx * 0.7,
                 }}
-                className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 w-[85%] h-8 rounded-[100%] border-t-2 border-cyan-100/70 bg-gradient-to-b from-[var(--space-cyan)]/20 to-transparent"
+                className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 w-[85%] h-8 rounded-[100%] border-t border-cyan-100/35 bg-gradient-to-b from-[var(--space-cyan)]/10 to-transparent"
               />
             ))}
 
@@ -230,43 +228,22 @@ export function SpaceshipTeleporter({ techIcons }: SpaceshipTeleporterProps) {
         <motion.div
           initial={{
             opacity: 0,
-            scale: 0.92,
-            filter: 'brightness(2.6) drop-shadow(0 0 50px rgba(100, 244, 255, 0.95))',
+            scale: 0.95,
+            y: 10,
           }}
           animate={{
             opacity: 1,
             scale: 1,
-            filter:
-              'drop-shadow(0 25px 35px rgba(0, 0, 0, 0.85)) drop-shadow(0 0 35px rgba(100, 244, 255, 0.25)) brightness(1)',
+            y: 0,
           }}
           transition={{
-            duration: 1.2,
-            delay: 1.15, // Materializes right after beam descends
-            ease: 'easeOut',
+            duration: 0.85,
+            delay: 0.85,
+            ease: [0.16, 1, 0.3, 1],
           }}
-          className="relative w-full overflow-visible"
+          className="relative w-full overflow-visible drop-shadow-[0_20px_35px_rgba(0,0,0,0.45)] dark:drop-shadow-[0_25px_35px_rgba(0,0,0,0.85)]"
         >
-          {/* Holographic Laser Scanline sweeping down on initial materialize */}
-          <AnimatePresence>
-            {isBeaming && (
-              <motion.div
-                initial={{ top: '0%', opacity: 0 }}
-                animate={{
-                  top: ['0%', '100%'],
-                  opacity: [0, 1, 1, 0],
-                }}
-                exit={{ opacity: 0 }}
-                transition={{
-                  duration: 1.3,
-                  delay: 1.15,
-                  ease: 'easeInOut',
-                }}
-                className="pointer-events-none absolute left-0 right-0 z-40 h-1 bg-gradient-to-r from-transparent via-cyan-200 to-transparent shadow-[0_0_20px_6px_rgba(100,244,255,0.9)]"
-              />
-            )}
-          </AnimatePresence>
-
-          {/* Pure Frameless Character Image */}
+          {/* Pure Frameless Character Image - Clean & Sharp without scanline bars or distortion */}
           <img
             src={portraitImg}
             alt="Mohamed Shipet (Superior)"
