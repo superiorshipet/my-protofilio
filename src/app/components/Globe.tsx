@@ -146,6 +146,9 @@ export function Globe({
   const updatePointerInteraction = (coords: { x: number; y: number } | null) => {
     pointerInteracting.current = coords;
     lastTimeRef.current = Date.now();
+    if (coords !== null) {
+      velocityRef.current = 0;
+    }
     if (canvasRef.current) {
       canvasRef.current.style.cursor = coords !== null ? 'grabbing' : 'grab';
     }
@@ -209,7 +212,13 @@ export function Globe({
           targetPhiRef.current = null;
         }
       } else if (!pointerInteracting.current) {
-        phi += 0.003;
+        if (Math.abs(velocityRef.current) > 0.0001) {
+          phi += velocityRef.current;
+          velocityRef.current *= 0.94;
+        } else {
+          velocityRef.current = 0;
+          phi += 0.003;
+        }
       }
 
       const currentPhi = phi + rs.get();
