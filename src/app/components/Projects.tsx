@@ -1,5 +1,5 @@
 import { useState, useRef, useMemo } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence, useMotionValue, useSpring } from 'motion/react';
 import { ExternalLink, Github, Satellite, Sparkles, ChevronLeft, ChevronRight, Layers } from 'lucide-react';
 import { Button } from './ui/button';
 
@@ -12,6 +12,7 @@ interface ProjectItem {
   featured?: boolean;
   githubUrl?: string;
   demoUrl?: string;
+  image: string;
 }
 
 const projects: ProjectItem[] = [
@@ -25,6 +26,7 @@ const projects: ProjectItem[] = [
     featured: true,
     githubUrl: 'https://github.com/superiorshipet/project-task-managment',
     demoUrl: 'https://tasharuky.duckdns.org/login',
+    image: '/assets/p2.png',
   },
   {
     title: 'ATS Website',
@@ -36,6 +38,7 @@ const projects: ProjectItem[] = [
     featured: true,
     githubUrl: 'https://github.com/superiorshipet/ATS-website',
     demoUrl: 'https://the-ats-pro.duckdns.org/ats/',
+    image: '/assets/p6.png',
   },
   {
     title: 'Pharmacy Management',
@@ -47,6 +50,7 @@ const projects: ProjectItem[] = [
     featured: true,
     githubUrl: 'https://github.com/superiorshipet/pharmacy',
     demoUrl: 'https://tasharuky.duckdns.org/pharmacy/',
+    image: '/assets/medibroking.png',
   },
   {
     title: 'Discover Madina',
@@ -58,6 +62,7 @@ const projects: ProjectItem[] = [
     featured: true,
     githubUrl: 'https://github.com/superiorshipet/discover-madina',
     demoUrl: 'https://discover-madina.duckdns.org/',
+    image: '/assets/p10.png',
   },
   {
     title: 'SUPVEND',
@@ -69,6 +74,7 @@ const projects: ProjectItem[] = [
     featured: true,
     githubUrl: 'https://github.com/superiorshipet/SUPVEND',
     demoUrl: 'https://supvend.duckdns.org/supvend-ui/',
+    image: '/assets/projects/game-engine.jpg',
   },
   {
     title: 'Study Mate',
@@ -79,6 +85,7 @@ const projects: ProjectItem[] = [
     category: 'Full-Stack',
     githubUrl: 'https://github.com/superiorshipet/study-mate',
     demoUrl: 'https://study-mate-blush.vercel.app',
+    image: '/assets/projects/elearning.jpg',
   },
   {
     title: 'Belvie Furniture',
@@ -88,6 +95,7 @@ const projects: ProjectItem[] = [
     orbit: 'Furniture store',
     category: 'Commerce',
     demoUrl: 'https://belvie-arc.duckdns.org/belvie/',
+    image: '/assets/projects/accessories.jpg',
   },
   {
     title: 'Arabic Perfume Shop',
@@ -97,6 +105,7 @@ const projects: ProjectItem[] = [
     orbit: 'Perfume shop',
     category: 'Commerce',
     demoUrl: 'https://arabic-perfume.duckdns.org/arabic-perfume/',
+    image: '/assets/p4.png',
   },
   {
     title: 'Podcasty',
@@ -107,6 +116,7 @@ const projects: ProjectItem[] = [
     category: 'Backend & APIs',
     githubUrl: 'https://github.com/superiorshipet/podcasty',
     demoUrl: 'https://tasharuky.duckdns.org/podcasty-ui/',
+    image: '/assets/p5.png',
   },
   {
     title: 'Stunning.io Task',
@@ -117,6 +127,7 @@ const projects: ProjectItem[] = [
     category: 'Backend & APIs',
     githubUrl: 'https://github.com/superiorshipet/stunning.io-task',
     demoUrl: 'https://tasharuky.duckdns.org/stunning.io-task/',
+    image: '/assets/disil.png',
   },
   {
     title: 'Luxira Chat',
@@ -126,6 +137,7 @@ const projects: ProjectItem[] = [
     orbit: 'Realtime chat',
     category: 'Backend & APIs',
     githubUrl: 'https://github.com/superiorshipet/luxira-chatting-backend',
+    image: '/assets/beetsah.png',
   },
   {
     title: 'Distributed Database Project',
@@ -135,6 +147,7 @@ const projects: ProjectItem[] = [
     orbit: 'Systems',
     category: 'Systems & ML',
     githubUrl: 'https://github.com/superiorshipet/distribution-database-project-for-eng-farosa',
+    image: '/assets/coding-pov.png',
   },
   {
     title: 'Data Mining Cancer Prediction',
@@ -144,6 +157,7 @@ const projects: ProjectItem[] = [
     orbit: 'Machine learning',
     category: 'Systems & ML',
     githubUrl: 'https://github.com/superiorshipet/data-mining-cancer-prediction-project',
+    image: '/assets/projects/auth-system.jpg',
   },
   {
     title: 'Telegram Training Bot',
@@ -153,6 +167,7 @@ const projects: ProjectItem[] = [
     orbit: 'Training bot',
     category: 'Systems & ML',
     githubUrl: 'https://github.com/superiorshipet/telegram_training_bot',
+    image: '/assets/telegram-bot.png',
   },
   {
     title: 'Loxx King',
@@ -163,6 +178,7 @@ const projects: ProjectItem[] = [
     category: 'Full-Stack',
     githubUrl: 'https://github.com/superiorshipet/loxx-king',
     demoUrl: 'https://loxx-king.vercel.app',
+    image: '/assets/p3.png',
   },
   {
     title: 'E-commerce for E-products',
@@ -173,6 +189,7 @@ const projects: ProjectItem[] = [
     category: 'Commerce',
     githubUrl: 'https://github.com/superiorshipet/E-commerce-for-E-products',
     demoUrl: 'https://e-commerce-for-e-products.vercel.app',
+    image: '/assets/p8.png',
   },
 ];
 
@@ -183,7 +200,32 @@ export function Projects() {
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [preview, setPreview] = useState<{ image: string; title: string; tech: string[] } | null>(null);
   const sectionRef = useRef<HTMLElement>(null);
+
+  const cursorX = useMotionValue(0);
+  const cursorY = useMotionValue(0);
+  const springX = useSpring(cursorX, { damping: 16, stiffness: 120 });
+  const springY = useSpring(cursorY, { damping: 16, stiffness: 120 });
+
+  const handleSectionMouseMove = (e: React.MouseEvent<HTMLElement>) => {
+    const previewWidth = 340;
+    const previewHeight = 240;
+    let posX = e.clientX + 22;
+    let posY = e.clientY + 22;
+
+    if (typeof window !== 'undefined') {
+      if (posX + previewWidth > window.innerWidth) {
+        posX = e.clientX - previewWidth - 20;
+      }
+      if (posY + previewHeight > window.innerHeight) {
+        posY = e.clientY - previewHeight - 20;
+      }
+    }
+
+    cursorX.set(posX);
+    cursorY.set(posY);
+  };
 
   const filteredProjects = useMemo(() => {
     if (selectedCategory === 'All') return projects;
@@ -195,11 +237,13 @@ export function Projects() {
   const currentProjects = filteredProjects.slice(startIndex, startIndex + ITEMS_PER_PAGE);
 
   const handleCategoryChange = (category: string) => {
+    setPreview(null);
     setSelectedCategory(category);
     setCurrentPage(1);
   };
 
   const handlePageChange = (page: number) => {
+    setPreview(null);
     setCurrentPage(page);
     if (sectionRef.current) {
       sectionRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -207,7 +251,13 @@ export function Projects() {
   };
 
   return (
-    <section id="projects" ref={sectionRef} className="relative py-24">
+    <section
+      id="projects"
+      ref={sectionRef}
+      onMouseMove={handleSectionMouseMove}
+      onMouseLeave={() => setPreview(null)}
+      className="relative py-24"
+    >
 
       <div className="relative z-10 mx-auto max-w-7xl px-6">
         {/* Header */}
@@ -274,8 +324,20 @@ export function Projects() {
                 initial={{ opacity: 0, y: 24 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4, delay: index * 0.05 }}
-                onHoverStart={() => setHoveredIndex(index)}
-                onHoverEnd={() => setHoveredIndex(null)}
+                onHoverStart={() => {
+                  setHoveredIndex(index);
+                  if (project.image) {
+                    setPreview({
+                      image: project.image,
+                      title: project.title,
+                      tech: project.tech,
+                    });
+                  }
+                }}
+                onHoverEnd={() => {
+                  setHoveredIndex(null);
+                  setPreview(null);
+                }}
                 whileHover={{ y: -8 }}
                 className="group relative"
               >
@@ -400,6 +462,55 @@ export function Projects() {
           </div>
         )}
       </div>
+
+      {/* Floating Cursor Web Preview */}
+      <AnimatePresence>
+        {preview && (
+          <motion.div
+            className="pointer-events-none fixed top-0 left-0 z-50 w-72 md:w-80 overflow-hidden rounded-xl border border-[var(--space-cyan)]/50 bg-[var(--space-void)]/95 shadow-[0_20px_50px_rgba(0,0,0,0.85),0_0_30px_rgba(100,244,255,0.3)] backdrop-blur-xl"
+            style={{ x: springX, y: springY }}
+            initial={{ opacity: 0, scale: 0.88 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.88 }}
+            transition={{ duration: 0.16 }}
+          >
+            {/* Browser top-bar */}
+            <div className="flex items-center justify-between border-b border-[var(--space-border)] bg-[var(--space-panel)]/80 px-3 py-1.5">
+              <div className="flex items-center gap-1.5">
+                <span className="h-2 w-2 rounded-full bg-rose-500/80" />
+                <span className="h-2 w-2 rounded-full bg-amber-500/80" />
+                <span className="h-2 w-2 rounded-full bg-emerald-500/80" />
+              </div>
+              <span className="max-w-[150px] truncate font-mono text-[10px] text-[var(--space-starlight)]/90">
+                {preview.title}
+              </span>
+              <span className="font-mono text-[9px] font-semibold uppercase tracking-wider text-[var(--space-cyan)]">
+                LIVE PREVIEW
+              </span>
+            </div>
+
+            {/* Browser viewport */}
+            <div className="relative aspect-[16/10] w-full overflow-hidden bg-black/60">
+              <img
+                src={preview.image}
+                alt={preview.title}
+                className="h-full w-full object-cover object-top"
+              />
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[var(--space-void)]/90 via-transparent to-transparent" />
+              <div className="absolute bottom-2 left-2 right-2 flex flex-wrap gap-1">
+                {preview.tech.slice(0, 3).map((t) => (
+                  <span
+                    key={t}
+                    className="rounded border border-[var(--space-border)] bg-[var(--space-panel-strong)]/90 px-1.5 py-0.5 font-mono text-[9px] font-medium text-[var(--space-cyan)] shadow-sm"
+                  >
+                    {t}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }
