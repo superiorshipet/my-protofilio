@@ -23,12 +23,7 @@ export const GLOBE_CONFIG = {
   baseColor: [0.39, 0.96, 1] as [number, number, number], // Space Cyan dots matching design theme
   markerColor: [0.39, 0.96, 1] as [number, number, number], // Space Cyan markers
   glowColor: [0.39, 0.96, 1] as [number, number, number], // Space Cyan atmospheric glow
-  markers: [
-    { location: [30.0444, 31.2357], size: 0.02 }, // Egypt - delicate glowing dot
-    { location: [24.7136, 46.6753], size: 0.02 }, // Saudi Arabia - delicate glowing dot
-    { location: [41.0082, 28.9784], size: 0.02 }, // Turkey - delicate glowing dot
-    { location: [40.7128, -74.006], size: 0.02 }, // USA - delicate glowing dot
-  ],
+  markers: [], // Native HTML pins provide smooth horizon fade without WebGL limb bleeding
 };
 
 export type CalloutAlign = 'top' | 'left' | 'right' | 'bottom';
@@ -71,12 +66,17 @@ function cobeProject(lat: number, lon: number, phi: number, theta: number = 0.3)
 
   const c = cosP * t_vec[0] + sinP * t_vec[2];
   const s = sinP * sinT * t_vec[0] + cosT * t_vec[1] - cosP * sinT * t_vec[2];
-  const isFront = -sinP * cosT * t_vec[0] + sinT * t_vec[1] + cosP * cosT * t_vec[2] >= 0;
+  const z = -sinP * cosT * t_vec[0] + sinT * t_vec[1] + cosP * cosT * t_vec[2];
+
+  // Accurate horizon fade: smoothly fades to 0 before hitting the limb (z <= 0.16)
+  // This completely eliminates horizon compression clumping when viewing the opposite hemisphere
+  const fade = Math.max(0, Math.min(1, (z - 0.16) / 0.16));
 
   return {
     xPct: ((c + 1) / 2) * 100,
     yPct: ((-s + 1) / 2) * 100,
-    isFront,
+    fade,
+    isFront: fade > 0.01,
   };
 }
 
