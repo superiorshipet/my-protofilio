@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { LucideIcon } from 'lucide-react';
-import spaceshipImg from '../../imports/spaceship.png';
+import ufoSaucerImg from '../../imports/ufo_saucer.png';
 import portraitImg from '../../imports/image.png';
 
 interface TechSatellite {
@@ -19,12 +19,12 @@ export function SpaceshipTeleporter({ techIcons }: SpaceshipTeleporterProps) {
   const [teleportKey, setTeleportKey] = useState(0);
   const [isBeaming, setIsBeaming] = useState(true);
 
-  // Auto-finish high-intensity beaming state after 2.4 seconds
+  // Auto-finish high-intensity beaming state after 2.6 seconds
   useEffect(() => {
     setIsBeaming(true);
     const timer = setTimeout(() => {
       setIsBeaming(false);
-    }, 2400);
+    }, 2600);
     return () => clearTimeout(timer);
   }, [teleportKey]);
 
@@ -34,32 +34,34 @@ export function SpaceshipTeleporter({ techIcons }: SpaceshipTeleporterProps) {
 
   return (
     <div className="relative flex flex-col items-center justify-center w-full select-none pt-2 sm:pt-4">
-      {/* 1. 3D Hovering Spaceship (Orbital Flagship) */}
+      {/* 1. 3D Hovering UFO Saucer (Flying Saucer arriving from deep space) */}
       <motion.div
-        key={`ship-${teleportKey}`}
-        initial={{ y: -60, opacity: 0, scale: 0.8 }}
+        key={`saucer-entrance-${teleportKey}`}
+        // Comes from deep space behind ("يجي من بعدي")
+        initial={{
+          scale: 0.15,
+          y: 70,
+          opacity: 0,
+          filter: 'blur(8px) brightness(2.2)',
+        }}
         animate={{
-          y: [0, -7, 0],
-          opacity: 1,
-          scale: 1,
-          rotateZ: [-0.7, 0.7, -0.7],
+          scale: [0.15, 1.06, 1],
+          y: [70, -8, 0],
+          opacity: [0, 1, 1],
+          filter: [
+            'blur(8px) brightness(2.2)',
+            'blur(0px) brightness(1.2)',
+            'blur(0px) brightness(1)',
+          ],
         }}
         transition={{
-          y: {
-            duration: 0.8,
-            ease: 'easeOut',
-            times: [0, 0.5, 1],
-            repeat: Infinity,
-            repeatType: 'reverse',
-          },
-          opacity: { duration: 0.5 },
-          scale: { duration: 0.7, ease: 'easeOut' },
-          rotateZ: { duration: 4.5, repeat: Infinity, ease: 'easeInOut' },
+          duration: 1.15,
+          ease: [0.16, 1, 0.3, 1], // Smooth cinematic arrival curve
         }}
         whileHover={{ scale: 1.08, y: -4 }}
         whileTap={{ scale: 0.95 }}
         onClick={handleReTeleport}
-        title="Orbital Transporter • Click to re-beam"
+        title="UFO Transporter • Click to re-beam"
         className="relative z-40 cursor-pointer group mb-1 sm:mb-2"
         style={{
           transform: 'translateZ(95px)',
@@ -73,31 +75,39 @@ export function SpaceshipTeleporter({ techIcons }: SpaceshipTeleporterProps) {
           </span>
         </div>
 
-        {/* Ambient Ship Aura Glow */}
-        <div className="absolute inset-0 -z-10 rounded-full bg-[var(--space-cyan)]/25 blur-xl opacity-75 group-hover:opacity-100 transition-opacity" />
+        {/* Ambient Saucer Energy Aura Glow */}
+        <div className="absolute inset-0 -z-10 rounded-full bg-[var(--space-cyan)]/25 blur-2xl opacity-75 group-hover:opacity-100 transition-opacity" />
 
-        {/* Spaceship Cutout Asset */}
-        <div className="relative w-36 sm:w-44 md:w-52 drop-shadow-[0_12px_28px_rgba(0,0,0,0.85)]">
+        {/* Continuous Space Hovering Motion */}
+        <motion.div
+          animate={{
+            y: [0, -6, 0],
+            rotateZ: [-0.9, 0.9, -0.9],
+          }}
+          transition={{
+            y: { duration: 3.8, repeat: Infinity, ease: 'easeInOut' },
+            rotateZ: { duration: 4.6, repeat: Infinity, ease: 'easeInOut' },
+          }}
+          className="relative w-44 sm:w-56 md:w-64 drop-shadow-[0_12px_28px_rgba(0,0,0,0.85)]"
+        >
+          {/* High-Resolution 3D UFO Saucer Asset */}
           <img
-            src={spaceshipImg}
-            alt="Orbital Command Spaceship"
+            src={ufoSaucerImg}
+            alt="UFO Flying Saucer Transporter"
             className="w-full h-auto object-contain transition-transform duration-300 group-hover:brightness-110"
           />
 
-          {/* Glowing Ventral Emitter Core Portal */}
+          {/* Glowing Ventral Emitter Core Portal on Saucer Bottom */}
           <div
-            className="absolute left-1/2 bottom-[1.5%] -translate-x-1/2 w-7 sm:w-9 h-3.5 sm:h-4.5 rounded-full bg-cyan-100 blur-[1px] shadow-[0_0_24px_8px_rgba(100,244,255,0.95)]"
+            className="absolute left-1/2 bottom-[1%] -translate-x-1/2 w-10 sm:w-14 h-4 sm:h-5 rounded-full bg-cyan-100 blur-[1px] shadow-[0_0_28px_10px_rgba(100,244,255,0.95)]"
             style={{
               animation: 'pulse 1.8s infinite ease-in-out',
             }}
           />
 
-          {/* Left Engine Ion Plasma Exhaust Flare */}
-          <div className="absolute left-[7%] bottom-0 w-5 h-7 bg-gradient-to-b from-cyan-300/80 to-transparent blur-[3px] rounded-b-full animate-pulse" />
-          
-          {/* Right Engine Ion Plasma Exhaust Flare */}
-          <div className="absolute right-[7%] bottom-0 w-5 h-7 bg-gradient-to-b from-cyan-300/80 to-transparent blur-[3px] rounded-b-full animate-pulse" />
-        </div>
+          {/* Energy Rings Aura around Saucer perimeter */}
+          <div className="absolute -inset-1 rounded-full border border-[var(--space-cyan)]/20 pointer-events-none animate-pulse opacity-60" />
+        </motion.div>
       </motion.div>
 
       {/* 2. Volumetric 3D Conical Tractor Beam ("الشعاع الضوئي") */}
@@ -115,16 +125,16 @@ export function SpaceshipTeleporter({ techIcons }: SpaceshipTeleporterProps) {
           initial={{ scaleY: 0, opacity: 0 }}
           animate={{
             scaleY: 1,
-            opacity: isBeaming ? [0, 1, 0.85] : 0.45,
+            opacity: isBeaming ? [0, 1, 0.88] : 0.45,
           }}
           transition={{
-            scaleY: { duration: 0.5, delay: 0.5, ease: 'easeOut' },
-            opacity: { duration: 0.4, delay: 0.5 },
+            scaleY: { duration: 0.55, delay: 0.9, ease: 'easeOut' },
+            opacity: { duration: 0.4, delay: 0.9 },
           }}
           style={{
             transformOrigin: 'top center',
             background:
-              'linear-gradient(180deg, rgba(165, 243, 252, 0.92) 0%, rgba(100, 244, 255, 0.38) 22%, rgba(100, 244, 255, 0.12) 65%, rgba(100, 244, 255, 0.02) 100%)',
+              'linear-gradient(180deg, rgba(165, 243, 252, 0.95) 0%, rgba(100, 244, 255, 0.40) 22%, rgba(100, 244, 255, 0.14) 65%, rgba(100, 244, 255, 0.02) 100%)',
           }}
           className="absolute inset-0 w-full h-full backdrop-blur-[0.5px] drop-shadow-[0_0_25px_rgba(100,244,255,0.4)]"
         />
@@ -138,14 +148,14 @@ export function SpaceshipTeleporter({ techIcons }: SpaceshipTeleporterProps) {
             opacity: isBeaming ? [0, 1, 0.9, 0.65] : 0.35,
           }}
           transition={{
-            scaleY: { duration: 0.4, delay: 0.55, ease: 'easeOut' },
-            opacity: { duration: 0.5, delay: 0.55 },
+            scaleY: { duration: 0.45, delay: 0.95, ease: 'easeOut' },
+            opacity: { duration: 0.5, delay: 0.95 },
           }}
           style={{
             transformOrigin: 'top center',
             clipPath: 'polygon(46% 0%, 54% 0%, 72% 100%, 28% 100%)',
             background:
-              'linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(165, 243, 252, 0.65) 16%, rgba(100, 244, 255, 0.22) 60%, transparent 100%)',
+              'linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(165, 243, 252, 0.7) 16%, rgba(100, 244, 255, 0.24) 60%, transparent 100%)',
           }}
           className="absolute inset-0 w-full h-full"
         />
@@ -157,14 +167,14 @@ export function SpaceshipTeleporter({ techIcons }: SpaceshipTeleporterProps) {
             initial={{ y: '5%', opacity: 0, scaleX: 0.35 }}
             animate={{
               y: ['5%', '95%'],
-              opacity: [0, 0.7, 0.4, 0],
+              opacity: [0, 0.75, 0.45, 0],
               scaleX: [0.35, 0.65, 0.95, 1.1],
             }}
             transition={{
               duration: 2.2,
               repeat: Infinity,
               ease: 'linear',
-              delay: 0.6 + ringIdx * 0.55,
+              delay: 1.0 + ringIdx * 0.55,
             }}
             className="absolute top-0 w-[90%] h-8 rounded-[100%] border-t-2 border-cyan-100/70 bg-gradient-to-b from-[var(--space-cyan)]/25 to-transparent"
           />
@@ -190,7 +200,7 @@ export function SpaceshipTeleporter({ techIcons }: SpaceshipTeleporterProps) {
         ))}
       </div>
 
-      {/* 3. Mohamed's Holographic Photo Materialization Container */}
+      {/* 3. Mohamed's Holographic Photo Materialization Container ("يظهر صورتي") */}
       <div
         className="relative w-full max-w-[220px] sm:max-w-[270px] md:max-w-[310px] z-30"
         style={{
@@ -200,10 +210,11 @@ export function SpaceshipTeleporter({ techIcons }: SpaceshipTeleporterProps) {
       >
         <motion.div
           key={`portrait-${teleportKey}`}
+          // Starts hidden until saucer parks and beam shoots down
           initial={{
             opacity: 0,
             scale: 0.92,
-            filter: 'brightness(2.4) drop-shadow(0 0 50px rgba(100, 244, 255, 0.95))',
+            filter: 'brightness(2.6) drop-shadow(0 0 50px rgba(100, 244, 255, 0.95))',
           }}
           animate={{
             opacity: 1,
@@ -213,7 +224,7 @@ export function SpaceshipTeleporter({ techIcons }: SpaceshipTeleporterProps) {
           }}
           transition={{
             duration: 1.2,
-            delay: 0.85,
+            delay: 1.25, // Materializes right after beam descends
             ease: 'easeOut',
           }}
           className="relative w-full overflow-visible"
@@ -231,7 +242,7 @@ export function SpaceshipTeleporter({ techIcons }: SpaceshipTeleporterProps) {
                 exit={{ opacity: 0 }}
                 transition={{
                   duration: 1.3,
-                  delay: 0.85,
+                  delay: 1.25,
                   ease: 'easeInOut',
                 }}
                 className="pointer-events-none absolute left-0 right-0 z-40 h-1 bg-gradient-to-r from-transparent via-cyan-200 to-transparent shadow-[0_0_20px_6px_rgba(100,244,255,0.9)]"
@@ -261,7 +272,7 @@ export function SpaceshipTeleporter({ techIcons }: SpaceshipTeleporterProps) {
             key={`floor-impact-${teleportKey}`}
             initial={{ scale: 0.4, opacity: 1 }}
             animate={{ scale: 1.25, opacity: 0 }}
-            transition={{ duration: 1.2, delay: 0.9, ease: 'easeOut' }}
+            transition={{ duration: 1.2, delay: 1.3, ease: 'easeOut' }}
             className="absolute inset-0 rounded-[100%] border-2 border-cyan-200 shadow-[0_0_25px_rgba(100,244,255,0.9)]"
           />
         )}
@@ -289,10 +300,10 @@ export function SpaceshipTeleporter({ techIcons }: SpaceshipTeleporterProps) {
             initial={{ opacity: 0, scale: 0.2 }}
             animate={{ opacity: 1, scale: 1, y: [0, -8, 0] }}
             transition={{
-              opacity: { delay: 1.3 + delay, duration: 0.4 },
-              scale: { delay: 1.3 + delay, duration: 0.4 },
+              opacity: { delay: 1.7 + delay, duration: 0.4 },
+              scale: { delay: 1.7 + delay, duration: 0.4 },
               y: {
-                delay: 1.7 + delay,
+                delay: 2.1 + delay,
                 duration: 3 + index * 0.4,
                 repeat: Infinity,
                 ease: 'easeInOut',
