@@ -34,6 +34,26 @@ export function FloatingActions() {
       transition={{ delay: 1, duration: 0.5 }}
       className="fixed bottom-20 right-4 sm:bottom-24 sm:right-5 z-40 flex flex-col items-center gap-2 sm:gap-3"
     >
+      {/* Back to top button - positioned above GitHub in the side floating dock */}
+      <AnimatePresence>
+        {showScrollTop && (
+          <motion.button
+            key="back-to-top"
+            type="button"
+            aria-label="Back to top"
+            onClick={scrollToTop}
+            initial={{ opacity: 0, scale: 0.5, y: -8 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.5, y: -8 }}
+            whileHover={{ scale: 1.15, y: -2 }}
+            whileTap={{ scale: 0.9 }}
+            className="space-glass flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-full border border-[var(--space-cyan)]/40 bg-[var(--space-panel)] text-[var(--space-cyan)] shadow-[0_0_20px_rgba(100,244,255,0.3)] transition-colors hover:bg-[var(--space-cyan)] hover:text-[var(--space-void)] cursor-pointer"
+          >
+            <ArrowUp className="h-4 w-4" />
+          </motion.button>
+        )}
+      </AnimatePresence>
+
       {/* Social quick dock - visible on both mobile and desktop */}
       <div className="space-glass flex flex-col gap-1.5 sm:gap-2 rounded-full p-1.5 sm:p-2 border border-[var(--space-border)] backdrop-blur-md shadow-[0_12px_40px_rgba(0,0,0,0.5)]">
         {actions.map(({ href, label, Icon }) => (
@@ -54,26 +74,6 @@ export function FloatingActions() {
           </motion.a>
         ))}
       </div>
-
-      {/* Back to top button */}
-      <AnimatePresence>
-        {showScrollTop && (
-          <motion.button
-            key="back-to-top"
-            type="button"
-            aria-label="Back to top"
-            onClick={scrollToTop}
-            initial={{ opacity: 0, scale: 0.5, y: 10 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.5, y: 10 }}
-            whileHover={{ scale: 1.15, y: -2 }}
-            whileTap={{ scale: 0.9 }}
-            className="space-glass flex h-9 w-9 sm:h-11 sm:w-11 items-center justify-center rounded-full border border-[var(--space-cyan)]/40 bg-[var(--space-panel)] text-[var(--space-cyan)] shadow-[0_0_20px_rgba(100,244,255,0.3)] transition-colors hover:bg-[var(--space-cyan)] hover:text-[var(--space-void)] cursor-pointer"
-          >
-            <ArrowUp className="h-4 w-4" />
-          </motion.button>
-        )}
-      </AnimatePresence>
     </motion.div>
   );
 }
