@@ -5,7 +5,7 @@ import { twMerge } from 'tailwind-merge';
 
 const MOVEMENT_DAMPING = 1400;
 
-export const GLOBE_CONFIG = {
+const GLOBE_CONFIG = {
   width: 800,
   height: 800,
   onRender: () => {},
@@ -69,17 +69,17 @@ export function Globe({
   };
 
   useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
     const onResize = () => {
-      if (canvasRef.current) {
-        width = canvasRef.current.offsetWidth || 480;
+      if (canvas) {
+        width = canvas.offsetWidth || 480;
       }
     };
 
     window.addEventListener('resize', onResize);
     onResize();
-
-    const canvas = canvasRef.current;
-    if (!canvas) return;
 
     const globe = createGlobe(canvas, {
       ...config,
@@ -93,13 +93,33 @@ export function Globe({
       },
     });
 
-    setTimeout(() => {
-      if (canvasRef.current) {
-        canvasRef.current.style.opacity = '1';
+    let animId: number;
+
+    // Animation loop supporting cobe 2.0+ explicit update
+    const animate = () => {
+      if (!pointerInteracting.current) {
+        phi += 0.005;
       }
-    }, 0);
+      if (globe && typeof (globe as any).update === 'function') {
+        (globe as any).update({
+          phi: phi + rs.get(),
+          width: (width || 480) * 2,
+          height: (width || 480) * 2,
+        });
+      }
+      animId = requestAnimationFrame(animate);
+    };
+
+    animId = requestAnimationFrame(animate);
+
+    setTimeout(() => {
+      if (canvas) {
+        canvas.style.opacity = '1';
+      }
+    }, 50);
 
     return () => {
+      cancelAnimationFrame(animId);
       globe.destroy();
       window.removeEventListener('resize', onResize);
     };
@@ -114,7 +134,7 @@ export function Globe({
     >
       <canvas
         className={twMerge(
-          'size-[30rem] opacity-0 transition-opacity duration-500 [contain:layout_paint_size] select-none touch-none'
+          'size-[30rem] opacity-0 transition-opacity duration-500 [contain:layout_paint_size] select-none touch-none cursor-grab'
         )}
         ref={canvasRef}
         onPointerDown={(e) => {
