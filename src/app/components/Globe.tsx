@@ -4,8 +4,9 @@ import { useEffect, useRef } from 'react';
 import { twMerge } from 'tailwind-merge';
 
 const MOVEMENT_DAMPING = 1400;
+const PI = Math.PI;
 
-const GLOBE_CONFIG = {
+export const GLOBE_CONFIG = {
   width: 900,
   height: 900,
   devicePixelRatio: 2,
@@ -18,32 +19,83 @@ const GLOBE_CONFIG = {
   baseColor: [1, 1, 1] as [number, number, number], // Starlight white dots
   markerColor: [0.39, 0.96, 1] as [number, number, number], // Space Cyan markers
   glowColor: [0.39, 0.96, 1] as [number, number, number], // Space Cyan atmospheric halo
+  // Exactly 3 requested markers: Egypt, Turkey, USA
   markers: [
-    { location: [30.0444, 31.2357] as [number, number], size: 0.08 }, // Cairo / Tanta, Egypt
-    { location: [40.7128, -74.006] as [number, number], size: 0.07 }, // New York
-    { location: [51.5074, -0.1278] as [number, number], size: 0.06 }, // London
-    { location: [35.6762, 139.6503] as [number, number], size: 0.06 }, // Tokyo
-    { location: [25.2048, 55.2708] as [number, number], size: 0.07 }, // Dubai
-    { location: [-23.5505, -46.6333] as [number, number], size: 0.07 }, // Sao Paulo
-    { location: [19.076, 72.8777] as [number, number], size: 0.07 }, // Mumbai
-    { location: [14.5995, 120.9842] as [number, number], size: 0.05 }, // Manila
-    { location: [39.9042, 116.4074] as [number, number], size: 0.07 }, // Beijing
-    { location: [41.0082, 28.9784] as [number, number], size: 0.06 }, // Istanbul
+    { location: [30.0444, 31.2357] as [number, number], size: 0.1 }, // Egypt
+    { location: [41.0082, 28.9784] as [number, number], size: 0.09 }, // Turkey
+    { location: [40.7128, -74.006] as [number, number], size: 0.09 }, // USA
   ],
 };
+
+export const GLOBE_HUBS = [
+  { id: 'egypt', flag: '🇪🇬', labelAr: 'مصر', labelEn: 'Egypt', lat: 30.0444, lon: 31.2357, roleAr: 'المقر الأساسي & تدريب شركات ريموت' },
+  { id: 'turkey', flag: '🇹🇷', labelAr: 'تركيا', labelEn: 'Turkey', lat: 41.0082, lon: 28.9784, roleAr: 'لوكسيرا (Luxera)' },
+  { id: 'usa', flag: '🇺🇸', labelAr: 'أمريكا', labelEn: 'USA', lat: 40.7128, lon: -74.006, roleAr: 'ستار جيمز (Star Games)' },
+] as const;
+
+export type HubId = typeof GLOBE_HUBS[number]['id'];
+
+function shortestAngleDiff(current: number, target: number) {
+  const TWO_PI = PI * 2;
+  return ((target - current) % TWO_PI + TWO_PI * 1.5) % TWO_PI - PI;
+}
+
+function cobeProject(lat: number, lon: number, phi: number, theta: number = 0.3) {
+  const r = (lat * PI) / 180;
+  const a = (lon * PI) / 180 - PI;
+  const cosR = Math.cos(r);
+  const px = -cosR * Math.cos(a);
+  const py = Math.sin(r);
+  const pz = cosR * Math.sin(a);
+
+  const ee = 0.8;
+  const p = 0.05;
+  const r_rad = ee + p;
+  const t_vec = [px * r_rad, py * r_rad, pz * r_rad];
+
+  const cosT = Math.cos(theta);
+  const sinT = Math.sin(theta);
+  const cosP = Math.cos(phi);
+  const sinP = Math.sin(phi);
+
+  const c = cosP * t_vec[0] + sinP * t_vec[2];
+  const s = sinP * sinT * t_vec[0] + cosT * t_vec[1] - cosP * sinT * t_vec[2];
+  const isFront = -sinP * cosT * t_vec[0] + sinT * t_vec[1] + cosP * cosT * t_vec[2] >= 0;
+
+  return {
+    xPct: ((c + 1) / 2) * 100,
+    yPct: ((-s + 1) / 2) * 100,
+    isFront,
+  };
+}
+
+export interface GlobeProps {
+  className?: string;
+  config?: typeof GLOBE_CONFIG;
+  activeHubId?: HubId | null;
+  targetPhi?: number | null;
+  onSelectHub?: (id: HubId) => void;
+}
 
 export function Globe({
   className,
   config = GLOBE_CONFIG,
-}: {
-  className?: string;
-  config?: typeof GLOBE_CONFIG;
-}) {
+  activeHubId,
+  targetPhi,
+  onSelectHub,
+}: GlobeProps) {
   let phi = 0;
   let width = 0;
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const pointerInteracting = useRef<number | null>(null);
   const pointerInteractionMovement = useRef(0);
+  const targetPhiRef = useRef<number | null>(targetPhi ?? null);
+
+  const pinRefs = useRef<Record<HubId, HTMLButtonElement | null>>({
+    egypt: null,
+    turkey: null,
+    usa: null,
+  });
 
   const r = useMotionValue(0);
   const rs = useSpring(r, {
@@ -51,6 +103,13 @@ export function Globe({
     damping: 30,
     stiffness: 100,
   });
+
+  // Keep targetPhiRef in sync when targetPhi prop updates
+  useEffect(() => {
+    if (typeof targetPhi === 'number') {
+      targetPhiRef.current = targetPhi;
+    }
+  }, [targetPhi]);
 
   const updatePointerInteraction = (value: number | null) => {
     pointerInteracting.current = value;
@@ -64,6 +123,8 @@ export function Globe({
       const delta = clientX - pointerInteracting.current;
       pointerInteractionMovement.current = delta;
       r.set(r.get() + delta / MOVEMENT_DAMPING);
+      // Cancel automatic rotation targeting when user manually grabs
+      targetPhiRef.current = null;
     }
   };
 
@@ -84,27 +145,52 @@ export function Globe({
       ...config,
       width: (width || 500) * 2,
       height: (width || 500) * 2,
-      onRender: (state) => {
-        if (!pointerInteracting.current) phi += 0.005;
-        state.phi = phi + rs.get();
-        state.width = (width || 500) * 2;
-        state.height = (width || 500) * 2;
-      },
     });
 
     let animId: number;
 
     const animate = () => {
-      if (!pointerInteracting.current) {
-        phi += 0.005;
+      // Smooth targeting rotation or ambient spin
+      if (targetPhiRef.current !== null && !pointerInteracting.current) {
+        const currentPhi = phi + rs.get();
+        const diff = shortestAngleDiff(currentPhi, targetPhiRef.current);
+        if (Math.abs(diff) > 0.005) {
+          phi += diff * 0.08;
+        } else {
+          phi = targetPhiRef.current - rs.get();
+          targetPhiRef.current = null;
+        }
+      } else if (!pointerInteracting.current) {
+        phi += 0.003;
       }
+
+      const currentPhi = phi + rs.get();
+
       if (globe && typeof (globe as any).update === 'function') {
         (globe as any).update({
-          phi: phi + rs.get(),
+          phi: currentPhi,
           width: (width || 500) * 2,
           height: (width || 500) * 2,
         });
       }
+
+      // Update the 3 HTML Pin coordinates on the globe
+      GLOBE_HUBS.forEach((hub) => {
+        const pinEl = pinRefs.current[hub.id];
+        if (!pinEl) return;
+        const { xPct, yPct, isFront } = cobeProject(hub.lat, hub.lon, currentPhi);
+
+        if (isFront) {
+          pinEl.style.left = `${xPct}%`;
+          pinEl.style.top = `${yPct}%`;
+          pinEl.style.opacity = '1';
+          pinEl.style.pointerEvents = 'auto';
+        } else {
+          pinEl.style.opacity = '0';
+          pinEl.style.pointerEvents = 'none';
+        }
+      });
+
       animId = requestAnimationFrame(animate);
     };
 
@@ -133,10 +219,9 @@ export function Globe({
       {/* Subtle Cyan Atmosphere Glow behind the full globe */}
       <div className="absolute inset-4 rounded-full bg-[var(--space-cyan)]/15 blur-2xl pointer-events-none -z-10" />
 
+      {/* Interactive Canvas */}
       <canvas
-        className={twMerge(
-          'w-full h-full aspect-square opacity-0 transition-opacity duration-700 [contain:layout_paint_size] select-none touch-none cursor-grab active:cursor-grabbing'
-        )}
+        className="w-full h-full aspect-square opacity-0 transition-opacity duration-700 [contain:layout_paint_size] select-none touch-none cursor-grab active:cursor-grabbing"
         ref={canvasRef}
         onPointerDown={(e) => {
           pointerInteracting.current = e.clientX;
@@ -149,6 +234,53 @@ export function Globe({
           e.touches[0] && updateMovement(e.touches[0].clientX)
         }
       />
+
+      {/* 3 Interactive Country Pins (Overlay over Cobe Globe) */}
+      {GLOBE_HUBS.map((hub) => {
+        const isActive = activeHubId === hub.id;
+        return (
+          <button
+            key={hub.id}
+            ref={(el) => {
+              pinRefs.current[hub.id] = el;
+            }}
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              onSelectHub?.(hub.id);
+            }}
+            className="group absolute -translate-x-1/2 -translate-y-1/2 cursor-pointer z-30 transition-all duration-200 select-none focus:outline-none"
+            style={{
+              left: '50%',
+              top: '50%',
+              opacity: 0,
+              pointerEvents: 'none',
+            }}
+            aria-label={`Show experience in ${hub.labelEn}`}
+          >
+            {/* Glowing Radar Pulse & Interactive Chip */}
+            <div className="relative flex flex-col items-center">
+              {/* Radar rings */}
+              <span className="relative flex h-4 w-4 items-center justify-center">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--space-cyan)] opacity-75" />
+                <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-[var(--space-cyan)] shadow-[0_0_10px_#64f4ff]" />
+              </span>
+
+              {/* Pin Chip with Flag & Title */}
+              <div
+                className={`mt-1 flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs font-bold backdrop-blur-xl transition-all duration-200 shadow-lg ${
+                  isActive
+                    ? 'border-[var(--space-cyan)] bg-[var(--space-cyan)]/25 text-[var(--space-cyan)] shadow-[0_0_20px_rgba(100,244,255,0.6)] scale-110'
+                    : 'border-white/20 bg-[var(--space-midnight)]/90 text-white hover:border-[var(--space-cyan)] hover:text-[var(--space-cyan)] hover:scale-105'
+                }`}
+              >
+                <span>{hub.flag}</span>
+                <span className="whitespace-nowrap">{hub.labelAr}</span>
+              </div>
+            </div>
+          </button>
+        );
+      })}
     </div>
   );
 }
