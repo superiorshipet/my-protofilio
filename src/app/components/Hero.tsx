@@ -233,16 +233,20 @@ export function Hero() {
           >
             {/* The full photo in complete height */}
             <div
-              className="relative h-full w-full overflow-hidden rounded-2xl border border-white/10"
+              className="relative h-full w-full overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-b from-[#0e1738] via-[#060a1c] to-[#02030a] flex items-end justify-center"
               style={{ transform: 'translateZ(20px)' }}
             >
+              {/* Subtle Cosmic Aura Halo behind portrait */}
+              <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 rounded-full bg-[var(--space-cyan)]/20 blur-3xl pointer-events-none" />
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 rounded-full bg-[var(--space-violet)]/25 blur-2xl pointer-events-none" />
+
               <img
                 src={portraitImg}
                 alt="Mohamed Shipet (Superior)"
-                className="h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                className="h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-105 relative z-10"
               />
               {/* Subtle gradient vignette for depth */}
-              <div className="absolute inset-0 bg-gradient-to-t from-[var(--space-midnight)]/90 via-transparent to-transparent pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[var(--space-midnight)]/90 via-transparent to-transparent pointer-events-none z-20" />
               
               {/* Holographic Nameplate inside bottom of photo */}
               <div
