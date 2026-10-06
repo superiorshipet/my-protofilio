@@ -256,7 +256,7 @@ export function Hero() {
               repeat: Infinity,
               ease: 'easeInOut',
             }}
-            className="relative flex flex-col items-center justify-center cursor-pointer select-none"
+            className="relative flex flex-col items-center justify-center select-none"
           >
             <SpaceshipTeleporter techIcons={techIcons} />
           </motion.div>
