@@ -27,11 +27,13 @@ export const GLOBE_CONFIG = {
   ],
 };
 
+export type CalloutAlign = 'top' | 'left' | 'right' | 'bottom';
+
 export const GLOBE_HUBS = [
-  { id: 'egypt', flag: '🇪🇬', labelEn: 'Egypt', lat: 30.0444, lon: 31.2357, roleEn: 'Core Base & Remote Training' },
-  { id: 'saudi', flag: '🇸🇦', labelEn: 'Saudi Arabia', lat: 24.7136, lon: 46.6753, roleEn: 'Freelance & Enterprise Platforms' },
-  { id: 'turkey', flag: '🇹🇷', labelEn: 'Turkey', lat: 41.0082, lon: 28.9784, roleEn: 'Luxira Holding' },
-  { id: 'usa', flag: '🇺🇸', labelEn: 'USA', lat: 40.7128, lon: -74.006, roleEn: 'Star+Games' },
+  { id: 'egypt', flag: '🇪🇬', labelEn: 'Egypt', lat: 30.0444, lon: 31.2357, roleEn: 'Core Base & Remote Training', calloutAlign: 'left' as CalloutAlign },
+  { id: 'saudi', flag: '🇸🇦', labelEn: 'Saudi Arabia', lat: 24.7136, lon: 46.6753, roleEn: 'Freelance & Enterprise Platforms', calloutAlign: 'right' as CalloutAlign },
+  { id: 'turkey', flag: '🇹🇷', labelEn: 'Turkey', lat: 41.0082, lon: 28.9784, roleEn: 'Luxira Holding', calloutAlign: 'top' as CalloutAlign },
+  { id: 'usa', flag: '🇺🇸', labelEn: 'USA', lat: 40.7128, lon: -74.006, roleEn: 'Star+Games', calloutAlign: 'left' as CalloutAlign },
 ] as const;
 
 export type HubId = typeof GLOBE_HUBS[number]['id'];
