@@ -2,6 +2,7 @@ import createGlobe from 'cobe';
 import { useMotionValue, useSpring } from 'motion/react';
 import { useEffect, useRef } from 'react';
 import { twMerge } from 'tailwind-merge';
+import { User } from 'lucide-react';
 
 const MOVEMENT_DAMPING = 1400;
 const PI = Math.PI;
@@ -305,10 +306,12 @@ export function Globe({
             }}
             aria-label={`Show experience in ${hub.labelEn}`}
           >
-            {/* Centered Luminous Beacon Dot (Always precisely at location coordinate) */}
-            <div className="absolute left-0 top-0 -translate-x-1/2 -translate-y-1/2 flex h-3.5 w-3.5 items-center justify-center pointer-events-none">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--space-cyan)] opacity-75" />
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-[var(--space-cyan)] shadow-[0_0_12px_#64f4ff]" />
+            {/* Miniature Glowing Person Avatar Pin (زي الاشخاص في الاول) */}
+            <div className="absolute left-0 top-0 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center pointer-events-none">
+              <span className="absolute inline-flex h-6 w-6 animate-ping rounded-full bg-[var(--space-cyan)] opacity-35" />
+              <div className="relative flex h-5 w-5 items-center justify-center rounded-full border border-[var(--space-cyan)]/70 bg-[var(--space-midnight)]/90 shadow-[0_0_10px_rgba(100,244,255,0.7)]">
+                <User className="h-2.5 w-2.5 text-[var(--space-cyan)]" />
+              </div>
             </div>
 
             {/* Directional Callout Badge Container */}
