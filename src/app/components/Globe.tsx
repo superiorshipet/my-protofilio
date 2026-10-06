@@ -36,6 +36,7 @@ export const GLOBE_HUBS = [
   { id: 'saudi', flag: '🇸🇦', labelEn: 'Saudi Arabia', lat: 24.7136, lon: 46.6753, roleEn: 'Freelance & Enterprise Platforms', calloutAlign: 'right' as CalloutAlign },
   // Turkey: Anchored Northward (Top into Black Sea/Europe) keeping Mediterranean clear
   { id: 'turkey', flag: '🇹🇷', labelEn: 'Turkey', lat: 41.0082, lon: 28.9784, roleEn: 'Luxira Holding', calloutAlign: 'top' as CalloutAlign },
+  // USA: Anchored Westward (Left across North America) with streamlined spacing
   { id: 'usa', flag: '🇺🇸', labelEn: 'USA', lat: 40.7128, lon: -74.006, roleEn: 'Star+Games', calloutAlign: 'left' as CalloutAlign },
 ] as const;
 
