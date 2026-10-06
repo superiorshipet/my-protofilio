@@ -12,8 +12,8 @@ const Statistics = lazy(() => import('./components/Statistics').then((m) => ({ d
 const DevThoughts = lazy(() => import('./components/DevThoughts').then((m) => ({ default: m.DevThoughts })));
 const Contact = lazy(() => import('./components/Contact').then((m) => ({ default: m.Contact })));
 const Footer = lazy(() => import('./components/Footer').then((m) => ({ default: m.Footer })));
-const FloatingActions = lazy(() => import('./components/FloatingActions').then((m) => ({ default: m.FloatingActions })));
-const ProjectAdvisorBot = lazy(() => import('./components/ProjectAdvisorBot').then((m) => ({ default: m.ProjectAdvisorBot })));
+import { FloatingActions } from './components/FloatingActions';
+import { ProjectAdvisorBot } from './components/ProjectAdvisorBot';
 
 function LazySection({
   children,
@@ -56,24 +56,6 @@ function LazySection({
   );
 }
 
-// AI Advisor is only downloaded and mounted when the user actually opens it
-function LazyAdvisorBot() {
-  const [opened, setOpened] = useState(false);
-
-  useEffect(() => {
-    const onOpen = () => setOpened(true);
-    window.addEventListener('open-project-advisor', onOpen);
-    return () => window.removeEventListener('open-project-advisor', onOpen);
-  }, []);
-
-  if (!opened) return null;
-  return (
-    <Suspense fallback={null}>
-      <ProjectAdvisorBot />
-    </Suspense>
-  );
-}
-
 export default function App() {
   return (
     <div className="space-scene space-stars relative min-h-screen overflow-hidden text-[var(--space-starlight)]" id="home">
@@ -89,8 +71,8 @@ export default function App() {
         <LazySection minHeight="300px"><DevThoughts /></LazySection>
         <LazySection minHeight="450px"><Contact /></LazySection>
         <LazySection minHeight="100px"><Footer /></LazySection>
-        <Suspense fallback={null}><FloatingActions /></Suspense>
-        <LazyAdvisorBot />
+        <FloatingActions />
+        <ProjectAdvisorBot />
       </div>
     </div>
   );

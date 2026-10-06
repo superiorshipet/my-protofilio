@@ -81,6 +81,11 @@ export function ProjectAdvisorBot() {
           {/* Bot Robot Icon from user reference */}
           <BotRobotIcon className="h-7 w-7 sm:h-9 sm:w-9 text-[var(--space-cyan)] transition-transform duration-300 group-hover:scale-105" />
         </div>
+
+        {/* Desktop Tooltip */}
+        <span className="pointer-events-none absolute right-16 whitespace-nowrap rounded-lg border border-[var(--space-border)] bg-[var(--space-midnight)] px-2.5 py-1 text-xs font-semibold text-[var(--space-starlight)] opacity-0 shadow-xl transition-all duration-200 group-hover:opacity-100 group-hover:-translate-x-1 hidden sm:block">
+          AI Project Advisor
+        </span>
       </motion.button>
 
       {/* Main Chatbot Window */}
