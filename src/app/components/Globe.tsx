@@ -88,7 +88,7 @@ export function Globe({
   let phi = config.phi ?? 4.17;
   let width = 0;
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
-  const pointerInteracting = useRef<number | null>(null);
+  const pointerInteracting = useRef<{ x: number; y: number } | null>(null);
   const pointerInteractionMovement = useRef(0);
   const targetPhiRef = useRef<number | null>(targetPhi ?? null);
 
@@ -113,18 +113,20 @@ export function Globe({
     }
   }, [targetPhi]);
 
-  const updatePointerInteraction = (value: number | null) => {
-    pointerInteracting.current = value;
+  const updatePointerInteraction = (coords: { x: number; y: number } | null) => {
+    pointerInteracting.current = coords;
     if (canvasRef.current) {
-      canvasRef.current.style.cursor = value !== null ? 'grabbing' : 'grab';
+      canvasRef.current.style.cursor = coords !== null ? 'grabbing' : 'grab';
     }
   };
 
-  const updateMovement = (clientX: number) => {
+  const updateMovement = (clientX: number, clientY: number) => {
     if (pointerInteracting.current !== null) {
-      const delta = clientX - pointerInteracting.current;
-      pointerInteractionMovement.current = delta;
-      r.set(r.get() + delta / MOVEMENT_DAMPING);
+      const deltaX = clientX - pointerInteracting.current.x;
+      const deltaY = clientY - pointerInteracting.current.y;
+      pointerInteractionMovement.current = deltaX;
+      r.set(r.get() + deltaX / MOVEMENT_DAMPING);
+      pointerInteracting.current = { x: clientX, y: clientY };
       // Cancel automatic rotation targeting when user manually grabs
       targetPhiRef.current = null;
     }
@@ -223,15 +225,16 @@ export function Globe({
         className="w-full h-full aspect-square opacity-0 transition-opacity duration-700 [contain:layout_paint_size] select-none touch-none cursor-grab active:cursor-grabbing"
         ref={canvasRef}
         onPointerDown={(e) => {
-          pointerInteracting.current = e.clientX;
-          updatePointerInteraction(e.clientX);
+          updatePointerInteraction({ x: e.clientX, y: e.clientY });
         }}
         onPointerUp={() => updatePointerInteraction(null)}
         onPointerOut={() => updatePointerInteraction(null)}
-        onMouseMove={(e) => updateMovement(e.clientX)}
-        onTouchMove={(e) =>
-          e.touches[0] && updateMovement(e.touches[0].clientX)
-        }
+        onMouseMove={(e) => updateMovement(e.clientX, e.clientY)}
+        onTouchMove={(e) => {
+          if (e.touches[0]) {
+            updateMovement(e.touches[0].clientX, e.touches[0].clientY);
+          }
+        }}
       />
 
       {/* 3 Interactive Country Pins (Overlay over Cobe Globe) */}
