@@ -1,31 +1,101 @@
+import { useState, useEffect } from 'react';
+import { motion } from 'motion/react';
+import { Globe2, Clock } from 'lucide-react';
 import { Globe } from './Globe';
-import { Sparkles } from './Sparkles';
 
 export function AboutBento() {
+  const [time, setTime] = useState('');
+
+  useEffect(() => {
+    const updateTime = () => {
+      const now = new Date();
+      setTime(
+        now.toLocaleTimeString('en-US', {
+          timeZone: 'Africa/Cairo',
+          hour: '2-digit',
+          minute: '2-digit',
+          second: '2-digit',
+          hour12: true,
+        })
+      );
+    };
+    updateTime();
+    const interval = setInterval(updateTime, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
-    <section id="about" className="relative overflow-hidden py-16 md:py-24">
-      {/* Ambient background glow */}
-      <div className="pointer-events-none absolute -top-24 left-1/2 h-96 w-[70vw] -translate-x-1/2 bg-gradient-to-b from-[var(--space-cyan)]/10 via-[var(--space-violet)]/8 to-transparent blur-3xl" />
+    <section id="about" className="relative py-20 md:py-28">
+      <div className="relative z-10 mx-auto max-w-7xl px-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          {/* Left Column: Information & Cairo Time */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="flex flex-col justify-center"
+          >
+            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[var(--space-border)] bg-[var(--space-panel)] px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-[var(--space-cyan)] backdrop-blur w-fit">
+              <Globe2 className="h-3.5 w-3.5 text-[var(--space-cyan)]" />
+              Global Reach & Time Zone
+            </div>
 
-      <div className="relative z-10 mx-auto max-w-5xl px-6">
-        <div className="relative rounded-3xl p-6 md:p-9 border border-white/10 bg-gradient-to-tl from-[#3A3A3A] via-[#242424] to-[#3A3A3A] h-[17rem] sm:h-[19rem] md:h-[21rem] overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.5)] transition-all duration-300 hover:-translate-y-1">
-          {/* Sparkles particle starfield */}
-          <Sparkles className="w-full h-full" />
+            <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-[var(--space-starlight)] mb-4">
+              Cairo, Egypt
+            </h2>
 
-          {/* Left Text Content */}
-          <div className="z-10 absolute inset-y-6 md:inset-y-9 left-6 md:left-9 w-[55%] sm:w-[50%] pointer-events-none">
-            <h3 className="mt-2 mb-2 text-2xl sm:text-3xl font-bold text-white tracking-tight">
-              Time Zone
-            </h3>
-            <p className="text-neutral-400 text-sm sm:text-base leading-relaxed">
-              I’m based in Tanta, open to work remotely
+            <p className="text-base sm:text-lg text-[var(--space-moon)] leading-relaxed max-w-xl mb-8">
+              Based in Egypt (UTC+2) and flexible with global communications. Collaborating seamlessly with engineering teams, startups, and remote organizations worldwide.
             </p>
-          </div>
 
-          {/* 3D Rotating Earth Globe */}
-          <figure className="absolute left-[24%] sm:left-[30%] top-[6%] sm:top-[10%] pointer-events-auto">
+            {/* Live Cairo Clock & Availability Card */}
+            <div className="flex flex-wrap items-center gap-5 p-5 rounded-2xl border border-[var(--space-border)] bg-[var(--space-panel)]/80 backdrop-blur-xl w-fit shadow-[0_12px_40px_rgba(0,0,0,0.3)]">
+              <div className="flex items-center gap-3">
+                <Clock className="h-5 w-5 text-[var(--space-cyan)]" />
+                <div className="flex flex-col">
+                  <span className="text-[11px] font-mono uppercase tracking-wider text-[var(--space-muted)]">
+                    Local Time (Cairo)
+                  </span>
+                  <span className="font-mono text-2xl font-bold text-[var(--space-starlight)] tabular-nums">
+                    {time || '12:00:00 AM'}
+                  </span>
+                </div>
+              </div>
+
+              <div className="hidden sm:block h-10 w-px bg-[var(--space-border)]" />
+
+              <div className="flex items-center gap-2.5">
+                <span className="relative flex h-3 w-3">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+                  <span className="relative inline-flex h-3 w-3 rounded-full bg-emerald-500" />
+                </span>
+                <div className="flex flex-col">
+                  <span className="text-[11px] font-mono uppercase tracking-wider text-[var(--space-muted)]">
+                    Availability
+                  </span>
+                  <span className="text-sm font-semibold text-emerald-400">
+                    Open to Remote & Global Work
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <p className="text-xs font-mono text-[var(--space-muted)] mt-5 flex items-center gap-2">
+              <span className="text-base">🌍</span> Drag the Earth in 3D space to rotate in any direction
+            </p>
+          </motion.div>
+
+          {/* Right Column: Full Round 3D Earth Globe (No black frame, pure space cosmos) */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+            className="flex items-center justify-center relative"
+          >
             <Globe />
-          </figure>
+          </motion.div>
         </div>
       </div>
     </section>
