@@ -93,16 +93,16 @@ export function AboutBento() {
               Cairo, Egypt
             </h2>
 
-            <p className="text-base sm:text-lg text-[var(--space-moon)] leading-relaxed max-w-xl mb-6">
+            <p className="text-base sm:text-lg text-[var(--space-moon)] font-medium leading-relaxed max-w-xl mb-6">
               Based in Egypt (UTC+2) and collaborating seamlessly with global clients and teams across Saudi Arabia, Turkey, the United States, and worldwide.
             </p>
 
             {/* Live Cairo Clock & Availability Card */}
-            <div className="flex flex-wrap items-center gap-5 p-5 rounded-2xl border border-[var(--space-border)] bg-[var(--space-panel)]/80 backdrop-blur-xl w-fit shadow-[0_12px_40px_rgba(0,0,0,0.3)] mb-6">
+            <div className="flex flex-wrap items-center gap-5 p-5 rounded-2xl border border-[var(--space-border)] bg-[var(--space-panel-strong)] backdrop-blur-xl w-fit shadow-[0_8px_30px_rgba(0,0,0,0.06)] dark:shadow-[0_12px_40px_rgba(0,0,0,0.3)] mb-6">
               <div className="flex items-center gap-3">
                 <Clock className="h-5 w-5 text-[var(--space-cyan)]" />
                 <div className="flex flex-col">
-                  <span className="text-[11px] font-mono uppercase tracking-wider text-[var(--space-muted)]">
+                  <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-[var(--space-muted)]">
                     Local Time (Cairo)
                   </span>
                   <CairoClock />

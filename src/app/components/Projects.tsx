@@ -356,7 +356,7 @@ export function Projects() {
                     </span>
 
                     {project.featured && (
-                      <span className="flex items-center gap-1.5 rounded-full border border-amber-500/30 bg-amber-500/10 px-3 py-0.5 text-[0.7rem] font-bold uppercase tracking-wider text-amber-300">
+                      <span className="flex items-center gap-1.5 rounded-full border border-amber-500/40 bg-amber-500/10 px-3 py-0.5 text-[0.7rem] font-bold uppercase tracking-wider text-amber-600 dark:text-amber-300">
                         <Sparkles className="h-3 w-3" />
                         Featured
                       </span>

@@ -392,12 +392,12 @@ export function Globe({
             {/* Miniature Glowing Person Avatar Pin (زي الاشخاص في الاول) */}
             <div className="absolute left-0 top-0 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center pointer-events-none">
               <span className={`absolute inline-flex h-6 w-6 animate-ping rounded-full bg-[var(--space-cyan)] ${isActive ? 'opacity-70' : 'opacity-35'}`} />
-              <div className={`relative flex h-5 w-5 items-center justify-center rounded-full border transition-all duration-200 bg-[var(--space-midnight)]/90 ${
+              <div className={`relative flex h-5 w-5 items-center justify-center rounded-full border transition-all duration-200 bg-[var(--space-panel-strong)] ${
                 isActive
                   ? 'border-[var(--space-cyan)] shadow-[0_0_15px_rgba(100,244,255,0.95)] scale-110'
                   : 'border-[var(--space-cyan)]/70 shadow-[0_0_10px_rgba(100,244,255,0.6)] group-hover:border-[var(--space-cyan)] group-hover:shadow-[0_0_14px_rgba(100,244,255,0.8)]'
               }`}>
-                <User className={`h-2.5 w-2.5 transition-colors ${isActive ? 'text-white' : 'text-[var(--space-cyan)] group-hover:text-white'}`} />
+                <User className={`h-2.5 w-2.5 transition-colors ${isActive ? 'text-[var(--space-cyan)]' : 'text-[var(--space-cyan)] group-hover:text-[var(--space-starlight)]'}`} />
               </div>
             </div>
 
@@ -415,13 +415,13 @@ export function Globe({
               )}
 
               <div
-                className={`flex items-center gap-1.5 rounded-full border px-2 py-0.5 text-[11px] font-medium leading-none backdrop-blur-xl transition-all duration-200 shadow-[0_2px_10px_rgba(0,0,0,0.5)] whitespace-nowrap ${
+                className={`flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[11px] font-bold leading-none backdrop-blur-xl transition-all duration-200 shadow-[0_4px_16px_rgba(0,0,0,0.25)] whitespace-nowrap ${
                   isActive
-                    ? 'border-[var(--space-cyan)] bg-[var(--space-cyan)]/25 text-[var(--space-cyan)] shadow-[0_0_16px_rgba(100,244,255,0.5)] scale-105'
-                    : 'border-white/20 bg-[var(--space-midnight)]/95 text-white/95 hover:border-[var(--space-cyan)] hover:text-[var(--space-cyan)] group-hover:scale-105'
+                    ? 'border-[var(--space-cyan)] bg-[var(--space-cyan)] text-[var(--space-button-text)] shadow-[0_0_16px_rgba(100,244,255,0.6)] scale-105'
+                    : 'border-[var(--space-border)] bg-[var(--space-panel-strong)] text-[var(--space-starlight)] hover:border-[var(--space-cyan)] hover:text-[var(--space-cyan)] group-hover:scale-105'
                 }`}
               >
-                <span className="text-[11px]">{hub.flag}</span>
+                <span className="text-[12px]">{hub.flag}</span>
                 <span className="whitespace-nowrap tracking-wide">{hub.labelEn}</span>
               </div>
             </div>

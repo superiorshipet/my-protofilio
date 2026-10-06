@@ -150,7 +150,7 @@ export function Experience() {
                     </div>
 
                     {exp.current && (
-                      <span className="flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-0.5 text-[0.7rem] font-bold uppercase tracking-wider text-emerald-400">
+                      <span className="flex items-center gap-1.5 rounded-full border border-emerald-500/40 bg-emerald-500/10 px-3 py-0.5 text-[0.7rem] font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400">
                         <Sparkles className="h-3 w-3" />
                         Active
                       </span>

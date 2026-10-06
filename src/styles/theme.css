@@ -3,38 +3,38 @@
 :root {
   --font-size: 16px;
   --background: #f6f8ff;
-  --foreground: #11162f;
+  --foreground: #0f172a;
   --card: #ffffff;
-  --card-foreground: #11162f;
+  --card-foreground: #0f172a;
   --space-void: #f6f8ff;
-  --space-midnight: #e8edff;
-  --space-panel: rgba(255, 255, 255, 0.74);
-  --space-panel-strong: rgba(255, 255, 255, 0.92);
-  --space-starlight: #11162f;
-  --space-moon: #536183;
-  --space-muted: #6f7894;
-  --space-orbit: rgba(76, 92, 145, 0.18);
-  --space-cyan: #087ea4;
+  --space-midnight: #edf2ff;
+  --space-panel: rgba(255, 255, 255, 0.88);
+  --space-panel-strong: rgba(255, 255, 255, 0.98);
+  --space-starlight: #0f172a;
+  --space-moon: #252e42;
+  --space-muted: #4b5874;
+  --space-orbit: rgba(30, 41, 59, 0.16);
+  --space-cyan: #0284c7;
   --space-violet: #6d45d9;
   --space-rose: #d73794;
-  --space-sun: #c57700;
-  --space-border: rgba(41, 55, 99, 0.08);
-  --space-star-a: rgba(15, 23, 42, 0.72);
-  --space-star-b: rgba(0, 0, 0, 0.58);
+  --space-sun: #b45309;
+  --space-border: rgba(15, 23, 42, 0.14);
+  --space-star-a: rgba(15, 23, 42, 0.85);
+  --space-star-b: rgba(0, 0, 0, 0.65);
   --space-body-bg:
-    radial-gradient(circle at 16% 18%, rgba(109, 69, 217, 0.12), transparent 26rem),
-    radial-gradient(circle at 82% 12%, rgba(8, 126, 164, 0.12), transparent 28rem),
-    linear-gradient(180deg, #f6f8ff 0%, #e9eeff 52%, #f7f9ff 100%);
+    radial-gradient(circle at 16% 18%, rgba(109, 69, 217, 0.08), transparent 26rem),
+    radial-gradient(circle at 82% 12%, rgba(2, 132, 199, 0.08), transparent 28rem),
+    linear-gradient(180deg, #f8faff 0%, #edf2ff 52%, #f8faff 100%);
   --space-scene-bg:
-    radial-gradient(circle at 20% 12%, rgba(109, 69, 217, 0.14), transparent 22rem),
-    radial-gradient(circle at 82% 26%, rgba(8, 126, 164, 0.10), transparent 26rem),
-    radial-gradient(circle at 48% 85%, rgba(215, 55, 148, 0.08), transparent 24rem),
-    linear-gradient(180deg, #f6f8ff 0%, #edf2ff 54%, #f8faff 100%);
-  --space-glass-bg: linear-gradient(145deg, rgba(255, 255, 255, 0.84), rgba(236, 241, 255, 0.76));
-  --space-glass-shadow: 0 24px 80px rgba(42, 53, 94, 0.16);
-  --space-nav-bg: rgba(246, 248, 255, 0.82);
-  --space-overlay: rgba(11, 17, 37, 0.28);
-  --space-button: #11162f;
+    radial-gradient(circle at 20% 12%, rgba(109, 69, 217, 0.09), transparent 22rem),
+    radial-gradient(circle at 82% 26%, rgba(2, 132, 199, 0.08), transparent 26rem),
+    radial-gradient(circle at 48% 85%, rgba(215, 55, 148, 0.06), transparent 24rem),
+    linear-gradient(180deg, #f8faff 0%, #f0f4ff 54%, #f8faff 100%);
+  --space-glass-bg: linear-gradient(145deg, rgba(255, 255, 255, 0.92), rgba(240, 244, 255, 0.86));
+  --space-glass-shadow: 0 12px 32px rgba(15, 23, 42, 0.08), 0 2px 6px rgba(15, 23, 42, 0.04);
+  --space-nav-bg: rgba(248, 250, 255, 0.88);
+  --space-overlay: rgba(15, 23, 42, 0.5);
+  --space-button: #0f172a;
   --space-button-text: #ffffff;
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
