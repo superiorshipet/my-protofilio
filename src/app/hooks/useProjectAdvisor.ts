@@ -3,6 +3,7 @@ import {
   findMatchingProjects,
   getConversationalIntent,
   getConversationalResponse,
+  analyzeCustomIdea,
   ProjectSolution,
 } from "../data/botKnowledge";
 
@@ -22,6 +23,12 @@ export interface ChatMessage {
   matchedProjects?: ProjectSolution[];
   suggestedReplies?: string[];
   isFinalScope?: boolean;
+  whatsappUrl?: string;
+  customBreakdown?: {
+    domain: string;
+    items: string[];
+    whatsappUrl: string;
+  };
   timestamp: number;
 }
 
@@ -39,7 +46,7 @@ export function useProjectAdvisor() {
       id: "initial-welcome",
       sender: "assistant",
       text:
-        "Welcome! I am Mohamed Shipet's Project & Architecture AI Assistant. Describe your project idea, product, or challenge, and I will check our existing production solutions, show you live working demos, and organize your requirements into a ready-to-execute specification.",
+        "Welcome! I am Mohamed Shipet's Project & Architecture AI Assistant. Describe your project idea, product, or challenge, and I will check our existing production solutions, show you live working demos, or break down your requirements and connect you directly with Mohamed.",
       suggestedReplies: [
         "I need an E-Commerce Store",
         "I need a Task / CRM Platform",
@@ -85,6 +92,7 @@ export function useProjectAdvisor() {
           matchedProjects: [],
           suggestedReplies: conv.suggestedReplies,
           isFinalScope: false,
+          whatsappUrl: conv.whatsappUrl,
           timestamp: Date.now(),
         };
         setMessages((prev) => [...prev, botMessage]);
@@ -117,6 +125,7 @@ export function useProjectAdvisor() {
       let botReplyText = "";
       let suggested: string[] = [];
       let isFinal = false;
+      let breakdownData: { domain: string; items: string[]; whatsappUrl: string } | undefined = undefined;
 
       if (matches.length > 0) {
         const primary = matches[0];
@@ -183,12 +192,40 @@ export function useProjectAdvisor() {
           botReplyText = `Excellent! I have compiled your project scope draft into a structured brief. You can review the specification below and forward it directly to Mohamed on WhatsApp with one click to kickstart development!`;
         }
       } else {
+        // Honest, structured breakdown for custom projects without direct pre-built catalog demos
+        const breakdown = analyzeCustomIdea(userText);
+        const directWhatsAppMsg = arabic
+          ? `أهلاً محمد، حابب أستفسر عن تنفيذ مشروع: ${userText}\n\nالمتطلبات المقترحة:\n` +
+            breakdown.arabicSuggestedItems.map((item, i) => `${i + 1}. ${item}`).join("\n") +
+            `\n\nحابب أعرف التكلفة والمدة الزمنية المتوقعة.`
+          : `Hi Mohamed, I would like to discuss building: ${userText}\n\nProposed Requirements:\n` +
+            breakdown.suggestedItems.map((item, i) => `${i + 1}. ${item}`).join("\n") +
+            `\n\nCould we discuss the estimated timeline and budget?`;
+
+        const directWhatsAppUrl = `https://wa.me/${WHATSAPP_NUMBER.replace("+", "")}?text=${encodeURIComponent(directWhatsAppMsg)}`;
+
+        breakdownData = {
+          domain: arabic ? breakdown.arabicDomain : breakdown.domain,
+          items: arabic ? breakdown.arabicSuggestedItems : breakdown.suggestedItems,
+          whatsappUrl: directWhatsAppUrl,
+        };
+
         if (arabic) {
-          botReplyText = `فكرة ممتازة! محمد يمتلك خبرة عميقة في بناء هذه الأنظمة من الصفر (بناء واجهات تفاعلية سريعة + أنظمة Backend وقواعد بيانات قوية).\n\nلضبط نطاق العمل، ما هو المدى الزمني المتوقع للإطلاق (مثلاً أسبوعين، شهر، أو مرن)؟`;
-          suggested = ["أسبوعين إلى 4 أسابيع", "خلال شهرين", "مرن حسب جودة العمل", "جاهز للمناقشة"];
+          botReplyText = `فكرة ممتازة جداً! 🚀\n\nالمعرض الحالي لا يحتوي على نموذج جاهز مخصص لـ **${breakdown.arabicDomain}** تحديداً، لكن محمد متخصص في هندسة وبناء الحلول والأنظمة المخصصة من الصفر بأعلى معايير الأداء والسرعة والتصميم المتجاوب.\n\nقمت بتنظيم وتلخيص خارطة المتطلبات الأساسية لمشروعك بالأسفل لمساعدتك في ترتيب الفكرة، وتقدر تتواصل مباشرة مع محمد على واتساب لمناقشة التفاصيل والبدء فوراً:`;
+          suggested = [
+            "تواصل عبر واتساب فوراً",
+            "نحتاج واجهة سريعة وتصميم مودرن",
+            "ما هي المدة المتوقعة للتسليم؟",
+            "استعراض مشاريع سابقة أخرى",
+          ];
         } else {
-          botReplyText = `That is a solid product idea! Mohamed specializes in engineering these systems end-to-end with high-throughput backend services and clean frontend interfaces.\n\nTo help size the project scope, what is your estimated timeline for MVP launch?`;
-          suggested = ["2-4 weeks (MVP)", "1-2 months", "Flexible for high quality", "Ready to discuss"];
+          botReplyText = `That sounds like a fantastic project! 🚀\n\nWhile Mohamed doesn't have an off-the-shelf demo for **${breakdown.domain}** in the portfolio showcase, this is a custom web solution he specializes in architecting from scratch with high performance, clean UI, and scalable architecture.\n\nI've outlined a recommended technical feature roadmap below to help organize your requirements, and you can connect directly with Mohamed on WhatsApp to discuss details:`;
+          suggested = [
+            "Discuss on WhatsApp directly",
+            "Need modern responsive UI",
+            "What is the estimated timeline?",
+            "Explore other live projects",
+          ];
         }
       }
 
@@ -199,6 +236,7 @@ export function useProjectAdvisor() {
         matchedProjects: matches.slice(0, 2),
         suggestedReplies: suggested,
         isFinalScope: isFinal,
+        customBreakdown: breakdownData,
         timestamp: Date.now(),
       };
 

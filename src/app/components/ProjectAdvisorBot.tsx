@@ -233,6 +233,62 @@ export function ProjectAdvisorBot() {
                         </div>
                       )}
 
+                      {/* Custom Idea Feature Roadmap & Direct WhatsApp Consultation */}
+                      {msg.customBreakdown && (
+                        <div className="mt-3.5 rounded-xl border border-[var(--space-cyan)]/30 bg-[var(--space-panel-strong)]/90 p-3.5 shadow-md">
+                          <div className="flex items-center gap-2 font-display text-xs font-bold text-[var(--space-cyan)]">
+                            <Layers className="h-4 w-4 text-[var(--space-cyan)]" />
+                            <span>{msg.customBreakdown.domain}</span>
+                          </div>
+                          <div className="mt-2.5 space-y-1.5 border-t border-[var(--space-border)]/60 pt-2.5">
+                            <div className="text-[11px] font-semibold text-[var(--space-starlight)]">
+                              📋 {/[\u0600-\u06FF]/.test(msg.text) ? "خارطة الميزات المقترحة لمشروعك:" : "Suggested Feature Roadmap:"}
+                            </div>
+                            {msg.customBreakdown.items.map((item, idx) => (
+                              <div
+                                key={idx}
+                                className="flex items-start gap-1.5 text-[11px] text-[var(--space-moon)] leading-relaxed"
+                              >
+                                <span className="text-[var(--space-cyan)] font-mono">•</span>
+                                <span>{item}</span>
+                              </div>
+                            ))}
+                          </div>
+                          <a
+                            href={msg.customBreakdown.whatsappUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="mt-3.5 flex items-center justify-center gap-2 rounded-xl bg-emerald-500 px-4 py-2.5 text-xs font-bold text-black shadow-[0_0_20px_rgba(16,185,129,0.35)] hover:bg-emerald-400 transition-all cursor-pointer"
+                          >
+                            <MessageCircle className="h-4 w-4" />
+                            <span>
+                              {/[\u0600-\u06FF]/.test(msg.text)
+                                ? "تواصل مع محمد على واتساب لبدء التنفيذ"
+                                : "Discuss on WhatsApp with Mohamed"}
+                            </span>
+                          </a>
+                        </div>
+                      )}
+
+                      {/* Standalone WhatsApp Action (e.g. for contact or pricing queries) */}
+                      {msg.whatsappUrl && !msg.customBreakdown && (
+                        <div className="mt-3">
+                          <a
+                            href={msg.whatsappUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center justify-center gap-2 rounded-xl bg-emerald-500 px-4 py-2.5 text-xs font-bold text-black shadow-[0_0_20px_rgba(16,185,129,0.35)] hover:bg-emerald-400 transition-all cursor-pointer"
+                          >
+                            <MessageCircle className="h-4 w-4" />
+                            <span>
+                              {/[\u0600-\u06FF]/.test(msg.text)
+                                ? "محادثة محمد على واتساب"
+                                : "Chat on WhatsApp with Mohamed"}
+                            </span>
+                          </a>
+                        </div>
+                      )}
+
                       {/* Final Project Scope Export Box */}
                       {msg.isFinalScope && (
                         <div className="mt-4 rounded-xl border border-emerald-500/40 bg-emerald-950/20 p-3.5">

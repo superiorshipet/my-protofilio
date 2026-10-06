@@ -315,7 +315,7 @@ export const projectKnowledgeBase: ProjectSolution[] = [
     title: "High-Throughput Microservice & API Layer",
     arabicTitle: "طبقة خدمات وواجهات برمجية عالية الأداء (Microservices & APIs)",
     category: "Backend & APIs",
-    keywords: ["api", "microservice", "performance", "throughput", "architecture", "docker", "backend", "rest", "high traffic"],
+    keywords: ["api", "microservice", "performance", "throughput", "architecture", "docker", "backend", "rest api", "high traffic"],
     arabicKeywords: ["اي بي اي", "باك اند", "مايكروسيرفس", "خدمات", "سرعة", "ضغط عالي", "داتا بيز", "ربط انظمة"],
     description: "High-performance full-stack service layer built on .NET with a reactive client, optimized DB queries, and containerized deployment.",
     arabicDescription: "بنية تحتية برمجية ذات كفاءة فائقة مصممة لتحمل ملايين الطلبات وسرعة استجابة متناهية الدقة.",
@@ -334,7 +334,8 @@ export type ConversationalIntent =
   | "who_are_you"
   | "about_mohamed"
   | "gratitude"
-  | "pricing";
+  | "pricing"
+  | "contact_whatsapp";
 
 const STOP_WORDS = new Set([
   "how", "are", "you", "and", "the", "for", "with", "have", "need", "want", "like", "can",
@@ -409,13 +410,21 @@ export function getConversationalIntent(query: string): ConversationalIntent | n
     return "pricing";
   }
 
+  // 7. Contact / WhatsApp
+  if (
+    /(whatsapp|whats\s*app|phone|call|contact|reach\s*out|talk\s*to\s*mohamed|hire|chat\s*on\s*whatsapp)/i.test(q) ||
+    /(واتس|واتساب|تواصل|اتصال|رقم|تليفون|موبايل|تواصل عبر واتساب|كلمني|كلم محمد)/i.test(q)
+  ) {
+    return "contact_whatsapp";
+  }
+
   return null;
 }
 
 export function getConversationalResponse(
   intent: ConversationalIntent,
   isArabic: boolean
-): { text: string; suggestedReplies: string[] } {
+): { text: string; suggestedReplies: string[]; whatsappUrl?: string } {
   switch (intent) {
     case "how_are_you":
       return isArabic
@@ -523,6 +532,7 @@ export function getConversationalResponse(
               "مشروع متكامل للشركات",
               "تواصل عبر واتساب",
             ],
+            whatsappUrl: "https://wa.me/201285544547?text=" + encodeURIComponent("مرحباً محمد، حابب أستفسر عن تقدير تكلفة ووقت تنفيذ مشروع برمجيات."),
           }
         : {
             text: "Pricing is determined by your system scope, required integrations (e.g. payment gateways, real-time sockets, ERP database scale), and launch timeline.\n\nTell me the core features you need, or click below to connect with Mohamed directly on WhatsApp for an accurate quote!",
@@ -531,6 +541,28 @@ export function getConversationalResponse(
               "Need complete enterprise system",
               "Connect on WhatsApp",
             ],
+            whatsappUrl: "https://wa.me/201285544547?text=" + encodeURIComponent("Hi Mohamed, I would like to get a quote and timeline estimation for a software project."),
+          };
+
+    case "contact_whatsapp":
+      return isArabic
+        ? {
+            text: "تقدر تتواصل مباشرة مع محمد شيبت على واتساب في أي وقت لمناقشة مشروعك أو طلب استشارة تقنية سريعة:\n\n📱 **واتساب:** +20 128 554 4547\n\nاضغط على الزر أدناه لبدء المحادثة فوراً:",
+            suggestedReplies: [
+              "استعراض مشاريع سابقة",
+              "عندي فكرة مشروع جديد",
+              "نظام إدارة أو ERP",
+            ],
+            whatsappUrl: "https://wa.me/201285544547?text=" + encodeURIComponent("مرحباً محمد، حابب أناقش معاك مشروع جديد."),
+          }
+        : {
+            text: "You can connect directly with Mohamed Shipet on WhatsApp anytime to discuss your project or explore technical feasibility:\n\n📱 **WhatsApp:** +20 128 554 4547\n\nClick the button below to start a chat directly:",
+            suggestedReplies: [
+              "Show me past projects",
+              "I have a new product idea",
+              "Need an ERP or CRM platform",
+            ],
+            whatsappUrl: "https://wa.me/201285544547?text=" + encodeURIComponent("Hi Mohamed, I would like to discuss a software project with you."),
           };
 
     default:
@@ -544,6 +576,137 @@ export function getConversationalResponse(
         ],
       };
   }
+}
+
+export interface ScopeBreakdown {
+  domain: string;
+  arabicDomain: string;
+  suggestedItems: string[];
+  arabicSuggestedItems: string[];
+}
+
+export function analyzeCustomIdea(query: string): ScopeBreakdown {
+  const q = query.toLowerCase();
+
+  if (/restaurant|cafe|food|pizza|burger|coffee|dining|bakery|مطعم|كافيه|مقهى|مقهي|اكل|أكل|طعام|وجبات/i.test(q)) {
+    return {
+      domain: "Restaurant & Cafe Website",
+      arabicDomain: "موقع وتطبيق مطعم أو كافيه",
+      suggestedItems: [
+        "Interactive Digital Menu with Dish Categories & Pricing",
+        "Online Food Ordering & Direct WhatsApp Checkout",
+        "Table Reservation System with Date/Time Picker",
+        "Google Maps Branch Location, Opening Hours & Reviews",
+      ],
+      arabicSuggestedItems: [
+        "منيو رقمي تفاعلي مع تصنيف الأطباق والأسعار والصور",
+        "نظام طلبات أونلاين مع تحويل الطلب فوراً للواتساب",
+        "نظام حجز طاولات تفاعلي لتحديد التاريخ والوقت وعدد الأفراد",
+        "موقع الفروع على خرائط جوجل، ساعات العمل، وتقييمات العملاء",
+      ],
+    };
+  }
+
+  if (/real\s*estate|property|properties|apartment|villa|broker|عقار|عقارات|شقق|فيلا|سمسار|مكتب عقاري/i.test(q)) {
+    return {
+      domain: "Real Estate & Property Platform",
+      arabicDomain: "منصة عقارات وإدارة وحدات سكنية",
+      suggestedItems: [
+        "Property Listings with Filters (Price, Location, Bedrooms)",
+        "High-Resolution Photo Galleries & Virtual Tour Ingestion",
+        "Lead Ingestion Forms & Instant WhatsApp Inquiry Button",
+        "Admin Portal to Add/Edit/Archive Property Listings",
+      ],
+      arabicSuggestedItems: [
+        "دليل عقارات تفاعلي مع فلترة متقدمة (السعر، المنطقة، المساحة)",
+        "معرض صور عالي الدقة ومخططات للوحدات السكنية",
+        "نماذج استقبال استفسارات العملاء والتواصل الفوري عبر واتساب",
+        "لوحة تحكم سهلة لإضافة وتعديل وحذف العقارات",
+      ],
+    };
+  }
+
+  if (/clinic|doctor|hospital|dental|medical|patient|عيادة|طبيب|دكتور|اسنان|أسنان|مستوصف/i.test(q)) {
+    return {
+      domain: "Medical Clinic & Healthcare Portal",
+      arabicDomain: "موقع عيادة أو مركز طبي",
+      suggestedItems: [
+        "Specialties, Doctors & Services Directory",
+        "Patient Online Appointment Booking Calendar",
+        "Clinic Locations, Working Hours & Emergency Contacts",
+        "Patient FAQs & WhatsApp Quick Consultation Channel",
+      ],
+      arabicSuggestedItems: [
+        "دليل التخصصات الطبية والأطباء والخدمات العلاجية",
+        "جدول مواعيد تفاعلي لحجز كشف ومواعيد العيادة بسهولة",
+        "مواقع العيادات، مواعيد العمل، وأرقام الطوارئ",
+        "قناة تواصل سريعة عبر واتساب لاستفسارات المرضى المباشرة",
+      ],
+    };
+  }
+
+  if (/gym|fitness|workout|trainer|crossfit|جيم|لياقة|رياضة|مدرب/i.test(q)) {
+    return {
+      domain: "Fitness & Gym Platform",
+      arabicDomain: "موقع مركز لياقة بدنية أو جيم",
+      suggestedItems: [
+        "Membership Plans & Online Subscription Purchases",
+        "Trainer Profiles & Weekly Class Schedule Grid",
+        "Facility Photo Tour & Equipment Highlights",
+        "Free Trial Request Form & Direct WhatsApp Contact",
+      ],
+      arabicSuggestedItems: [
+        "باقات الاشتراك والعضويات مع إمكانية الدفع والتسجيل",
+        "جداول الحصص والتمارين الأسبوعية والمدربين",
+        "جولة مصورة في الصالة الرياضية والأجهزة المتاحة",
+        "طلب حصة تجريبية مجانية وتواصل سريع عبر واتساب",
+      ],
+    };
+  }
+
+  if (/law|legal|attorney|lawyer|محامي|استشارات قانونية|قانون/i.test(q)) {
+    return {
+      domain: "Legal Practice & Law Firm Website",
+      arabicDomain: "موقع مكتب محاماة واستشارات قانونية",
+      suggestedItems: [
+        "Practice Areas & Legal Case Overview",
+        "Confidential Legal Consultation Booking Flow",
+        "Attorney Profiles & Track Record of Success",
+        "Direct WhatsApp & Encrypted Inquiry Form",
+      ],
+      arabicSuggestedItems: [
+        "استعراض مجالات التخصص والقضايا والاستشارات",
+        "حجز جلسة استشارة قانونية بسرية وأمان",
+        "السيرة المهنية للمحامين وإنجازات المكتب",
+        "نموذج تواصل مشفر وزر استشارة مباشرة عبر واتساب",
+      ],
+    };
+  }
+
+  // Default custom project breakdown
+  return {
+    domain: "Custom Web Application",
+    arabicDomain: "مشروع وتطبيق ويب مخصص",
+    suggestedItems: [
+      "Modern, Responsive High-Performance Frontend UI",
+      "Secure Backend Architecture & Scalable Database",
+      "Dedicated Admin Dashboard to Control Content & Workflows",
+      "Direct WhatsApp & Automated Notifications Integration",
+    ],
+    arabicSuggestedItems: [
+      "واجهة مستخدم عصرية وسريعة جداً متجاوبة مع كافة الشاشات",
+      "بنية تحتية برمجية آمنة للـ Backend وقاعدة بيانات سريعة",
+      "لوحة تحكم إدارية خاصة لإدارة المحتوى والبيانات وسير العمل",
+      "ربط مباشر مع واتساب والإشعارات وبوابات الدفع الإلكترونية",
+    ],
+  };
+}
+
+function matchesWordBoundary(text: string, term: string): boolean {
+  if (!term) return false;
+  const escaped = term.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const regex = new RegExp(`(^|[^\\w\\u0600-\\u06FF])${escaped}([^\\w\\u0600-\\u06FF]|$)`, "i");
+  return regex.test(text);
 }
 
 export function findMatchingProjects(query: string): ProjectSolution[] {
@@ -568,58 +731,74 @@ export function findMatchingProjects(query: string): ProjectSolution[] {
     let score = 0;
 
     if (normalized.includes(proj.title.toLowerCase()) || normalized.includes(proj.arabicTitle.toLowerCase())) {
-      score += 20;
+      score += 25;
     }
 
     for (const kw of proj.keywords) {
-      if (normalized.includes(kw)) {
+      if (matchesWordBoundary(normalized, kw)) {
         score += 8;
       }
       for (const word of words) {
-        if (word === kw) score += 5;
-        else if (word.length >= 4 && kw.length >= 4 && (word.includes(kw) || kw.includes(word))) {
-          score += 2;
-        }
-      }
-    }
-
-    for (const akw of proj.arabicKeywords) {
-      if (normalized.includes(akw)) {
-        score += 10;
-      }
-      for (const word of words) {
-        if (word === akw) score += 7;
-        else if (word.length >= 4 && akw.length >= 4 && (word.includes(akw) || akw.includes(word))) {
+        if (word === kw) {
+          score += 6;
+        } else if (
+          word.length >= 4 &&
+          (word === kw + "s" || kw === word + "s" || word === kw + "es" || kw === word + "es")
+        ) {
           score += 3;
         }
       }
     }
 
+    for (const akw of proj.arabicKeywords) {
+      if (matchesWordBoundary(normalized, akw)) {
+        score += 10;
+      }
+      for (const word of words) {
+        if (word === akw) {
+          score += 8;
+        }
+      }
+    }
+
     for (const t of proj.tech) {
-      if (normalized.includes(t.toLowerCase())) {
+      if (matchesWordBoundary(normalized, t.toLowerCase())) {
         score += 5;
       }
     }
 
     // High precision domain boost for exact terms
-    if ((words.includes("crm") || normalized.includes("crm") || normalized.includes("سي ار ام") || normalized.includes("عملاء")) && proj.id === "luxira-crm") {
+    if (
+      (words.includes("crm") || matchesWordBoundary(normalized, "crm") || matchesWordBoundary(normalized, "سي ار ام")) &&
+      proj.id === "luxira-crm"
+    ) {
       score += 35;
     }
-    if ((words.includes("erp") || normalized.includes("erp") || normalized.includes("اي ار بي") || normalized.includes("تخطيط موارد")) && proj.id === "pharmacy") {
+    if (
+      (words.includes("erp") || matchesWordBoundary(normalized, "erp") || matchesWordBoundary(normalized, "اي ار بي") || matchesWordBoundary(normalized, "تخطيط موارد")) &&
+      proj.id === "pharmacy"
+    ) {
       score += 35;
     }
-    if ((words.includes("ats") || normalized.includes("ats") || normalized.includes("توظيف")) && proj.id === "ats-website") {
+    if (
+      (words.includes("ats") || matchesWordBoundary(normalized, "ats") || matchesWordBoundary(normalized, "توظيف")) &&
+      proj.id === "ats-website"
+    ) {
       score += 25;
     }
-    if ((words.includes("iot") || normalized.includes("iot") || normalized.includes("انترنت الاشياء")) && proj.id === "supvend") {
+    if (
+      (words.includes("iot") || matchesWordBoundary(normalized, "iot") || matchesWordBoundary(normalized, "انترنت الاشياء")) &&
+      proj.id === "supvend"
+    ) {
       score += 25;
     }
 
     return { project: proj, score };
   });
 
+  // Only return as existing matching project if score is solid (>= 12)
   return scored
-    .filter((s) => s.score >= 5)
+    .filter((s) => s.score >= 12)
     .sort((a, b) => b.score - a.score)
     .map((s) => s.project);
 }
