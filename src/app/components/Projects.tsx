@@ -26,7 +26,7 @@ const projects: ProjectItem[] = [
     featured: true,
     githubUrl: 'https://github.com/superiorshipet/project-task-managment',
     demoUrl: 'https://tasharuky.duckdns.org/login',
-    image: '/assets/p2.png',
+    image: '/assets/real-projects/task-management.png',
   },
   {
     title: 'ATS Website',
@@ -38,7 +38,7 @@ const projects: ProjectItem[] = [
     featured: true,
     githubUrl: 'https://github.com/superiorshipet/ATS-website',
     demoUrl: 'https://the-ats-pro.duckdns.org/ats/',
-    image: '/assets/p6.png',
+    image: '/assets/real-projects/ats.png',
   },
   {
     title: 'Pharmacy Management',
@@ -50,7 +50,7 @@ const projects: ProjectItem[] = [
     featured: true,
     githubUrl: 'https://github.com/superiorshipet/pharmacy',
     demoUrl: 'https://tasharuky.duckdns.org/pharmacy/',
-    image: '/assets/medibroking.png',
+    image: '/assets/real-projects/pharmacy.png',
   },
   {
     title: 'Discover Madina',
@@ -62,7 +62,7 @@ const projects: ProjectItem[] = [
     featured: true,
     githubUrl: 'https://github.com/superiorshipet/discover-madina',
     demoUrl: 'https://discover-madina.duckdns.org/',
-    image: '/assets/p10.png',
+    image: '/assets/real-projects/discover-madina.png',
   },
   {
     title: 'SUPVEND',
@@ -74,7 +74,7 @@ const projects: ProjectItem[] = [
     featured: true,
     githubUrl: 'https://github.com/superiorshipet/SUPVEND',
     demoUrl: 'https://supvend.duckdns.org/supvend-ui/',
-    image: '/assets/projects/game-engine.jpg',
+    image: '/assets/real-projects/supvend.png',
   },
   {
     title: 'Study Mate',
@@ -85,7 +85,7 @@ const projects: ProjectItem[] = [
     category: 'Full-Stack',
     githubUrl: 'https://github.com/superiorshipet/study-mate',
     demoUrl: 'https://study-mate-blush.vercel.app',
-    image: '/assets/projects/elearning.jpg',
+    image: '/assets/real-projects/study-mate.png',
   },
   {
     title: 'Belvie Furniture',
@@ -95,7 +95,7 @@ const projects: ProjectItem[] = [
     orbit: 'Furniture store',
     category: 'Commerce',
     demoUrl: 'https://belvie-arc.duckdns.org/belvie/',
-    image: '/assets/projects/accessories.jpg',
+    image: '/assets/real-projects/belvie.png',
   },
   {
     title: 'Arabic Perfume Shop',
@@ -105,7 +105,7 @@ const projects: ProjectItem[] = [
     orbit: 'Perfume shop',
     category: 'Commerce',
     demoUrl: 'https://arabic-perfume.duckdns.org/arabic-perfume/',
-    image: '/assets/p4.png',
+    image: '/assets/real-projects/arabic-perfume.png',
   },
   {
     title: 'Podcasty',
@@ -116,7 +116,7 @@ const projects: ProjectItem[] = [
     category: 'Backend & APIs',
     githubUrl: 'https://github.com/superiorshipet/podcasty',
     demoUrl: 'https://tasharuky.duckdns.org/podcasty-ui/',
-    image: '/assets/p5.png',
+    image: '/assets/real-projects/podcasty.png',
   },
   {
     title: 'Stunning.io Task',
@@ -127,7 +127,7 @@ const projects: ProjectItem[] = [
     category: 'Backend & APIs',
     githubUrl: 'https://github.com/superiorshipet/stunning.io-task',
     demoUrl: 'https://tasharuky.duckdns.org/stunning.io-task/',
-    image: '/assets/disil.png',
+    image: '/assets/real-projects/stunning-task.png',
   },
   {
     title: 'Luxira Chat',
@@ -137,7 +137,7 @@ const projects: ProjectItem[] = [
     orbit: 'Realtime chat',
     category: 'Backend & APIs',
     githubUrl: 'https://github.com/superiorshipet/luxira-chatting-backend',
-    image: '/assets/beetsah.png',
+    image: '/assets/real-projects/luxira-chat.png',
   },
   {
     title: 'Distributed Database Project',
@@ -147,7 +147,7 @@ const projects: ProjectItem[] = [
     orbit: 'Systems',
     category: 'Systems & ML',
     githubUrl: 'https://github.com/superiorshipet/distribution-database-project-for-eng-farosa',
-    image: '/assets/coding-pov.png',
+    image: '/assets/real-projects/distributed-db.png',
   },
   {
     title: 'Data Mining Cancer Prediction',
@@ -157,7 +157,7 @@ const projects: ProjectItem[] = [
     orbit: 'Machine learning',
     category: 'Systems & ML',
     githubUrl: 'https://github.com/superiorshipet/data-mining-cancer-prediction-project',
-    image: '/assets/projects/auth-system.jpg',
+    image: '/assets/real-projects/cancer-prediction.png',
   },
   {
     title: 'Telegram Training Bot',
@@ -167,7 +167,7 @@ const projects: ProjectItem[] = [
     orbit: 'Training bot',
     category: 'Systems & ML',
     githubUrl: 'https://github.com/superiorshipet/telegram_training_bot',
-    image: '/assets/telegram-bot.png',
+    image: '/assets/real-projects/telegram-bot.png',
   },
   {
     title: 'Loxx King',
@@ -178,7 +178,7 @@ const projects: ProjectItem[] = [
     category: 'Full-Stack',
     githubUrl: 'https://github.com/superiorshipet/loxx-king',
     demoUrl: 'https://loxx-king.vercel.app',
-    image: '/assets/p3.png',
+    image: '/assets/real-projects/loxx-king.png',
   },
   {
     title: 'E-commerce for E-products',
@@ -189,7 +189,7 @@ const projects: ProjectItem[] = [
     category: 'Commerce',
     githubUrl: 'https://github.com/superiorshipet/E-commerce-for-E-products',
     demoUrl: 'https://e-commerce-for-e-products.vercel.app',
-    image: '/assets/p8.png',
+    image: '/assets/real-projects/e-commerce-e-products.png',
   },
 ];
 
