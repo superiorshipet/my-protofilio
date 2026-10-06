@@ -4,7 +4,8 @@ import { useEffect, useRef } from 'react';
 import { twMerge } from 'tailwind-merge';
 import { User } from 'lucide-react';
 
-const MOVEMENT_DAMPING = 1400;
+// Tuned for silky-smooth, effortless 1:1 rotation when dragging left and right
+const MOVEMENT_DAMPING = 360;
 const PI = Math.PI;
 
 export const GLOBE_CONFIG = {
