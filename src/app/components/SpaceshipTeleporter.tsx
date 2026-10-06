@@ -72,8 +72,6 @@ export function SpaceshipTeleporter({ techIcons }: SpaceshipTeleporterProps) {
         }}
         className="relative z-40 mb-1 sm:mb-2 select-none cursor-pointer group focus:outline-none"
         style={{
-          transform: 'translateZ(95px)',
-          transformStyle: 'preserve-3d',
         }}
       >
         {/* Ambient Saucer Energy Aura Glow */}
@@ -111,8 +109,6 @@ export function SpaceshipTeleporter({ techIcons }: SpaceshipTeleporterProps) {
       <div
         className="pointer-events-none absolute top-14 sm:top-18 bottom-2 left-1/2 -translate-x-1/2 w-64 sm:w-76 md:w-88 z-20 flex justify-center"
         style={{
-          transform: 'translateZ(25px)',
-          transformStyle: 'preserve-3d',
         }}
       >
         <motion.div
@@ -221,8 +217,6 @@ export function SpaceshipTeleporter({ techIcons }: SpaceshipTeleporterProps) {
       <div
         className="relative w-full max-w-[220px] sm:max-w-[270px] md:max-w-[310px] z-30"
         style={{
-          transform: 'translateZ(50px)',
-          transformStyle: 'preserve-3d',
         }}
       >
         <motion.div
@@ -280,8 +274,6 @@ export function SpaceshipTeleporter({ techIcons }: SpaceshipTeleporterProps) {
               bottom: pos.bottom,
               right: pos.right,
               left: pos.left,
-              transform:
-                index % 2 === 0 ? 'translateZ(85px)' : 'translateZ(105px)',
             }}
           >
             <div className={`animate-satellite-float-${index} flex h-9 w-9 sm:h-11 sm:w-11 items-center justify-center rounded-2xl border border-[var(--space-cyan)]/40 bg-[var(--space-panel)]/90 text-[var(--space-cyan)] shadow-[0_8px_24px_rgba(0,0,0,0.6),0_0_15px_rgba(100,244,255,0.25)] backdrop-blur-md`}>

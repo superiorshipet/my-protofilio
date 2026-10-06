@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { motion, useMotionValue, useSpring, useTransform } from 'motion/react';
+import { motion } from 'motion/react';
 import {
   Activity,
   Cloud,
@@ -94,28 +94,6 @@ function TypewriterHeadline() {
 }
 
 export function Hero() {
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-  const springX = useSpring(mouseX, { stiffness: 180, damping: 20 });
-  const springY = useSpring(mouseY, { stiffness: 180, damping: 20 });
-  const rotateX = useTransform(springY, [-0.5, 0.5], ['14deg', '-14deg']);
-  const rotateY = useTransform(springX, [-0.5, 0.5], ['-14deg', '14deg']);
-
-  const handlePortraitMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const width = rect.width;
-    const height = rect.height;
-    const mousePosFromCenterX = (e.clientX - rect.left) / width - 0.5;
-    const mousePosFromCenterY = (e.clientY - rect.top) / height - 0.5;
-    mouseX.set(mousePosFromCenterX);
-    mouseY.set(mousePosFromCenterY);
-  };
-
-  const handlePortraitMouseLeave = () => {
-    mouseX.set(0);
-    mouseY.set(0);
-  };
-
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     element?.scrollIntoView({ behavior: 'smooth' });
@@ -218,25 +196,15 @@ export function Hero() {
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.2, ease: 'easeOut' }}
           className="relative mx-auto flex w-full max-w-[340px] sm:max-w-[400px] lg:max-w-[460px] flex-col items-center justify-center py-2 sm:py-4"
-          style={{ perspective: 1200 }}
-          onMouseMove={handlePortraitMouseMove}
-          onMouseLeave={handlePortraitMouseLeave}
         >
           {/* Luminous Cosmic Energy Portal Halo behind portrait */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 rounded-full bg-gradient-to-tr from-[var(--space-cyan)]/25 via-[var(--space-violet)]/20 to-transparent blur-3xl pointer-events-none" />
           <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 sm:w-64 sm:h-64 rounded-full bg-[var(--space-cyan)]/15 blur-2xl pointer-events-none" />
 
           {/* 3D Tilting Character Container */}
-          <motion.div
-            style={{
-              rotateX,
-              rotateY,
-              transformStyle: 'preserve-3d',
-            }}
-            className="relative flex flex-col items-center justify-center select-none"
-          >
+          <div className="relative flex flex-col items-center justify-center select-none">
             <SpaceshipTeleporter techIcons={techIcons} />
-          </motion.div>
+          </div>
         </motion.div>
       </div>
     </section>
