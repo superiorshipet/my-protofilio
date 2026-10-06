@@ -57,7 +57,7 @@ export function AboutBento() {
             </h2>
 
             <p className="text-base sm:text-lg text-[var(--space-moon)] leading-relaxed max-w-xl mb-6">
-              Based in Egypt (UTC+2) and collaborating seamlessly with global teams across the United States, Turkey, and worldwide.
+              Based in Egypt (UTC+2) and collaborating seamlessly with global clients and teams across Saudi Arabia, Turkey, the United States, and worldwide.
             </p>
 
             {/* Live Cairo Clock & Availability Card */}
