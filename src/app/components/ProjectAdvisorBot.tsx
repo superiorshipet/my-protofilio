@@ -70,16 +70,16 @@ export function ProjectAdvisorBot() {
         onClick={() => setIsOpen(!isOpen)}
         whileHover={{ scale: 1.1, y: -2 }}
         whileTap={{ scale: 0.94 }}
-        className="fixed bottom-6 right-5 z-40 flex items-center justify-center cursor-pointer group"
+        className="fixed bottom-4 right-4 sm:bottom-6 sm:right-5 z-40 flex items-center justify-center cursor-pointer group"
         aria-label="Open AI Project Advisor"
       >
         {/* Futuristic Speech-Bubble Bot Container */}
-        <div className="relative flex h-14 w-14 items-center justify-center rounded-2xl border-2 border-[var(--space-cyan)]/70 bg-[var(--space-panel-strong)]/95 shadow-[0_12px_35px_rgba(0,0,0,0.7),0_0_25px_rgba(100,244,255,0.3)] backdrop-blur-xl transition-all duration-300 group-hover:border-[var(--space-cyan)] group-hover:shadow-[0_16px_50px_rgba(100,244,255,0.5)]">
+        <div className="relative flex h-12 w-12 sm:h-14 sm:w-14 items-center justify-center rounded-2xl border-2 border-[var(--space-cyan)]/70 bg-[var(--space-panel-strong)]/95 shadow-[0_12px_35px_rgba(0,0,0,0.7),0_0_25px_rgba(100,244,255,0.3)] backdrop-blur-xl transition-all duration-300 group-hover:border-[var(--space-cyan)] group-hover:shadow-[0_16px_50px_rgba(100,244,255,0.5)]">
           {/* Cyan Glow Aura */}
           <div className="absolute inset-0 -z-10 rounded-2xl bg-[var(--space-cyan)]/20 blur-md opacity-50 group-hover:opacity-100 transition-opacity" />
 
           {/* Bot Robot Icon from user reference */}
-          <BotRobotIcon className="h-9 w-9 text-[var(--space-cyan)] transition-transform duration-300 group-hover:scale-105" />
+          <BotRobotIcon className="h-7 w-7 sm:h-9 sm:w-9 text-[var(--space-cyan)] transition-transform duration-300 group-hover:scale-105" />
         </div>
       </motion.button>
 
