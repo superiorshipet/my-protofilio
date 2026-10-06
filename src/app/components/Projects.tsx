@@ -1,4 +1,4 @@
-import { useState, useRef, useMemo } from 'react';
+import { useState, useRef, useMemo, useEffect } from 'react';
 import { motion, AnimatePresence, useMotionValue, useSpring } from 'motion/react';
 import { ExternalLink, Github, Satellite, Sparkles, ChevronLeft, ChevronRight, Layers } from 'lucide-react';
 import { Button } from './ui/button';
@@ -205,26 +205,74 @@ export function Projects() {
 
   const cursorX = useMotionValue(0);
   const cursorY = useMotionValue(0);
-  const springX = useSpring(cursorX, { damping: 16, stiffness: 120 });
-  const springY = useSpring(cursorY, { damping: 16, stiffness: 120 });
+  const springX = useSpring(cursorX, { damping: 24, stiffness: 280 });
+  const springY = useSpring(cursorY, { damping: 24, stiffness: 280 });
 
-  const handleSectionMouseMove = (e: React.MouseEvent<HTMLElement>) => {
+  const updateCursorPos = (clientX: number, clientY: number, immediate = false) => {
     const previewWidth = 340;
     const previewHeight = 240;
-    let posX = e.clientX + 22;
-    let posY = e.clientY + 22;
+    let posX = clientX + 22;
+    let posY = clientY + 22;
 
     if (typeof window !== 'undefined') {
       if (posX + previewWidth > window.innerWidth) {
-        posX = e.clientX - previewWidth - 20;
+        posX = clientX - previewWidth - 20;
       }
       if (posY + previewHeight > window.innerHeight) {
-        posY = e.clientY - previewHeight - 20;
+        posY = clientY - previewHeight - 20;
       }
+      posX = Math.max(12, Math.min(posX, window.innerWidth - previewWidth - 12));
+      posY = Math.max(12, Math.min(posY, window.innerHeight - previewHeight - 12));
     }
 
     cursorX.set(posX);
     cursorY.set(posY);
+
+    if (immediate) {
+      springX.jump(posX);
+      springY.jump(posY);
+    }
+  };
+
+  // Pre-track mouse coordinates anywhere on the window so preview never starts from (0, 0)
+  useEffect(() => {
+    if (typeof window === 'undefined' || window.matchMedia('(pointer: coarse)').matches) {
+      return;
+    }
+    const handleGlobalMouseMove = (e: MouseEvent) => {
+      if (cursorX.get() === 0 && cursorY.get() === 0) {
+        updateCursorPos(e.clientX, e.clientY, true);
+      } else {
+        updateCursorPos(e.clientX, e.clientY, false);
+      }
+    };
+    window.addEventListener('mousemove', handleGlobalMouseMove, { passive: true });
+    return () => window.removeEventListener('mousemove', handleGlobalMouseMove);
+  }, []);
+
+  const handleCardMouseEnter = (e: React.MouseEvent, project: ProjectItem, index: number) => {
+    if (typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches) {
+      return;
+    }
+    // Snap spring directly to cursor on first entry to prevent flying from afar
+    updateCursorPos(e.clientX, e.clientY, true);
+    setHoveredIndex(index);
+    if (project.image) {
+      setPreview({
+        image: project.image,
+        title: project.title,
+        tech: project.tech,
+      });
+    }
+  };
+
+  const handleCardMouseMove = (e: React.MouseEvent) => {
+    updateCursorPos(e.clientX, e.clientY, false);
+  };
+
+  const handleCardMouseLeave = () => {
+    setHoveredIndex(null);
+    setPreview(null);
   };
 
   const filteredProjects = useMemo(() => {
@@ -254,7 +302,7 @@ export function Projects() {
     <section
       id="projects"
       ref={sectionRef}
-      onMouseMove={handleSectionMouseMove}
+      onMouseMove={(e) => updateCursorPos(e.clientX, e.clientY, false)}
       onMouseLeave={() => setPreview(null)}
       className="relative py-24"
     >
@@ -324,20 +372,9 @@ export function Projects() {
                 initial={{ opacity: 0, y: 24 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4, delay: index * 0.05 }}
-                onHoverStart={() => {
-                  setHoveredIndex(index);
-                  if (project.image) {
-                    setPreview({
-                      image: project.image,
-                      title: project.title,
-                      tech: project.tech,
-                    });
-                  }
-                }}
-                onHoverEnd={() => {
-                  setHoveredIndex(null);
-                  setPreview(null);
-                }}
+                onMouseEnter={(e) => handleCardMouseEnter(e, project, index)}
+                onMouseMove={handleCardMouseMove}
+                onMouseLeave={handleCardMouseLeave}
                 whileHover={{ y: -8 }}
                 className="group relative"
               >
@@ -467,12 +504,12 @@ export function Projects() {
       <AnimatePresence>
         {preview && (
           <motion.div
-            className="pointer-events-none fixed top-0 left-0 z-50 w-72 md:w-80 overflow-hidden rounded-xl border border-[var(--space-cyan)]/50 bg-[var(--space-void)]/95 shadow-[0_20px_50px_rgba(0,0,0,0.85),0_0_30px_rgba(100,244,255,0.3)] backdrop-blur-xl"
+            className="pointer-events-none fixed top-0 left-0 z-50 hidden md:block w-72 md:w-80 overflow-hidden rounded-xl border border-[var(--space-cyan)]/50 bg-[var(--space-void)]/95 shadow-[0_20px_50px_rgba(0,0,0,0.85),0_0_30px_rgba(100,244,255,0.3)] backdrop-blur-xl"
             style={{ x: springX, y: springY }}
-            initial={{ opacity: 0, scale: 0.88 }}
+            initial={{ opacity: 0, scale: 0.92 }}
             animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.88 }}
-            transition={{ duration: 0.16 }}
+            exit={{ opacity: 0, scale: 0.92 }}
+            transition={{ duration: 0.15, ease: 'easeOut' }}
           >
             {/* Browser top-bar */}
             <div className="flex items-center justify-between border-b border-[var(--space-border)] bg-[var(--space-panel)]/80 px-3 py-1.5">
