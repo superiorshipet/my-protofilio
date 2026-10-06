@@ -73,23 +73,6 @@ export function AboutBento() {
                   </span>
                 </div>
               </div>
-
-              <div className="hidden sm:block h-10 w-px bg-[var(--space-border)]" />
-
-              <div className="flex items-center gap-2.5">
-                <span className="relative flex h-3 w-3">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-                  <span className="relative inline-flex h-3 w-3 rounded-full bg-emerald-500" />
-                </span>
-                <div className="flex flex-col">
-                  <span className="text-[11px] font-mono uppercase tracking-wider text-[var(--space-muted)]">
-                    Availability
-                  </span>
-                  <span className="text-sm font-semibold text-emerald-400">
-                    Open to Remote & Global Work
-                  </span>
-                </div>
-              </div>
             </div>
 
           </motion.div>

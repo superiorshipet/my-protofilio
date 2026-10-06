@@ -35,7 +35,7 @@ export function FloatingActions() {
       className="fixed bottom-6 right-5 z-50 flex flex-col items-center gap-3"
     >
       {/* Social quick dock */}
-      <div className="space-glass flex flex-col gap-2 rounded-full p-2 border border-[var(--space-border)] backdrop-blur-md shadow-[0_12px_40px_rgba(0,0,0,0.4)]">
+      <div className="space-glass hidden sm:flex flex-col gap-2 rounded-full p-2 border border-[var(--space-border)] backdrop-blur-md shadow-[0_12px_40px_rgba(0,0,0,0.4)]">
         {actions.map(({ href, label, Icon }) => (
           <motion.a
             key={label}
