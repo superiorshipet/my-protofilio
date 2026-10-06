@@ -13,12 +13,12 @@ export const GLOBE_CONFIG = {
   phi: 0.1,
   theta: 0.3,
   dark: 1,
-  diffuse: 0.4,
+  diffuse: 0.5,
   mapSamples: 16000,
-  mapBrightness: 1.2,
-  baseColor: [1, 1, 1] as [number, number, number], // Starlight white dots
-  markerColor: [0.39, 0.96, 1] as [number, number, number],
-  glowColor: [1, 1, 1] as [number, number, number], // Soft natural white glow
+  mapBrightness: 1.35,
+  baseColor: [0.39, 0.96, 1] as [number, number, number], // Space Cyan dots matching design theme
+  markerColor: [0.39, 0.96, 1] as [number, number, number], // Space Cyan markers
+  glowColor: [0.39, 0.96, 1] as [number, number, number], // Space Cyan atmospheric glow
   markers: [] as Array<{ location: [number, number]; size: number }>, // Clean globe surface without giant disks
 };
 
