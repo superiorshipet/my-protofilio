@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { LucideIcon } from 'lucide-react';
-import ufoSaucerImg from '../../imports/ufo_saucer.png';
-import portraitImg from '../../imports/image.png';
+import ufoSaucerImg from '../../imports/ufo_saucer.webp';
+import portraitImg from '../../imports/portrait.webp';
 
 interface TechSatellite {
   Icon: LucideIcon;
@@ -97,6 +97,10 @@ export function SpaceshipTeleporter({ techIcons }: SpaceshipTeleporterProps) {
           <img
             src={ufoSaucerImg}
             alt="UFO Flying Saucer"
+            width={560}
+            height={242}
+            decoding="async"
+            fetchPriority="high"
             className="w-full h-auto object-contain transition-transform duration-300"
           />
 
@@ -272,6 +276,10 @@ export function SpaceshipTeleporter({ techIcons }: SpaceshipTeleporterProps) {
           <img
             src={portraitImg}
             alt="Mohamed Shipet (Superior)"
+            width={720}
+            height={1082}
+            decoding="async"
+            fetchPriority="high"
             className="w-full h-auto object-contain transition-transform duration-500 hover:scale-105"
           />
         </motion.div>

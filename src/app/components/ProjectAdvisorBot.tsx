@@ -186,6 +186,8 @@ export function ProjectAdvisorBot() {
                                 <img
                                   src={proj.image}
                                   alt={proj.title}
+                loading="lazy"
+                decoding="async"
                                   className="h-full w-full object-cover object-top"
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-[var(--space-void)] via-transparent to-transparent opacity-80" />
