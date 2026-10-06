@@ -133,7 +133,12 @@ export function Globe({
       const deltaY = clientY - pointerInteracting.current.y;
       pointerInteractionMovement.current = deltaX;
       r.set(r.get() + deltaX / MOVEMENT_DAMPING);
-      thetaMotion.set(thetaMotion.get() + deltaY / MOVEMENT_DAMPING);
+
+      // Clamp vertical motion to maintain natural planetary orientation
+      const nextTheta = thetaMotion.get() + deltaY / MOVEMENT_DAMPING;
+      const clampedTheta = Math.max(-0.85, Math.min(0.85, nextTheta));
+      thetaMotion.set(clampedTheta);
+
       pointerInteracting.current = { x: clientX, y: clientY };
       // Cancel automatic rotation targeting when user manually grabs
       targetPhiRef.current = null;
@@ -178,7 +183,7 @@ export function Globe({
 
       const currentPhi = phi + rs.get();
       const baseTheta = config.theta ?? 0.3;
-      const currentTheta = baseTheta + thetaSpring.get();
+      const currentTheta = Math.max(-0.95, Math.min(0.95, baseTheta + thetaSpring.get()));
 
       if (globe && typeof (globe as any).update === 'function') {
         (globe as any).update({
