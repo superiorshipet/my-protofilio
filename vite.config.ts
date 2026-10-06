@@ -94,6 +94,24 @@ export default defineConfig({
     },
   },
 
+  build: {
+    target: 'es2020',
+    cssCodeSplit: true,
+    chunkSizeWarningLimit: 800,
+    rollupOptions: {
+      output: {
+        // Stable vendor chunks: they stay cached across deploys and download in parallel
+        manualChunks(id: string) {
+          if (!id.includes('node_modules')) return;
+          if (id.includes('/three/')) return 'three';
+          if (id.includes('/react-dom/') || id.includes('/react/') || id.includes('/scheduler/')) return 'vendor-react';
+          if (id.includes('/motion') || id.includes('/framer-motion/')) return 'vendor-motion';
+          if (id.includes('/lucide-react/')) return 'vendor-icons';
+        },
+      },
+    },
+  },
+
   // File types to support raw imports. Never add .css, .tsx, or .ts files to this.
   assetsInclude: ['**/*.svg', '**/*.csv'],
 })
