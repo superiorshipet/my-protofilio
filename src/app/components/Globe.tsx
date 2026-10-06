@@ -15,16 +15,11 @@ export const GLOBE_CONFIG = {
   dark: 1,
   diffuse: 0.4,
   mapSamples: 16000,
-  mapBrightness: 1.3,
+  mapBrightness: 1.2,
   baseColor: [1, 1, 1] as [number, number, number], // Starlight white dots
-  markerColor: [0.39, 0.96, 1] as [number, number, number], // Space Cyan markers
-  glowColor: [0.39, 0.96, 1] as [number, number, number], // Space Cyan atmospheric halo
-  // Exactly 3 requested markers: Egypt, Turkey, USA
-  markers: [
-    { location: [30.0444, 31.2357] as [number, number], size: 0.1 }, // Egypt
-    { location: [41.0082, 28.9784] as [number, number], size: 0.09 }, // Turkey
-    { location: [40.7128, -74.006] as [number, number], size: 0.09 }, // USA
-  ],
+  markerColor: [0.39, 0.96, 1] as [number, number, number],
+  glowColor: [1, 1, 1] as [number, number, number], // Soft natural white glow
+  markers: [] as Array<{ location: [number, number]; size: number }>, // Clean globe surface without giant disks
 };
 
 export const GLOBE_HUBS = [
@@ -216,9 +211,6 @@ export function Globe({
         className
       )}
     >
-      {/* Subtle Cyan Atmosphere Glow behind the full globe */}
-      <div className="absolute inset-4 rounded-full bg-[var(--space-cyan)]/15 blur-2xl pointer-events-none -z-10" />
-
       {/* Interactive Canvas */}
       <canvas
         className="w-full h-full aspect-square opacity-0 transition-opacity duration-700 [contain:layout_paint_size] select-none touch-none cursor-grab active:cursor-grabbing"
@@ -249,7 +241,7 @@ export function Globe({
               e.stopPropagation();
               onSelectHub?.(hub.id);
             }}
-            className="group absolute -translate-x-1/2 -translate-y-1/2 cursor-pointer z-30 transition-all duration-200 select-none focus:outline-none"
+            className="group absolute -translate-x-1/2 -translate-y-1/2 cursor-pointer z-30 transition-transform duration-200 hover:scale-110 focus:outline-none"
             style={{
               left: '50%',
               top: '50%',
@@ -258,25 +250,17 @@ export function Globe({
             }}
             aria-label={`Show experience in ${hub.labelEn}`}
           >
-            {/* Glowing Radar Pulse & Interactive Chip */}
-            <div className="relative flex flex-col items-center">
-              {/* Radar rings */}
-              <span className="relative flex h-4 w-4 items-center justify-center">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--space-cyan)] opacity-75" />
-                <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-[var(--space-cyan)] shadow-[0_0_10px_#64f4ff]" />
-              </span>
-
-              {/* Pin Chip with Flag & Title */}
-              <div
-                className={`mt-1 flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs font-bold backdrop-blur-xl transition-all duration-200 shadow-lg ${
-                  isActive
-                    ? 'border-[var(--space-cyan)] bg-[var(--space-cyan)]/25 text-[var(--space-cyan)] shadow-[0_0_20px_rgba(100,244,255,0.6)] scale-110'
-                    : 'border-white/20 bg-[var(--space-midnight)]/90 text-white hover:border-[var(--space-cyan)] hover:text-[var(--space-cyan)] hover:scale-105'
-                }`}
-              >
-                <span>{hub.flag}</span>
-                <span className="whitespace-nowrap">{hub.labelAr}</span>
-              </div>
+            {/* Sleek Pin Badge without large circles */}
+            <div
+              className={`flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs font-semibold backdrop-blur-xl transition-all duration-200 shadow-lg ${
+                isActive
+                  ? 'border-[var(--space-cyan)] bg-[var(--space-cyan)]/25 text-[var(--space-cyan)] shadow-[0_0_14px_rgba(100,244,255,0.4)] scale-105'
+                  : 'border-white/20 bg-[var(--space-midnight)]/90 text-white hover:border-[var(--space-cyan)] hover:text-[var(--space-cyan)]'
+              }`}
+            >
+              <span className="h-2 w-2 rounded-full bg-[var(--space-cyan)] shadow-[0_0_6px_#64f4ff]" />
+              <span className="text-xs">{hub.flag}</span>
+              <span className="whitespace-nowrap">{hub.labelAr}</span>
             </div>
           </button>
         );
