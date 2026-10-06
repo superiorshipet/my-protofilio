@@ -247,7 +247,21 @@ export function SpaceshipTeleporter({ techIcons }: SpaceshipTeleporterProps) {
             fetchPriority="high"
             className="w-full h-auto object-contain transition-transform duration-500 hover:scale-105"
           />
+
+          {/* Glowing Energy Mist at base merging legs smoothly into the portal */}
+          <div className="pointer-events-none absolute bottom-0 inset-x-2 h-6 bg-gradient-to-t from-[var(--space-cyan)]/30 via-[var(--space-cyan)]/10 to-transparent rounded-b-xl blur-xs" />
         </motion.div>
+
+        {/* 4. Cosmic Teleporter Portal Disk ("دايرة كاني طالع منها") */}
+        <div className="pointer-events-none absolute -bottom-3 sm:-bottom-4 left-1/2 -translate-x-1/2 -z-10 flex items-center justify-center">
+          {/* Outer glowing perspective ellipse */}
+          <div className="relative w-56 sm:w-68 md:w-76 h-12 sm:h-15 rounded-[100%] border-2 border-[var(--space-cyan)]/60 bg-gradient-to-t from-[var(--space-cyan)]/30 via-[var(--space-cyan)]/10 to-transparent shadow-[0_0_35px_rgba(100,244,255,0.5),inset_0_0_20px_rgba(100,244,255,0.25)]">
+            {/* Inner concentric teleporter ring */}
+            <div className="absolute inset-1.5 sm:inset-2 rounded-[100%] border border-[var(--space-cyan)]/40 shadow-[0_0_12px_rgba(100,244,255,0.3)]" />
+            {/* Core energy portal vortex glow */}
+            <div className="absolute inset-x-4 inset-y-1.5 rounded-[100%] bg-[var(--space-cyan)]/25 blur-sm" />
+          </div>
+        </div>
       </div>
 
       {/* 4. Orbiting 3D Tech Satellites floating around Mohamed */}
