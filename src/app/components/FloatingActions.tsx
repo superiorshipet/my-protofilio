@@ -32,7 +32,7 @@ export function FloatingActions() {
       initial={{ opacity: 0, x: 20 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ delay: 1, duration: 0.5 }}
-      className="fixed bottom-6 right-5 z-50 flex flex-col items-center gap-3"
+      className="fixed bottom-20 right-5 z-40 flex flex-col items-center gap-3"
     >
       {/* Social quick dock */}
       <div className="space-glass hidden sm:flex flex-col gap-2 rounded-full p-2 border border-[var(--space-border)] backdrop-blur-md shadow-[0_12px_40px_rgba(0,0,0,0.4)]">

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Menu, Moon, Sun, X } from 'lucide-react';
+import { Menu, Moon, Sun, X, Sparkles } from 'lucide-react';
 
 const navItems = [
   { label: 'Home', href: '#home' },
@@ -93,7 +93,17 @@ export function Navigation() {
               ))}
             </div>
 
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2.5">
+              <motion.button
+                whileTap={{ scale: 0.94 }}
+                whileHover={{ scale: 1.04 }}
+                onClick={() => window.dispatchEvent(new CustomEvent('open-project-advisor'))}
+                className="hidden md:inline-flex items-center gap-1.5 rounded-full border border-[var(--space-cyan)]/40 bg-[var(--space-panel)] px-3.5 py-1.5 text-xs font-semibold text-[var(--space-starlight)] hover:border-[var(--space-cyan)] hover:bg-[var(--space-cyan)]/15 hover:text-[var(--space-cyan)] transition-all cursor-pointer shadow-[0_0_15px_rgba(100,244,255,0.15)]"
+              >
+                <Sparkles className="h-3.5 w-3.5 text-[var(--space-cyan)]" />
+                <span>AI Advisor</span>
+              </motion.button>
+
               <motion.button
                 whileTap={{ scale: 0.92 }}
                 whileHover={{ y: -1 }}
@@ -128,6 +138,18 @@ export function Navigation() {
             className="fixed top-0 right-0 bottom-0 w-64 bg-[var(--space-nav-bg)] backdrop-blur-xl border-l border-[var(--space-border)] z-40 md:hidden"
           >
             <div className="flex flex-col gap-4 p-8 mt-20">
+              <button
+                type="button"
+                onClick={() => {
+                  setIsMobileMenuOpen(false);
+                  window.dispatchEvent(new CustomEvent('open-project-advisor'));
+                }}
+                className="flex items-center gap-2 rounded-xl border border-[var(--space-cyan)]/50 bg-[var(--space-cyan)]/15 px-4 py-2.5 text-sm font-bold text-[var(--space-cyan)] shadow-[0_0_15px_rgba(100,244,255,0.2)] mb-2 text-left"
+              >
+                <Sparkles className="h-4 w-4" />
+                <span>AI Project Advisor</span>
+              </button>
+
               {navItems.map((item, index) => (
                 <motion.a
                   key={item.label}

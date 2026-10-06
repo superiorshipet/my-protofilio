@@ -10,6 +10,7 @@ import { DevThoughts } from './components/DevThoughts';
 import { Contact } from './components/Contact';
 import { Footer } from './components/Footer';
 import { FloatingActions } from './components/FloatingActions';
+import { ProjectAdvisorBot } from './components/ProjectAdvisorBot';
 
 export default function App() {
   return (
@@ -27,6 +28,7 @@ export default function App() {
         <Contact />
         <Footer />
         <FloatingActions />
+        <ProjectAdvisorBot />
       </div>
     </div>
   );
