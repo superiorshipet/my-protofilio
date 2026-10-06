@@ -185,16 +185,27 @@ export function Globe({
     const canvas = canvasRef.current;
     if (!canvas) return;
 
+    let globe: any;
+
     const onResize = () => {
       if (canvas) {
-        width = canvas.offsetWidth || 500;
+        const newWidth = canvas.offsetWidth || 500;
+        if (newWidth !== width) {
+          width = newWidth;
+          if (globe && typeof globe.update === 'function') {
+            globe.update({
+              width: width * 2,
+              height: width * 2,
+            });
+          }
+        }
       }
     };
 
     window.addEventListener('resize', onResize);
-    onResize();
+    width = canvas.offsetWidth || 500;
 
-    const globe = createGlobe(canvas, {
+    globe = createGlobe(canvas, {
       ...config,
       width: (width || 500) * 2,
       height: (width || 500) * 2,
@@ -231,8 +242,6 @@ export function Globe({
         (globe as any).update({
           phi: currentPhi,
           theta: currentTheta,
-          width: (width || 500) * 2,
-          height: (width || 500) * 2,
         });
       }
 
