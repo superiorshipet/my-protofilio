@@ -246,6 +246,16 @@ export function Globe({
         onPointerUp={() => updatePointerInteraction(null)}
         onPointerOut={() => updatePointerInteraction(null)}
         onMouseMove={(e) => updateMovement(e.clientX, e.clientY)}
+        onTouchStart={(e) => {
+          if (e.touches[0]) {
+            updatePointerInteraction({
+              x: e.touches[0].clientX,
+              y: e.touches[0].clientY,
+            });
+          }
+        }}
+        onTouchEnd={() => updatePointerInteraction(null)}
+        onTouchCancel={() => updatePointerInteraction(null)}
         onTouchMove={(e) => {
           if (e.touches[0]) {
             updateMovement(e.touches[0].clientX, e.touches[0].clientY);
