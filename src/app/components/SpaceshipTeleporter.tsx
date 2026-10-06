@@ -82,16 +82,8 @@ export function SpaceshipTeleporter({ techIcons }: SpaceshipTeleporterProps) {
         <div className="absolute inset-0 -z-10 rounded-full bg-[var(--space-cyan)]/25 blur-2xl opacity-75 group-hover:opacity-100 group-hover:bg-[var(--space-cyan)]/40 transition-all duration-300" />
 
         {/* Continuous Space Hovering Motion with Clean Scale-on-Hover & Click-feedback */}
-        <motion.div
-          animate={{
-            y: [0, -6, 0],
-            rotateZ: [-0.9, 0.9, -0.9],
-          }}
-          transition={{
-            y: { duration: 3.8, repeat: Infinity, ease: 'easeInOut' },
-            rotateZ: { duration: 4.6, repeat: Infinity, ease: 'easeInOut' },
-          }}
-          className="relative w-44 sm:w-56 md:w-64 drop-shadow-[0_12px_28px_rgba(0,0,0,0.85)] transition-all duration-200 group-hover:scale-105 group-active:scale-95"
+        <div
+          className="animate-ufo-hover relative w-44 sm:w-56 md:w-64 drop-shadow-[0_12px_28px_rgba(0,0,0,0.85)] transition-all duration-200 group-hover:scale-105 group-active:scale-95"
         >
           {/* High-Resolution 3D UFO Saucer Asset */}
           <img
@@ -114,7 +106,7 @@ export function SpaceshipTeleporter({ techIcons }: SpaceshipTeleporterProps) {
 
           {/* Energy Rings Aura around Saucer perimeter */}
           <div className="absolute -inset-1 rounded-full border border-[var(--space-cyan)]/20 pointer-events-none animate-pulse opacity-60 group-hover:border-[var(--space-cyan)]/50 transition-colors" />
-        </motion.div>
+        </div>
       </motion.div>
 
       {/* 2. Volumetric 3D Conical Tractor Beam (Pure SVG Polygon - Zero Box Artifacts) */}
@@ -184,44 +176,46 @@ export function SpaceshipTeleporter({ techIcons }: SpaceshipTeleporterProps) {
             <ellipse cx="150" cy="2" rx="36" ry="8" fill="url(#apexHotspot)" />
           </svg>
 
-          {/* Descending Conical Energy Waves */}
-          {[0, 1, 2].map((ringIdx) => (
-            <motion.div
-              key={`ring-${ringIdx}`}
-              initial={{ y: '5%', opacity: 0, scaleX: 0.35 }}
-              animate={{
-                y: ['5%', '92%'],
-                opacity: [0, 0.7, 0.35, 0],
-                scaleX: [0.35, 0.65, 0.95, 1.1],
-              }}
-              transition={{
-                duration: 2.2,
-                repeat: Infinity,
-                ease: 'linear',
-                delay: 1.0 + ringIdx * 0.7,
-              }}
-              className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 w-[85%] h-8 rounded-[100%] border-t-2 border-cyan-100/70 bg-gradient-to-b from-[var(--space-cyan)]/20 to-transparent"
-            />
-          ))}
+          {/* Descending Conical Energy Waves - only active during teleportation */}
+          {isBeaming &&
+            [0, 1, 2].map((ringIdx) => (
+              <motion.div
+                key={`ring-${ringIdx}`}
+                initial={{ y: '5%', opacity: 0, scaleX: 0.35 }}
+                animate={{
+                  y: ['5%', '92%'],
+                  opacity: [0, 0.7, 0.35, 0],
+                  scaleX: [0.35, 0.65, 0.95, 1.1],
+                }}
+                transition={{
+                  duration: 2.2,
+                  repeat: Infinity,
+                  ease: 'linear',
+                  delay: 1.0 + ringIdx * 0.7,
+                }}
+                className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 w-[85%] h-8 rounded-[100%] border-t-2 border-cyan-100/70 bg-gradient-to-b from-[var(--space-cyan)]/20 to-transparent"
+              />
+            ))}
 
-          {/* Descending Light Particles */}
-          {[20, 35, 50, 65, 80].map((leftPct, pIdx) => (
-            <motion.div
-              key={`p-${pIdx}`}
-              animate={{
-                y: [0, 360],
-                opacity: [0, 0.85, 0],
-              }}
-              transition={{
-                duration: 1.8 + (pIdx % 3) * 0.4,
-                repeat: Infinity,
-                ease: 'easeInOut',
-                delay: 0.8 + pIdx * 0.3,
-              }}
-              style={{ left: `${leftPct}%` }}
-              className="pointer-events-none absolute top-2 h-1.5 w-1.5 rounded-full bg-cyan-200 shadow-[0_0_8px_rgba(100,244,255,0.9)]"
-            />
-          ))}
+          {/* Descending Light Particles - only active during teleportation */}
+          {isBeaming &&
+            [20, 35, 50, 65, 80].map((leftPct, pIdx) => (
+              <motion.div
+                key={`p-${pIdx}`}
+                animate={{
+                  y: [0, 360],
+                  opacity: [0, 0.85, 0],
+                }}
+                transition={{
+                  duration: 1.8 + (pIdx % 3) * 0.4,
+                  repeat: Infinity,
+                  ease: 'easeInOut',
+                  delay: 0.8 + pIdx * 0.3,
+                }}
+                style={{ left: `${leftPct}%` }}
+                className="pointer-events-none absolute top-2 h-1.5 w-1.5 rounded-full bg-cyan-200 shadow-[0_0_8px_rgba(100,244,255,0.9)]"
+              />
+            ))}
         </motion.div>
       </div>
 
@@ -323,16 +317,10 @@ export function SpaceshipTeleporter({ techIcons }: SpaceshipTeleporterProps) {
           <motion.div
             key={`satellite-${label}`}
             initial={{ opacity: 0, scale: 0.2 }}
-            animate={{ opacity: 1, scale: 1, y: [0, -8, 0] }}
+            animate={{ opacity: 1, scale: 1 }}
             transition={{
               opacity: { delay: 1.6 + delay, duration: 0.4 },
               scale: { delay: 1.6 + delay, duration: 0.4 },
-              y: {
-                delay: 2.0 + delay,
-                duration: 3 + index * 0.4,
-                repeat: Infinity,
-                ease: 'easeInOut',
-              },
             }}
             className="absolute z-30 pointer-events-none"
             style={{
@@ -344,7 +332,7 @@ export function SpaceshipTeleporter({ techIcons }: SpaceshipTeleporterProps) {
                 index % 2 === 0 ? 'translateZ(85px)' : 'translateZ(105px)',
             }}
           >
-            <div className="flex h-9 w-9 sm:h-11 sm:w-11 items-center justify-center rounded-2xl border border-[var(--space-cyan)]/40 bg-[var(--space-panel)]/90 text-[var(--space-cyan)] shadow-[0_8px_24px_rgba(0,0,0,0.6),0_0_15px_rgba(100,244,255,0.25)] backdrop-blur-md">
+            <div className={`animate-satellite-float-${index} flex h-9 w-9 sm:h-11 sm:w-11 items-center justify-center rounded-2xl border border-[var(--space-cyan)]/40 bg-[var(--space-panel)]/90 text-[var(--space-cyan)] shadow-[0_8px_24px_rgba(0,0,0,0.6),0_0_15px_rgba(100,244,255,0.25)] backdrop-blur-md`}>
               <Icon className="h-4 w-4 sm:h-5 sm:w-5" />
             </div>
           </motion.div>

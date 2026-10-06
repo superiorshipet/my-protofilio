@@ -218,21 +218,50 @@ export function Globe({
       height: initialWidth * sizeMultiplier,
     });
 
-    // Skip all rendering work while the globe is off-screen or the tab is hidden.
+    // Completely pause all WebGL updates when the globe is off-screen or tab is hidden.
     let visible = true;
+    let animId = 0;
+    let isRunning = false;
+
+    const startLoop = () => {
+      if (!isRunning && visible && !document.hidden) {
+        isRunning = true;
+        animId = requestAnimationFrame(animate);
+      }
+    };
+
+    const stopLoop = () => {
+      if (isRunning) {
+        cancelAnimationFrame(animId);
+        isRunning = false;
+      }
+    };
+
     const io =
       typeof IntersectionObserver !== 'undefined'
         ? new IntersectionObserver(([entry]) => {
             visible = entry.isIntersecting;
+            if (visible) {
+              startLoop();
+            } else {
+              stopLoop();
+            }
           })
         : null;
     io?.observe(canvas);
 
-    let animId: number;
+    const onVisibilityChange = () => {
+      if (!document.hidden && visible) {
+        startLoop();
+      } else {
+        stopLoop();
+      }
+    };
+    document.addEventListener('visibilitychange', onVisibilityChange);
 
     const animate = () => {
       if (!visible || document.hidden) {
-        animId = requestAnimationFrame(animate);
+        isRunning = false;
         return;
       }
       // Smooth targeting rotation or ambient spin
@@ -286,7 +315,7 @@ export function Globe({
       animId = requestAnimationFrame(animate);
     };
 
-    animId = requestAnimationFrame(animate);
+    startLoop();
 
     setTimeout(() => {
       if (canvas) {
@@ -295,7 +324,8 @@ export function Globe({
     }, 50);
 
     return () => {
-      cancelAnimationFrame(animId);
+      stopLoop();
+      document.removeEventListener('visibilitychange', onVisibilityChange);
       io?.disconnect();
       globe.destroy();
       window.removeEventListener('resize', onResize);

@@ -87,30 +87,12 @@ export function DevThoughts() {
             </div>
           </div>
 
-          {/* Floating Elements */}
-          <motion.div
-            animate={{
-              y: [0, -20, 0],
-              rotate: [0, 5, 0],
-            }}
-            transition={{
-              duration: 4,
-              repeat: Infinity,
-              ease: 'easeInOut',
-            }}
-            className="absolute -top-8 -right-8 w-16 h-16 rounded-2xl bg-[var(--space-panel)] backdrop-blur-sm border border-[var(--space-border)]"
+          {/* Floating Elements - Hardware accelerated off-main-thread CSS animations */}
+          <div
+            className="animate-thought-float-1 pointer-events-none absolute -top-8 -right-8 w-16 h-16 rounded-2xl bg-[var(--space-panel)] backdrop-blur-sm border border-[var(--space-border)]"
           />
-          <motion.div
-            animate={{
-              y: [0, 20, 0],
-              rotate: [0, -5, 0],
-            }}
-            transition={{
-              duration: 5,
-              repeat: Infinity,
-              ease: 'easeInOut',
-            }}
-            className="absolute -bottom-8 -left-8 w-20 h-20 rounded-2xl bg-[var(--space-panel)] backdrop-blur-sm border border-[var(--space-border)]"
+          <div
+            className="animate-thought-float-2 pointer-events-none absolute -bottom-8 -left-8 w-20 h-20 rounded-2xl bg-[var(--space-panel)] backdrop-blur-sm border border-[var(--space-border)]"
           />
         </motion.div>
       </div>

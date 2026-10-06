@@ -49,48 +49,10 @@ const starTrails = Array.from({ length: 9 }, (_, index) => ({
   width: 42 + (index % 3) * 24,
 }));
 
-export function Hero() {
+function TypewriterHeadline() {
   const [displayText, setDisplayText] = useState('');
   const [currentSequenceIndex, setCurrentSequenceIndex] = useState(0);
   const [isTyping, setIsTyping] = useState(true);
-
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-  const springX = useSpring(mouseX, { stiffness: 180, damping: 20 });
-  const springY = useSpring(mouseY, { stiffness: 180, damping: 20 });
-  const rotateX = useTransform(springY, [-0.5, 0.5], ['14deg', '-14deg']);
-  const rotateY = useTransform(springX, [-0.5, 0.5], ['-14deg', '14deg']);
-
-  const handlePortraitMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const width = rect.width;
-    const height = rect.height;
-    const mousePosFromCenterX = (e.clientX - rect.left) / width - 0.5;
-    const mousePosFromCenterY = (e.clientY - rect.top) / height - 0.5;
-    mouseX.set(mousePosFromCenterX);
-    mouseY.set(mousePosFromCenterY);
-  };
-
-  const handlePortraitMouseLeave = () => {
-    mouseX.set(0);
-    mouseY.set(0);
-  };
-
-  const handlePortraitTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
-    if (e.touches.length > 0) {
-      const touch = e.touches[0];
-      const rect = e.currentTarget.getBoundingClientRect();
-      const mousePosFromCenterX = (touch.clientX - rect.left) / rect.width - 0.5;
-      const mousePosFromCenterY = (touch.clientY - rect.top) / rect.height - 0.5;
-      mouseX.set(mousePosFromCenterX);
-      mouseY.set(mousePosFromCenterY);
-    }
-  };
-
-  const handlePortraitTouchEnd = () => {
-    mouseX.set(0);
-    mouseY.set(0);
-  };
 
   useEffect(() => {
     const currentPhrase = typingSequence[currentSequenceIndex];
@@ -119,6 +81,40 @@ export function Hero() {
     setCurrentSequenceIndex((currentSequenceIndex + 1) % typingSequence.length);
     setIsTyping(true);
   }, [displayText, currentSequenceIndex, isTyping]);
+
+  return (
+    <h1 className="font-display mb-5 sm:mb-6 min-h-[3.8rem] sm:min-h-[5.5rem] lg:min-h-[7.2rem] text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.08] tracking-tight text-[var(--space-starlight)]">
+      {displayText}
+      <span
+        aria-hidden="true"
+        className="ml-2 inline-block h-[0.72em] w-1.5 sm:w-2 translate-y-1 sm:translate-y-2 bg-[var(--space-cyan)] animate-pulse"
+      />
+    </h1>
+  );
+}
+
+export function Hero() {
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  const springX = useSpring(mouseX, { stiffness: 180, damping: 20 });
+  const springY = useSpring(mouseY, { stiffness: 180, damping: 20 });
+  const rotateX = useTransform(springY, [-0.5, 0.5], ['14deg', '-14deg']);
+  const rotateY = useTransform(springX, [-0.5, 0.5], ['-14deg', '14deg']);
+
+  const handlePortraitMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const width = rect.width;
+    const height = rect.height;
+    const mousePosFromCenterX = (e.clientX - rect.left) / width - 0.5;
+    const mousePosFromCenterY = (e.clientY - rect.top) / height - 0.5;
+    mouseX.set(mousePosFromCenterX);
+    mouseY.set(mousePosFromCenterY);
+  };
+
+  const handlePortraitMouseLeave = () => {
+    mouseX.set(0);
+    mouseY.set(0);
+  };
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
@@ -165,14 +161,7 @@ export function Hero() {
             <span className="truncate">Building reliable products from backend orbit to polished interface</span>
           </motion.div>
 
-          <h1 className="font-display mb-5 sm:mb-6 min-h-[3.8rem] sm:min-h-[5.5rem] lg:min-h-[7.2rem] text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.08] tracking-tight text-[var(--space-starlight)]">
-            {displayText}
-            <motion.span
-              animate={{ opacity: [1, 0] }}
-              transition={{ duration: 0.8, repeat: Infinity, repeatType: 'reverse' }}
-              className="ml-2 inline-block h-[0.72em] w-1.5 sm:w-2 translate-y-1 sm:translate-y-2 bg-[var(--space-cyan)]"
-            />
-          </h1>
+          <TypewriterHeadline />
 
           <p className="mb-6 sm:mb-8 max-w-2xl text-base sm:text-lg leading-relaxed text-[var(--space-moon)] md:text-xl">
             I am Mohamed Shipet, also known as Superior. I build scalable systems, practical web products, and clean user experiences with the kind of engineering that stays steady after launch.
@@ -232,27 +221,17 @@ export function Hero() {
           style={{ perspective: 1200 }}
           onMouseMove={handlePortraitMouseMove}
           onMouseLeave={handlePortraitMouseLeave}
-          onTouchMove={handlePortraitTouchMove}
-          onTouchEnd={handlePortraitTouchEnd}
         >
           {/* Luminous Cosmic Energy Portal Halo behind portrait */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 rounded-full bg-gradient-to-tr from-[var(--space-cyan)]/25 via-[var(--space-violet)]/20 to-transparent blur-3xl pointer-events-none" />
           <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 sm:w-64 sm:h-64 rounded-full bg-[var(--space-cyan)]/15 blur-2xl pointer-events-none" />
 
-          {/* 3D Tilting Character Container with Floating Hover */}
+          {/* 3D Tilting Character Container */}
           <motion.div
             style={{
               rotateX,
               rotateY,
               transformStyle: 'preserve-3d',
-            }}
-            animate={{
-              y: [0, -10, 0],
-            }}
-            transition={{
-              duration: 5,
-              repeat: Infinity,
-              ease: 'easeInOut',
             }}
             className="relative flex flex-col items-center justify-center select-none"
           >

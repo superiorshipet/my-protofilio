@@ -33,18 +33,13 @@ function useNearViewport<T extends Element>(rootMargin = '300px') {
   return [ref, near] as const;
 }
 
-export function AboutBento() {
-  const [globeRef, globeNear] = useNearViewport<HTMLDivElement>();
+function CairoClock() {
   const [time, setTime] = useState('');
-  const [selectedHubId, setSelectedHubId] = useState<HubId | null>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [targetPhi, setTargetPhi] = useState<number | null>(null);
 
   useEffect(() => {
     const updateTime = () => {
-      const now = new Date();
       setTime(
-        now.toLocaleTimeString('en-US', {
+        new Date().toLocaleTimeString('en-US', {
           timeZone: 'Africa/Cairo',
           hour: '2-digit',
           minute: '2-digit',
@@ -57,6 +52,19 @@ export function AboutBento() {
     const interval = setInterval(updateTime, 1000);
     return () => clearInterval(interval);
   }, []);
+
+  return (
+    <span className="font-mono text-2xl font-bold text-[var(--space-starlight)] tabular-nums">
+      {time || '12:00:00 AM'}
+    </span>
+  );
+}
+
+export function AboutBento() {
+  const [globeRef, globeNear] = useNearViewport<HTMLDivElement>();
+  const [selectedHubId, setSelectedHubId] = useState<HubId | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [targetPhi, setTargetPhi] = useState<number | null>(null);
 
   const handleSelectHub = (id: HubId) => {
     setSelectedHubId(id);
@@ -97,9 +105,7 @@ export function AboutBento() {
                   <span className="text-[11px] font-mono uppercase tracking-wider text-[var(--space-muted)]">
                     Local Time (Cairo)
                   </span>
-                  <span className="font-mono text-2xl font-bold text-[var(--space-starlight)] tabular-nums">
-                    {time || '12:00:00 AM'}
-                  </span>
+                  <CairoClock />
                 </div>
               </div>
             </div>

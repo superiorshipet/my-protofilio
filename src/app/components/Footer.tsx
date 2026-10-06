@@ -13,12 +13,9 @@ export function Footer() {
             className="text-[var(--space-moon)] flex items-center gap-1"
           >
             Built with
-            <motion.span
-              animate={{ scale: [1, 1.2, 1] }}
-              transition={{ duration: 1, repeat: Infinity }}
-            >
+            <span className="inline-block animate-pulse">
               <Heart className="w-4 h-4 text-red-500 fill-red-500" />
-            </motion.span>
+            </span>
             by Mohamed
           </motion.p>
         </div>

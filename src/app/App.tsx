@@ -19,10 +19,12 @@ function LazySection({
   children,
   rootMargin = '400px',
   minHeight = '300px',
+  className = '',
 }: {
   children: React.ReactNode;
   rootMargin?: string;
   minHeight?: string;
+  className?: string;
 }) {
   const ref = useRef<HTMLDivElement | null>(null);
   const [inView, setInView] = useState(false);
@@ -48,7 +50,7 @@ function LazySection({
   }, [inView, rootMargin]);
 
   return (
-    <div ref={ref} style={{ minHeight: inView ? undefined : minHeight }}>
+    <div ref={ref} className={className} style={{ minHeight: inView ? undefined : minHeight }}>
       {inView ? <Suspense fallback={null}>{children}</Suspense> : null}
     </div>
   );
@@ -80,9 +82,9 @@ export default function App() {
         <Navigation />
         <Hero />
         <LazySection minHeight="450px"><AboutBento /></LazySection>
-        <LazySection minHeight="600px"><Projects /></LazySection>
-        <LazySection minHeight="500px"><Experience /></LazySection>
-        <LazySection minHeight="400px"><Skills /></LazySection>
+        <LazySection minHeight="600px" className="mobile-content-visibility"><Projects /></LazySection>
+        <LazySection minHeight="500px" className="mobile-content-visibility"><Experience /></LazySection>
+        <LazySection minHeight="400px" className="mobile-content-visibility"><Skills /></LazySection>
         <LazySection minHeight="300px"><Statistics /></LazySection>
         <LazySection minHeight="300px"><DevThoughts /></LazySection>
         <LazySection minHeight="450px"><Contact /></LazySection>

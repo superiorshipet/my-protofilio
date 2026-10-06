@@ -361,6 +361,83 @@
     will-change: transform;
   }
 
+  @media (max-width: 768px) {
+    .portfolio-depth-card {
+      transform-style: flat;
+      will-change: auto;
+    }
+
+    .mobile-content-visibility {
+      content-visibility: auto;
+      contain-intrinsic-size: 1px 500px;
+    }
+  }
+
+  /* Hardware-accelerated GPU animations that run 100% off the main JS thread */
+  @keyframes ufo-hover {
+    0%, 100% {
+      transform: translateY(0px) rotate(0deg);
+    }
+    50% {
+      transform: translateY(-6px) rotate(0.8deg);
+    }
+  }
+
+  @keyframes satellite-float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-7px);
+    }
+  }
+
+  @keyframes thought-float-1 {
+    0%, 100% {
+      transform: translateY(0px) rotate(0deg);
+    }
+    50% {
+      transform: translateY(-16px) rotate(4deg);
+    }
+  }
+
+  @keyframes thought-float-2 {
+    0%, 100% {
+      transform: translateY(0px) rotate(0deg);
+    }
+    50% {
+      transform: translateY(16px) rotate(-4deg);
+    }
+  }
+
+  .animate-ufo-hover {
+    animation: ufo-hover 4s ease-in-out infinite;
+    transform: translateZ(0);
+  }
+
+  .animate-satellite-float-0 {
+    animation: satellite-float 3.2s ease-in-out infinite;
+  }
+  .animate-satellite-float-1 {
+    animation: satellite-float 3.6s ease-in-out infinite 0.4s;
+  }
+  .animate-satellite-float-2 {
+    animation: satellite-float 4s ease-in-out infinite 0.8s;
+  }
+  .animate-satellite-float-3 {
+    animation: satellite-float 4.4s ease-in-out infinite 1.2s;
+  }
+
+  .animate-thought-float-1 {
+    animation: thought-float-1 5.5s ease-in-out infinite;
+    transform: translateZ(0);
+  }
+
+  .animate-thought-float-2 {
+    animation: thought-float-2 6.5s ease-in-out infinite;
+    transform: translateZ(0);
+  }
+
   .portfolio-depth-card::before {
     content: '';
     position: absolute;
