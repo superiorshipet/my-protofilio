@@ -92,9 +92,6 @@ export function AboutBento() {
               </div>
             </div>
 
-            <p className="text-xs font-mono text-[var(--space-muted)] mt-5 flex items-center gap-2">
-              <span className="text-base">🌍</span> تدوير تفاعلي 360° • انقر على أي نقطة على كوكب الأرض (مصر، تركيا، أمريكا) لاستعراض الخبرات
-            </p>
           </motion.div>
 
           {/* Right Column: Full Round 3D Earth Globe with 3 Interactive Markers */}

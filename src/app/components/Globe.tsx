@@ -23,9 +23,9 @@ export const GLOBE_CONFIG = {
 };
 
 export const GLOBE_HUBS = [
-  { id: 'egypt', flag: '🇪🇬', labelAr: 'مصر', labelEn: 'Egypt', lat: 30.0444, lon: 31.2357, roleAr: 'المقر الأساسي & تدريب شركات ريموت' },
-  { id: 'turkey', flag: '🇹🇷', labelAr: 'تركيا', labelEn: 'Turkey', lat: 41.0082, lon: 28.9784, roleAr: 'لوكسيرا (Luxera)' },
-  { id: 'usa', flag: '🇺🇸', labelAr: 'أمريكا', labelEn: 'USA', lat: 40.7128, lon: -74.006, roleAr: 'ستار جيمز (Star Games)' },
+  { id: 'egypt', flag: '🇪🇬', labelEn: 'Egypt', lat: 30.0444, lon: 31.2357, roleEn: 'Core Base & Remote Training' },
+  { id: 'turkey', flag: '🇹🇷', labelEn: 'Turkey', lat: 41.0082, lon: 28.9784, roleEn: 'Luxera Group' },
+  { id: 'usa', flag: '🇺🇸', labelEn: 'USA', lat: 40.7128, lon: -74.006, roleEn: 'Star Games' },
 ] as const;
 
 export type HubId = typeof GLOBE_HUBS[number]['id'];
@@ -258,9 +258,8 @@ export function Globe({
                   : 'border-white/20 bg-[var(--space-midnight)]/90 text-white hover:border-[var(--space-cyan)] hover:text-[var(--space-cyan)]'
               }`}
             >
-              <span className="h-2 w-2 rounded-full bg-[var(--space-cyan)] shadow-[0_0_6px_#64f4ff]" />
               <span className="text-xs">{hub.flag}</span>
-              <span className="whitespace-nowrap">{hub.labelAr}</span>
+              <span className="whitespace-nowrap">{hub.labelEn}</span>
             </div>
           </button>
         );

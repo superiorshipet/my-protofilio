@@ -32,7 +32,7 @@ export function WorkHubModal({ hub, isOpen, onClose, onSelectHub }: WorkHubModal
             exit={{ opacity: 0, scale: 0.92, y: 20 }}
             transition={{ type: 'spring', damping: 25, stiffness: 280 }}
             className="relative w-full max-w-2xl rounded-3xl border border-[var(--space-border)] bg-[var(--space-midnight)]/95 p-6 sm:p-8 shadow-[0_24px_80px_rgba(0,0,0,0.6)] backdrop-blur-2xl z-10 text-[var(--space-starlight)]"
-            dir="rtl"
+            dir="ltr"
           >
             {/* Top Close Button & Quick Country Selectors */}
             <div className="flex items-center justify-between gap-4 mb-6 pb-4 border-b border-[var(--space-border)]">
@@ -52,7 +52,7 @@ export function WorkHubModal({ hub, isOpen, onClose, onSelectHub }: WorkHubModal
                       }`}
                     >
                       <span>{item.flag}</span>
-                      <span>{item.countryAr}</span>
+                      <span>{item.countryEn}</span>
                     </button>
                   );
                 })}
@@ -83,11 +83,11 @@ export function WorkHubModal({ hub, isOpen, onClose, onSelectHub }: WorkHubModal
                       {hub.countryEn}
                     </span>
                     <span className="text-xs px-2 py-0.5 rounded-full border border-white/10 bg-white/5 text-[var(--space-muted)]">
-                      {hub.workTypeAr}
+                      {hub.workTypeEn}
                     </span>
                   </div>
                   <h3 className="font-display text-2xl sm:text-3xl font-bold text-white tracking-tight mt-1">
-                    {hub.companyAr}
+                    {hub.companyEn}
                   </h3>
                 </div>
               </div>
@@ -98,16 +98,16 @@ export function WorkHubModal({ hub, isOpen, onClose, onSelectHub }: WorkHubModal
               <div className="flex items-center gap-2.5 text-sm">
                 <Briefcase className="h-4 w-4 text-[var(--space-cyan)] shrink-0" />
                 <div>
-                  <span className="text-xs text-[var(--space-muted)] block">المسمى الوظيفي:</span>
-                  <span className="font-semibold text-white">{hub.roleAr}</span>
+                  <span className="text-xs text-[var(--space-muted)] block">Role & Focus:</span>
+                  <span className="font-semibold text-white">{hub.roleEn}</span>
                 </div>
               </div>
 
               <div className="flex items-center gap-2.5 text-sm">
                 <MapPin className="h-4 w-4 text-[var(--space-violet)] shrink-0" />
                 <div>
-                  <span className="text-xs text-[var(--space-muted)] block">الموقع الجغرافي:</span>
-                  <span className="font-semibold text-white">{hub.locationAr}</span>
+                  <span className="text-xs text-[var(--space-muted)] block">Location:</span>
+                  <span className="font-semibold text-white">{hub.locationEn}</span>
                 </div>
               </div>
             </div>
@@ -116,11 +116,11 @@ export function WorkHubModal({ hub, isOpen, onClose, onSelectHub }: WorkHubModal
             <div className="mb-6 space-y-3">
               <h4 className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--space-cyan)] flex items-center gap-2">
                 <Sparkles className="h-3.5 w-3.5" />
-                تفاصيل الخبرة والعمل
+                Key Highlights & Experience
               </h4>
 
               <div className="space-y-2.5">
-                {hub.highlightsAr.map((bullet, idx) => (
+                {hub.highlightsEn.map((bullet, idx) => (
                   <div key={idx} className="flex items-start gap-2.5 text-sm sm:text-base text-[var(--space-moon)] leading-relaxed">
                     <CheckCircle2 className="h-4 w-4 text-emerald-400 shrink-0 mt-1" />
                     <span>{bullet}</span>
@@ -132,7 +132,7 @@ export function WorkHubModal({ hub, isOpen, onClose, onSelectHub }: WorkHubModal
             {/* Tech Stack Tags */}
             <div className="mb-6">
               <span className="text-xs text-[var(--space-muted)] font-mono block mb-2">
-                التقنيات ومنظومة العمل:
+                Engineering Stack & Architecture:
               </span>
               <div className="flex flex-wrap gap-2">
                 {hub.techStack.map((tech) => (
@@ -149,7 +149,7 @@ export function WorkHubModal({ hub, isOpen, onClose, onSelectHub }: WorkHubModal
             {/* Bottom Actions */}
             <div className="flex items-center justify-between pt-4 border-t border-[var(--space-border)]">
               <span className="text-xs text-[var(--space-muted)] font-mono">
-                إحداثيات الموقع: [{hub.coords[0]}°, {hub.coords[1]}°]
+                Coordinates: [{hub.coords[0]}°, {hub.coords[1]}°]
               </span>
 
               <button
@@ -157,7 +157,7 @@ export function WorkHubModal({ hub, isOpen, onClose, onSelectHub }: WorkHubModal
                 onClick={onClose}
                 className="px-5 py-2 rounded-xl border border-[var(--space-border)] bg-white/10 hover:bg-white/20 text-white text-xs font-semibold transition-colors cursor-pointer"
               >
-                إغلاق
+                Close
               </button>
             </div>
           </motion.div>
