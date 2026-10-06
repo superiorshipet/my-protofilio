@@ -1,12 +1,12 @@
 import { motion, AnimatePresence } from 'motion/react';
 import { X, ExternalLink, MapPin, Building2, Briefcase, Sparkles, CheckCircle2 } from 'lucide-react';
-import { WorkHub, WORK_HUBS } from '../data/workHubs';
+import { WorkHub, WORK_HUBS, HubId } from '../data/workHubs';
 
 interface WorkHubModalProps {
   hub: WorkHub | null;
   isOpen: boolean;
   onClose: () => void;
-  onSelectHub: (id: 'egypt' | 'turkey' | 'usa') => void;
+  onSelectHub: (id: HubId) => void;
 }
 
 export function WorkHubModal({ hub, isOpen, onClose, onSelectHub }: WorkHubModalProps) {
@@ -36,8 +36,8 @@ export function WorkHubModal({ hub, isOpen, onClose, onSelectHub }: WorkHubModal
           >
             {/* Top Close Button & Quick Country Selectors */}
             <div className="flex items-center justify-between gap-4 mb-6 pb-4 border-b border-[var(--space-border)]">
-              <div className="flex items-center gap-2">
-                {(['egypt', 'turkey', 'usa'] as const).map((id) => {
+              <div className="flex flex-wrap items-center gap-2">
+                {(['egypt', 'saudi', 'turkey', 'usa'] as const).map((id) => {
                   const item = WORK_HUBS[id];
                   const active = hub.id === id;
                   return (
