@@ -288,17 +288,16 @@ export function Globe({
             }}
             aria-label={`Show experience in ${hub.labelEn}`}
           >
-            {/* Glowing Radar Beacon & Pin Badge */}
-            <div className="relative flex flex-col items-center">
-              {/* Luminous Pulsing Beacon Dot */}
-              <span className="relative flex h-3.5 w-3.5 items-center justify-center">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--space-cyan)] opacity-75" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-[var(--space-cyan)] shadow-[0_0_12px_#64f4ff]" />
-              </span>
+            {/* Centered Luminous Beacon Dot (Always precisely at location coordinate) */}
+            <div className="absolute left-0 top-0 -translate-x-1/2 -translate-y-1/2 flex h-3.5 w-3.5 items-center justify-center pointer-events-none">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--space-cyan)] opacity-75" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-[var(--space-cyan)] shadow-[0_0_12px_#64f4ff]" />
+            </div>
 
-              {/* Pin Chip */}
+            {/* Directional Callout Badge Container */}
+            <div className="relative">
               <div
-                className={`mt-1 flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs font-semibold backdrop-blur-xl transition-all duration-200 shadow-lg ${
+                className={`flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs font-semibold backdrop-blur-xl transition-all duration-200 shadow-lg ${
                   isActive
                     ? 'border-[var(--space-cyan)] bg-[var(--space-cyan)]/25 text-[var(--space-cyan)] shadow-[0_0_16px_rgba(100,244,255,0.5)] scale-105'
                     : 'border-white/20 bg-[var(--space-midnight)]/90 text-white hover:border-[var(--space-cyan)] hover:text-[var(--space-cyan)] group-hover:scale-105'
