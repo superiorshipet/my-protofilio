@@ -240,13 +240,13 @@ export function Globe({
       GLOBE_HUBS.forEach((hub) => {
         const pinEl = pinRefs.current[hub.id];
         if (!pinEl) return;
-        const { xPct, yPct, isFront } = cobeProject(hub.lat, hub.lon, currentPhi, currentTheta);
+        const { xPct, yPct, fade, isFront } = cobeProject(hub.lat, hub.lon, currentPhi, currentTheta);
 
         if (isFront) {
           pinEl.style.left = `${xPct}%`;
           pinEl.style.top = `${yPct}%`;
-          pinEl.style.opacity = '1';
-          pinEl.style.pointerEvents = 'auto';
+          pinEl.style.opacity = `${fade}`;
+          pinEl.style.pointerEvents = fade > 0.35 ? 'auto' : 'none';
         } else {
           pinEl.style.opacity = '0';
           pinEl.style.pointerEvents = 'none';
