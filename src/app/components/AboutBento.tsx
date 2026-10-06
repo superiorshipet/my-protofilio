@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
-import { Clock, Globe2, Sparkles, Terminal, Cpu, ShieldCheck } from 'lucide-react';
+import { Clock, Globe2, Sparkles, Terminal } from 'lucide-react';
 import { Globe } from './Globe';
 
 export function AboutBento() {
@@ -49,8 +49,8 @@ export function AboutBento() {
           </p>
         </motion.div>
 
-        {/* Bento Grid: 2 balanced columns on desktop */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* Bento Grid: 2 clean cards (Bio & TimeZone Globe) */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch">
           {/* Card 1: Bio Card */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -58,7 +58,7 @@ export function AboutBento() {
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
             whileHover={{ y: -4 }}
-            className="group relative rounded-3xl border border-[var(--space-border)] bg-[var(--space-panel)] p-8 transition-all duration-300 hover:border-[var(--space-cyan)]/45 overflow-hidden flex flex-col justify-between shadow-[0_18px_60px_rgba(0,0,0,0.3)] backdrop-blur-xl"
+            className="group relative rounded-3xl border border-[var(--space-border)] bg-[var(--space-panel)] p-8 transition-all duration-300 hover:border-[var(--space-cyan)]/45 overflow-hidden flex flex-col justify-between shadow-[0_18px_60px_rgba(0,0,0,0.3)] backdrop-blur-xl min-h-[440px]"
           >
             <div className="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-[var(--space-cyan)]/10 blur-3xl group-hover:bg-[var(--space-cyan)]/18 transition-colors pointer-events-none" />
             
@@ -92,42 +92,51 @@ export function AboutBento() {
             </div>
           </motion.div>
 
-          {/* Card 2: Live Time Zone Clock & 3D Interactive Detailed Globe */}
+          {/* Card 2: Time Zone Card with 3D Rotating Globe from Reference Branch */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
             whileHover={{ y: -4 }}
-            className="group relative rounded-3xl border border-[var(--space-border)] bg-[var(--space-panel)] p-8 transition-all duration-300 hover:border-[var(--space-cyan)]/45 overflow-hidden flex flex-col justify-between shadow-[0_18px_60px_rgba(0,0,0,0.3)] backdrop-blur-xl"
+            className="group relative rounded-3xl border border-[var(--space-border)] bg-[var(--space-panel)] p-8 transition-all duration-300 hover:border-[var(--space-cyan)]/45 overflow-hidden shadow-[0_18px_60px_rgba(0,0,0,0.3)] backdrop-blur-xl min-h-[440px] flex flex-col justify-between"
           >
-            <div className="absolute -left-10 -bottom-10 h-44 w-44 rounded-full bg-[var(--space-violet)]/16 blur-3xl pointer-events-none" />
+            {/* Ambient background stars / glow */}
+            <div className="absolute inset-0 bg-gradient-to-br from-indigo-950/20 via-transparent to-cyan-950/20 pointer-events-none" />
+            <div className="absolute right-0 top-1/2 -translate-y-1/2 w-80 h-80 rounded-full bg-[var(--space-cyan)]/5 blur-3xl pointer-events-none" />
 
-            <div className="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-2">
-              <div>
-                <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.16em] text-[var(--space-cyan)] mb-1">
-                  <Clock className="h-4 w-4" />
-                  Time Zone
-                </div>
-                <h4 className="text-xs font-medium uppercase tracking-wider text-[var(--space-muted)]">
-                  Cairo, Egypt (UTC+2 / UTC+3)
-                </h4>
+            {/* 3D Globe Figure Positioned exactly like reference TimeZoneCard */}
+            <figure className="absolute -right-24 sm:-right-12 md:left-[24%] lg:left-[26%] -top-10 sm:-top-6 md:top-[2%] pointer-events-auto select-none">
+              <Globe />
+            </figure>
+
+            {/* Left Content Column */}
+            <div className="relative z-10 max-w-[62%] sm:max-w-[52%]">
+              <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.16em] text-[var(--space-cyan)] mb-2">
+                <Clock className="h-4 w-4" />
+                Time Zone
               </div>
+              <h4 className="font-display text-xl sm:text-2xl font-bold text-[var(--space-starlight)] mb-2">
+                Cairo, Egypt
+              </h4>
+              <p className="text-xs sm:text-sm text-[var(--space-moon)] leading-relaxed mb-4">
+                I’m based in Cairo / Tanta, flexible with time zone communications and available for remote work worldwide.
+              </p>
 
-              <div className="flex items-center gap-3">
-                <div className="font-display text-2xl md:text-3xl font-extrabold text-[var(--space-starlight)] tabular-nums tracking-tight">
+              {/* Live Digital Cairo Clock */}
+              <div className="inline-flex items-center gap-2.5 rounded-2xl border border-[var(--space-border)] bg-[var(--space-panel-strong)]/80 px-4 py-2 backdrop-blur-md">
+                <Globe2 className="h-4 w-4 text-[var(--space-cyan)] animate-spin-slow" />
+                <span className="font-mono text-base sm:text-lg font-bold text-[var(--space-starlight)] tabular-nums">
                   {time || '12:00:00 AM'}
-                </div>
-                <Globe2 className="h-5 w-5 text-[var(--space-cyan)]/80" />
+                </span>
+                <span className="text-[10px] uppercase font-semibold text-[var(--space-muted)]">
+                  UTC+2
+                </span>
               </div>
             </div>
 
-            {/* Interactive 3D Spinning Globe (Draggable & Detailed) */}
-            <div className="relative z-10 my-2 flex items-center justify-center min-h-[260px] sm:min-h-[290px]">
-              <Globe className="max-w-[340px]" />
-            </div>
-
-            <div className="relative z-10 flex items-center justify-between gap-3 pt-3 border-t border-[var(--space-border)]">
+            {/* Bottom Status Bar */}
+            <div className="relative z-10 flex items-center justify-between gap-3 pt-4 border-t border-[var(--space-border)] mt-6">
               <div className="flex items-center gap-2">
                 <span className="relative flex h-2.5 w-2.5">
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
@@ -140,86 +149,6 @@ export function AboutBento() {
               <span className="text-[11px] font-mono text-[var(--space-muted)] hidden sm:inline">
                 Drag to rotate 🌍
               </span>
-            </div>
-          </motion.div>
-
-          {/* Card 3: Code Craftsmanship ("CODE IS CRAFT") */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.15 }}
-            whileHover={{ y: -4 }}
-            className="group relative rounded-3xl border border-[var(--space-border)] bg-[var(--space-panel)] p-8 transition-all duration-300 hover:border-[var(--space-cyan)]/45 overflow-hidden flex flex-col justify-between shadow-[0_18px_60px_rgba(0,0,0,0.3)] backdrop-blur-xl"
-          >
-            <div className="absolute right-0 top-0 h-40 w-40 rounded-full bg-[var(--space-rose)]/12 blur-3xl pointer-events-none" />
-
-            <div>
-              <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.16em] text-[var(--space-cyan)] mb-4">
-                <ShieldCheck className="h-4 w-4" />
-                Core Philosophy
-              </div>
-              <div className="font-display text-4xl md:text-5xl font-black tracking-tighter text-[var(--space-starlight)]/90 mb-4">
-                CODE IS CRAFT
-              </div>
-              <p className="text-sm md:text-base text-[var(--space-moon)] leading-relaxed">
-                Writing clean, documented, and resilient code that teams love to collaborate on. Believing that architecture discipline upfront guarantees effortless scaling in production.
-              </p>
-            </div>
-
-            <div className="mt-6 flex flex-wrap gap-2 pt-4 border-t border-[var(--space-border)]">
-              {['SOLID', 'DRY', 'TDD', 'Design Patterns', 'Domain-Driven Design'].map((badge) => (
-                <span
-                  key={badge}
-                  className="rounded-md border border-[var(--space-border)] bg-[var(--space-panel-strong)] px-2.5 py-1 text-xs font-mono font-medium text-[var(--space-cyan)]"
-                >
-                  {badge}
-                </span>
-              ))}
-            </div>
-          </motion.div>
-
-          {/* Card 4: Tech Stack Radar & Core Proficiencies */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            whileHover={{ y: -4 }}
-            className="group relative rounded-3xl border border-[var(--space-border)] bg-[var(--space-panel)] p-8 transition-all duration-300 hover:border-[var(--space-cyan)]/45 overflow-hidden flex flex-col justify-between shadow-[0_18px_60px_rgba(0,0,0,0.3)] backdrop-blur-xl"
-          >
-            <div className="absolute inset-0 bg-gradient-to-br from-[var(--space-violet)]/8 via-transparent to-[var(--space-cyan)]/8 pointer-events-none" />
-
-            <div>
-              <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.16em] text-[var(--space-cyan)] mb-4">
-                <Cpu className="h-4 w-4" />
-                Tech Stack Core
-              </div>
-              <h4 className="font-display text-2xl font-bold text-[var(--space-starlight)] mb-2">
-                Modern Tools & Runtimes
-              </h4>
-              <p className="text-xs text-[var(--space-moon)] mb-6">
-                Hands-on production expertise across the full engineering lifecycle:
-              </p>
-            </div>
-
-            <div className="space-y-3 text-sm">
-              <div className="flex items-center justify-between border-b border-[var(--space-border)] pb-2.5">
-                <span className="text-[var(--space-muted)]">Backend & APIs</span>
-                <span className="font-semibold text-[var(--space-starlight)]">C#, ASP.NET Core, Python, Go</span>
-              </div>
-              <div className="flex items-center justify-between border-b border-[var(--space-border)] pb-2.5">
-                <span className="text-[var(--space-muted)]">Frontend Architecture</span>
-                <span className="font-semibold text-[var(--space-starlight)]">React, TypeScript, Tailwind CSS</span>
-              </div>
-              <div className="flex items-center justify-between border-b border-[var(--space-border)] pb-2.5">
-                <span className="text-[var(--space-muted)]">Databases & Caches</span>
-                <span className="font-semibold text-[var(--space-starlight)]">SQL Server, PostgreSQL, Redis</span>
-              </div>
-              <div className="flex items-center justify-between">
-                <span className="text-[var(--space-muted)]">DevOps & Infrastructure</span>
-                <span className="font-semibold text-[var(--space-starlight)]">Docker, Git, Linux, Azure, CI/CD</span>
-              </div>
             </div>
           </motion.div>
         </div>
