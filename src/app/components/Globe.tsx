@@ -106,6 +106,13 @@ export function Globe({
     stiffness: 100,
   });
 
+  const thetaMotion = useMotionValue(0);
+  const thetaSpring = useSpring(thetaMotion, {
+    mass: 1,
+    damping: 30,
+    stiffness: 100,
+  });
+
   // Keep targetPhiRef in sync when targetPhi prop updates
   useEffect(() => {
     if (typeof targetPhi === 'number') {
@@ -126,6 +133,7 @@ export function Globe({
       const deltaY = clientY - pointerInteracting.current.y;
       pointerInteractionMovement.current = deltaX;
       r.set(r.get() + deltaX / MOVEMENT_DAMPING);
+      thetaMotion.set(thetaMotion.get() + deltaY / MOVEMENT_DAMPING);
       pointerInteracting.current = { x: clientX, y: clientY };
       // Cancel automatic rotation targeting when user manually grabs
       targetPhiRef.current = null;
