@@ -231,33 +231,42 @@ export function AnimatedSpaceBackground() {
 
       const shootingStars = [makeShootingStar(), makeShootingStar()];
 
+      const targetColorFar = new THREE.Color(isInitialDark ? 0x94a3b8 : 0x1e293b);
+      const targetColorMid = new THREE.Color(isInitialDark ? 0xe2e8f0 : 0x0f172a);
+      const targetColorNear = new THREE.Color(isInitialDark ? 0xffffff : 0x020617);
+      let targetOpacityFar = isInitialDark ? 0.5 : 0.65;
+      let targetOpacityMid = isInitialDark ? 0.65 : 0.8;
+      let targetOpacityNear = isInitialDark ? 0.75 : 0.95;
+      let targetNebula1 = isInitialDark ? 0.45 : 0.05;
+      let targetNebula2 = isInitialDark ? 0.4 : 0.05;
+
       const applyThemeColors = () => {
         const isDark = document.documentElement.classList.contains('dark');
         if (isDark) {
-          (starsFar.material as Three.PointsMaterial).color.setHex(0x94a3b8);
-          (starsFar.material as Three.PointsMaterial).opacity = 0.5;
-          (starsMid.material as Three.PointsMaterial).color.setHex(0xe2e8f0);
-          (starsMid.material as Three.PointsMaterial).opacity = 0.65;
-          (starsNear.material as Three.PointsMaterial).color.setHex(0xffffff);
-          (starsNear.material as Three.PointsMaterial).opacity = 0.75;
+          targetColorFar.setHex(0x94a3b8);
+          targetOpacityFar = 0.5;
+          targetColorMid.setHex(0xe2e8f0);
+          targetOpacityMid = 0.65;
+          targetColorNear.setHex(0xffffff);
+          targetOpacityNear = 0.75;
+          targetNebula1 = 0.45;
+          targetNebula2 = 0.4;
           shootingStars.forEach((star) => {
             (star.points.material as Three.PointsMaterial).color.setHex(0xffffff);
           });
-          if (nebula1) (nebula1.material as Three.SpriteMaterial).opacity = 0.45;
-          if (nebula2) (nebula2.material as Three.SpriteMaterial).opacity = 0.4;
         } else {
-          // Dark black stars for light background to give high focus and clarity
-          (starsFar.material as Three.PointsMaterial).color.setHex(0x1e293b);
-          (starsFar.material as Three.PointsMaterial).opacity = 0.65;
-          (starsMid.material as Three.PointsMaterial).color.setHex(0x0f172a);
-          (starsMid.material as Three.PointsMaterial).opacity = 0.8;
-          (starsNear.material as Three.PointsMaterial).color.setHex(0x020617);
-          (starsNear.material as Three.PointsMaterial).opacity = 0.95;
+          // Smoothly lerp towards dark black stars in light mode
+          targetColorFar.setHex(0x1e293b);
+          targetOpacityFar = 0.65;
+          targetColorMid.setHex(0x0f172a);
+          targetOpacityMid = 0.8;
+          targetColorNear.setHex(0x020617);
+          targetOpacityNear = 0.95;
+          targetNebula1 = 0.05;
+          targetNebula2 = 0.05;
           shootingStars.forEach((star) => {
             (star.points.material as Three.PointsMaterial).color.setHex(0x0f172a);
           });
-          if (nebula1) (nebula1.material as Three.SpriteMaterial).opacity = 0.05;
-          if (nebula2) (nebula2.material as Three.SpriteMaterial).opacity = 0.05;
         }
       };
 
@@ -305,12 +314,25 @@ export function AnimatedSpaceBackground() {
         starsMid.rotation.y += dt * 0.011;
         starsNear.rotation.y += dt * 0.017;
 
+        (starsFar.material as Three.PointsMaterial).color.lerp(targetColorFar, 0.08);
+        (starsFar.material as Three.PointsMaterial).opacity += (targetOpacityFar - (starsFar.material as Three.PointsMaterial).opacity) * 0.08;
+
+        (starsMid.material as Three.PointsMaterial).color.lerp(targetColorMid, 0.08);
+        (starsMid.material as Three.PointsMaterial).opacity += (targetOpacityMid - (starsMid.material as Three.PointsMaterial).opacity) * 0.08;
+
+        (starsNear.material as Three.PointsMaterial).color.lerp(targetColorNear, 0.08);
+        (starsNear.material as Three.PointsMaterial).opacity += (targetOpacityNear - (starsNear.material as Three.PointsMaterial).opacity) * 0.08;
+
         if (nebula1) {
           nebula1.position.x = -140 + Math.sin(t * 0.12) * 14;
+          const mat = nebula1.material as Three.SpriteMaterial;
+          mat.opacity += (targetNebula1 - mat.opacity) * 0.08;
         }
 
         if (nebula2) {
           nebula2.position.y = -60 + Math.cos(t * 0.1) * 14;
+          const mat = nebula2.material as Three.SpriteMaterial;
+          mat.opacity += (targetNebula2 - mat.opacity) * 0.08;
         }
 
         nextShoot -= dt;

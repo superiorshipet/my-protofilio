@@ -43,9 +43,24 @@ export function Navigation() {
   const toggleTheme = () => {
     const nextTheme = theme === 'dark' ? 'light' : 'dark';
 
-    setTheme(nextTheme);
-    localStorage.setItem('theme', nextTheme);
-    document.documentElement.classList.toggle('dark', nextTheme === 'dark');
+    const applyTheme = () => {
+      setTheme(nextTheme);
+      localStorage.setItem('theme', nextTheme);
+      document.documentElement.classList.toggle('dark', nextTheme === 'dark');
+    };
+
+    const doc = document as Document & { startViewTransition?: (cb: () => void) => void };
+    if (typeof doc.startViewTransition === 'function') {
+      doc.startViewTransition(() => {
+        applyTheme();
+      });
+    } else {
+      document.documentElement.classList.add('theme-transitioning');
+      applyTheme();
+      setTimeout(() => {
+        document.documentElement.classList.remove('theme-transitioning');
+      }, 420);
+    }
   };
 
   const scrollToSection = (href: string) => {

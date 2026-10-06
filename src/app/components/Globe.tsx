@@ -207,13 +207,15 @@ export function Globe({
 
     // Lighter WebGL settings on phones: lower pixel ratio and fewer map samples.
     const isMobile = window.matchMedia('(max-width: 768px)').matches;
-    const dpr = isMobile ? 1.5 : 2;
+    const dpr = isMobile ? 1.0 : Math.min(window.devicePixelRatio || 1, 2);
+    const sizeMultiplier = isMobile ? 1.4 : 2;
+    const initialWidth = width || (isMobile ? 340 : 500);
     globe = createGlobe(canvas, {
       ...config,
       devicePixelRatio: dpr,
-      mapSamples: isMobile ? 9000 : config.mapSamples,
-      width: (width || 500) * 2,
-      height: (width || 500) * 2,
+      mapSamples: isMobile ? 6000 : config.mapSamples,
+      width: initialWidth * sizeMultiplier,
+      height: initialWidth * sizeMultiplier,
     });
 
     // Skip all rendering work while the globe is off-screen or the tab is hidden.

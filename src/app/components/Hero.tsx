@@ -127,27 +127,25 @@ export function Hero() {
 
   return (
     <section className="relative min-h-screen overflow-hidden">
-      <div className="absolute inset-0">
-        <motion.div
-          className="absolute left-[8%] top-[18%] h-56 w-56 rounded-full bg-[var(--space-violet)]/20 blur-3xl"
-          animate={{ scale: [1, 1.18, 1], opacity: [0.38, 0.62, 0.38] }}
-          transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
+      <div className="absolute inset-0 pointer-events-none">
+        <div
+          className="absolute left-[8%] top-[18%] h-56 w-56 rounded-full bg-[var(--space-violet)]/16 blur-3xl transform-gpu"
         />
-        <motion.div
-          className="absolute bottom-[12%] right-[10%] h-72 w-72 rounded-full bg-[var(--space-cyan)]/14 blur-3xl"
-          animate={{ scale: [1.08, 0.92, 1.08], opacity: [0.28, 0.48, 0.28] }}
-          transition={{ duration: 9, repeat: Infinity, ease: 'easeInOut' }}
+        <div
+          className="absolute bottom-[12%] right-[10%] h-72 w-72 rounded-full bg-[var(--space-cyan)]/12 blur-3xl transform-gpu"
         />
-        {starTrails.map((trail) => (
-          <motion.div
-            key={`${trail.top}-${trail.left}`}
-            className="absolute h-px bg-gradient-to-r from-transparent via-[var(--space-starlight)]/20 to-transparent"
-            style={{ top: trail.top, left: trail.left, width: trail.width }}
-            initial={{ x: -80, opacity: 0 }}
-            animate={{ x: 180, opacity: [0, 0.75, 0] }}
-            transition={{ duration: 3.8, delay: trail.delay, repeat: Infinity, repeatDelay: 4, ease: 'easeOut' }}
-          />
-        ))}
+        <div className="hidden sm:block">
+          {starTrails.slice(0, 5).map((trail) => (
+            <motion.div
+              key={`${trail.top}-${trail.left}`}
+              className="absolute h-px bg-gradient-to-r from-transparent via-[var(--space-starlight)]/20 to-transparent"
+              style={{ top: trail.top, left: trail.left, width: trail.width }}
+              initial={{ x: -80, opacity: 0 }}
+              animate={{ x: 180, opacity: [0, 0.75, 0] }}
+              transition={{ duration: 3.8, delay: trail.delay, repeat: Infinity, repeatDelay: 4, ease: 'easeOut' }}
+            />
+          ))}
+        </div>
       </div>
 
       <div className="relative z-10 mx-auto grid min-h-screen w-full max-w-7xl items-center gap-10 sm:gap-12 px-4 sm:px-6 pb-12 sm:pb-16 pt-24 sm:pt-28 lg:grid-cols-[1.05fr_0.95fr] lg:pt-20">
