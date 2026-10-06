@@ -309,6 +309,17 @@ export function Globe({
 
             {/* Directional Callout Badge Container */}
             <div className={`absolute ${getCalloutClasses(hub.calloutAlign)} pointer-events-auto`}>
+              {/* Futuristic HUD hairline connector stem pointing to beacon dot */}
+              {hub.calloutAlign === 'left' && (
+                <span className="absolute -right-3.5 top-1/2 -translate-y-1/2 w-3.5 h-[1px] bg-gradient-to-r from-transparent via-[var(--space-cyan)]/60 to-[var(--space-cyan)] pointer-events-none" />
+              )}
+              {hub.calloutAlign === 'right' && (
+                <span className="absolute -left-3.5 top-1/2 -translate-y-1/2 w-3.5 h-[1px] bg-gradient-to-l from-transparent via-[var(--space-cyan)]/60 to-[var(--space-cyan)] pointer-events-none" />
+              )}
+              {hub.calloutAlign === 'top' && (
+                <span className="absolute -bottom-3.5 left-1/2 -translate-x-1/2 w-[1px] h-3.5 bg-gradient-to-b from-transparent via-[var(--space-cyan)]/60 to-[var(--space-cyan)] pointer-events-none" />
+              )}
+
               <div
                 className={`flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs font-semibold backdrop-blur-xl transition-all duration-200 shadow-lg whitespace-nowrap ${
                   isActive
