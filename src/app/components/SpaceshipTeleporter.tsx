@@ -15,29 +15,20 @@ interface SpaceshipTeleporterProps {
 }
 
 export function SpaceshipTeleporter({ techIcons }: SpaceshipTeleporterProps) {
-  // Key to re-trigger the teleportation animation sequence
-  const [teleportKey, setTeleportKey] = useState(0);
   const [isBeaming, setIsBeaming] = useState(true);
 
   // Auto-finish high-intensity beaming state after 2.6 seconds
   useEffect(() => {
-    setIsBeaming(true);
     const timer = setTimeout(() => {
       setIsBeaming(false);
     }, 2600);
     return () => clearTimeout(timer);
-  }, [teleportKey]);
-
-  const handleReTeleport = () => {
-    setTeleportKey((prev) => prev + 1);
-  };
+  }, []);
 
   return (
     <div className="relative flex flex-col items-center justify-center w-full select-none pt-2 sm:pt-4">
-      {/* 1. 3D Hovering UFO Saucer (Flying Saucer arriving from deep space) */}
+      {/* 1. 3D Hovering UFO Saucer (Arrives smoothly from space on mount) */}
       <motion.div
-        key={`saucer-entrance-${teleportKey}`}
-        // Comes from deep space behind ("يجي من بعدي")
         initial={{
           scale: 0.15,
           y: 70,
@@ -45,40 +36,25 @@ export function SpaceshipTeleporter({ techIcons }: SpaceshipTeleporterProps) {
           filter: 'blur(8px) brightness(2.2)',
         }}
         animate={{
-          scale: [0.15, 1.06, 1],
-          y: [70, -8, 0],
-          opacity: [0, 1, 1],
-          filter: [
-            'blur(8px) brightness(2.2)',
-            'blur(0px) brightness(1.2)',
-            'blur(0px) brightness(1)',
-          ],
+          scale: 1,
+          y: 0,
+          opacity: 1,
+          filter: 'blur(0px) brightness(1)',
         }}
         transition={{
           duration: 1.15,
           ease: [0.16, 1, 0.3, 1], // Smooth cinematic arrival curve
         }}
-        whileHover={{ scale: 1.08, y: -4 }}
-        whileTap={{ scale: 0.95 }}
-        onClick={handleReTeleport}
-        title="UFO Transporter • Click to re-beam"
-        className="relative z-40 cursor-pointer group mb-1 sm:mb-2"
+        className="relative z-40 mb-1 sm:mb-2 select-none"
         style={{
           transform: 'translateZ(95px)',
           transformStyle: 'preserve-3d',
         }}
       >
-        {/* Subtle Warp/Re-beam Badge on Hover */}
-        <div className="absolute -top-7 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none whitespace-nowrap z-50">
-          <span className="rounded-full border border-[var(--space-cyan)]/50 bg-[var(--space-void)]/95 px-2.5 py-0.5 font-mono text-[9px] font-semibold text-[var(--space-cyan)] shadow-[0_0_15px_rgba(100,244,255,0.4)] backdrop-blur-md">
-            🛸 Warp • Click to Re-beam
-          </span>
-        </div>
-
         {/* Ambient Saucer Energy Aura Glow */}
-        <div className="absolute inset-0 -z-10 rounded-full bg-[var(--space-cyan)]/25 blur-2xl opacity-75 group-hover:opacity-100 transition-opacity" />
+        <div className="absolute inset-0 -z-10 rounded-full bg-[var(--space-cyan)]/25 blur-2xl opacity-75" />
 
-        {/* Continuous Space Hovering Motion */}
+        {/* Continuous Space Hovering Motion with Clean Scale-on-Hover (No Re-triggering) */}
         <motion.div
           animate={{
             y: [0, -6, 0],
@@ -88,13 +64,13 @@ export function SpaceshipTeleporter({ techIcons }: SpaceshipTeleporterProps) {
             y: { duration: 3.8, repeat: Infinity, ease: 'easeInOut' },
             rotateZ: { duration: 4.6, repeat: Infinity, ease: 'easeInOut' },
           }}
-          className="relative w-44 sm:w-56 md:w-64 drop-shadow-[0_12px_28px_rgba(0,0,0,0.85)]"
+          className="relative w-44 sm:w-56 md:w-64 drop-shadow-[0_12px_28px_rgba(0,0,0,0.85)] transition-transform duration-300 hover:scale-105"
         >
           {/* High-Resolution 3D UFO Saucer Asset */}
           <img
             src={ufoSaucerImg}
-            alt="UFO Flying Saucer Transporter"
-            className="w-full h-auto object-contain transition-transform duration-300 group-hover:brightness-110"
+            alt="UFO Flying Saucer"
+            className="w-full h-auto object-contain transition-transform duration-300"
           />
 
           {/* Glowing Ventral Emitter Core Portal on Saucer Bottom */}
@@ -110,94 +86,112 @@ export function SpaceshipTeleporter({ techIcons }: SpaceshipTeleporterProps) {
         </motion.div>
       </motion.div>
 
-      {/* 2. Volumetric 3D Conical Tractor Beam ("الشعاع الضوئي") */}
+      {/* 2. Volumetric 3D Conical Tractor Beam (Pure SVG Polygon - Zero Box Artifacts) */}
       <div
-        className="pointer-events-none absolute top-14 sm:top-18 bottom-2 left-1/2 -translate-x-1/2 w-60 sm:w-72 md:w-84 overflow-hidden z-20 flex justify-center"
+        className="pointer-events-none absolute top-14 sm:top-18 bottom-2 left-1/2 -translate-x-1/2 w-64 sm:w-76 md:w-88 z-20 flex justify-center"
         style={{
           transform: 'translateZ(25px)',
           transformStyle: 'preserve-3d',
-          clipPath: 'polygon(38% 0%, 62% 0%, 98% 100%, 2% 100%)',
         }}
       >
-        {/* Main Conical Volumetric Light Beam */}
         <motion.div
-          key={`beam-${teleportKey}`}
           initial={{ scaleY: 0, opacity: 0 }}
           animate={{
             scaleY: 1,
-            opacity: isBeaming ? [0, 1, 0.88] : 0.45,
+            opacity: isBeaming ? 1 : 0.45,
           }}
           transition={{
-            scaleY: { duration: 0.55, delay: 0.9, ease: 'easeOut' },
-            opacity: { duration: 0.4, delay: 0.9 },
+            scaleY: { duration: 0.55, delay: 0.85, ease: 'easeOut' },
+            opacity: { duration: 0.45, delay: 0.85 },
           }}
-          style={{
-            transformOrigin: 'top center',
-            background:
-              'linear-gradient(180deg, rgba(165, 243, 252, 0.95) 0%, rgba(100, 244, 255, 0.40) 22%, rgba(100, 244, 255, 0.14) 65%, rgba(100, 244, 255, 0.02) 100%)',
-          }}
-          className="absolute inset-0 w-full h-full backdrop-blur-[0.5px] drop-shadow-[0_0_25px_rgba(100,244,255,0.4)]"
-        />
+          style={{ transformOrigin: 'top center' }}
+          className="relative w-full h-full"
+        >
+          <svg
+            viewBox="0 0 300 450"
+            preserveAspectRatio="none"
+            className="w-full h-full overflow-visible"
+          >
+            <defs>
+              {/* Outer Beam Gradient */}
+              <linearGradient id="tractorBeamOuter" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stopColor="#cffafe" stopOpacity="0.85" />
+                <stop offset="16%" stopColor="#64f4ff" stopOpacity="0.4" />
+                <stop offset="60%" stopColor="#64f4ff" stopOpacity="0.12" />
+                <stop offset="100%" stopColor="#64f4ff" stopOpacity="0.0" />
+              </linearGradient>
 
-        {/* Hyper-intense Center Ray Core */}
-        <motion.div
-          key={`core-${teleportKey}`}
-          initial={{ scaleY: 0, opacity: 0 }}
-          animate={{
-            scaleY: 1,
-            opacity: isBeaming ? [0, 1, 0.9, 0.65] : 0.35,
-          }}
-          transition={{
-            scaleY: { duration: 0.45, delay: 0.95, ease: 'easeOut' },
-            opacity: { duration: 0.5, delay: 0.95 },
-          }}
-          style={{
-            transformOrigin: 'top center',
-            clipPath: 'polygon(46% 0%, 54% 0%, 72% 100%, 28% 100%)',
-            background:
-              'linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(165, 243, 252, 0.7) 16%, rgba(100, 244, 255, 0.24) 60%, transparent 100%)',
-          }}
-          className="absolute inset-0 w-full h-full"
-        />
+              {/* Inner Core Beam Gradient */}
+              <linearGradient id="tractorBeamCore" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stopColor="#ffffff" stopOpacity="0.95" />
+                <stop offset="14%" stopColor="#a5f3fc" stopOpacity="0.75" />
+                <stop offset="50%" stopColor="#64f4ff" stopOpacity="0.22" />
+                <stop offset="100%" stopColor="#64f4ff" stopOpacity="0.0" />
+              </linearGradient>
 
-        {/* Descending Energy Pulse Wave Rings (strictly inside cone) */}
-        {[0, 1, 2, 3].map((ringIdx) => (
-          <motion.div
-            key={`ring-${teleportKey}-${ringIdx}`}
-            initial={{ y: '5%', opacity: 0, scaleX: 0.35 }}
-            animate={{
-              y: ['5%', '95%'],
-              opacity: [0, 0.75, 0.45, 0],
-              scaleX: [0.35, 0.65, 0.95, 1.1],
-            }}
-            transition={{
-              duration: 2.2,
-              repeat: Infinity,
-              ease: 'linear',
-              delay: 1.0 + ringIdx * 0.55,
-            }}
-            className="absolute top-0 w-[90%] h-8 rounded-[100%] border-t-2 border-cyan-100/70 bg-gradient-to-b from-[var(--space-cyan)]/25 to-transparent"
-          />
-        ))}
+              {/* Saucer vent emitter hotspot */}
+              <radialGradient id="apexHotspot" cx="50%" cy="0%" r="50%">
+                <stop offset="0%" stopColor="#ffffff" stopOpacity="1" />
+                <stop offset="40%" stopColor="#64f4ff" stopOpacity="0.85" />
+                <stop offset="100%" stopColor="#64f4ff" stopOpacity="0" />
+              </radialGradient>
+            </defs>
 
-        {/* Ambient Flowing Micro-Particles Streaming Downwards */}
-        {[14, 30, 48, 65, 82].map((leftPct, pIdx) => (
-          <motion.div
-            key={`p-${pIdx}`}
-            animate={{
-              y: [0, 380],
-              opacity: [0, 0.9, 0],
-            }}
-            transition={{
-              duration: 1.8 + (pIdx % 3) * 0.4,
-              repeat: Infinity,
-              ease: 'easeInOut',
-              delay: pIdx * 0.3,
-            }}
-            style={{ left: `${leftPct}%` }}
-            className="absolute top-2 h-1.5 w-1.5 rounded-full bg-cyan-200 shadow-[0_0_8px_rgba(100,244,255,0.9)]"
-          />
-        ))}
+            {/* Ambient Conical Beam */}
+            <polygon
+              points="114,0 186,0 295,450 5,450"
+              fill="url(#tractorBeamOuter)"
+            />
+
+            {/* Intense Center Ray Core */}
+            <polygon
+              points="132,0 168,0 225,450 75,450"
+              fill="url(#tractorBeamCore)"
+            />
+
+            {/* Saucer vent emitter hotspot */}
+            <ellipse cx="150" cy="2" rx="36" ry="8" fill="url(#apexHotspot)" />
+          </svg>
+
+          {/* Descending Conical Energy Waves */}
+          {[0, 1, 2].map((ringIdx) => (
+            <motion.div
+              key={`ring-${ringIdx}`}
+              initial={{ y: '5%', opacity: 0, scaleX: 0.35 }}
+              animate={{
+                y: ['5%', '92%'],
+                opacity: [0, 0.7, 0.35, 0],
+                scaleX: [0.35, 0.65, 0.95, 1.1],
+              }}
+              transition={{
+                duration: 2.2,
+                repeat: Infinity,
+                ease: 'linear',
+                delay: 1.0 + ringIdx * 0.7,
+              }}
+              className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 w-[85%] h-8 rounded-[100%] border-t-2 border-cyan-100/70 bg-gradient-to-b from-[var(--space-cyan)]/20 to-transparent"
+            />
+          ))}
+
+          {/* Descending Light Particles */}
+          {[20, 35, 50, 65, 80].map((leftPct, pIdx) => (
+            <motion.div
+              key={`p-${pIdx}`}
+              animate={{
+                y: [0, 360],
+                opacity: [0, 0.85, 0],
+              }}
+              transition={{
+                duration: 1.8 + (pIdx % 3) * 0.4,
+                repeat: Infinity,
+                ease: 'easeInOut',
+                delay: 0.8 + pIdx * 0.3,
+              }}
+              style={{ left: `${leftPct}%` }}
+              className="pointer-events-none absolute top-2 h-1.5 w-1.5 rounded-full bg-cyan-200 shadow-[0_0_8px_rgba(100,244,255,0.9)]"
+            />
+          ))}
+        </motion.div>
       </div>
 
       {/* 3. Mohamed's Holographic Photo Materialization Container ("يظهر صورتي") */}
@@ -209,8 +203,6 @@ export function SpaceshipTeleporter({ techIcons }: SpaceshipTeleporterProps) {
         }}
       >
         <motion.div
-          key={`portrait-${teleportKey}`}
-          // Starts hidden until saucer parks and beam shoots down
           initial={{
             opacity: 0,
             scale: 0.92,
@@ -224,16 +216,15 @@ export function SpaceshipTeleporter({ techIcons }: SpaceshipTeleporterProps) {
           }}
           transition={{
             duration: 1.2,
-            delay: 1.25, // Materializes right after beam descends
+            delay: 1.15, // Materializes right after beam descends
             ease: 'easeOut',
           }}
           className="relative w-full overflow-visible"
         >
-          {/* Holographic Laser Scanline sweeping down on teleport */}
+          {/* Holographic Laser Scanline sweeping down on initial materialize */}
           <AnimatePresence>
             {isBeaming && (
               <motion.div
-                key={`scanline-${teleportKey}`}
                 initial={{ top: '0%', opacity: 0 }}
                 animate={{
                   top: ['0%', '100%'],
@@ -242,7 +233,7 @@ export function SpaceshipTeleporter({ techIcons }: SpaceshipTeleporterProps) {
                 exit={{ opacity: 0 }}
                 transition={{
                   duration: 1.3,
-                  delay: 1.25,
+                  delay: 1.15,
                   ease: 'easeInOut',
                 }}
                 className="pointer-events-none absolute left-0 right-0 z-40 h-1 bg-gradient-to-r from-transparent via-cyan-200 to-transparent shadow-[0_0_20px_6px_rgba(100,244,255,0.9)]"
@@ -266,13 +257,12 @@ export function SpaceshipTeleporter({ techIcons }: SpaceshipTeleporterProps) {
           transform: 'rotateX(75deg) translateZ(-30px)',
         }}
       >
-        {/* Floor Teleport Shockwave impact ring on re-beam */}
+        {/* Floor Teleport Shockwave impact ring on initial materialize */}
         {isBeaming && (
           <motion.div
-            key={`floor-impact-${teleportKey}`}
             initial={{ scale: 0.4, opacity: 1 }}
             animate={{ scale: 1.25, opacity: 0 }}
-            transition={{ duration: 1.2, delay: 1.3, ease: 'easeOut' }}
+            transition={{ duration: 1.2, delay: 1.2, ease: 'easeOut' }}
             className="absolute inset-0 rounded-[100%] border-2 border-cyan-200 shadow-[0_0_25px_rgba(100,244,255,0.9)]"
           />
         )}
@@ -296,14 +286,14 @@ export function SpaceshipTeleporter({ techIcons }: SpaceshipTeleporterProps) {
         const pos = positions[index] || {};
         return (
           <motion.div
-            key={`satellite-${label}-${teleportKey}`}
+            key={`satellite-${label}`}
             initial={{ opacity: 0, scale: 0.2 }}
             animate={{ opacity: 1, scale: 1, y: [0, -8, 0] }}
             transition={{
-              opacity: { delay: 1.7 + delay, duration: 0.4 },
-              scale: { delay: 1.7 + delay, duration: 0.4 },
+              opacity: { delay: 1.6 + delay, duration: 0.4 },
+              scale: { delay: 1.6 + delay, duration: 0.4 },
               y: {
-                delay: 2.1 + delay,
+                delay: 2.0 + delay,
                 duration: 3 + index * 0.4,
                 repeat: Infinity,
                 ease: 'easeInOut',

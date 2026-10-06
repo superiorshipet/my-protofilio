@@ -10,7 +10,7 @@ export const GLOBE_CONFIG = {
   width: 900,
   height: 900,
   devicePixelRatio: 2,
-  phi: 0.1,
+  phi: 4.17,
   theta: 0.3,
   dark: 1,
   diffuse: 0.5,
@@ -19,7 +19,11 @@ export const GLOBE_CONFIG = {
   baseColor: [0.39, 0.96, 1] as [number, number, number], // Space Cyan dots matching design theme
   markerColor: [0.39, 0.96, 1] as [number, number, number], // Space Cyan markers
   glowColor: [0.39, 0.96, 1] as [number, number, number], // Space Cyan atmospheric glow
-  markers: [] as Array<{ location: [number, number]; size: number }>, // Clean globe surface without giant disks
+  markers: [
+    { location: [30.0444, 31.2357], size: 0.08 }, // Egypt
+    { location: [41.0082, 28.9784], size: 0.08 }, // Turkey
+    { location: [40.7128, -74.006], size: 0.08 }, // USA
+  ],
 };
 
 export const GLOBE_HUBS = [
@@ -79,7 +83,7 @@ export function Globe({
   targetPhi,
   onSelectHub,
 }: GlobeProps) {
-  let phi = 0;
+  let phi = config.phi ?? 4.17;
   let width = 0;
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const pointerInteracting = useRef<number | null>(null);
@@ -241,7 +245,7 @@ export function Globe({
               e.stopPropagation();
               onSelectHub?.(hub.id);
             }}
-            className="group absolute -translate-x-1/2 -translate-y-1/2 cursor-pointer z-30 transition-transform duration-200 hover:scale-110 focus:outline-none"
+            className="group absolute -translate-x-1/2 -translate-y-1/2 cursor-pointer z-30 transition-transform duration-200 select-none focus:outline-none"
             style={{
               left: '50%',
               top: '50%',
@@ -250,16 +254,25 @@ export function Globe({
             }}
             aria-label={`Show experience in ${hub.labelEn}`}
           >
-            {/* Sleek Pin Badge without large circles */}
-            <div
-              className={`flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs font-semibold backdrop-blur-xl transition-all duration-200 shadow-lg ${
-                isActive
-                  ? 'border-[var(--space-cyan)] bg-[var(--space-cyan)]/25 text-[var(--space-cyan)] shadow-[0_0_14px_rgba(100,244,255,0.4)] scale-105'
-                  : 'border-white/20 bg-[var(--space-midnight)]/90 text-white hover:border-[var(--space-cyan)] hover:text-[var(--space-cyan)]'
-              }`}
-            >
-              <span className="text-xs">{hub.flag}</span>
-              <span className="whitespace-nowrap">{hub.labelEn}</span>
+            {/* Glowing Radar Beacon & Pin Badge */}
+            <div className="relative flex flex-col items-center">
+              {/* Luminous Pulsing Beacon Dot */}
+              <span className="relative flex h-3.5 w-3.5 items-center justify-center">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--space-cyan)] opacity-75" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-[var(--space-cyan)] shadow-[0_0_12px_#64f4ff]" />
+              </span>
+
+              {/* Pin Chip */}
+              <div
+                className={`mt-1 flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs font-semibold backdrop-blur-xl transition-all duration-200 shadow-lg ${
+                  isActive
+                    ? 'border-[var(--space-cyan)] bg-[var(--space-cyan)]/25 text-[var(--space-cyan)] shadow-[0_0_16px_rgba(100,244,255,0.5)] scale-105'
+                    : 'border-white/20 bg-[var(--space-midnight)]/90 text-white hover:border-[var(--space-cyan)] hover:text-[var(--space-cyan)] group-hover:scale-105'
+                }`}
+              >
+                <span className="text-xs">{hub.flag}</span>
+                <span className="whitespace-nowrap">{hub.labelEn}</span>
+              </div>
             </div>
           </button>
         );
