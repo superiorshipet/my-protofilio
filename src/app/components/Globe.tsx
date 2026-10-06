@@ -176,11 +176,11 @@ export function Globe({
         });
       }
 
-      // Update the 3 HTML Pin coordinates on the globe
+      // Update the 4 HTML Pin coordinates on the globe
       GLOBE_HUBS.forEach((hub) => {
         const pinEl = pinRefs.current[hub.id];
         if (!pinEl) return;
-        const { xPct, yPct, isFront } = cobeProject(hub.lat, hub.lon, currentPhi);
+        const { xPct, yPct, isFront } = cobeProject(hub.lat, hub.lon, currentPhi, (config.theta ?? 0.3));
 
         if (isFront) {
           pinEl.style.left = `${xPct}%`;
