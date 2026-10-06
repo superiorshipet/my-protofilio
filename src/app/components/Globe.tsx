@@ -111,6 +111,8 @@ export function Globe({
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const pointerInteracting = useRef<{ x: number; y: number } | null>(null);
   const pointerInteractionMovement = useRef(0);
+  const velocityRef = useRef(0);
+  const lastTimeRef = useRef(Date.now());
   const targetPhiRef = useRef<number | null>(targetPhi ?? null);
 
   const pinRefs = useRef<Record<HubId, HTMLButtonElement | null>>({
@@ -143,6 +145,7 @@ export function Globe({
 
   const updatePointerInteraction = (coords: { x: number; y: number } | null) => {
     pointerInteracting.current = coords;
+    lastTimeRef.current = Date.now();
     if (canvasRef.current) {
       canvasRef.current.style.cursor = coords !== null ? 'grabbing' : 'grab';
     }
@@ -150,8 +153,15 @@ export function Globe({
 
   const updateMovement = (clientX: number, clientY: number) => {
     if (pointerInteracting.current !== null) {
+      const now = Date.now();
+      const dt = Math.max(now - lastTimeRef.current, 8);
       const deltaX = clientX - pointerInteracting.current.x;
       const deltaY = clientY - pointerInteracting.current.y;
+      
+      // Calculate instantaneous horizontal drag velocity
+      velocityRef.current = (deltaX / MOVEMENT_DAMPING) / (dt / 16.6);
+      lastTimeRef.current = now;
+
       pointerInteractionMovement.current = deltaX;
       r.set(r.get() + deltaX / MOVEMENT_DAMPING);
 
