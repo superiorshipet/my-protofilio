@@ -72,6 +72,19 @@ function cobeProject(lat: number, lon: number, phi: number, theta: number = 0.3)
   };
 }
 
+function getCalloutClasses(align: CalloutAlign) {
+  switch (align) {
+    case 'top':
+      return 'bottom-3.5 left-1/2 -translate-x-1/2 mb-0.5';
+    case 'left':
+      return 'right-3.5 top-1/2 -translate-y-1/2 mr-0.5';
+    case 'right':
+      return 'left-3.5 top-1/2 -translate-y-1/2 ml-0.5';
+    case 'bottom':
+      return 'top-3.5 left-1/2 -translate-x-1/2 mt-0.5';
+  }
+}
+
 export interface GlobeProps {
   className?: string;
   config?: typeof GLOBE_CONFIG;
@@ -295,9 +308,9 @@ export function Globe({
             </div>
 
             {/* Directional Callout Badge Container */}
-            <div className="relative">
+            <div className={`absolute ${getCalloutClasses(hub.calloutAlign)} pointer-events-auto`}>
               <div
-                className={`flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs font-semibold backdrop-blur-xl transition-all duration-200 shadow-lg ${
+                className={`flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs font-semibold backdrop-blur-xl transition-all duration-200 shadow-lg whitespace-nowrap ${
                   isActive
                     ? 'border-[var(--space-cyan)] bg-[var(--space-cyan)]/25 text-[var(--space-cyan)] shadow-[0_0_16px_rgba(100,244,255,0.5)] scale-105'
                     : 'border-white/20 bg-[var(--space-midnight)]/90 text-white hover:border-[var(--space-cyan)] hover:text-[var(--space-cyan)] group-hover:scale-105'
