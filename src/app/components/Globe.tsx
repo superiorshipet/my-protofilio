@@ -21,6 +21,7 @@ export const GLOBE_CONFIG = {
   glowColor: [0.39, 0.96, 1] as [number, number, number], // Space Cyan atmospheric glow
   markers: [
     { location: [30.0444, 31.2357], size: 0.08 }, // Egypt
+    { location: [24.7136, 46.6753], size: 0.08 }, // Saudi Arabia
     { location: [41.0082, 28.9784], size: 0.08 }, // Turkey
     { location: [40.7128, -74.006], size: 0.08 }, // USA
   ],
@@ -28,6 +29,7 @@ export const GLOBE_CONFIG = {
 
 export const GLOBE_HUBS = [
   { id: 'egypt', flag: '🇪🇬', labelEn: 'Egypt', lat: 30.0444, lon: 31.2357, roleEn: 'Core Base & Remote Training' },
+  { id: 'saudi', flag: '🇸🇦', labelEn: 'Saudi Arabia', lat: 24.7136, lon: 46.6753, roleEn: 'Freelance & Enterprise Platforms' },
   { id: 'turkey', flag: '🇹🇷', labelEn: 'Turkey', lat: 41.0082, lon: 28.9784, roleEn: 'Luxira Holding' },
   { id: 'usa', flag: '🇺🇸', labelEn: 'USA', lat: 40.7128, lon: -74.006, roleEn: 'Star+Games' },
 ] as const;
@@ -92,6 +94,7 @@ export function Globe({
 
   const pinRefs = useRef<Record<HubId, HTMLButtonElement | null>>({
     egypt: null,
+    saudi: null,
     turkey: null,
     usa: null,
   });
