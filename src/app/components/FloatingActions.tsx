@@ -32,10 +32,10 @@ export function FloatingActions() {
       initial={{ opacity: 0, x: 20 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ delay: 1, duration: 0.5 }}
-      className="fixed bottom-20 right-5 z-40 flex flex-col items-center gap-3"
+      className="fixed bottom-20 right-4 sm:bottom-24 sm:right-5 z-40 flex flex-col items-center gap-2 sm:gap-3"
     >
-      {/* Social quick dock */}
-      <div className="space-glass hidden sm:flex flex-col gap-2 rounded-full p-2 border border-[var(--space-border)] backdrop-blur-md shadow-[0_12px_40px_rgba(0,0,0,0.4)]">
+      {/* Social quick dock - visible on both mobile and desktop */}
+      <div className="space-glass flex flex-col gap-1.5 sm:gap-2 rounded-full p-1.5 sm:p-2 border border-[var(--space-border)] backdrop-blur-md shadow-[0_12px_40px_rgba(0,0,0,0.5)]">
         {actions.map(({ href, label, Icon }) => (
           <motion.a
             key={label}
@@ -44,11 +44,11 @@ export function FloatingActions() {
             rel={href.startsWith('mailto:') ? undefined : 'noopener noreferrer'}
             aria-label={label}
             whileHover={{ scale: 1.15, x: -3 }}
-            whileTap={{ scale: 0.92 }}
-            className="group relative flex h-10 w-10 items-center justify-center rounded-full border border-[var(--space-border)] bg-[var(--space-panel)] text-[var(--space-muted)] transition-colors hover:border-[var(--space-cyan)]/50 hover:bg-[var(--space-cyan)]/15 hover:text-[var(--space-cyan)]"
+            whileTap={{ scale: 0.9 }}
+            className="group relative flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-full border border-[var(--space-border)] bg-[var(--space-panel)] text-[var(--space-muted)] transition-colors hover:border-[var(--space-cyan)]/50 hover:bg-[var(--space-cyan)]/15 hover:text-[var(--space-cyan)]"
           >
             <Icon className="h-4 w-4" />
-            <span className="pointer-events-none absolute right-12 whitespace-nowrap rounded-lg border border-[var(--space-border)] bg-[var(--space-midnight)] px-2.5 py-1 text-xs font-semibold text-[var(--space-starlight)] opacity-0 shadow-xl transition-all duration-200 group-hover:opacity-100 group-hover:-translate-x-1">
+            <span className="pointer-events-none absolute right-12 whitespace-nowrap rounded-lg border border-[var(--space-border)] bg-[var(--space-midnight)] px-2.5 py-1 text-xs font-semibold text-[var(--space-starlight)] opacity-0 shadow-xl transition-all duration-200 group-hover:opacity-100 group-hover:-translate-x-1 hidden sm:block">
               {label}
             </span>
           </motion.a>
@@ -67,8 +67,8 @@ export function FloatingActions() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.5, y: 10 }}
             whileHover={{ scale: 1.15, y: -2 }}
-            whileTap={{ scale: 0.92 }}
-            className="space-glass flex h-11 w-11 items-center justify-center rounded-full border border-[var(--space-cyan)]/40 bg-[var(--space-panel)] text-[var(--space-cyan)] shadow-[0_0_20px_rgba(100,244,255,0.3)] transition-colors hover:bg-[var(--space-cyan)] hover:text-[var(--space-void)] cursor-pointer"
+            whileTap={{ scale: 0.9 }}
+            className="space-glass flex h-9 w-9 sm:h-11 sm:w-11 items-center justify-center rounded-full border border-[var(--space-cyan)]/40 bg-[var(--space-panel)] text-[var(--space-cyan)] shadow-[0_0_20px_rgba(100,244,255,0.3)] transition-colors hover:bg-[var(--space-cyan)] hover:text-[var(--space-void)] cursor-pointer"
           >
             <ArrowUp className="h-4 w-4" />
           </motion.button>
