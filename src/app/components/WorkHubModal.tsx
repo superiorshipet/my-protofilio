@@ -147,15 +147,11 @@ export function WorkHubModal({ hub, isOpen, onClose, onSelectHub }: WorkHubModal
             </div>
 
             {/* Bottom Actions */}
-            <div className="flex items-center justify-between pt-4 border-t border-[var(--space-border)]">
-              <span className="text-xs text-[var(--space-muted)] font-mono">
-                Coordinates: [{hub.coords[0]}°, {hub.coords[1]}°]
-              </span>
-
+            <div className="flex items-center justify-end pt-4 border-t border-[var(--space-border)]">
               <button
                 type="button"
                 onClick={onClose}
-                className="px-5 py-2 rounded-xl border border-[var(--space-border)] bg-white/10 hover:bg-white/20 text-white text-xs font-semibold transition-colors cursor-pointer"
+                className="px-6 py-2 rounded-xl border border-[var(--space-border)] bg-white/10 hover:bg-white/20 text-white text-xs font-semibold transition-colors cursor-pointer"
               >
                 Close
               </button>

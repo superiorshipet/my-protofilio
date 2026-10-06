@@ -36,14 +36,14 @@ export const WORK_HUBS: Record<'egypt' | 'turkey' | 'usa', WorkHub> = {
     id: 'turkey',
     countryEn: 'Turkey',
     flag: '🇹🇷',
-    companyEn: 'Luxera Group',
+    companyEn: 'Luxira Holding',
     roleEn: 'Software Engineer',
     workTypeEn: 'Remote / Hybrid Engineering',
     locationEn: 'Istanbul, Turkey',
     coords: [41.0082, 28.9784],
     targetPhi: 4.21, // Centered on Turkey
     highlightsEn: [
-      'Worked as a Software Engineer with Luxera Group in Turkey.',
+      'Worked as a Software Engineer with Luxira Holding in Turkey.',
       'Engineered enterprise web platforms, digital service portals, and business operations workflows.',
       'Integrated resilient APIs, tuned database queries, and enhanced application response times.',
     ],
@@ -54,14 +54,14 @@ export const WORK_HUBS: Record<'egypt' | 'turkey' | 'usa', WorkHub> = {
     id: 'usa',
     countryEn: 'United States',
     flag: '🇺🇸',
-    companyEn: 'Star Games',
+    companyEn: 'Star+Games',
     roleEn: 'Part-Time Software Engineer',
     workTypeEn: 'Part-Time Remote Contract',
     locationEn: 'United States',
     coords: [40.7128, -74.006],
     targetPhi: 6.0, // Centered on USA
     highlightsEn: [
-      'Contributed as a Part-Time Software Engineer with Star Games (USA).',
+      'Contributed as a Part-Time Software Engineer with Star+Games (USA).',
       'Engineered backend microservices, real-time communication protocols, and game platform data pipelines.',
       'Optimized high-concurrency throughput, connection resilience, and server performance under peak loads.',
     ],
