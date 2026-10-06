@@ -60,9 +60,9 @@ export function ProjectAdvisorBot() {
       <motion.button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
-        whileHover={{ scale: 1.08, y: -2 }}
+        whileHover={{ scale: 1.1, y: -2 }}
         whileTap={{ scale: 0.94 }}
-        className="fixed bottom-6 right-5 z-40 flex items-center gap-3 cursor-pointer group"
+        className="fixed bottom-6 right-5 z-40 flex items-center justify-center cursor-pointer group"
         aria-label="Open AI Project Advisor"
       >
         {/* Futuristic Speech-Bubble Bot Container */}
@@ -72,22 +72,6 @@ export function ProjectAdvisorBot() {
 
           {/* Bot Robot Icon from user reference */}
           <BotRobotIcon className="h-9 w-9 text-[var(--space-cyan)] transition-transform duration-300 group-hover:scale-105" />
-
-          {/* Antenna Live Beacon Dot */}
-          <span className="absolute -top-1.5 right-4 flex h-3 w-3">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-80" />
-            <span className="relative inline-flex h-3 w-3 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399]" />
-          </span>
-        </div>
-
-        {/* Text Tag (Desktop only) */}
-        <div className="hidden sm:flex flex-col text-left rounded-xl border border-[var(--space-cyan)]/40 bg-[var(--space-void)]/90 px-3 py-1.5 shadow-[0_4px_20px_rgba(0,0,0,0.6)] backdrop-blur-md transition-all group-hover:border-[var(--space-cyan)]">
-          <span className="font-mono text-xs font-bold text-[var(--space-starlight)] group-hover:text-[var(--space-cyan)] transition-colors">
-            Ask AI Architect
-          </span>
-          <span className="font-mono text-[9px] text-emerald-400">
-            ● Online • Solutions
-          </span>
         </div>
       </motion.button>
 
@@ -104,19 +88,15 @@ export function ProjectAdvisorBot() {
             {/* Header */}
             <div className="flex items-center justify-between border-b border-[var(--space-border)] bg-[var(--space-panel)]/80 px-4 py-3 sm:px-5">
               <div className="flex items-center gap-3">
-                <div className="relative flex h-10 w-10 items-center justify-center rounded-2xl border border-[var(--space-cyan)]/50 bg-gradient-to-br from-[var(--space-cyan)]/25 via-[var(--space-panel)] to-purple-500/20 text-[var(--space-cyan)] shadow-[0_0_20px_rgba(100,244,255,0.3)]">
+                <div className="flex h-10 w-10 items-center justify-center rounded-2xl border border-[var(--space-cyan)]/50 bg-gradient-to-br from-[var(--space-cyan)]/25 via-[var(--space-panel)] to-purple-500/20 text-[var(--space-cyan)] shadow-[0_0_20px_rgba(100,244,255,0.3)]">
                   <BotRobotIcon className="h-6 w-6 text-[var(--space-cyan)]" />
-                  <span className="absolute -top-0.5 -right-0.5 flex h-2.5 w-2.5">
-                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-                    <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-400" />
-                  </span>
                 </div>
                 <div>
                   <div className="flex items-center gap-2">
                     <span className="font-display text-sm font-bold text-[var(--space-starlight)]">
                       Shipet AI Architect
                     </span>
-                    <span className="rounded bg-emerald-500/20 px-1.5 py-0.2 font-mono text-[9px] font-semibold text-emerald-400 border border-emerald-500/30">
+                    <span className="rounded bg-[var(--space-cyan)]/20 px-1.5 py-0.2 font-mono text-[9px] font-semibold text-[var(--space-cyan)] border border-[var(--space-cyan)]/30">
                       ONLINE
                     </span>
                   </div>
