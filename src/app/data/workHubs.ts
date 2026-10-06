@@ -1,5 +1,7 @@
+export type HubId = 'egypt' | 'saudi' | 'turkey' | 'usa';
+
 export interface WorkHub {
-  id: 'egypt' | 'turkey' | 'usa';
+  id: HubId;
   countryEn: string;
   flag: string;
   companyEn: string;
@@ -13,7 +15,7 @@ export interface WorkHub {
   accentColor: string;
 }
 
-export const WORK_HUBS: Record<'egypt' | 'turkey' | 'usa', WorkHub> = {
+export const WORK_HUBS: Record<HubId, WorkHub> = {
   egypt: {
     id: 'egypt',
     countryEn: 'Egypt',
@@ -31,6 +33,25 @@ export const WORK_HUBS: Record<'egypt' | 'turkey' | 'usa', WorkHub> = {
     ],
     techStack: ['C#', 'ASP.NET Core', 'React', 'TypeScript', 'SQL Server', 'REST APIs', 'Cloud Native'],
     accentColor: '#10b981', // Emerald
+  },
+  saudi: {
+    id: 'saudi',
+    countryEn: 'Saudi Arabia',
+    flag: '🇸🇦',
+    companyEn: 'Freelance Systems & Enterprise Platforms',
+    roleEn: 'Full-Stack & Systems Freelancer',
+    workTypeEn: 'Freelance & Contract Projects',
+    locationEn: 'Riyadh / Remote, Saudi Arabia',
+    coords: [24.7136, 46.6753],
+    targetPhi: 3.92, // Centered on Saudi Arabia & Gulf
+    highlightsEn: [
+      'Delivered multiple high-impact freelance engineering projects for Saudi clients and digital businesses.',
+      'Architected custom e-commerce web applications, booking systems, and administrative control panels.',
+      'Engineered secure payment integrations (Mada, Apple Pay, HyperPay) with optimized checkout pipelines.',
+      'Designed scalable RESTful APIs, tuned database queries, and implemented ZATCA compliant e-invoicing workflows.',
+    ],
+    techStack: ['React', 'Next.js', 'C# / ASP.NET Core', 'Node.js', 'PostgreSQL', 'Tailwind CSS', 'Payment APIs'],
+    accentColor: '#10b981', // Saudi Emerald Green
   },
   turkey: {
     id: 'turkey',
