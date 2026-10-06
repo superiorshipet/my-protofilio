@@ -17,11 +17,133 @@ export interface ProjectSolution {
 
 export const projectKnowledgeBase: ProjectSolution[] = [
   {
+    id: "luxira-crm",
+    title: "Luxira Enterprise Operations & Customer CRM Platform",
+    arabicTitle: "منصة إدارة علاقات العملاء والعمليات المؤسسية (CRM)",
+    category: "Full-Stack",
+    keywords: [
+      "crm",
+      "crm system",
+      "crm systems",
+      "customer relationship",
+      "customer management",
+      "customer",
+      "lead",
+      "leads",
+      "sales crm",
+      "order management",
+      "logistics",
+      "client portal",
+      "customer support",
+      "luxira",
+      "operations",
+      "pipeline",
+      "client",
+      "clients",
+      "tickets",
+    ],
+    arabicKeywords: [
+      "crm",
+      "سي ار ام",
+      "ادارة عملاء",
+      "إدارة عملاء",
+      "علاقات العملاء",
+      "عملاء",
+      "طلبات",
+      "لوجستيات",
+      "خدمة عملاء",
+      "مبيعات",
+      "منظومة عملاء",
+      "ليدز",
+      "دعم فني",
+      "نظام crm",
+      "منصة عملاء",
+    ],
+    description: "An enterprise-grade CRM and operations platform engineered for customer lifecycle tracking, order dispatching, logistics tracking, role-based access control, and real-time customer support.",
+    arabicDescription: "منصة CRM متكاملة لإدارة دورة حياة العملاء ومتابعة الطلبات، والشحن واللوجستيات، وصلاحيات المستخدمين، وقنوات الدعم الفوري.",
+    solutionHighlight: "Production CRM architecture built at Luxira Holding with real-time SignalR notifications, audit trails, and multi-tier role permissions.",
+    tech: ["ASP.NET Core MVC", "C#", "SQL Server", "SignalR", "Entity Framework Core"],
+    image: "/assets/real-projects/luxira-chat.png",
+    githubUrl: "https://github.com/superiorshipet",
+    features: [
+      "360 Customer Lifecycle & History",
+      "Order Management & Logistics Tracking",
+      "Role-Based Access Control (RBAC)",
+      "Real-time Support via SignalR",
+    ],
+  },
+  {
+    id: "pharmacy",
+    title: "Enterprise ERP & Pharmacy Inventory System",
+    arabicTitle: "نظام إدارة الموارد والمخزون المؤسسي (ERP & POS)",
+    category: "Backend & APIs",
+    keywords: [
+      "erp",
+      "erp system",
+      "erp systems",
+      "enterprise resource planning",
+      "inventory",
+      "stock",
+      "pos",
+      "point of sale",
+      "warehouse",
+      "procurement",
+      "supply chain",
+      "invoicing",
+      "billing",
+      "pharmacy",
+      "medicine",
+      "medical",
+      "hospital",
+      "prescription",
+      "health",
+      "expiry",
+      "accounting",
+      "operations erp",
+    ],
+    arabicKeywords: [
+      "erp",
+      "اي ار بي",
+      "نظام erp",
+      "مؤسسي",
+      "تخطيط موارد",
+      "ادارة موارد",
+      "مخازن",
+      "مستودعات",
+      "مخزون",
+      "فواتير",
+      "نقاط بيع",
+      "حسابات",
+      "توريدات",
+      "صيدلية",
+      "ادوية",
+      "أدوية",
+      "طبي",
+      "علاج",
+      "صلاحية",
+      "روشتة",
+      "نظام محاسبي",
+    ],
+    description: "A mission-critical enterprise ERP system for inventory batch control, sales audits, POS cashiering, supplier workflows, and financial records.",
+    arabicDescription: "نظام ERP متكامل لإدارة الموارد والمخزون، وتتبع الصلاحيات والتشغيلات، وفواتير نقاط البيع (POS)، وحسابات الموردين والتدقيق المالي.",
+    solutionHighlight: "Production ERP transactional architecture ensuring strict inventory batch audit, supplier purchase orders, POS cashiering, and zero discrepancy accounting.",
+    tech: ["C#", "ASP.NET Core", "SQL Server", "Entity Framework", "ERP Engine"],
+    image: "/assets/real-projects/pharmacy.png",
+    demoUrl: "https://tasharuky.duckdns.org/pharmacy/",
+    githubUrl: "https://github.com/superiorshipet/pharmacy",
+    features: [
+      "Inventory & Expiry Batch Tracking",
+      "Point of Sale (POS) Cashier & Invoicing",
+      "Supplier Procurement & Purchase Orders",
+      "Financial Auditing & Discrepancy Prevention",
+    ],
+  },
+  {
     id: "task-management",
     title: "Project Task Management Workspace",
     arabicTitle: "نظام إدارة المشاريع والمهام وسير العمل",
     category: "Full-Stack",
-    keywords: ["task", "project", "management", "sprint", "board", "kanban", "team", "collaboration", "workflow", "crm", "jira", "trello", "productivity"],
+    keywords: ["task", "project", "management", "sprint", "board", "kanban", "team", "collaboration", "workflow", "jira", "trello", "productivity"],
     arabicKeywords: ["مهام", "مشروع", "مشاريع", "ادارة", "إدارة", "فريق", "كانبان", "تاسكات", "ورك فلو", "تعاون", "تنظيم", "سبرنت"],
     description: "An enterprise workspace for managing team projects, sprint tasks, member roles, status boards, and automated workflows.",
     arabicDescription: "مساحة عمل متكاملة لإدارة مشاريع وفرق العمل، وتعيين المهام، وتتبع حالات الإنجاز بلوحات كانبان وتقارير الأداء.",
@@ -47,22 +169,6 @@ export const projectKnowledgeBase: ProjectSolution[] = [
     demoUrl: "https://the-ats-pro.duckdns.org/ats/",
     githubUrl: "https://github.com/superiorshipet/ATS-website",
     features: ["Resume Ingestion Pipeline", "Hiring Stage Kanban", "Recruiter Assessment Rubrics", "Candidate Filtering"],
-  },
-  {
-    id: "pharmacy",
-    title: "Pharmacy & Medical ERP System",
-    arabicTitle: "نظام إدارة الصيدليات والمخزون الطبي",
-    category: "Backend & APIs",
-    keywords: ["pharmacy", "medicine", "medical", "hospital", "pos", "inventory", "stock", "prescription", "health", "erp", "expiry"],
-    arabicKeywords: ["صيدلية", "ادوية", "أدوية", "طبي", "علاج", "مخزن", "مخزون", "صلاحية", "روشتة", "فواتير", "نقطة بيع"],
-    description: "Mission-critical pharmacy operations system designed for inventory batch control, sales audits, prescription records, and supplier management.",
-    arabicDescription: "نظام عمليات متكامل لإدارة الصيدليات والمنشآت الطبية، وتتبع صلاحيات الأدوية والموردين ومبيعات الـ POS.",
-    solutionHighlight: "Robust transactional architecture ensuring zero inventory discrepancies and strict batch tracking.",
-    tech: ["C#", "ASP.NET Core", "SQL Server", "Entity Framework"],
-    image: "/assets/real-projects/pharmacy.png",
-    demoUrl: "https://tasharuky.duckdns.org/pharmacy/",
-    githubUrl: "https://github.com/superiorshipet/pharmacy",
-    features: ["Batch & Expiry Date Tracking", "Point of Sale (POS) Cashier", "Supplier Purchase Orders", "Financial Auditing"],
   },
   {
     id: "belvie-furniture",
@@ -493,6 +599,20 @@ export function findMatchingProjects(query: string): ProjectSolution[] {
       if (normalized.includes(t.toLowerCase())) {
         score += 5;
       }
+    }
+
+    // High precision domain boost for exact terms
+    if ((words.includes("crm") || normalized.includes("crm") || normalized.includes("سي ار ام") || normalized.includes("عملاء")) && proj.id === "luxira-crm") {
+      score += 35;
+    }
+    if ((words.includes("erp") || normalized.includes("erp") || normalized.includes("اي ار بي") || normalized.includes("تخطيط موارد")) && proj.id === "pharmacy") {
+      score += 35;
+    }
+    if ((words.includes("ats") || normalized.includes("ats") || normalized.includes("توظيف")) && proj.id === "ats-website") {
+      score += 25;
+    }
+    if ((words.includes("iot") || normalized.includes("iot") || normalized.includes("انترنت الاشياء")) && proj.id === "supvend") {
+      score += 25;
     }
 
     return { project: proj, score };

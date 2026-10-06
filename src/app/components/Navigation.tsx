@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Menu, Moon, Sun, X, BrainCircuit } from 'lucide-react';
+import { Menu, Moon, Sun, X } from 'lucide-react';
+import { BotRobotIcon } from './BotRobotIcon';
 
 const navItems = [
   { label: 'Home', href: '#home' },
@@ -100,7 +101,7 @@ export function Navigation() {
                 onClick={() => window.dispatchEvent(new CustomEvent('open-project-advisor'))}
                 className="hidden md:inline-flex items-center gap-1.5 rounded-full border border-[var(--space-cyan)]/40 bg-[var(--space-panel)] px-3.5 py-1.5 text-xs font-semibold text-[var(--space-starlight)] hover:border-[var(--space-cyan)] hover:bg-[var(--space-cyan)]/15 hover:text-[var(--space-cyan)] transition-all cursor-pointer shadow-[0_0_15px_rgba(100,244,255,0.15)]"
               >
-                <BrainCircuit className="h-3.5 w-3.5 text-[var(--space-cyan)]" />
+                <BotRobotIcon className="h-4 w-4 text-[var(--space-cyan)]" />
                 <span>AI Advisor</span>
               </motion.button>
 
@@ -146,7 +147,7 @@ export function Navigation() {
                 }}
                 className="flex items-center gap-2 rounded-xl border border-[var(--space-cyan)]/50 bg-[var(--space-cyan)]/15 px-4 py-2.5 text-sm font-bold text-[var(--space-cyan)] shadow-[0_0_15px_rgba(100,244,255,0.2)] mb-2 text-left"
               >
-                <BrainCircuit className="h-4 w-4" />
+                <BotRobotIcon className="h-5 w-5" />
                 <span>AI Project Advisor</span>
               </button>
 

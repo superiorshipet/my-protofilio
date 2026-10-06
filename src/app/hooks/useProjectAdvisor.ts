@@ -120,22 +120,60 @@ export function useProjectAdvisor() {
 
       if (matches.length > 0) {
         const primary = matches[0];
-        if (arabic) {
-          botReplyText = `ممتاز جداً! محمد شيبت قام بالفعل بتنفيذ وتطوير بنية برمجية متكاملة تطابق هذه الفكرة تماماً: **${primary.arabicTitle}**.\n\nيمكنك استكشاف النموذج الحي ومعاينة الكود مباشرة من الكارت أدناه. ما هي المميزات المحددة أو التخصيصات التي تريدها لمشروعك؟`;
-          suggested = [
-            "نحتاج بوابات دفع ولوحة تحكم",
-            "نحتاج تطبيق موبايل مع الويب",
-            "التسليم خلال شهر",
-            "تجهيز العرض والاتفاق مباشرة",
-          ];
+        if (primary.id === "luxira-crm") {
+          if (arabic) {
+            botReplyText = `ممتاز جداً! محمد شيبت يمتلك خبرة إنتاجية حقيقية ومباشرة في تطوير أنظمة الـ CRM في Luxira Holding: **${primary.arabicTitle}**.\n\nالمنصة تشمل إدارة دورة حياة العملاء، وتتبع الطلبات والشحنات اللوجستية، وتوزيع الصلاحيات، والدعم الفني اللحظي عبر SignalR.\n\nما هي الوحدات أو دورات العمل المحددة التي تحتاجها في نظام الـ CRM لمشروعك؟`;
+            suggested = [
+              "نحتاج إدارة ليدز ومبيعات",
+              "نحتاج ربط الشحن واللوجستيات",
+              "نحتاج قنوات دعم فوري وتذاكر",
+              "تجهيز المتطلبات للمناقشة فوراً",
+            ];
+          } else {
+            botReplyText = `Great news! Mohamed has direct enterprise production experience architecting a full CRM platform at Luxira Holding: **${primary.title}**.\n\nIt features customer 360 profiles, order dispatching, delivery logistics, multi-tier RBAC permissions, and real-time customer support via SignalR.\n\nWhat specific CRM modules or customer pipelines do you need for your system?`;
+            suggested = [
+              "Need leads & sales pipeline",
+              "Need order & delivery logistics",
+              "Need live chat & support tickets",
+              "Ready to scope CRM specifications",
+            ];
+          }
+        } else if (primary.id === "pharmacy") {
+          if (arabic) {
+            botReplyText = `ممتاز جداً! محمد شيبت قام بالفعل بتطوير نظام ERP متكامل لإدارة الموارد والمخزون ونقاط البيع: **${primary.arabicTitle}**.\n\nيشمل تتبع تشغيلات وصلاحيات المخزون بدقة متناهية، ونقاط البيع (POS)، وأوامر التوريد والشراء، ومطابقة الحسابات المالية بدون أي فروقات.\n\nما هي المتطلبات أو الوحدات التي تحتاجها في نظام الـ ERP لمشروعك؟`;
+            suggested = [
+              "نحتاج إدارة فروع ومخازن متعددة",
+              "نحتاج فواتير ونقاط بيع (POS)",
+              "نحتاج حسابات وموردين وتقارير",
+              "تجهيز المتطلبات للاتفاق",
+            ];
+          } else {
+            botReplyText = `Great news! Mohamed has engineered mission-critical enterprise ERP & operations systems: **${primary.title}**.\n\nIt features strict inventory batch control, sales auditing, POS cashiering, supplier purchase orders, and zero-discrepancy financial accounting.\n\nWhat enterprise modules or inventory workflows do you need for your ERP?`;
+            suggested = [
+              "Need multi-warehouse & stock sync",
+              "Need POS cashiering & invoicing",
+              "Need supplier & procurement pipeline",
+              "Ready to scope ERP specifications",
+            ];
+          }
         } else {
-          botReplyText = `Great news! Mohamed has already architected and deployed a live production system matching this exact concept: **${primary.title}**.\n\nYou can explore the live demo and inspect the architecture right in the card below. What custom features or specific business integrations do you need?`;
-          suggested = [
-            "Need online payments & admin dashboard",
-            "Need real-time notifications",
-            "Target launch within 3-4 weeks",
-            "Ready to finalize specifications",
-          ];
+          if (arabic) {
+            botReplyText = `ممتاز جداً! محمد شيبت قام بالفعل بتنفيذ وتطوير بنية برمجية متكاملة تطابق هذه الفكرة تماماً: **${primary.arabicTitle}**.\n\nيمكنك استكشاف النموذج الحي ومعاينة الكود مباشرة من الكارت أدناه. ما هي المميزات المحددة أو التخصيصات التي تريدها لمشروعك؟`;
+            suggested = [
+              "نحتاج بوابات دفع ولوحة تحكم",
+              "نحتاج تطبيق موبايل مع الويب",
+              "التسليم خلال شهر",
+              "تجهيز العرض والاتفاق مباشرة",
+            ];
+          } else {
+            botReplyText = `Great news! Mohamed has already architected and deployed a live production system matching this exact concept: **${primary.title}**.\n\nYou can explore the live demo and inspect the architecture right in the card below. What custom features or specific business integrations do you need?`;
+            suggested = [
+              "Need online payments & admin dashboard",
+              "Need real-time notifications",
+              "Target launch within 3-4 weeks",
+              "Ready to finalize specifications",
+            ];
+          }
         }
       } else if (isTimelineInput || userText.toLowerCase().includes("ready") || userText.includes("جاهز") || userText.includes("اتفاق")) {
         isFinal = true;
