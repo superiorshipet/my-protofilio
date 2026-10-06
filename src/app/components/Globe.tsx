@@ -83,13 +83,13 @@ function cobeProject(lat: number, lon: number, phi: number, theta: number = 0.3)
 function getCalloutClasses(align: CalloutAlign) {
   switch (align) {
     case 'top':
-      return 'bottom-3.5 left-1/2 -translate-x-1/2 mb-0.5';
+      return 'bottom-4 left-1/2 -translate-x-1/2 mb-0.5';
     case 'left':
-      return 'right-3.5 top-1/2 -translate-y-1/2 mr-0.5';
+      return 'right-4 top-1/2 -translate-y-1/2 mr-0.5';
     case 'right':
-      return 'left-3.5 top-1/2 -translate-y-1/2 ml-0.5';
+      return 'left-4 top-1/2 -translate-y-1/2 ml-0.5';
     case 'bottom':
-      return 'top-3.5 left-1/2 -translate-x-1/2 mt-0.5';
+      return 'top-4 left-1/2 -translate-x-1/2 mt-0.5';
   }
 }
 
@@ -344,24 +344,24 @@ export function Globe({
             <div className={`absolute ${getCalloutClasses(hub.calloutAlign)} pointer-events-auto`}>
               {/* Futuristic HUD hairline connector stem pointing to beacon dot */}
               {hub.calloutAlign === 'left' && (
-                <span className="absolute -right-3.5 top-1/2 -translate-y-1/2 w-3.5 h-[1px] bg-gradient-to-r from-transparent via-[var(--space-cyan)]/60 to-[var(--space-cyan)] pointer-events-none" />
+                <span className="absolute -right-4 top-1/2 -translate-y-1/2 w-4 h-[1px] bg-gradient-to-r from-transparent via-[var(--space-cyan)]/60 to-[var(--space-cyan)] pointer-events-none" />
               )}
               {hub.calloutAlign === 'right' && (
-                <span className="absolute -left-3.5 top-1/2 -translate-y-1/2 w-3.5 h-[1px] bg-gradient-to-l from-transparent via-[var(--space-cyan)]/60 to-[var(--space-cyan)] pointer-events-none" />
+                <span className="absolute -left-4 top-1/2 -translate-y-1/2 w-4 h-[1px] bg-gradient-to-l from-transparent via-[var(--space-cyan)]/60 to-[var(--space-cyan)] pointer-events-none" />
               )}
               {hub.calloutAlign === 'top' && (
-                <span className="absolute -bottom-3.5 left-1/2 -translate-x-1/2 w-[1px] h-3.5 bg-gradient-to-b from-transparent via-[var(--space-cyan)]/60 to-[var(--space-cyan)] pointer-events-none" />
+                <span className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-[1px] h-4 bg-gradient-to-b from-transparent via-[var(--space-cyan)]/60 to-[var(--space-cyan)] pointer-events-none" />
               )}
 
               <div
-                className={`flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs font-semibold backdrop-blur-xl transition-all duration-200 shadow-lg whitespace-nowrap ${
+                className={`flex items-center gap-1.5 rounded-full border px-2 py-0.5 text-[11px] font-medium leading-none backdrop-blur-xl transition-all duration-200 shadow-[0_2px_10px_rgba(0,0,0,0.5)] whitespace-nowrap ${
                   isActive
                     ? 'border-[var(--space-cyan)] bg-[var(--space-cyan)]/25 text-[var(--space-cyan)] shadow-[0_0_16px_rgba(100,244,255,0.5)] scale-105'
-                    : 'border-white/20 bg-[var(--space-midnight)]/90 text-white hover:border-[var(--space-cyan)] hover:text-[var(--space-cyan)] group-hover:scale-105'
+                    : 'border-white/20 bg-[var(--space-midnight)]/95 text-white/95 hover:border-[var(--space-cyan)] hover:text-[var(--space-cyan)] group-hover:scale-105'
                 }`}
               >
-                <span className="text-xs">{hub.flag}</span>
-                <span className="whitespace-nowrap">{hub.labelEn}</span>
+                <span className="text-[11px]">{hub.flag}</span>
+                <span className="whitespace-nowrap tracking-wide">{hub.labelEn}</span>
               </div>
             </div>
           </button>
