@@ -61,7 +61,7 @@ export function Navigation() {
         animate={{ y: 0 }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled
-            ? 'bg-[var(--space-nav-bg)] backdrop-blur-xl border-b border-[var(--space-border)] shadow-[0_18px_70px_rgba(0,0,0,0.16)]'
+            ? 'bg-[var(--space-nav-bg)] backdrop-blur-xl border-b border-[var(--space-border)] shadow-[0_10px_30px_rgba(0,0,0,0.05)]'
             : 'bg-transparent'
         }`}
       >

@@ -141,7 +141,7 @@ export function Hero() {
         {starTrails.map((trail) => (
           <motion.div
             key={`${trail.top}-${trail.left}`}
-            className="absolute h-px bg-gradient-to-r from-transparent via-[var(--space-starlight)]/65 to-transparent"
+            className="absolute h-px bg-gradient-to-r from-transparent via-[var(--space-starlight)]/20 to-transparent"
             style={{ top: trail.top, left: trail.left, width: trail.width }}
             initial={{ x: -80, opacity: 0 }}
             animate={{ x: 180, opacity: [0, 0.75, 0] }}
