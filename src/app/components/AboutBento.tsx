@@ -90,7 +90,7 @@ export function AboutBento() {
             </div>
 
             <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-[var(--space-starlight)] mb-4">
-              Cairo, Egypt
+              Giza, Egypt
             </h2>
 
             <p className="text-base sm:text-lg text-[var(--space-moon)] font-medium leading-relaxed max-w-xl mb-6">
