@@ -141,7 +141,7 @@ export function Contact() {
                 </div>
                 <div>
                   <p className="text-sm text-[var(--space-muted)]">Location</p>
-                  <p>Egypt,Giza</p>
+                  <p>Giza, Egypt</p>
                   <p>Available world wide </p>
                 </div>
               </motion.div>

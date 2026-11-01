@@ -23,8 +23,8 @@ export const WORK_HUBS: Record<HubId, WorkHub> = {
     companyEn: 'Core Base & Remote Training',
     roleEn: 'Full Stack Software Engineer',
     workTypeEn: 'Primary Base & Remote Work',
-    locationEn: 'Cairo / Tanta, Egypt',
-    coords: [30.0444, 31.2357],
+    locationEn: 'Giza, Egypt',
+    coords: [30.0131, 31.2089],
     targetPhi: 4.17, // Centered on Egypt
     highlightsEn: [
       'Primary headquarters for full-stack software architecture and production engineering.',

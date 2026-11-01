@@ -30,7 +30,7 @@ export type CalloutAlign = 'top' | 'left' | 'right' | 'bottom';
 
 export const GLOBE_HUBS = [
   // Egypt: Anchored Westward (Left into Africa) to give full breathing room from Gulf
-  { id: 'egypt', flag: '🇪🇬', labelEn: 'Egypt', lat: 30.0444, lon: 31.2357, roleEn: 'Core Base & Remote Training', calloutAlign: 'left' as CalloutAlign },
+  { id: 'egypt', flag: '🇪🇬', labelEn: 'Egypt', lat: 30.0131, lon: 31.2089, roleEn: 'Core Base & Remote Training', calloutAlign: 'left' as CalloutAlign },
   // Saudi Arabia: Anchored Eastward (Right into Gulf) eliminating overlap with Egypt
   { id: 'saudi', flag: '🇸🇦', labelEn: 'Saudi Arabia', lat: 24.7136, lon: 46.6753, roleEn: 'Freelance & Enterprise Platforms', calloutAlign: 'right' as CalloutAlign },
   // Turkey: Anchored Northward (Top into Black Sea/Europe) keeping Mediterranean clear
